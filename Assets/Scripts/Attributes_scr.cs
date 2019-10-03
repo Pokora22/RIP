@@ -15,7 +15,7 @@ public class Attributes_scr : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Barricade")) 
+        if (other.gameObject.CompareTag("Barricade") && other.GetContact(0).normal == other.transform.right) //transform.right is the spiky side
             damage(other.gameObject.GetComponent<Attributes_scr>().attackDamage);
     }
 
@@ -29,5 +29,4 @@ public class Attributes_scr : MonoBehaviour
             //Todo: Destroy and replace with something else depending on what was destroyed? Minion - nothing; Mobs - bodies
         }
     }
-    
 }

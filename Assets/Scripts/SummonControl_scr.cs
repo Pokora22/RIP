@@ -55,7 +55,7 @@ public class SummonControl_scr : MonoBehaviour
 
             minionLeave(minionToSend);
 
-            minionToSend.GetComponent<AICharacterControl>()
+            minionToSend.GetComponent<SummonAIControl>()
                 .SendToDestination(selectMinionDestination());
         }
     }
@@ -65,7 +65,7 @@ public class SummonControl_scr : MonoBehaviour
         if (Input.GetMouseButton(1) && minionsAway.Count > 0)
         {
             GameObject minionToRecall = minionsAway[0];
-            minionToRecall.GetComponent<AICharacterControl>().CurrentState = AICharacterControl.MINION_STATE.FOLLOW;
+            minionToRecall.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.FOLLOW;
         }
     }
 
