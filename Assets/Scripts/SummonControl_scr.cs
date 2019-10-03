@@ -13,7 +13,8 @@ public class SummonControl_scr : MonoBehaviour
     public float minionCollisionCheckRadius = .5f;
     public LayerMask bodiesMask;
 
-    private List<GameObject> minions, minionsAway;
+    [SerializeField] public List<GameObject> minions;
+    [SerializeField] public List<GameObject> minionsAway;
     private GameObject minionTarget;
 
     // Start is called before the first frame update
@@ -21,6 +22,8 @@ public class SummonControl_scr : MonoBehaviour
     {
         minions = new List<GameObject>();
         minionsAway = new List<GameObject>();
+        
+        Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
     }
 
     // Update is called once per frame
@@ -37,19 +40,21 @@ public class SummonControl_scr : MonoBehaviour
 
         Collider[] nearbyBodies = Physics.OverlapSphere(transform.position, summonRadius, bodiesMask);
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             //secondary mouse button
             if (nearbyBodies.Length > 0)
             {
                 summonMinion(nearbyBodies[0].gameObject);
+                
+                Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
             }
         }
     }
 
     private void sendMinionCheck()
     {
-        if (Input.GetMouseButton(0) && minions.Count > 0)
+        if (Input.GetMouseButtonDown(0) && minions.Count > 0)
         {
             GameObject minionToSend = minions[0];
 
@@ -57,15 +62,19 @@ public class SummonControl_scr : MonoBehaviour
 
             minionToSend.GetComponent<SummonAIControl>()
                 .SendToDestination(selectMinionDestination());
+            
+            Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
         }
     }
 
     private void recallMinionCheck()
     {
-        if (Input.GetMouseButton(1) && minionsAway.Count > 0)
+        if (Input.GetMouseButtonDown(1) && minionsAway.Count > 0)
         {
             GameObject minionToRecall = minionsAway[0];
-            minionToRecall.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.FOLLOW;
+            StartCoroutine(minionToRecall.GetComponent<SummonAIControl>().recall());
+            
+            Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
         }
     }
 

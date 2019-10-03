@@ -21,10 +21,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public float stoppingDistance = 0f;
         public float attackDistance = 1f;
         public float enemyDetectionRange = 3f;
+        public float recallDelay = 3f;
         
         public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK}
 
         private MINION_STATE currentState;
+
+        private bool recalled = false;
+        public bool debug = true;
 
         public MINION_STATE CurrentState
         {
@@ -34,7 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 currentState = value;
 
-                StopAllCoroutines();
+                StopStateCoroutines();
                 switch (currentState)
                 {
                     case MINION_STATE.FOLLOW:
@@ -55,6 +59,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 }
             }
         }
+
+        private void StopStateCoroutines()
+        {
+            StopCoroutine(minionChase());
+            StopCoroutine(minionAttack());
+            StopCoroutine(minionFollow());
+            StopCoroutine(minionAdvance());
+        }
+
         private void Start()
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
@@ -65,13 +78,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	        agent.updatePosition = true;
 
             player = GameObject.FindWithTag("Player");
-            
-            CurrentState = MINION_STATE.FOLLOW;
+
+            gameObject.name = "Minion " + (player.GetComponent<SummonControl_scr>().minions.Count  + player.GetComponent<SummonControl_scr>().minionsAway.Count);
+
+            StartCoroutine(recall());
+
+            StartCoroutine(stateDebug());
         }
 
         private IEnumerator minionFollow()
         {
-            player.GetComponent<SummonControl_scr>().minionReturn(this.gameObject); //TODO: Why is it not visible (when in std assets folder) ?
+            if(!recalled)
+                StartCoroutine(recall());
+            
+            player.GetComponent<SummonControl_scr>().minionReturn(this.gameObject); //TODO: Iffy queueing - very random
             agent.stoppingDistance = playerFollowowDistance;
             
             while (currentState == MINION_STATE.FOLLOW)
@@ -145,7 +165,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 character.Move(Vector3.zero, false, false);
             
             Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
-            if (nearbyEnemies.Length > 0)
+            if (nearbyEnemies.Length > 0 && !recalled)
             {
                 GameObject enemyToAttack = nearbyEnemies[Random.Range(0, nearbyEnemies.Length - 1)].gameObject;
                 agent.destination = enemyToAttack.transform.position;
@@ -172,6 +192,27 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(agent.destination, 1f);
+        }
+
+        public IEnumerator recall()
+        {
+            if (recalled)
+                yield return null;
+            recalled = true;
+            Debug.Log(gameObject.name +" : Coroutine start recall: " + recalled);
+            CurrentState = MINION_STATE.FOLLOW;
+            yield return new WaitForSeconds(recallDelay);
+            recalled = false;
+            Debug.Log(gameObject.name + "Coroutine end recall: " + recalled);
+        }
+
+        private IEnumerator stateDebug()
+        {
+            while (debug)
+            {
+                Debug.Log(gameObject.name + ": " + CurrentState);
+                yield return  new WaitForSeconds(1);
+            }
         }
     }
 }
