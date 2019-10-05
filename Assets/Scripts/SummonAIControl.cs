@@ -19,8 +19,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public float playerFollowowDistance = 2f;
         public float stoppingDistance = 0f;
-        public float attackDistance = 1f;
-        public float enemyDetectionRange = 3f;
+        public float enemyFollowDistance = 1f;
+        public float enemyDetectionRange = 10f;
         public float recallDelay = 3f;
         
         public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK}
@@ -28,6 +28,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private MINION_STATE currentState;
 
         private bool recalled = false;
+        private SummonControl_scr summoner;
+        private GameObject target;
+        
         public bool debug = true;
 
         public MINION_STATE CurrentState
@@ -78,26 +81,27 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	        agent.updatePosition = true;
 
             player = GameObject.FindWithTag("Player");
+            summoner = player.GetComponent<SummonControl_scr>();
 
             gameObject.name = "Minion " + (player.GetComponent<SummonControl_scr>().minions.Count  + player.GetComponent<SummonControl_scr>().minionsAway.Count);
 
             StartCoroutine(recall());
 
-            StartCoroutine(stateDebug());
+//            StartCoroutine(stateDebug());
         }
 
         private IEnumerator minionFollow()
         {
             if(!recalled)
                 StartCoroutine(recall());
-            
-            player.GetComponent<SummonControl_scr>().minionReturn(this.gameObject); //TODO: Iffy queueing - very random
+
+            target = null;
+            summoner.minionReturn(this.gameObject);
             agent.stoppingDistance = playerFollowowDistance;
             
             while (currentState == MINION_STATE.FOLLOW)
             {
-            if(player != null)
-                agent.SetDestination(player.transform.position);
+                agent.SetDestination(player.transform.position); 
 
                 yield return null;
             }
@@ -105,7 +109,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAdvance()
         {
-            agent.stoppingDistance = stoppingDistance;
+            summoner.minionLeave(gameObject);
             
             while (currentState == MINION_STATE.ADVANCE)
             {
@@ -114,7 +118,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    CurrentState = MINION_STATE.FOLLOW;
+                    StartCoroutine(recall());
                 }
 
                 yield return null;
@@ -123,12 +127,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionChase()
         {
-            agent.stoppingDistance = attackDistance;
+            agent.stoppingDistance = enemyFollowDistance;
+            
+            summoner.minionLeave(gameObject);
             
             while (currentState == MINION_STATE.CHASE)
             {
-                while (agent.pathPending)
-                    yield return null;
+//                while (agent.pathPending)
+//                    yield return null;
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -141,13 +147,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAttack()
         {
-            agent.stoppingDistance = attackDistance;
-            
             while (currentState == MINION_STATE.ATTACK)
             {
                 //TODO: Put attack coroutine here
                 
-                if (agent.remainingDistance > agent.stoppingDistance)
+                if (agent.remainingDistance > agent.stoppingDistance * 1.2f) //Extra space to keep attacking without switching between states constantly
                 {
                     CurrentState = MINION_STATE.CHASE;
                 }
@@ -159,18 +163,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
+            if (nearbyEnemies.Length > 0 && !recalled)
+            {
+                if(target == null)
+                    target = nearbyEnemies[Random.Range(0, nearbyEnemies.Length - 1)].gameObject; //Acquire new target if old is gone
+                
+                agent.destination = target.transform.position;
+                
+                if (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE) //If following player, start combat
+                    CurrentState = MINION_STATE.CHASE;
+            }
+            
             if (agent.remainingDistance > agent.stoppingDistance)
                 character.Move(agent.desiredVelocity, false, false);
             else
                 character.Move(Vector3.zero, false, false);
-            
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
-            if (nearbyEnemies.Length > 0 && !recalled)
-            {
-                GameObject enemyToAttack = nearbyEnemies[Random.Range(0, nearbyEnemies.Length - 1)].gameObject;
-                agent.destination = enemyToAttack.transform.position;
-                CurrentState = MINION_STATE.CHASE;
-            }
         }
 
         private void OnCollisionEnter(Collision other)
@@ -199,11 +207,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (recalled)
                 yield return null;
             recalled = true;
-            Debug.Log(gameObject.name +" : Coroutine start recall: " + recalled);
+//            Debug.Log(gameObject.name +" : Coroutine start recall: " + recalled);
             CurrentState = MINION_STATE.FOLLOW;
             yield return new WaitForSeconds(recallDelay);
             recalled = false;
-            Debug.Log(gameObject.name + "Coroutine end recall: " + recalled);
+//            Debug.Log(gameObject.name + "Coroutine end recall: " + recalled);
         }
 
         private IEnumerator stateDebug()

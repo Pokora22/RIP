@@ -13,8 +13,8 @@ public class SummonControl_scr : MonoBehaviour
     public float minionCollisionCheckRadius = .5f;
     public LayerMask bodiesMask;
 
-    [SerializeField] public List<GameObject> minions;
-    [SerializeField] public List<GameObject> minionsAway;
+    public List<GameObject> minions;
+    public List<GameObject> minionsAway; //public for debugging purpose TODO: Change to private later?
     private GameObject minionTarget;
 
     // Start is called before the first frame update
@@ -22,8 +22,6 @@ public class SummonControl_scr : MonoBehaviour
     {
         minions = new List<GameObject>();
         minionsAway = new List<GameObject>();
-        
-        Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
     }
 
     // Update is called once per frame
@@ -44,11 +42,7 @@ public class SummonControl_scr : MonoBehaviour
         {
             //secondary mouse button
             if (nearbyBodies.Length > 0)
-            {
                 summonMinion(nearbyBodies[0].gameObject);
-                
-                Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
-            }
         }
     }
 
@@ -58,12 +52,8 @@ public class SummonControl_scr : MonoBehaviour
         {
             GameObject minionToSend = minions[0];
 
-            minionLeave(minionToSend);
-
             minionToSend.GetComponent<SummonAIControl>()
                 .SendToDestination(selectMinionDestination());
-            
-            Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
         }
     }
 
@@ -73,8 +63,6 @@ public class SummonControl_scr : MonoBehaviour
         {
             GameObject minionToRecall = minionsAway[0];
             StartCoroutine(minionToRecall.GetComponent<SummonAIControl>().recall());
-            
-            Debug.Log("minion list sizes: " + minions.Count + " : " + minionsAway.Count);
         }
     }
 
@@ -84,7 +72,6 @@ public class SummonControl_scr : MonoBehaviour
 
         //Summon minion
         GameObject newMinion = Instantiate(minionNPC, summonPos, transform.rotation);
-        minions.Add(newMinion);
 
         //Destroy body
         Destroy(body.transform.gameObject);
@@ -105,20 +92,25 @@ public class SummonControl_scr : MonoBehaviour
 
     public void minionLeave(GameObject minion)
     {
+        Debug.Log(minion.name + " leaving");
         minions.Remove(minion);
-        minionsAway.Add(minion);
+        if(!minionsAway.Contains(minion))
+            minionsAway.Add(minion);
     }
 
     public void minionRemove(GameObject minion)
     {
+        Debug.Log(minion.name + " removed");
         minions.Remove(minion);
         minionsAway.Remove(minion);
     }
 
     public void minionReturn(GameObject minion)
     {
+        Debug.Log(minion.name + " returning");
         minionsAway.Remove(minion);
-        minions.Add(minion);
+        if(!minions.Contains(minion))
+            minions.Add(minion);
     }
 
     private void OnDrawGizmos()
