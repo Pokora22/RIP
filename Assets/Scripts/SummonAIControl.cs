@@ -15,17 +15,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public GameObject player;
 
-        public LayerMask enemies;
+        public LayerMask enemies;        
 
         public float playerFollowowDistance = 2f;
         public float stoppingDistance = 0f;
         public float enemyFollowDistance = 1f;
-        public float enemyDetectionRange = 10f;
+        public float enemyDetectionRange = 10f;        
         public float recallDelay = 3f;
+        private Attributes_scr minionAttributes;
         
         public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK}
 
-        private MINION_STATE currentState;
+        [SerializeField] private MINION_STATE currentState;
 
         private bool recalled = false;
         private SummonControl_scr summoner;
@@ -69,6 +70,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             StopCoroutine(minionAttack());
             StopCoroutine(minionFollow());
             StopCoroutine(minionAdvance());
+            StopCoroutine(dealDamage());
         }
 
         private void Start()
@@ -82,27 +84,27 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             player = GameObject.FindWithTag("Player");
             summoner = player.GetComponent<SummonControl_scr>();
+            minionAttributes = gameObject.GetComponent<Attributes_scr>();
 
             gameObject.name = "Minion " + (player.GetComponent<SummonControl_scr>().minions.Count  + player.GetComponent<SummonControl_scr>().minionsAway.Count);
 
-            StartCoroutine(recall());
+            // StartCoroutine(recall());
+            CurrentState = MINION_STATE.FOLLOW;
 
 //            StartCoroutine(stateDebug());
         }
 
         private IEnumerator minionFollow()
         {
-            if(!recalled)
-                StartCoroutine(recall());
+            Debug.Log(gameObject.name + " now following");
 
-            target = null;
+            target = player;
             summoner.minionReturn(this.gameObject);
             agent.stoppingDistance = playerFollowowDistance;
             
             while (currentState == MINION_STATE.FOLLOW)
             {
-                agent.SetDestination(player.transform.position); 
-
+                agent.SetDestination(target.transform.position);
                 yield return null;
             }
         }
@@ -118,7 +120,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    StartCoroutine(recall());
+                    //If there's a target?
+                    if (target.CompareTag("Destructible"))
+                        CurrentState = MINION_STATE.ATTACK;                     
+                    else
+                        CurrentState = MINION_STATE.FOLLOW;
                 }
 
                 yield return null;
@@ -133,11 +139,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             while (currentState == MINION_STATE.CHASE)
             {
-//                while (agent.pathPending)
-//                    yield return null;
+                //                while (agent.pathPending)
+                //                    yield return null;
+                if(!target)
+                {                    
+                    CurrentState = MINION_STATE.FOLLOW;
+                    yield return null;                    
+                }
+
+                agent.destination = target.transform.position;
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
-                {
+                {                    
                     CurrentState = MINION_STATE.ATTACK;
                 }
 
@@ -147,12 +160,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAttack()
         {
+            Debug.Log(gameObject.name + " starting attack..");
+            StartCoroutine(dealDamage());
             while (currentState == MINION_STATE.ATTACK)
-            {
-                //TODO: Put attack coroutine here
-                
-                if (agent.remainingDistance > agent.stoppingDistance * 1.2f) //Extra space to keep attacking without switching between states constantly
+            {                
+                if(!target)
                 {
+                    Debug.Log(gameObject.name + " destroyed target, now returning to follow...");
+                    target = player;
+                    CurrentState = MINION_STATE.FOLLOW;
+                    yield return null;
+                }
+
+                if (target != player && agent.remainingDistance > agent.stoppingDistance * 1.2f) //Extra space to keep attacking without switching between states constantly
+                {                    
                     CurrentState = MINION_STATE.CHASE;
                 }
 
@@ -163,36 +184,37 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
-            if (nearbyEnemies.Length > 0 && !recalled)
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);            
+
+            if (nearbyEnemies.Length > 0 && !recalled) //Target enemies first
             {
-                if(target == null)
+                if(target == player)
                     target = nearbyEnemies[Random.Range(0, nearbyEnemies.Length - 1)].gameObject; //Acquire new target if old is gone
-                
-                agent.destination = target.transform.position;
-                
-                if (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE) //If following player, start combat
+
+                agent.SetDestination(target.transform.position);
+
+                if (!recalled && (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE)) //If following player, start combat
+                {                    
                     CurrentState = MINION_STATE.CHASE;
-            }
-            
+                }
+            }            
+
             if (agent.remainingDistance > agent.stoppingDistance)
                 character.Move(agent.desiredVelocity, false, false);
             else
                 character.Move(Vector3.zero, false, false);
         }
 
-        private void OnCollisionEnter(Collision other)
-        {
-            if(other.gameObject.layer == LayerMask.NameToLayer("Structures"))
-                CurrentState = MINION_STATE.FOLLOW;
-        }
-
-        public void SendToDestination(Vector3 destination)
+        public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
         {
             NavMeshHit hit;
-            NavMesh.SamplePosition(destination, out hit, 2.0f, NavMesh.AllAreas); 
-            
+
+            if (obstacleHit)                            
+                target = rayHit.transform.gameObject; //This is still pointing to object, not hit point.                         
+
+            NavMesh.SamplePosition(destination, out hit, 2.0f, NavMesh.AllAreas);
             agent.SetDestination(hit.position);
+
             CurrentState = MINION_STATE.ADVANCE;
         }
 
@@ -220,6 +242,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 Debug.Log(gameObject.name + ": " + CurrentState);
                 yield return  new WaitForSeconds(1);
+            }
+        }
+
+        private IEnumerator dealDamage(){ //TODO: Link with animation instead later
+            Attributes_scr enemyAttr = target.GetComponent<Attributes_scr>();
+            float dmg = minionAttributes.attackDamage;
+            float aspd = minionAttributes.attackSpeed;
+
+            while(target && (target.CompareTag("Destructible") || target.CompareTag("Enemy"))) //Infinite for now
+            {
+                if(!gameObject){
+                    StopAllCoroutines();
+                    yield return null;
+                }
+
+                Debug.Log(gameObject.name + " attacks " + enemyAttr.gameObject.name);
+                enemyAttr.damage(dmg, minionAttributes);
+                yield return new WaitForSeconds(1f/aspd);
             }
         }
     }

@@ -16,6 +16,7 @@ public class SummonControl_scr : MonoBehaviour
     public List<GameObject> minions;
     public List<GameObject> minionsAway; //public for debugging purpose TODO: Change to private later?
     private GameObject minionTarget;
+    private bool consumeSummonInput = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +43,10 @@ public class SummonControl_scr : MonoBehaviour
         {
             //secondary mouse button
             if (nearbyBodies.Length > 0)
+            {
                 summonMinion(nearbyBodies[0].gameObject);
+                consumeSummonInput = true;
+            }
         }
     }
 
@@ -50,10 +54,19 @@ public class SummonControl_scr : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && minions.Count > 0)
         {
-            GameObject minionToSend = minions[0];
+            RaycastHit hit;
+            GameObject minionToSend = minions[0];                         
+
+            Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); //TODO: +1 hardcoded for now, change to player height/2 later? 
+            bool obstacleHit = Physics.SphereCast(origin, minionCollisionCheckRadius, camera.transform.forward, out hit,
+                minionRunDistance);
+
+            Vector3 destination = hit.transform
+            ? hit.point
+            : transform.position + camera.transform.forward * minionRunDistance;
 
             minionToSend.GetComponent<SummonAIControl>()
-                .SendToDestination(selectMinionDestination());
+                .SendToDestination(selectMinionDestination(), obstacleHit, hit);
         }
     }
 
@@ -61,8 +74,12 @@ public class SummonControl_scr : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && minionsAway.Count > 0)
         {
+            if(!consumeSummonInput){
             GameObject minionToRecall = minionsAway[0];
             StartCoroutine(minionToRecall.GetComponent<SummonAIControl>().recall());
+            }
+
+            consumeSummonInput = false; //Don't recall minion if summoned
         }
     }
 
@@ -77,7 +94,7 @@ public class SummonControl_scr : MonoBehaviour
         Destroy(body.transform.gameObject);
     }
 
-    private Vector3 selectMinionDestination()
+    private Vector3 selectMinionDestination() //Integrated with sendMinion
     {
         RaycastHit hit;
         

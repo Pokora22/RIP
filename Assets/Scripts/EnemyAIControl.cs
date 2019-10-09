@@ -1,5 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
+using Random = UnityEngine.Random;
+
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -11,6 +15,45 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target;                                    // target to aim for
 
+        private Terrain terrain;
+        
+        [SerializeField] private float patrolSpeed;
+        [SerializeField] private float chaseSpeed;
+        
+        public enum ENEMY_STATE {PATROL, CHASE, ATTACK};
+        //------------------------------------------
+        public ENEMY_STATE CurrentState
+        {
+            get{return currentstate;}
+
+            set
+            {
+                currentstate = value;
+                
+                StopAllCoroutines();
+
+                switch(currentstate)
+                {
+                    case ENEMY_STATE.PATROL:
+                        StartCoroutine(AIPatrol());
+                        break;
+
+                    case ENEMY_STATE.CHASE:
+//                        StartCoroutine(AIChase());
+                        break;
+
+                    case ENEMY_STATE.ATTACK:
+//                        StartCoroutine(AIAttack());
+                        break;
+                }
+            }
+        }
+        //------------------------------------------
+        [SerializeField]
+        private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
+
+        
+
 
         private void Start()
         {
@@ -20,24 +63,146 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 	        agent.updateRotation = false;
 	        agent.updatePosition = true;
+
+            terrain = GameObject.FindWithTag("Terrain").GetComponent<Terrain>();
+
+            CurrentState = ENEMY_STATE.PATROL;
         }
+        
+        public IEnumerator AIPatrol()
+	{
+		agent.speed = patrolSpeed;
+		
+        agent.SetDestination(randomTerrainPoint());
+        
+        while (currentstate == ENEMY_STATE.PATROL)
+        {
+            //TODO: Add line of sight
+//            m_ThisScrLineOfSight.Sensitivity = scr_LineOfSight.SightSensitivity.STRICT;
+
+            
+            agent.isStopped = false;
+            
+            if (agent.remainingDistance > agent.stoppingDistance)
+	            character.Move(agent.desiredVelocity, false, false);
+            else
+	            agent.SetDestination(randomTerrainPoint());
+            
+            while (agent.pathPending)
+                yield return null;
+
+            //TODO: Line of sight
+//            if (m_ThisScrLineOfSight.CanSeeTarget)
+//            {
+//                agent.isStopped = true;
+//                CurrentState = ENEMY_STATE.CHASE;
+//                yield break;
+//            }
+
+			yield return null;
+		}
+	}
+	//------------------------------------------
+//	public IEnumerator AIChase()
+//	{
+//		agent.speed = chaseSpeed;
+//		
+//		//Loop while chasing
+//		while(currentstate == ENEMY_STATE.CHASE)
+//		{
+//			//Set loose search
+//			m_ThisScrLineOfSight.Sensitivity = scr_LineOfSight.SightSensitivity.LOOSE;
+//
+//            //Chase to last known position
+//            agent.isStopped = false;
+//			agent.SetDestination(m_ThisScrLineOfSight.LastKnowSighting);
+//
+//			//Wait until path is computed
+//			while(agent.pathPending)
+//				yield return null;
+//			
+//			//Have we reached destination?
+//			if(agent.remainingDistance <= agent.stoppingDistance)
+//			{
+//				//Stop agent
+//                agent.isStopped = true;
+//
+//				//Reached destination but cannot see player
+//				if (!m_ThisScrLineOfSight.CanSeeTarget)
+//				{
+//					//Check nearest gate if lost player
+//					PatrolDestination = newDestination(nearestDestination());
+//					CurrentState = ENEMY_STATE.PATROL;
+//				}
+//					
+//				else //Reached destination and can see player. Reached attacking distance
+//					CurrentState = ENEMY_STATE.ATTACK;
+//
+//				yield break;
+//			}
+//
+//			//Wait until next frame
+//			yield return null;
+//		}
+//	}
+//
+//	//------------------------------------------
+//	public IEnumerator AIAttack()
+//	{
+//		
+//		//Loop while chasing and attacking
+//		while(currentstate == ENEMY_STATE.ATTACK)
+//		{
+//            //Chase to player position
+//            agent.isStopped = false;
+//			agent.SetDestination(PlayerTransform.position);
+//
+//			//Wait until path is computed
+//			while(agent.pathPending)
+//				yield return null;
+//
+//			//Has player run away?
+//			if(agent.remainingDistance > agent.stoppingDistance)
+//			{
+//				animator.SetBool("Attacking", false);
+//				while (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"))
+//					yield return null;
+//				//Change back to chase
+//				CurrentState = ENEMY_STATE.CHASE;
+//				yield break;
+//			}
+//
+//			//Wait until next frame
+//			yield return null;
+//		}
+//	}
 
 
         private void Update()
         {
-            if (target != null)
-                agent.SetDestination(target.position);
 
-            if (agent.remainingDistance > agent.stoppingDistance)
-                character.Move(agent.desiredVelocity, false, false);
-            else
-                character.Move(Vector3.zero, false, false);
+//
+//            if (agent.remainingDistance > agent.stoppingDistance)
+//                character.Move(agent.desiredVelocity, false, false);
+//            else
+//                CurrentState = ENEMY_STATE.PATROL;
         }
 
 
         public void SetTarget(Transform target)
         {
             this.target = target;
+        }
+
+        private Vector3 randomTerrainPoint()
+        {
+            float x = Random.Range(terrain.transform.position.x, terrain.transform.position.x + terrain.terrainData.size.x);
+            float z = Random.Range(terrain.transform.position.z, terrain.transform.position.z + terrain.terrainData.size.z);
+
+            NavMeshHit hit;
+            NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2.0f, NavMesh.AllAreas);
+            
+            return hit.position;
         }
     }
 }
