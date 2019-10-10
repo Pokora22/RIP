@@ -75,7 +75,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		
         agent.SetDestination(randomTerrainPoint());
         
-        while (currentstate == ENEMY_STATE.PATROL)
+        while (gameObject && currentstate == ENEMY_STATE.PATROL)
         {
             //TODO: Add line of sight
 //            m_ThisScrLineOfSight.Sensitivity = scr_LineOfSight.SightSensitivity.STRICT;

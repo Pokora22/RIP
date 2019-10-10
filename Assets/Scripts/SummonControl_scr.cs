@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 public class SummonControl_scr : MonoBehaviour
@@ -85,10 +86,14 @@ public class SummonControl_scr : MonoBehaviour
 
     private void summonMinion(GameObject body)
     {
+        NavMeshHit hit;
+
         Vector3 summonPos = body.transform.position;
+        NavMesh.SamplePosition(summonPos, out hit, 2.0f, NavMesh.AllAreas);
+        
 
         //Summon minion
-        GameObject newMinion = Instantiate(minionNPC, summonPos, transform.rotation);
+        GameObject newMinion = Instantiate(minionNPC, hit.position, transform.rotation);
 
         //Destroy body
         Destroy(body.transform.gameObject);
@@ -109,7 +114,7 @@ public class SummonControl_scr : MonoBehaviour
 
     public void minionLeave(GameObject minion)
     {
-        Debug.Log(minion.name + " leaving");
+//        Debug.Log(minion.name + " leaving");
         minions.Remove(minion);
         if(!minionsAway.Contains(minion))
             minionsAway.Add(minion);
@@ -124,7 +129,7 @@ public class SummonControl_scr : MonoBehaviour
 
     public void minionReturn(GameObject minion)
     {
-        Debug.Log(minion.name + " returning");
+//        Debug.Log(minion.name + " returning");
         minionsAway.Remove(minion);
         if(!minions.Contains(minion))
             minions.Add(minion);
