@@ -92,7 +92,7 @@ public class SummonControl_scr : MonoBehaviour
         NavMeshHit hit;
 
         Vector3 summonPos = body.transform.position;
-        NavMesh.SamplePosition(summonPos, out hit, 2.0f, NavMesh.AllAreas);
+        NavMesh.SamplePosition(summonPos, out hit, 10.0f, NavMesh.AllAreas);
         
 
         //Summon minion

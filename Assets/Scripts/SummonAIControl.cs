@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -70,15 +72,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if(debug)
                     Debug.Log(gameObject.name + " going into: " + currentState);
             }
-        }
-
-        private void StopStateCoroutines()
-        {
-            StopCoroutine(minionChase());
-            StopCoroutine(minionAttack());
-            StopCoroutine(minionFollow());
-            StopCoroutine(minionAdvance());
-//            StopCoroutine(dealDamage());
         }
 
         private void Start()
@@ -217,21 +210,35 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);            
-
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
+            
             if (nearbyEnemies.Length > 0 && !recalled) //Target enemies first
             {
-                if(target == player)
-                    target = nearbyEnemies[Random.Range(0, nearbyEnemies.Length - 1)].gameObject; //Acquire new target if old is gone
+                RaycastHit hit;
+                List<Collider> enemyList = new List<Collider>(nearbyEnemies);
+                if (target == player)
+                    do
+                    {
+                        int index = Random.Range(0, enemyList.Count - 1);
+                        target = enemyList[index].gameObject; //Acquire new target if old is gone
+                        enemyList.RemoveAt(index);
+                        Physics.Raycast(transform.position, target.transform.position, out hit);
+                        
+                        if(hit.transform.CompareTag("Enemy"))
+                            break;
 
-                if(target)
-                    agent.SetDestination(target.transform.position);
-
-                if (!recalled && (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE)) //If following player, start combat
-                {                    
+                        target = player;
+                    } while (enemyList.Count > 0);
+                
+                
+                if (target != player && !recalled && (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE)) //If following player, start combat
+                {
+                    Debug.Log("Chasing tag: " + target.tag);
                     CurrentState = MINION_STATE.CHASE;
                 }
-            }            
+            }       
+            
+            agent.SetDestination(target.transform.position);
 
             if (agent.remainingDistance > agent.stoppingDistance)
                 character.Move(agent.desiredVelocity, false, false);
@@ -241,8 +248,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
         {
-            if (recalled)
-                recalled = false;
+            recalled = false;
             
             NavMeshHit hit;
 
