@@ -131,7 +131,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     //If there's a target?
-                    if (target.CompareTag("Destructible"))
+                    if (target.CompareTag("Destructible") || target.CompareTag("Barricade"))
                         CurrentState = MINION_STATE.ATTACK;                     
                     else
                         CurrentState = MINION_STATE.FOLLOW;
@@ -238,8 +238,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             NavMeshHit hit;
 
-            if (obstacleHit)                            
-                target = rayHit.transform.gameObject; //This is still pointing to object, not hit point.                         
+            if (obstacleHit)
+            {
+                target = rayHit.transform.gameObject; //This is still pointing to object, not hit point.
+                Debug.Log("Ray hit obstacle: " + target.tag);
+            }
 
             NavMesh.SamplePosition(destination, out hit, 2.0f, NavMesh.AllAreas);
             agent.SetDestination(hit.position);
@@ -263,35 +266,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             yield return new WaitForSeconds(recallDelay);
             recalled = false;
 //            Debug.Log(gameObject.name + "Coroutine end recall: " + recalled);
-        }
-
-        private IEnumerator dealDamage(){ //TODO: Link with animation instead later
-            dmgRoutineRunning = true;
-            Debug.Log("Starting dmg routine: " + debugDmgRoutineCntr++);
-            
-            Attributes_scr enemyAttr = target.GetComponent<Attributes_scr>();
-            float dmg = minionAttributes.attackDamage;
-            float aspd = minionAttributes.attackSpeed;
-
-            while(target && (target.CompareTag("Destructible") || target.CompareTag("Enemy") || target.CompareTag("Barricade"))) //Infinite for now
-            {
-                yield return new WaitForSeconds(1f/aspd);
-                
-//                if(!gameObject)
-//                    yield break;
-//                if (!target)
-//                    CurrentState = MINION_STATE.FOLLOW;
-
-//                if (target)
-                {
-                    audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ATTACK);
-                    enemyAttr.damage(dmg, minionAttributes);
-                }
-                
-            }
-
-            dmgRoutineRunning = false;
-            Debug.Log("Finished dmg routine: " + debugDmgRoutineCntr--);
         }
     }
 }
