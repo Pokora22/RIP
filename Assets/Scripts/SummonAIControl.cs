@@ -36,8 +36,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private SummonControl_scr summoner;
         private GameObject target;
         private Attributes_scr minionAttributes;
-        
-        
+
+        private Transform debugTarget;
+
 
         public MINION_STATE CurrentState
         {
@@ -211,39 +212,53 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void Update()
         {
             Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
-            
-            if (nearbyEnemies.Length > 0 && !recalled) //Target enemies first
-            {
-                RaycastHit hit;
-                List<Collider> enemyList = new List<Collider>(nearbyEnemies);
-                if (target == player)
-                    do
-                    {
-                        int index = Random.Range(0, enemyList.Count - 1);
-                        target = enemyList[index].gameObject; //Acquire new target if old is gone
-                        enemyList.RemoveAt(index);
-                        Physics.Raycast(transform.position, target.transform.position, out hit);
-                        
-                        if(hit.transform.CompareTag("Enemy"))
-                            break;
 
-                        target = player;
-                    } while (enemyList.Count > 0);
-                
-                
-                if (target != player && !recalled && (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE)) //If following player, start combat
-                {
-                    Debug.Log("Chasing tag: " + target.tag);
-                    CurrentState = MINION_STATE.CHASE;
-                }
-            }       
-            
+            if (nearbyEnemies.Length > 0 && !recalled) //Target enemies first
+                target = selectTarget(nearbyEnemies);
+
+            //If following player, start combat
+            if (target != player && !recalled &&
+                (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE))
+            {
+                CurrentState = MINION_STATE.CHASE;
+            }
+
             agent.SetDestination(target.transform.position);
 
             if (agent.remainingDistance > agent.stoppingDistance)
                 character.Move(agent.desiredVelocity, false, false);
             else
                 character.Move(Vector3.zero, false, false);
+        }
+
+        private GameObject selectTarget(Collider[] nearbyEnemies)
+        {
+            GameObject newTarget;
+            RaycastHit hit;
+            List<Collider> enemyList = new List<Collider>(nearbyEnemies);
+            if (target == player)
+            {
+                do //TODO: Make a list instead and choose closest target and switch if not currently attacking instead
+                {
+                    int index = Random.Range(0, enemyList.Count - 1);
+                    newTarget = enemyList[index].gameObject; //Acquire new target if old is gone
+                    enemyList.RemoveAt(index);
+                    
+                    Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
+                    Vector3 destination = new Vector3(newTarget.transform.position.x, 1.5f, newTarget.transform.position.z) -
+                                          origin;
+                    
+                    Physics.Raycast(origin, destination, out hit);
+                    
+                    if (hit.transform.CompareTag("Enemy"))
+                    {
+                        return newTarget; 
+                    }
+                } while (enemyList.Count > 0);
+
+                return player;
+            }
+            return target;
         }
 
         public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
@@ -265,6 +280,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(agent.destination, 1f);
+            
+            Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
+            Vector3 destination = new Vector3(target.transform.position.x, 1.5f, target.transform.position.z) - origin;
+            
+            Gizmos.DrawRay(origin, destination);
         }
 
         public IEnumerator recall()

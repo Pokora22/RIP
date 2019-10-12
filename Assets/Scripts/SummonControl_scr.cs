@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 public class SummonControl_scr : MonoBehaviour
@@ -19,12 +20,14 @@ public class SummonControl_scr : MonoBehaviour
     public List<GameObject> minionsAway; //public for debugging purpose TODO: Change to private later?
     private GameObject minionTarget;
     private bool consumeSummonInput = false;
+    private pAttributes_scr summonerAttr;
 
     // Start is called before the first frame update
     void Start()
     {
         minions = new List<GameObject>();
         minionsAway = new List<GameObject>();
+        summonerAttr = GetComponent<pAttributes_scr>();
     }
 
     // Update is called once per frame
@@ -114,6 +117,7 @@ public class SummonControl_scr : MonoBehaviour
     {
         minions.Remove(minion);
         minionsAway.Remove(minion);
+        summonerAttr.updateHud();
     }
 
     public void minionReturn(GameObject minion)
@@ -122,6 +126,13 @@ public class SummonControl_scr : MonoBehaviour
         minionsAway.Remove(minion);
         if(!minions.Contains(minion))
             minions.Add(minion);
+        summonerAttr.updateHud(); //TODO: That would better be on summon, but it'd break minion follow routine
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Exit"))
+            SceneManager.LoadScene(2);
     }
 
     private void OnDrawGizmos()
