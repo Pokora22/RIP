@@ -15,7 +15,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
         public Transform target;                                    // target to aim for
 
-        private Terrain terrain;
+        private GameObject terrain;
         
         [SerializeField] private float patrolSpeed;
         [SerializeField] private float chaseSpeed;
@@ -64,7 +64,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	        agent.updateRotation = false;
 	        agent.updatePosition = true;
 
-            terrain = GameObject.FindWithTag("Terrain").GetComponent<Terrain>();
+            terrain = GameObject.FindWithTag("Terrain");
 
             CurrentState = ENEMY_STATE.PATROL;
         }
@@ -73,7 +73,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	{
 		agent.speed = patrolSpeed;
 		
-        agent.SetDestination(randomTerrainPoint());
+        agent.SetDestination(randomWaypoint());
         
         while (gameObject && currentstate == ENEMY_STATE.PATROL)
         {
@@ -86,7 +86,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (agent.remainingDistance > agent.stoppingDistance)
 	            character.Move(agent.desiredVelocity, false, false);
             else
-	            agent.SetDestination(randomTerrainPoint());
+	            agent.SetDestination(randomWaypoint());
             
             while (agent.pathPending)
                 yield return null;
@@ -194,15 +194,26 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             this.target = target;
         }
 
-        private Vector3 randomTerrainPoint()
+        private Vector3 randomWaypoint()
         {
-            float x = Random.Range(terrain.transform.position.x, terrain.transform.position.x + terrain.terrainData.size.x);
-            float z = Random.Range(terrain.transform.position.z, terrain.transform.position.z + terrain.terrainData.size.z);
+            Bounds levelBounds = terrain.gameObject.GetComponent<Collider>().bounds;
+            Debug.Log(terrain.GetComponent<Collider>().bounds.min + ":" + terrain.GetComponent<Collider>().bounds.max);
+            float x = Random.Range(levelBounds.min.x, levelBounds.max.x);
+            float z = Random.Range(levelBounds.min.z, levelBounds.max.z);
 
             NavMeshHit hit;
             NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2.0f, NavMesh.AllAreas);
             
+            Debug.Log(gameObject.name + " moving to: " + hit.position);
+            
             return hit.position;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.white;
+            if(Application.isPlaying)
+                Gizmos.DrawWireSphere(agent.destination, 1f);
         }
     }
 }

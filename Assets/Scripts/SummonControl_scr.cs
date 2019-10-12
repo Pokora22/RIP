@@ -13,6 +13,7 @@ public class SummonControl_scr : MonoBehaviour
     public float minionRunDistance = 10f;
     public float minionCollisionCheckRadius = .5f;
     public LayerMask bodiesMask;
+    public LayerMask obstaclesMask;
 
     public List<GameObject> minions;
     public List<GameObject> minionsAway; //public for debugging purpose TODO: Change to private later?
@@ -60,14 +61,16 @@ public class SummonControl_scr : MonoBehaviour
 
             Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); //TODO: +1 hardcoded for now, change to player height/2 later? 
             bool obstacleHit = Physics.SphereCast(origin, minionCollisionCheckRadius, camera.transform.forward, out hit,
-                minionRunDistance);
+                minionRunDistance, obstaclesMask);
+            
+            Vector3 direction = new Vector3(camera.transform.forward.x, 0f, camera.transform.forward.z);
 
             Vector3 destination = hit.transform
             ? hit.point
-            : transform.position + camera.transform.forward * minionRunDistance;
+            : transform.position + direction * minionRunDistance;
 
             minionToSend.GetComponent<SummonAIControl>()
-                .SendToDestination(selectMinionDestination(), obstacleHit, hit);
+                .SendToDestination(destination, obstacleHit, hit);
         }
     }
 
@@ -97,19 +100,6 @@ public class SummonControl_scr : MonoBehaviour
 
         //Destroy body
         Destroy(body.transform.gameObject);
-    }
-
-    private Vector3 selectMinionDestination() //Integrated with sendMinion
-    {
-        RaycastHit hit;
-        
-        Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); //TODO: +1 hardcoded for now, change to player height/2 later? 
-        Physics.SphereCast(origin, minionCollisionCheckRadius, camera.transform.forward, out hit,
-            minionRunDistance);
-
-        return hit.transform
-            ? hit.point
-            : transform.position + camera.transform.forward * minionRunDistance;
     }
 
     public void minionLeave(GameObject minion)
@@ -145,9 +135,14 @@ public class SummonControl_scr : MonoBehaviour
         RaycastHit hit;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); //TODO: +1 hardcoded for now, change to player height/2 later? 
         if (Physics.SphereCast(origin, minionCollisionCheckRadius, camera.transform.forward, out hit,
-            minionRunDistance))
+            minionRunDistance, obstaclesMask))
             Gizmos.DrawWireSphere(hit.point, .2f);
         else
             Gizmos.DrawWireSphere(transform.position + camera.transform.forward * minionRunDistance, .2f);
+        
+//        Gizmos.color = Color.green;
+//        Vector3 direction = new Vector3(camera.transform.forward.x, 0f, camera.transform.forward.z);
+//        Gizmos.DrawRay(origin, direction * 10f);
+        
     }
 }
