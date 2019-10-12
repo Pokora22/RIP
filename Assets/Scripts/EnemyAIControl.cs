@@ -197,16 +197,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 randomWaypoint()
         {
             Bounds levelBounds = terrain.gameObject.GetComponent<Collider>().bounds;
-            Debug.Log(terrain.GetComponent<Collider>().bounds.min + ":" + terrain.GetComponent<Collider>().bounds.max);
             float x = Random.Range(levelBounds.min.x, levelBounds.max.x);
             float z = Random.Range(levelBounds.min.z, levelBounds.max.z);
-
+            
             NavMeshHit hit;
             NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2.0f, NavMesh.AllAreas);
             
-            Debug.Log(gameObject.name + " moving to: " + hit.position);
-            
-            return hit.position;
+            NavMeshPath path = new NavMeshPath();
+            return agent.CalculatePath(hit.position, path) ? hit.position : randomWaypoint();
         }
 
         private void OnDrawGizmos()

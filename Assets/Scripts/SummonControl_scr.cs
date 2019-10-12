@@ -112,7 +112,6 @@ public class SummonControl_scr : MonoBehaviour
 
     public void minionRemove(GameObject minion)
     {
-        Debug.Log(minion.name + " removed");
         minions.Remove(minion);
         minionsAway.Remove(minion);
     }

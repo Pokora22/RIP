@@ -20,6 +20,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public float stoppingDistance = 0f;
         public float enemyFollowDistance = 1f;
         public float enemyDetectionRange = 10f;        
+        public float playerLeashRange = 15f;
         public float recallDelay = 3f;
         public bool debug = true;
         public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK}
@@ -151,6 +152,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 //                while (agent.pathPending)
                 //                    yield return null;
+                //Return to player if enemies run out too far from player
+                if (Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
+                {
+                    CurrentState = MINION_STATE.FOLLOW;
+                    yield return null;                 
+                }
+                
                 if(!target)
                 {                    
                     CurrentState = MINION_STATE.FOLLOW;
@@ -196,7 +204,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     yield break;
                 }
 
-                if (target)
+                if (target && target != player)
                 {
                     audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ATTACK);
                     enemyAttr.damage(dmg, minionAttributes);
@@ -239,10 +247,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             NavMeshHit hit;
 
             if (obstacleHit)
-            {
                 target = rayHit.transform.gameObject; //This is still pointing to object, not hit point.
-                Debug.Log("Ray hit obstacle: " + target.tag);
-            }
 
             NavMesh.SamplePosition(destination, out hit, 2.0f, NavMesh.AllAreas);
             agent.SetDestination(hit.position);
