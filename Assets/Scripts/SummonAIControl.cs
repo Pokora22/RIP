@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -33,10 +34,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool recalled = false;
         private bool dmgRoutineRunning = false;
         private SummonControl_scr summoner;
-        private GameObject target;
+        [SerializeField]private GameObject target;
         private Attributes_scr minionAttributes;
-
+        private Vector3 m_AdvanceDestination;
+        
         private Transform debugTarget;
+        
 
 
         public MINION_STATE CurrentState
@@ -116,7 +119,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     yield break;
                 }
 
-                UpdatePosition();
+                UpdatePosition(player.transform.position);
                 yield return null;
             }
         }
@@ -125,6 +128,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             summoner.minionLeave(gameObject);
             
+            Debug.Log(gameObject.name + " advancing from " + transform.position + " to " + m_AdvanceDestination);
             while (currentState == MINION_STATE.ADVANCE)
             {
                 while (agent.pathPending)
@@ -136,8 +140,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     CurrentState = MINION_STATE.CHASE;
                     yield break;
                 }
-
-                UpdatePosition();
+                
+                UpdatePosition(m_AdvanceDestination);
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -147,14 +151,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     else
                         CurrentState = MINION_STATE.FOLLOW;
                 }
-
+                
                 yield return null;
             }
         }
 
         private IEnumerator minionChase()
         {
-            agent.stoppingDistance = enemyFollowDistance;
+            agent.stoppingDistance = enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
             
             summoner.minionLeave(gameObject);
             
@@ -170,13 +174,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     yield break;                 
                 }
 
-                UpdatePosition();
+                UpdatePosition(target.transform.position);
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {                    
                     CurrentState = MINION_STATE.ATTACK;
                 }
-
                 yield return null;
             }
         }
@@ -194,35 +197,38 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             while (currentState == MINION_STATE.ATTACK)
             {
-                yield return new WaitForSeconds(1f/aspd);
+                character.attackAnim();
+                yield return new WaitForSeconds(1f/aspd); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
                 
                 if(!target)
                 {
-                    target = player;
                     CurrentState = MINION_STATE.FOLLOW;
                     yield break;
                 }
 
-                if (target != player && agent.remainingDistance > agent.stoppingDistance * 1.2f) //Extra space to keep attacking without switching between states constantly
+                if (agent.remainingDistance > agent.stoppingDistance * 1.2f) //Extra space to keep attacking without switching between states constantly
                 {                    
                     CurrentState = MINION_STATE.CHASE;
                     yield break;
                 }
 
-                if (target && target != player)
-                {
-                    audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ATTACK);
-                    enemyAttr.damage(dmg, minionAttributes);
-                }
-
+                while (character.CompareCurrentState("Attack"))
+                    yield return null;
+                
+                
+                audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ATTACK);
+                enemyAttr.damage(dmg, minionAttributes);
+                
                 yield return null;
             }
         }
 
 
-        private void UpdatePosition()
+        private void UpdatePosition(Vector3 destination)
         {
-            agent.SetDestination(target.transform.position);
+            NavMeshHit hit;
+            NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas);
+            agent.SetDestination(hit.position);
 
             if (agent.remainingDistance > agent.stoppingDistance)
                 character.Move(agent.desiredVelocity);
@@ -233,18 +239,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private GameObject findTargetEnemy() //TODO: Include destructibles later
         {
             Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
-
-            if (nearbyEnemies.Length == 0 || recalled) //Target enemies first
-                return player;
-            
             GameObject newTarget;
             RaycastHit hit;
             
             List<Collider> enemyList = new List<Collider>(nearbyEnemies);
-            do //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
+            while (enemyList.Count > 0 && !recalled) //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
             {
 //                int index = Random.Range(0, enemyList.Count - 1); 
-                newTarget = enemyList[0].gameObject; //Acquire new target if old is gone
+                newTarget = enemyList[0].gameObject;
                 enemyList.RemoveAt(0);
                 
                 Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
@@ -257,47 +259,55 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     return newTarget; 
                 }
-            } while (enemyList.Count > 0);
+            }
 
-            return player;
+            return target; //Don't change if no enemies found
         }
 
         public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
         {
             recalled = false;
-            
-            NavMeshHit hit;
 
-            if (obstacleHit)
-                target = rayHit.transform.gameObject; //This is still pointing to object, not hit point.
-
-            NavMesh.SamplePosition(destination, out hit, 2.0f, NavMesh.AllAreas);
-            agent.SetDestination(hit.position);
-
-            CurrentState = MINION_STATE.ADVANCE;
+            if (obstacleHit) {//TODO: Can't. This changes target to cube (world) and minions are confused (try to pathfind to center)
+                if (rayHit.transform.gameObject.CompareTag("Destructible"))
+                {
+                    target = rayHit.transform.gameObject; //Change target to the destructible
+                    CurrentState =
+                        MINION_STATE.CHASE; //Might be a problem again with distance and size of destructibles
+                }
+                else
+                {
+                    m_AdvanceDestination = rayHit.point;
+                    CurrentState = MINION_STATE.ADVANCE;
+                }
+            }
+            else
+            {
+                m_AdvanceDestination = destination;
+                CurrentState = MINION_STATE.ADVANCE;
+            }
         }
 
         private void OnDrawGizmos()
         {
-            // Gizmos.color = Color.green;
-            // Gizmos.DrawWireSphere(agent.destination, 1f);
-            
-            // Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
-            // Vector3 destination = new Vector3(target.transform.position.x, 1.5f, target.transform.position.z) - origin;
-            
-            // Gizmos.DrawRay(origin, destination);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(agent.destination, 1f);
+        
+            Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
+            Vector3 destination = new Vector3(target.transform.position.x, 1.5f, target.transform.position.z) - origin;
+        
+            Gizmos.DrawRay(origin, destination);
         }
-
+        
         public IEnumerator recall()
         {
             if (recalled)
                 yield break;
+            
             recalled = true;
-//            Debug.Log(gameObject.name +" : Coroutine start recall: " + recalled);
             CurrentState = MINION_STATE.FOLLOW;
             yield return new WaitForSeconds(recallDelay);
             recalled = false;
-//            Debug.Log(gameObject.name + "Coroutine end recall: " + recalled);
         }
     }
 }
