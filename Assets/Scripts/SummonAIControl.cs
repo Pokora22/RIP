@@ -9,15 +9,14 @@ using Random = UnityEngine.Random;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-    [RequireComponent(typeof (ThirdPersonCharacter))]
+    [RequireComponent(typeof (SummonAnimator_scr))]
     public class SummonAIControl : MonoBehaviour
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-        public ThirdPersonCharacter character { get; private set; } // the character we are controlling
+        public SummonAnimator_scr character { get; private set; } // the character we are controlling
 
         public GameObject player;
-        public LayerMask enemies;
-        public int debugDmgRoutineCntr = 0;
+        public LayerMask enemies;        
         public float playerFollowowDistance = 2f;
         public float stoppingDistance = 0f;
         public float enemyFollowDistance = 1f;
@@ -79,9 +78,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-            character = GetComponent<ThirdPersonCharacter>();
+            character = GetComponent<SummonAnimator_scr>();
 
-	        agent.updateRotation = false;
+	        agent.updateRotation = true;
 	        agent.updatePosition = true;
 
             player = GameObject.FindWithTag("Player");
@@ -101,15 +100,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionFollow()
         {
-//            Debug.Log(gameObject.name + " now following");
-
             target = player;
             summoner.minionReturn(this.gameObject);
             agent.stoppingDistance = playerFollowowDistance;
             
             while (currentState == MINION_STATE.FOLLOW)
             {
-                agent.SetDestination(target.transform.position);
+                while (agent.pathPending)
+                    yield return null;
+                
+                target = findTargetEnemy();
+                if (target != player)
+                {
+                    CurrentState = MINION_STATE.CHASE;
+                    yield break;
+                }
+
+                UpdatePosition();
                 yield return null;
             }
         }
@@ -122,6 +129,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 while (agent.pathPending)
                     yield return null;
+                
+                target = findTargetEnemy();
+                if (target != player)
+                {
+                    CurrentState = MINION_STATE.CHASE;
+                    yield break;
+                }
+
+                UpdatePosition();
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -144,22 +160,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             while (currentState == MINION_STATE.CHASE)
             {
-                //                while (agent.pathPending)
-                //                    yield return null;
+                while (agent.pathPending)
+                    yield return null;
+                
                 //Return to player if enemies run out too far from player
-                if (Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
+                if (!target || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
                 {
                     CurrentState = MINION_STATE.FOLLOW;
-                    yield return null;                 
-                }
-                
-                if(!target)
-                {                    
-                    CurrentState = MINION_STATE.FOLLOW;
-                    yield return null;                    
+                    yield break;                 
                 }
 
-                agent.destination = target.transform.position;
+                UpdatePosition();
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {                    
@@ -209,56 +220,46 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
 
 
-        private void Update()
+        private void UpdatePosition()
         {
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
-
-            if (nearbyEnemies.Length > 0 && !recalled) //Target enemies first
-                target = selectTarget(nearbyEnemies);
-
-            //If following player, start combat
-            if (target != player && !recalled &&
-                (CurrentState == MINION_STATE.FOLLOW || CurrentState == MINION_STATE.ADVANCE))
-            {
-                CurrentState = MINION_STATE.CHASE;
-            }
-
             agent.SetDestination(target.transform.position);
 
             if (agent.remainingDistance > agent.stoppingDistance)
-                character.Move(agent.desiredVelocity, false, false);
+                character.Move(agent.desiredVelocity);
             else
-                character.Move(Vector3.zero, false, false);
+                character.Move(Vector3.zero);
         }
 
-        private GameObject selectTarget(Collider[] nearbyEnemies)
+        private GameObject findTargetEnemy() //TODO: Include destructibles later
         {
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
+
+            if (nearbyEnemies.Length == 0 || recalled) //Target enemies first
+                return player;
+            
             GameObject newTarget;
             RaycastHit hit;
+            
             List<Collider> enemyList = new List<Collider>(nearbyEnemies);
-            if (target == player)
+            do //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
             {
-                do //TODO: Make a list instead and choose closest target and switch if not currently attacking instead
+//                int index = Random.Range(0, enemyList.Count - 1); 
+                newTarget = enemyList[0].gameObject; //Acquire new target if old is gone
+                enemyList.RemoveAt(0);
+                
+                Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
+                Vector3 destination = new Vector3(newTarget.transform.position.x, 1.5f, newTarget.transform.position.z) -
+                                      origin;
+                
+                Physics.Raycast(origin, destination, out hit);
+                
+                if (hit.transform.CompareTag("Enemy"))
                 {
-                    int index = Random.Range(0, enemyList.Count - 1);
-                    newTarget = enemyList[index].gameObject; //Acquire new target if old is gone
-                    enemyList.RemoveAt(index);
-                    
-                    Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
-                    Vector3 destination = new Vector3(newTarget.transform.position.x, 1.5f, newTarget.transform.position.z) -
-                                          origin;
-                    
-                    Physics.Raycast(origin, destination, out hit);
-                    
-                    if (hit.transform.CompareTag("Enemy"))
-                    {
-                        return newTarget; 
-                    }
-                } while (enemyList.Count > 0);
+                    return newTarget; 
+                }
+            } while (enemyList.Count > 0);
 
-                return player;
-            }
-            return target;
+            return player;
         }
 
         public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
@@ -278,13 +279,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(agent.destination, 1f);
+            // Gizmos.color = Color.green;
+            // Gizmos.DrawWireSphere(agent.destination, 1f);
             
-            Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
-            Vector3 destination = new Vector3(target.transform.position.x, 1.5f, target.transform.position.z) - origin;
+            // Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
+            // Vector3 destination = new Vector3(target.transform.position.x, 1.5f, target.transform.position.z) - origin;
             
-            Gizmos.DrawRay(origin, destination);
+            // Gizmos.DrawRay(origin, destination);
         }
 
         public IEnumerator recall()
