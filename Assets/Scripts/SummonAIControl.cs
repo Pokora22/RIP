@@ -39,7 +39,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool targetDead;
         private float nextEnemySearchTime;
         private Attributes_scr enemyAttr;
-        
 
         public MINION_STATE CurrentState
         {
@@ -126,6 +125,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 yield return null;
             }
         }
+        
+        public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
+        {
+            recalled = false;
+            
+            if (obstacleHit) 
+                m_AdvanceDestination = rayHit.point;
+            else
+                m_AdvanceDestination = destination;
+            
+            CurrentState = MINION_STATE.ADVANCE;
+        }
 
         private IEnumerator minionAdvance()
         {
@@ -137,7 +148,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (agent.pathPending)
                     yield return null;
                 
+                //TODO: Add search for obstacles
                 target = findTargetEnemy();
+                
                 if (target != player)
                 {                    
                     CurrentState = MINION_STATE.CHASE;
@@ -149,7 +162,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     //If there's a target?
-                    if (target.CompareTag("Destructible") || target.CompareTag("Barricade"))
+                    if (target.CompareTag("Destructible") || target.CompareTag("Barricade")) //This is redundant ?
                         CurrentState = MINION_STATE.ATTACK;                     
                     else
                         CurrentState = MINION_STATE.FOLLOW;
@@ -228,9 +241,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void UpdatePosition(Vector3 destination)
         {
-            NavMeshHit hit;
-            NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas);
-            agent.SetDestination(hit.position);
+//            NavMeshHit hit;
+//            NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas);
+
+            agent.SetDestination(destination);
 
             if (agent.remainingDistance > agent.stoppingDistance)
                 AnimatorScr.Move(agent.desiredVelocity);
@@ -238,10 +252,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 AnimatorScr.Move(Vector3.zero);
         }
 
-        private GameObject findTargetEnemy() //TODO: Include destructibles later
+        private GameObject findTargetEnemy()
         {
             if (Time.time < nextEnemySearchTime)
-                return player;
+                return target;
             nextEnemySearchTime += enemySearchDelay;
             
             Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
@@ -270,30 +284,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             return target; //Don't change if no enemies found
         }
-
-        public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
-        {
-            recalled = false;
-
-            if (obstacleHit) {//TODO: Can't. This changes target to cube (world) and minions are confused (try to pathfind to center)
-                if (rayHit.transform.gameObject.CompareTag("Destructible"))
-                {
-                    target = rayHit.transform.gameObject; //Change target to the destructible
-                    CurrentState =
-                        MINION_STATE.CHASE; //Might be a problem again with distance and size of destructibles
-                }
-                else
-                {
-                    m_AdvanceDestination = rayHit.point;
-                    CurrentState = MINION_STATE.ADVANCE;
-                }
-            }
-            else
-            {
-                m_AdvanceDestination = destination;
-                CurrentState = MINION_STATE.ADVANCE;
-            }
-        }
+        
 
         private void OnDrawGizmos()
         {
@@ -319,8 +310,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         public void MinionAttack() //called by animation
         {
-            Debug.Log("This was called from animation");
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ATTACK);
+            
+            Debug.Log("Distance from " + target.name + ": " + Vector3.Distance(transform.position, target.transform.position));
             
             if(Vector3.Distance(transform.position, target.transform.position) <= agent.stoppingDistance)
                 enemyAttr.damage(minionAttributes.attackDamage, minionAttributes);

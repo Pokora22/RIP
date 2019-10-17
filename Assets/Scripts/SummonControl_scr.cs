@@ -62,11 +62,13 @@ public class SummonControl_scr : MonoBehaviour
             RaycastHit hit;
             GameObject minionToSend = minions[0];                         
 
-            Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); //TODO: +1 hardcoded for now, change to player height/2 later? 
-            bool obstacleHit = Physics.SphereCast(origin, minionCollisionCheckRadius, camera.transform.forward, out hit,
+            //Fix: start the raycast behind the player character to make sure we don't bypass first obstacle
+            Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) - transform.forward; 
+            Vector3 direction = new Vector3(camera.transform.forward.x, 0f, camera.transform.forward.z);
+            bool obstacleHit = Physics.SphereCast(origin, minionCollisionCheckRadius, direction, out hit,
                 minionRunDistance, obstaclesMask);
             
-            Vector3 direction = new Vector3(camera.transform.forward.x, 0f, camera.transform.forward.z);
+            
 
             Vector3 destination = hit.transform
             ? hit.point
