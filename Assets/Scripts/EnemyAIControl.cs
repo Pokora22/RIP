@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         [SerializeField] private float patrolSpeed;
         [SerializeField] private float chaseSpeed;
+        [SerializeField] private bool doNotMove;
         
         public enum ENEMY_STATE {PATROL, CHASE, ATTACK};
         //------------------------------------------
@@ -72,25 +73,29 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public IEnumerator AIPatrol()
 	{
 		agent.speed = patrolSpeed;
-		
-        agent.SetDestination(randomWaypoint());
+
+        if (doNotMove)
+            agent.SetDestination(transform.position);
+        else
+            agent.SetDestination(randomWaypoint());
         
         while (gameObject && currentstate == ENEMY_STATE.PATROL)
         {
             //TODO: Add line of sight
 //            m_ThisScrLineOfSight.Sensitivity = scr_LineOfSight.SightSensitivity.STRICT;
-
             
             agent.isStopped = false;
-            
+
             if (agent.remainingDistance > agent.stoppingDistance)
-	            character.Move(agent.desiredVelocity, false, false);
+                character.Move(agent.desiredVelocity, false, false);
+            else if (doNotMove)
+                agent.SetDestination(transform.position);
             else
-	            agent.SetDestination(randomWaypoint());
-            
+                agent.SetDestination(randomWaypoint());
+                
             while (agent.pathPending)
                 yield return null;
-
+            
             //TODO: Line of sight
 //            if (m_ThisScrLineOfSight.CanSeeTarget)
 //            {

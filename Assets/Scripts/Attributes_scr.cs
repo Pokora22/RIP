@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Attributes_scr : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Attributes_scr : MonoBehaviour
     [SerializeField] private bool debug;
     private pAttributes_scr playerAttr;
     private SummonControl_scr summoner;
+    private GameObject attacker;
     
     void Start()
     {
@@ -49,6 +51,8 @@ public class Attributes_scr : MonoBehaviour
             else if(gameObject && gameObject.CompareTag("Minion"))
                 summoner.minionRemove(gameObject);
 
+            if (CompareTag("Enemy"))
+                attacker.GetComponent<SummonAIControl>().setTargetDead(true);
             Destroy(gameObject);
         }
     }
@@ -59,6 +63,7 @@ public class Attributes_scr : MonoBehaviour
             Debug.Log(gameObject.name + " received " +dmgAmnt + " dmg from " + minionAttacking.gameObject.name);
             
         damage(dmgAmnt);
+        attacker = minionAttacking.gameObject;
         minionAttacking.damage(reflectDamage); //Don't reflect from reflect        
     }
 }

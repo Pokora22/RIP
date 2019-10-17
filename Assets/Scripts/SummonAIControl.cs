@@ -28,19 +28,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK}
 
         [SerializeField] private MINION_STATE currentState;
+        [SerializeField] private GameObject target;
+        [SerializeField] private float enemySearchDelay = 1f;
         private Coroutine currentCoroutine;
-
         private NpcAudio_scr audioPlayer;
         private bool recalled = false;
         private bool dmgRoutineRunning = false;
         private SummonControl_scr summoner;
-        [SerializeField]private GameObject target;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination;
-        
-        private Transform debugTarget;
-        
-
+        private bool targetDead;
+        private float nextEnemySearchTime;
+        private Attributes_scr enemyAttr;
 
         public MINION_STATE CurrentState
         {
@@ -99,6 +98,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             audioPlayer = GetComponent<NpcAudio_scr>();
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);
+
+            nextEnemySearchTime = Time.time + enemySearchDelay;
         }
 
         private IEnumerator minionFollow()
@@ -127,8 +128,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private IEnumerator minionAdvance()
         {
             summoner.minionLeave(gameObject);
-            
-            Debug.Log(gameObject.name + " advancing from " + transform.position + " to " + m_AdvanceDestination);
+            agent.stoppingDistance = .2f;
+
             while (currentState == MINION_STATE.ADVANCE)
             {
                 while (agent.pathPending)
@@ -136,7 +137,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 target = findTargetEnemy();
                 if (target != player)
-                {
+                {                    
                     CurrentState = MINION_STATE.CHASE;
                     yield break;
                 }
@@ -168,7 +169,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     yield return null;
                 
                 //Return to player if enemies run out too far from player
-                if (!target || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
+                if (targetDead || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
                 {
                     CurrentState = MINION_STATE.FOLLOW;
                     yield break;                 
@@ -186,27 +187,33 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAttack()
         {
-            Attributes_scr enemyAttr = target.GetComponent<Attributes_scr>();
+            if(Time.time > nextEnemySearchTime)
+            
+            enemyAttr = target.GetComponent<Attributes_scr>();
             float dmg = minionAttributes.attackDamage;
             float aspd = minionAttributes.attackSpeed;
-            
+
+            /*
             if (target.CompareTag("Enemy"))
                 agent.stoppingDistance = enemyFollowDistance;
             else if (target.CompareTag("Destructible") || target.CompareTag("Barricade"))
                 agent.stoppingDistance = 1.6f; //Destructible attack distance
+            */
             
             while (currentState == MINION_STATE.ATTACK)
             {
-                character.attackAnim();
-                yield return new WaitForSeconds(1f/aspd); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
-                
-                if(!target)
+                if (targetDead)
                 {
                     CurrentState = MINION_STATE.FOLLOW;
                     yield break;
                 }
 
-                if (agent.remainingDistance > agent.stoppingDistance * 1.2f) //Extra space to keep attacking without switching between states constantly
+                character.attackAnim();
+                yield return new WaitForSeconds(1f/aspd); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
+                
+                agent.SetDestination(target.transform.position);
+
+                if (agent.remainingDistance > agent.stoppingDistance)
                 {                    
                     CurrentState = MINION_STATE.CHASE;
                     yield break;
@@ -238,6 +245,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private GameObject findTargetEnemy() //TODO: Include destructibles later
         {
+            if (Time.time < nextEnemySearchTime)
+                return player;
+            nextEnemySearchTime += enemySearchDelay;
+            
             Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
             GameObject newTarget;
             RaycastHit hit;
@@ -308,6 +319,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             CurrentState = MINION_STATE.FOLLOW;
             yield return new WaitForSeconds(recallDelay);
             recalled = false;
+        }
+
+        public void setTargetDead(bool dead)
+        {
+            targetDead = dead;
         }
     }
 }
