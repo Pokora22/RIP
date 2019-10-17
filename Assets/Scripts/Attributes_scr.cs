@@ -18,12 +18,14 @@ public class Attributes_scr : MonoBehaviour
     private pAttributes_scr playerAttr;
     private SummonControl_scr summoner;
     private GameObject attacker;
+    private SummonAnimator_scr AnimatorScr;
     
     void Start()
     {
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<SummonControl_scr>();
         playerAttr = GameObject.FindGameObjectWithTag("Player").GetComponent<pAttributes_scr>();
+        AnimatorScr = gameObject.GetComponent<SummonAnimator_scr>();
     }
 
     // private void OnCollisionEnter(Collision other)
@@ -42,18 +44,18 @@ public class Attributes_scr : MonoBehaviour
                 Debug.Log(gameObject.name + " dropped dead");
 
             //Todo: Destroy and replace with something else depending on what was destroyed? Minion - nothing; Mobs - bodies
-            if (gameObject && gameObject.CompareTag("Enemy"))
+            if (gameObject.CompareTag("Enemy"))
             {
                 Instantiate(corpse, transform.position, transform.rotation);
                 playerAttr.addExp(expValue);
+                Destroy(gameObject);
             }
             
-            else if(gameObject && gameObject.CompareTag("Minion"))
+            else if (gameObject.CompareTag("Minion"))
+            {
                 summoner.minionRemove(gameObject);
-
-            if (CompareTag("Enemy"))
-                attacker.GetComponent<SummonAIControl>().setTargetDead(true);
-            Destroy(gameObject);
+                AnimatorScr.setDeadAnim(true);
+            }
         }
     }
 
@@ -63,7 +65,6 @@ public class Attributes_scr : MonoBehaviour
             Debug.Log(gameObject.name + " received " +dmgAmnt + " dmg from " + minionAttacking.gameObject.name);
             
         damage(dmgAmnt);
-        attacker = minionAttacking.gameObject;
         minionAttacking.damage(reflectDamage); //Don't reflect from reflect        
     }
 }
