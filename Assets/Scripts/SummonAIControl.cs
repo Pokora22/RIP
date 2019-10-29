@@ -221,6 +221,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     CurrentState = MINION_STATE.FOLLOW;
                     yield break;
                 }
+                
+                transform.LookAt(target.transform);
 
                 float attackLength = AnimatorScr.SetAttackAnim(true, minionAttributes.attackSpeed);
                 yield return new WaitForSeconds(attackLength); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
