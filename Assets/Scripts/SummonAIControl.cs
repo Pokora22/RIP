@@ -115,12 +115,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     yield return null;
                 
                 target = findTargetEnemy();
+                
                 if (target != player)
                 {
                     CurrentState = MINION_STATE.CHASE;
                     yield break;
                 }
-
+                
                 UpdatePosition(player.transform.position);
                 yield return null;
             }
@@ -142,6 +143,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             summoner.minionLeave(gameObject);
             agent.stoppingDistance = .2f;
+            recalled = false;
 
             while (currentState == MINION_STATE.ADVANCE)
             {
@@ -223,7 +225,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 float attackLength = AnimatorScr.SetAttackAnim(true, minionAttributes.attackSpeed);
                 yield return new WaitForSeconds(attackLength); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
                 
-                agent.SetDestination(target.transform.position);
+                if(!target.gameObject){
+                    CurrentState = MINION_STATE.FOLLOW;
+                    yield break;
+                }                    
+
+                agent.SetDestination(target.transform.position);                
 
                 if (agent.remainingDistance > agent.stoppingDistance)
                 {                    
@@ -241,20 +248,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void UpdatePosition(Vector3 destination)
         {
-//            NavMeshHit hit;
-//            NavMesh.SamplePosition(destination, out hit, 1f, NavMesh.AllAreas);
-
             agent.SetDestination(destination);
 
-            if (agent.remainingDistance > agent.stoppingDistance)
+            float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
+            if (remainingDistance > agent.stoppingDistance)
                 AnimatorScr.Move(agent.desiredVelocity);
             else
+            {
                 AnimatorScr.Move(Vector3.zero);
+                recalled = false;
+            }
         }
 
         private GameObject findTargetEnemy()
         {
-            if (Time.time < nextEnemySearchTime)
+            if (Time.time < nextEnemySearchTime || recalled)
                 return target;
             nextEnemySearchTime += enemySearchDelay;
             
@@ -263,7 +271,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             RaycastHit hit;
             
             List<Collider> enemyList = new List<Collider>(nearbyEnemies);
-            while (enemyList.Count > 0 && !recalled) //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
+            while (enemyList.Count > 0) //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
             {
 //                int index = Random.Range(0, enemyList.Count - 1); 
                 newTarget = enemyList[0].gameObject;
@@ -288,6 +296,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void OnDrawGizmos()
         {
+            if(!target.gameObject)
+                return;
+            
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(agent.destination, 1f);
         
@@ -299,24 +310,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         public IEnumerator recall()
         {
-            if (recalled)
-                yield break;
-            
-            recalled = true;
-            CurrentState = MINION_STATE.FOLLOW;
-            yield return new WaitForSeconds(recallDelay);
-            recalled = false;
+            if (!recalled)
+            {
+                recalled = true;
+                CurrentState = MINION_STATE.FOLLOW;
+            }
+
+//            yield return new WaitForSeconds(recallDelay);
+//            recalled = false;
+            yield break;
         }
 
-        public void MinionAttack() //called by animation
-        {
-            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ATTACK);
-            
-            Debug.Log("Distance from " + target.name + ": " + Vector3.Distance(transform.position, target.transform.position));
-            
-            if(Vector3.Distance(transform.position, target.transform.position) <= agent.stoppingDistance)
-                enemyAttr.damage(minionAttributes.attackDamage, minionAttributes);
-        }
 
         public void setTargetDead(bool dead)
         {

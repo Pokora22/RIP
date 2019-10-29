@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -13,15 +14,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
         public ThirdPersonCharacter character { get; private set; } // the character we are controlling
-        public Transform target;                                    // target to aim for
+        public GameObject target;                                    // target to aim for
 
         private GameObject terrain;
-        
+        private GameObject player;
         [SerializeField] private float patrolSpeed;
         [SerializeField] private float chaseSpeed;
         [SerializeField] private bool doNotMove;
+        [SerializeField] private bool debug;
+        [SerializeField] private float AiCheckDelay = 1f;
+        [SerializeField] private float FovDistance = 30f;
+        [SerializeField] private float FovAngle = 45f;
+        [SerializeField] private LayerMask enemies;        
+        private float NextAiCheckTimestamp;
+        private Attributes_scr targetAttr, selfAttr;
         
-        public enum ENEMY_STATE {PATROL, CHASE, ATTACK};
+        
+        public enum ENEMY_STATE {PATROL, CHASE, ATTACK};        
+        
         //------------------------------------------
         public ENEMY_STATE CurrentState
         {
@@ -30,48 +40,52 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             set
             {
                 currentstate = value;
-                
-                StopAllCoroutines();
+                if(debug)
+                    Debug.Log("New state: " + currentstate);
 
                 switch(currentstate)
-                {
+                {                    
                     case ENEMY_STATE.PATROL:
                         StartCoroutine(AIPatrol());
                         break;
 
-                    case ENEMY_STATE.CHASE:
-//                        StartCoroutine(AIChase());
+                    case ENEMY_STATE.CHASE:                        
+                        StartCoroutine(AIChase());
                         break;
 
-                    case ENEMY_STATE.ATTACK:
-//                        StartCoroutine(AIAttack());
+                    case ENEMY_STATE.ATTACK:                        
+                       StartCoroutine(AIAttack());
                         break;
                 }
             }
         }
+
         //------------------------------------------
         [SerializeField]
         private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
-
-        
-
 
         private void Start()
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
+            selfAttr = GetComponent<Attributes_scr>();
+            target = gameObject;
 
 	        agent.updateRotation = false;
 	        agent.updatePosition = true;
 
             terrain = GameObject.FindWithTag("Terrain");
 
+            NextAiCheckTimestamp = Time.time + AiCheckDelay;
+
+            player = GameObject.FindGameObjectWithTag("Player");
+
             CurrentState = ENEMY_STATE.PATROL;
         }
         
         public IEnumerator AIPatrol()
-	{
+	{        
 		agent.speed = patrolSpeed;
 
         if (doNotMove)
@@ -80,9 +94,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent.SetDestination(randomWaypoint());
         
         while (gameObject && currentstate == ENEMY_STATE.PATROL)
-        {
-            //TODO: Add line of sight
-//            m_ThisScrLineOfSight.Sensitivity = scr_LineOfSight.SightSensitivity.STRICT;
+        {   
+            if(findTarget(FovAngle, FovDistance) != gameObject){
+                CurrentState = ENEMY_STATE.CHASE;                         
+                yield break;                
+            }
             
             agent.isStopped = false;
 
@@ -96,94 +112,88 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             while (agent.pathPending)
                 yield return null;
             
-            //TODO: Line of sight
-//            if (m_ThisScrLineOfSight.CanSeeTarget)
-//            {
-//                agent.isStopped = true;
-//                CurrentState = ENEMY_STATE.CHASE;
-//                yield break;
-//            }
-
 			yield return null;
 		}
 	}
 	//------------------------------------------
-//	public IEnumerator AIChase()
-//	{
-//		agent.speed = chaseSpeed;
-//		
-//		//Loop while chasing
-//		while(currentstate == ENEMY_STATE.CHASE)
-//		{
-//			//Set loose search
-//			m_ThisScrLineOfSight.Sensitivity = scr_LineOfSight.SightSensitivity.LOOSE;
-//
-//            //Chase to last known position
-//            agent.isStopped = false;
-//			agent.SetDestination(m_ThisScrLineOfSight.LastKnowSighting);
-//
-//			//Wait until path is computed
-//			while(agent.pathPending)
-//				yield return null;
-//			
-//			//Have we reached destination?
-//			if(agent.remainingDistance <= agent.stoppingDistance)
-//			{
-//				//Stop agent
-//                agent.isStopped = true;
-//
-//				//Reached destination but cannot see player
-//				if (!m_ThisScrLineOfSight.CanSeeTarget)
-//				{
-//					//Check nearest gate if lost player
-//					PatrolDestination = newDestination(nearestDestination());
-//					CurrentState = ENEMY_STATE.PATROL;
-//				}
-//					
-//				else //Reached destination and can see player. Reached attacking distance
-//					CurrentState = ENEMY_STATE.ATTACK;
-//
-//				yield break;
-//			}
-//
-//			//Wait until next frame
-//			yield return null;
-//		}
-//	}
-//
-//	//------------------------------------------
-//	public IEnumerator AIAttack()
-//	{
-//		
-//		//Loop while chasing and attacking
-//		while(currentstate == ENEMY_STATE.ATTACK)
-//		{
-//            //Chase to player position
-//            agent.isStopped = false;
-//			agent.SetDestination(PlayerTransform.position);
-//
-//			//Wait until path is computed
-//			while(agent.pathPending)
-//				yield return null;
-//
-//			//Has player run away?
-//			if(agent.remainingDistance > agent.stoppingDistance)
-//			{
-//				animator.SetBool("Attacking", false);
-//				while (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"))
-//					yield return null;
-//				//Change back to chase
-//				CurrentState = ENEMY_STATE.CHASE;
-//				yield break;
-//			}
-//
-//			//Wait until next frame
-//			yield return null;
-//		}
-//	}
+	public IEnumerator AIChase()
+	{
+		agent.speed = chaseSpeed;        
+		
+		//Loop while chasing
+		while(currentstate == ENEMY_STATE.CHASE)
+		{   
+            if(findTarget(FovAngle, FovDistance) != gameObject) //Update position when seeing player (multiplier for chase)
+                    agent.destination = player.transform.position;                                    
+                //Otherwise leave it as is (last seen position applies)
+            
+            agent.isStopped = false;			
+			while(agent.pathPending)
+				yield return null;
+			
+			//Have we reached destination?
+			if(agent.remainingDistance <= agent.stoppingDistance)
+			{
+				//Stop agent
+               agent.isStopped = true;
+
+				if(findTarget(180, 5, true) != gameObject) //Multiplied for chase search
+					CurrentState = ENEMY_STATE.ATTACK;
+                else
+                    CurrentState = ENEMY_STATE.PATROL;
+
+				yield break;
+			}
+            
+            if (doNotMove)
+                agent.SetDestination(transform.position);
+            
+            character.Move(agent.desiredVelocity, false, false);            
+
+			//Wait until next frame
+			yield return null;
+		}
+	}
+
+	//------------------------------------------
+	public IEnumerator AIAttack()
+	{
+		//Loop while chasing and attacking
+		while(currentstate == ENEMY_STATE.ATTACK)
+		{
+           //Chase to player position
+            agent.isStopped = true;			
+            transform.LookAt(player.transform);			
+
+			//Has player run away?
+			if(agent.remainingDistance > agent.stoppingDistance)
+			{
+				// animator.SetBool("Attacking", false);
+				// while (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"))
+				// 	yield return null;
+				//Change back to chase
+				CurrentState = ENEMY_STATE.CHASE;
+				yield break;
+			}
+
+			//Wait until next frame
+			yield return null;
+		}
+	}
 
 
-        private void Update()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ZombieRFist"))
+        {
+            Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
+            
+            selfAttr.damage(attackerAttr.attackDamage, attackerAttr);
+        }
+    }
+
+    
+    private void Update()
         {
 
 //
@@ -194,9 +204,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
 
 
-        public void SetTarget(Transform target)
+        public void SetTarget(GameObject target)
         {
-            this.target = target;
+            float distToCurrentTarget = Vector3.Distance(transform.position, this.target.transform.position);
+            float distToNewTarget = Vector3.Distance(transform.position, target.transform.position);
+            if(distToNewTarget <= distToCurrentTarget)
+                this.target = target;
         }
 
         private Vector3 randomWaypoint()
@@ -217,6 +230,79 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             Gizmos.color = Color.white;
             if(Application.isPlaying)
                 Gizmos.DrawWireSphere(agent.destination, 1f);
+        }
+
+
+        //TODO: Change distance check to sphere overlap -> iterate through [] and get list of entities in FOV angle -> target player if found in list or closest enemy
+        private GameObject findTarget(float fovAngle, float fovDistance, bool forceCheck = false)
+        {
+            if(target != gameObject)
+                return target.gameObject;
+
+            if(Time.time < NextAiCheckTimestamp && !forceCheck)
+                return gameObject; //Return self for checking
+            NextAiCheckTimestamp = Time.time + AiCheckDelay;
+            
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, fovDistance, enemies);
+            GameObject newTarget;
+            RaycastHit hit;
+            
+            List<Collider> enemyList = new List<Collider>(nearbyEnemies); //TODO: Sort by distance
+            while (enemyList.Count > 0)
+            {
+                if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){
+                    newTarget = player;
+                    enemyList.Remove(player.GetComponent<Collider>());
+                }                    
+                else{
+                    newTarget = enemyList[0].gameObject;
+                    enemyList.RemoveAt(0);
+                }
+                
+                float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);            
+                if(angle > fovAngle)
+                    continue;
+
+                Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
+                Vector3 destination = new Vector3(newTarget.transform.position.x, 1.5f, newTarget.transform.position.z) -
+                                      origin;
+                
+                Physics.Raycast(origin, destination, out hit);
+                
+                if (hit.transform.CompareTag("Minion") || hit.transform.CompareTag("Player"))
+                {
+                    targetAttr = hit.transform.GetComponent<Attributes_scr>();
+                    if(debug)
+                        Debug.Log("Target: " + newTarget.gameObject.name);
+                    return newTarget; 
+                }
+            }
+
+            return gameObject; //Don't change if no targets found
+        }
+
+        private bool CanSeePlayer(float fovAngle, float fovDistance, bool forceCheck = false){
+            if(Time.time < NextAiCheckTimestamp && !forceCheck)
+                return false;
+            NextAiCheckTimestamp = Time.time + AiCheckDelay;
+
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            if(distance > fovDistance)
+                return false;
+
+            float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);            
+            if(angle > fovAngle)
+                return false;
+
+            RaycastHit hit;
+            Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            Vector3 destination = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) - origin;
+            Debug.DrawRay(origin, destination, Color.red, 1f);
+            if(Physics.Raycast(origin, destination, out hit))         
+                if(!hit.transform.CompareTag("Player"))
+                    return false;                                    
+
+            return true;
         }
     }
 }

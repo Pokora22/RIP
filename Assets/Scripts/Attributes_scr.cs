@@ -56,7 +56,7 @@ public class Attributes_scr : MonoBehaviour
                 summoner.minionRemove(gameObject);
                 AnimatorScr.setDeadAnim(true);
             }
-        }
+        }        
     }
 
     public void damage(float dmgAmnt, Attributes_scr minionAttacking) //Attack with reflect
@@ -66,5 +66,9 @@ public class Attributes_scr : MonoBehaviour
             
         damage(dmgAmnt);
         minionAttacking.damage(reflectDamage); //Don't reflect from reflect        
+
+        if (gameObject.CompareTag("Enemy")){
+            gameObject.GetComponent<EnemyAIControl>().SetTarget(minionAttacking.gameObject);
+        }
     }
 }

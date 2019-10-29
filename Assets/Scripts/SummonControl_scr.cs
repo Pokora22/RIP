@@ -84,8 +84,8 @@ public class SummonControl_scr : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && minionsAway.Count > 0)
         {
             if(!consumeSummonInput){
-            GameObject minionToRecall = minionsAway[0];
-            StartCoroutine(minionToRecall.GetComponent<SummonAIControl>().recall());
+                GameObject minionToRecall = minionsAway[0];
+                StartCoroutine(minionToRecall.GetComponent<SummonAIControl>().recall());
             }
 
             consumeSummonInput = false; //Don't recall minion if summoned
@@ -95,6 +95,12 @@ public class SummonControl_scr : MonoBehaviour
     private void summonMinion(GameObject body)
     {
         NavMeshHit hit;
+
+        RaycastHit raycastHit;
+
+        if (Physics.Raycast(transform.position, body.transform.position - transform.position, out raycastHit))
+            if(!(raycastHit.transform.CompareTag("Body") || raycastHit.transform.CompareTag("CorpseContainer")))
+                return;
 
         Vector3 summonPos = body.transform.position;
         NavMesh.SamplePosition(summonPos, out hit, 10.0f, NavMesh.AllAreas);
