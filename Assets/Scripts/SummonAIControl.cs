@@ -33,7 +33,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private NpcAudio_scr audioPlayer;
         private bool recalled = false;
         private bool dmgRoutineRunning = false;
-        private SummonControl_scr summoner;
+        private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination;
         private bool targetDead;
@@ -86,10 +86,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	        agent.updatePosition = true;
 
             player = GameObject.FindWithTag("Player");
-            summoner = player.GetComponent<SummonControl_scr>();
+            summoner = player.GetComponent<PlayerController_scr>();
             minionAttributes = gameObject.GetComponent<Attributes_scr>();
 
-            gameObject.name = "Minion " + (player.GetComponent<SummonControl_scr>().minions.Count  + player.GetComponent<SummonControl_scr>().minionsAway.Count);
+            gameObject.name = "Minion " + (player.GetComponent<PlayerController_scr>().minions.Count  + player.GetComponent<PlayerController_scr>().minionsAway.Count);
 
             // StartCoroutine(recall());
             CurrentState = MINION_STATE.FOLLOW;
@@ -275,18 +275,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             List<Collider> enemyList = new List<Collider>(nearbyEnemies);
             while (enemyList.Count > 0) //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
             {
+                Debug.Log("Iterating enemies");
 //                int index = Random.Range(0, enemyList.Count - 1); 
                 newTarget = enemyList[0].gameObject;
+                Debug.Log("New target: " + newTarget.gameObject.name);
                 enemyList.RemoveAt(0);
                 
-                Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
-                Vector3 destination = new Vector3(newTarget.transform.position.x, 1.5f, newTarget.transform.position.z) -
+                Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+                Vector3 direction = new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z) -
                                       origin;
                 
-                Physics.Raycast(origin, destination, out hit);
+                Physics.Raycast(origin, direction, out hit);
+                Debug.DrawRay(origin, direction, Color.red, 2f);
                 
-                if (hit.transform.CompareTag("Enemy"))
-                {
+                if (hit.transform.CompareTag("Enemy")){
+                    
                     enemyAttr = hit.transform.GetComponent<Attributes_scr>(); //Expensive but called rarely (comparatively)
                     return newTarget; 
                 }
@@ -309,7 +312,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
             Gizmos.DrawRay(origin, destination);
         }
-        
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, enemyDetectionRange);
+        }
+
         public IEnumerator recall()
         {
             if (!recalled)

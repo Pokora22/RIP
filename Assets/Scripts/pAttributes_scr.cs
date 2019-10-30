@@ -14,7 +14,7 @@ public class pAttributes_scr : MonoBehaviour
     private float currentLvl;
     [SerializeField] private float baseExpReq = 50;
     private float nextLvlExpReq;
-    private SummonControl_scr summoner;
+    private PlayerController_scr summoner;
     private TextMeshProUGUI hudExp;
     private Rigidbody rb;
 
@@ -22,7 +22,7 @@ public class pAttributes_scr : MonoBehaviour
     {
         nextLvlExpReq = baseExpReq;
         health = maxHealth;
-        summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<SummonControl_scr>();
+        summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
         hudExp = GameObject.FindWithTag("HUDExp").GetComponent<TextMeshProUGUI>();
         rb = GetComponent<Rigidbody>();
         updateHud();

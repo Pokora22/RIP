@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class SummonControl_scr : MonoBehaviour
+public class PlayerController_scr : MonoBehaviour
 {
     public GameObject camera;
     

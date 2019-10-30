@@ -16,14 +16,14 @@ public class Attributes_scr : MonoBehaviour
     [SerializeField]private float health;
     [SerializeField] private bool debug;
     private pAttributes_scr playerAttr;
-    private SummonControl_scr summoner;
+    private PlayerController_scr summoner;
     private GameObject attacker;
     private SummonAnimator_scr AnimatorScr;
     
     void Start()
     {
         health = maxHealth;
-        summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<SummonControl_scr>();
+        summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
         playerAttr = GameObject.FindGameObjectWithTag("Player").GetComponent<pAttributes_scr>();
         AnimatorScr = gameObject.GetComponent<SummonAnimator_scr>();
     }
@@ -69,6 +69,16 @@ public class Attributes_scr : MonoBehaviour
 
         if (gameObject.CompareTag("Enemy")){
             gameObject.GetComponent<EnemyAIControl>().SetTarget(minionAttacking.gameObject);
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ZombieRFist"))
+        {
+            Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
+            
+            this.damage(attackerAttr.attackDamage, attackerAttr);
         }
     }
 }

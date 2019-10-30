@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonAnimator_scr : MonoBehaviour
+public class EnemyAnimator_scr : MonoBehaviour
 {
     private Animator m_Animator;
     private Rigidbody m_Rigidbody;
@@ -17,7 +17,7 @@ public class SummonAnimator_scr : MonoBehaviour
     {
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
-        hitBox.SetActive(false);
+//        hitBox.SetActive(false);
     }
 
     public void Move(Vector3 move){
@@ -55,7 +55,7 @@ public class SummonAnimator_scr : MonoBehaviour
     }
 
     private void UpdateAnimator(Vector3 move){
-			m_Animator.SetFloat("Forward", move.z, 0.1f, Time.deltaTime);
+//			m_Animator.SetFloat("Forward", move.z, 0.1f, Time.deltaTime);
     }
 
     private void toggleHitBox()

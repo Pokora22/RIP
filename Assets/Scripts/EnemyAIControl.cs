@@ -9,15 +9,16 @@ using Random = UnityEngine.Random;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-    [RequireComponent(typeof (ThirdPersonCharacter))]
+    [RequireComponent(typeof (EnemyAnimator_scr))]
     public class EnemyAIControl : MonoBehaviour
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-        public ThirdPersonCharacter character { get; private set; } // the character we are controlling
+        public EnemyAnimator_scr AnimatorScr { get; private set; } // the character we are controlling
         public GameObject target;                                    // target to aim for
 
         private GameObject terrain;
         private GameObject player;
+        private Attributes_scr targetAttr;
         [SerializeField] private float patrolSpeed;
         [SerializeField] private float chaseSpeed;
         [SerializeField] private bool doNotMove;
@@ -27,8 +28,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private float FovAngle = 45f;
         [SerializeField] private LayerMask enemies;        
         private float NextAiCheckTimestamp;
-        private Attributes_scr targetAttr, selfAttr;
-        
+
+        private Vector3 randomDest;
         
         public enum ENEMY_STATE {PATROL, CHASE, ATTACK};        
         
@@ -64,15 +65,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField]
         private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
 
+        
+
         private void Start()
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-            character = GetComponent<ThirdPersonCharacter>();
-            selfAttr = GetComponent<Attributes_scr>();
+            AnimatorScr = GetComponent<EnemyAnimator_scr>();
             target = gameObject;
 
-	        agent.updateRotation = false;
+	        agent.updateRotation = true;
 	        agent.updatePosition = true;
 
             terrain = GameObject.FindWithTag("Terrain");
@@ -81,7 +83,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             player = GameObject.FindGameObjectWithTag("Player");
 
-            CurrentState = ENEMY_STATE.PATROL;
+//            CurrentState = ENEMY_STATE.PATROL;
+
+            randomDest = randomWaypoint();
         }
         
         public IEnumerator AIPatrol()
@@ -102,8 +106,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             agent.isStopped = false;
 
+            
+//            Debug.Log(gameObject.name + ": " + agent.desiredVelocity);
+
             if (agent.remainingDistance > agent.stoppingDistance)
-                character.Move(agent.desiredVelocity, false, false);
+                AnimatorScr.Move(agent.desiredVelocity);
             else if (doNotMove)
                 agent.SetDestination(transform.position);
             else
@@ -137,7 +144,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				//Stop agent
                agent.isStopped = true;
 
-				if(findTarget(180, 5, true) != gameObject) //Multiplied for chase search
+				if(findTarget(180, 5, true) != gameObject)
 					CurrentState = ENEMY_STATE.ATTACK;
                 else
                     CurrentState = ENEMY_STATE.PATROL;
@@ -148,7 +155,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (doNotMove)
                 agent.SetDestination(transform.position);
             
-            character.Move(agent.desiredVelocity, false, false);            
+            AnimatorScr.Move(agent.desiredVelocity);            
 
 			//Wait until next frame
 			yield return null;
@@ -180,28 +187,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			yield return null;
 		}
 	}
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("ZombieRFist"))
-        {
-            Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
-            
-            selfAttr.damage(attackerAttr.attackDamage, attackerAttr);
-        }
-    }
-
     
     private void Update()
-        {
-
+    {
+        
+//        agent.SetDestination(player.transform.position);
+        agent.SetDestination(randomDest);
+//        Debug.Log(gameObject.name + "@" + transform.position + " going toward " + agent.destination + " with desired velocity of " + agent.desiredVelocity);
 //
 //            if (agent.remainingDistance > agent.stoppingDistance)
 //                character.Move(agent.desiredVelocity, false, false);
 //            else
 //                CurrentState = ENEMY_STATE.PATROL;
-        }
+    }
 
 
         public void SetTarget(GameObject target)
