@@ -14,7 +14,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     public class SummonAIControl : MonoBehaviour
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-        public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK}
+        public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK, NONE}
 
         [SerializeField] private MINION_STATE currentState;
         [SerializeField] private GameObject player;
@@ -69,11 +69,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.ATTACK:
                         currentCoroutine = StartCoroutine(minionAttack());
                         break;
+                    case MINION_STATE.NONE:
+                        currentCoroutine = StartCoroutine(minionDoNothing());
+                        break;
                 }
                 
                 if(debug)
                     Debug.Log(gameObject.name + " going into: " + currentState);
             }
+        }
+
+        private IEnumerator minionDoNothing()
+        {
+            yield break;
         }
 
         private void Start()

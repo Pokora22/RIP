@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class SummonAnimator_scr : MonoBehaviour
 {
@@ -49,9 +50,11 @@ public class SummonAnimator_scr : MonoBehaviour
 	    return animationLength;
     }
     
-    public void setDeadAnim(bool dead)
+    public void setDeadAnim()
     {
-	    m_Animator.SetBool("Dead", dead);
+	    toggleHitBox();
+	    m_Animator.SetTrigger("Dead");
+	    gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
     }
 
     private void UpdateAnimator(Vector3 move){

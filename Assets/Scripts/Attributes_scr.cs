@@ -43,18 +43,18 @@ public class Attributes_scr : MonoBehaviour
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
 
-            //Todo: Destroy and replace with something else depending on what was destroyed? Minion - nothing; Mobs - bodies
+            //Todo: Change tag for enemies to bodies (and change layer)
             if (gameObject.CompareTag("Enemy"))
             {
-                Instantiate(corpse, transform.position, transform.rotation);
+                gameObject.tag = "Body";
+                gameObject.layer = LayerMask.NameToLayer("Bodies");
                 playerAttr.addExp(expValue);
-                Destroy(gameObject);
             }
             
             else if (gameObject.CompareTag("Minion"))
             {
                 summoner.minionRemove(gameObject);
-                AnimatorScr.setDeadAnim(true);
+                AnimatorScr.setDeadAnim();
             }
         }        
     }
@@ -74,7 +74,7 @@ public class Attributes_scr : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("ZombieRFist"))
+        if (other.CompareTag("AttackHitbox"))
         {
             Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
             

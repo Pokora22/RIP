@@ -51,11 +51,11 @@ public class EnemyAnimator_scr : MonoBehaviour
     
     public void setDeadAnim(bool dead)
     {
-	    m_Animator.SetBool("Dead", dead);
+	    m_Animator.SetTrigger("Dead");
     }
 
     private void UpdateAnimator(Vector3 move){
-//			m_Animator.SetFloat("Forward", move.z, 0.1f, Time.deltaTime);
+			m_Animator.SetFloat("Forward", move.z, 0.1f, Time.deltaTime);
     }
 
     private void toggleHitBox()
