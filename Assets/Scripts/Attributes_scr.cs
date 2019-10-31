@@ -7,24 +7,25 @@ public class Attributes_scr : MonoBehaviour
 {
     // Start is called before the first frame update
     public float maxHealth = 10f;
+    public float health;
     public float attackDamage = 1f;
     public float attackSpeed = 2f;
     public float reflectDamage = 3f;
     public float expValue = 5f; //Change for different minions when they're in
     public GameObject corpse;
     
-    [SerializeField]private float health;
     [SerializeField] private bool debug;
     private pAttributes_scr playerAttr;
     private PlayerController_scr summoner;
     private GameObject attacker;
-    private SummonAnimator_scr AnimatorScr;
+    private AiAnimator_scr m_AiAnimatorScr;
     
     void Start()
     {
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
         playerAttr = GameObject.FindGameObjectWithTag("Player").GetComponent<pAttributes_scr>();
+        m_AiAnimatorScr = gameObject.GetComponent<AiAnimator_scr>();
     }
 
     // private void OnCollisionEnter(Collision other)
@@ -39,23 +40,24 @@ public class Attributes_scr : MonoBehaviour
 
         if (health <= 0)
         {
+            m_AiAnimatorScr.setDeadAnim();
+            GetComponent<Collider>().enabled = false;
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
 
             //Todo: Change tag for enemies to bodies (and change layer)
             if (gameObject.CompareTag("Enemy"))
             {
+                gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;
                 gameObject.tag = "Body";
                 gameObject.layer = LayerMask.NameToLayer("Bodies");
-                gameObject.GetComponent<SummonAnimator_scr>();
                 playerAttr.addExp(expValue);
             }
             
             else if (gameObject.CompareTag("Minion"))
             {
+                gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
                 summoner.minionRemove(gameObject);
-                AnimatorScr = gameObject.GetComponent<SummonAnimator_scr>();
-                AnimatorScr.setDeadAnim();
             }
         }        
     }

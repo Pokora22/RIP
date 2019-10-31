@@ -40,12 +40,12 @@ public class PlayerController_scr : MonoBehaviour
 
     private void summonMinionCheck()
     {
-        //Display on screen help -- need reverse conditions? 
-
-        Collider[] nearbyBodies = Physics.OverlapSphere(transform.position, summonRadius, bodiesMask);
+        //Display on screen help -- need reverse conditions?
 
         if (Input.GetMouseButtonDown(1))
         {
+            Collider[] nearbyBodies = Physics.OverlapSphere(transform.position, summonRadius, bodiesMask);
+            
             //secondary mouse button
             if (nearbyBodies.Length > 0)
             {
@@ -102,6 +102,7 @@ public class PlayerController_scr : MonoBehaviour
             if(!(raycastHit.transform.CompareTag("Body") || raycastHit.transform.CompareTag("CorpseContainer")))
                 return;
 
+        Debug.Log("Summoning minion: " + raycastHit.transform.name);
         Vector3 summonPos = body.transform.position;
         NavMesh.SamplePosition(summonPos, out hit, 10.0f, NavMesh.AllAreas);
         

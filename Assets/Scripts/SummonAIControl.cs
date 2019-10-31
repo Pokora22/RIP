@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-    [RequireComponent(typeof (SummonAnimator_scr))]
+    [RequireComponent(typeof (AiAnimator_scr))]
     public class SummonAIControl : MonoBehaviour
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
@@ -28,7 +28,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private GameObject target;
         [SerializeField] private float enemySearchDelay = 1f;
         
-        private SummonAnimator_scr AnimatorScr;
+        private AiAnimator_scr m_AiAnimatorScr;
         private Coroutine currentCoroutine;
         private NpcAudio_scr audioPlayer;
         private bool recalled = false;
@@ -38,7 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_AdvanceDestination;
         private bool targetDead;
         private float nextEnemySearchTime;
-        private Attributes_scr enemyAttr;
+        private Attributes_scr targetAttr;
 
         public MINION_STATE CurrentState
         {
@@ -88,7 +88,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-            AnimatorScr = GetComponent<SummonAnimator_scr>();
+            m_AiAnimatorScr = GetComponent<AiAnimator_scr>();
 
 	        agent.updateRotation = true;
 	        agent.updatePosition = true;
@@ -115,7 +115,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             target = player;
             summoner.minionReturn(this.gameObject);
             agent.stoppingDistance = playerFollowowDistance;
-            AnimatorScr.SetAttackAnim(false, minionAttributes.attackSpeed);
+//            m_AiAnimatorScr.SetAttackAnim(false, minionAttributes.attackSpeed);
             
             while (currentState == MINION_STATE.FOLLOW)
             {
@@ -187,7 +187,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent.stoppingDistance = enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
             
             summoner.minionLeave(gameObject);
-            AnimatorScr.SetAttackAnim(false, minionAttributes.attackSpeed);
+//            m_AiAnimatorScr.SetAttackAnim(false, minionAttributes.attackSpeed);
             
             while (currentState == MINION_STATE.CHASE)
             {
@@ -224,21 +224,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             while (currentState == MINION_STATE.ATTACK)
             {
-                if (!target)
+                if (!target || targetAttr.health <= 0)
                 {
                     CurrentState = MINION_STATE.FOLLOW;
                     yield break;
                 }
                 
                 transform.LookAt(target.transform);
-
-                float attackLength = AnimatorScr.SetAttackAnim(true, minionAttributes.attackSpeed);
-                yield return new WaitForSeconds(attackLength); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
+                m_AiAnimatorScr.Move(Vector3.zero);
                 
-                if(!target.gameObject){
-                    CurrentState = MINION_STATE.FOLLOW;
-                    yield break;
-                }                    
+                m_AiAnimatorScr.SetAttackAnim(true, minionAttributes.attackSpeed);
+//                yield return new WaitForSeconds(attackLength); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
+                while (m_AiAnimatorScr.CompareCurrentState("Attack"))
+                    yield return null;
 
                 agent.SetDestination(target.transform.position);                
 
@@ -247,9 +245,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     CurrentState = MINION_STATE.CHASE;
                     yield break;
                 }
-
-                while (AnimatorScr.CompareCurrentState("Attacking"))
-                    yield return null;
                 
                 yield return null;
             }
@@ -262,10 +257,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
             if (remainingDistance > agent.stoppingDistance)
-                AnimatorScr.Move(agent.desiredVelocity);
+                m_AiAnimatorScr.Move(agent.desiredVelocity);
             else
             {
-                AnimatorScr.Move(Vector3.zero);
+                m_AiAnimatorScr.Move(Vector3.zero);
                 recalled = false;
             }
         }
@@ -296,7 +291,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 if (hit.transform.CompareTag("Enemy")){
                     
-                    enemyAttr = hit.transform.GetComponent<Attributes_scr>(); //Expensive but called rarely (comparatively)
+                    targetAttr = hit.transform.GetComponent<Attributes_scr>(); //Expensive but called rarely (comparatively)
                     return newTarget; 
                 }
             }

@@ -9,16 +9,16 @@ using Random = UnityEngine.Random;
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
     [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-    [RequireComponent(typeof (EnemyAnimator_scr))]
+    [RequireComponent(typeof (AiAnimator_scr))]
     public class EnemyAIControl : MonoBehaviour
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-        public EnemyAnimator_scr AnimatorScr { get; private set; } // the character we are controlling
+        public AiAnimator_scr m_AiAnimatorScr; // the character we are controlling
         public GameObject target;                                    // target to aim for
 
         private GameObject terrain;
         private GameObject player;
-        private Attributes_scr targetAttr;
+        private Attributes_scr targetAttr, selfAttr;
         [SerializeField] private float patrolSpeed;
         [SerializeField] private float chaseSpeed;
         [SerializeField] private bool doNotMove;
@@ -79,8 +79,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
-            AnimatorScr = GetComponent<EnemyAnimator_scr>();
+            m_AiAnimatorScr = GetComponent<AiAnimator_scr>();
             target = gameObject;
+            selfAttr = GetComponent<Attributes_scr>();
 
 	        agent.updateRotation = true;
 	        agent.updatePosition = true;
@@ -97,6 +98,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public IEnumerator AIPatrol()
 	{        
 		agent.speed = patrolSpeed;
+        m_AiAnimatorScr.SetAttackAnim(false, selfAttr.attackSpeed);
 
         if (doNotMove)
             agent.SetDestination(transform.position);
@@ -116,7 +118,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //            Debug.Log(gameObject.name + ": " + agent.desiredVelocity);
 
             if (agent.remainingDistance > agent.stoppingDistance)
-                AnimatorScr.Move(agent.desiredVelocity);
+                m_AiAnimatorScr.Move(agent.desiredVelocity);
             else if (doNotMove)
                 agent.SetDestination(transform.position);
             else
@@ -132,6 +134,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public IEnumerator AIChase()
         {
             agent.speed = chaseSpeed;        
+            m_AiAnimatorScr.SetAttackAnim(false, selfAttr.attackSpeed);
             
             //Loop while chasing
             while(currentstate == ENEMY_STATE.CHASE)
@@ -161,7 +164,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if (doNotMove)
                     agent.SetDestination(transform.position);
                 
-                AnimatorScr.Move(agent.desiredVelocity);            
+                m_AiAnimatorScr.Move(agent.desiredVelocity);            
     
                 //Wait until next frame
                 yield return null;
@@ -176,16 +179,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                //Chase to player position
                 agent.isStopped = true;			
-                transform.LookAt(player.transform);
+                transform.LookAt(target.transform);
+
+                float attackLength = m_AiAnimatorScr.SetAttackAnim(true, selfAttr.attackSpeed);
+                yield return new WaitForSeconds(attackLength);
+
+                if (targetAttr.health <= 0)
+                {
+                    CurrentState = ENEMY_STATE.PATROL;
+                    yield break;
+                }
+                
                 agent.destination = player.transform.position;
-    
-                //Has player run away?
+                
                 if(agent.remainingDistance > agent.stoppingDistance)
                 {
-                    // animator.SetBool("Attacking", false);
-                    // while (animator.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"))
-                    // 	yield return null;
-                    //Change back to chase
                     CurrentState = ENEMY_STATE.CHASE;
                     yield break;
                 }
@@ -197,10 +205,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	
         public void SetTarget(GameObject target)
         {
-            float distToCurrentTarget = Vector3.Distance(transform.position, this.target.transform.position);
+            float distToCurrentTarget = this.target == gameObject ? 999 : Vector3.Distance(transform.position, this.target.transform.position); //Set distance to new target to 999 if targetting self (bandaid)
             float distToNewTarget = Vector3.Distance(transform.position, target.transform.position);
-            if(distToNewTarget <= distToCurrentTarget)
+            if (distToNewTarget < distToCurrentTarget)
+            {
                 this.target = target;
+                Debug.Log("Target switched");
+            }
         }
 
         private Vector3 randomWaypoint()

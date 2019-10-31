@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class SummonAnimator_scr : MonoBehaviour
+public class AiAnimator_scr : MonoBehaviour
 {
     private Animator m_Animator;
     private Rigidbody m_Rigidbody;
@@ -44,7 +44,7 @@ public class SummonAnimator_scr : MonoBehaviour
 
     public float SetAttackAnim(bool attacking, float speed)
     {
-	    m_Animator.SetBool("Attacking", attacking);
+	    m_Animator.SetTrigger("Attacking");
 	    m_Animator.SetFloat("AttackSpeed", speed);
 	    
 	    float animationLength = m_Animator.GetCurrentAnimatorStateInfo(0).length;
@@ -56,7 +56,6 @@ public class SummonAnimator_scr : MonoBehaviour
     {
 	    toggleHitBox();
 	    m_Animator.SetTrigger("Dead");
-	    gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
     }
 
     private void UpdateAnimator(Vector3 move){
@@ -70,7 +69,6 @@ public class SummonAnimator_scr : MonoBehaviour
 
     private void getHitbox(Transform parent, string tag)
     {
-	    Console.Write(parent.childCount);
 	    for (int i = 0; i < parent.childCount; i++)
 	    {
 		    Transform child = parent.GetChild(i);
