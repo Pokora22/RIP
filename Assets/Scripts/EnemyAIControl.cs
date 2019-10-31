@@ -178,13 +178,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
                 
+                Debug.Log(targetAttr);
                 if (targetAttr.health <= 0) //TODO: Breaks here 
                 {
                     CurrentState = ENEMY_STATE.PATROL;
                     yield break;
                 }
                 
-                Debug.Log("Switching destination to " + target.name);
                 agent.destination = target.transform.position;
                 
                 if(agent.remainingDistance > agent.stoppingDistance)
@@ -206,6 +206,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (distToNewTarget < distToCurrentTarget)
             {
                 this.target = target;
+                targetAttr = target.GetComponent<Attributes_scr>();
             }
         }
 
