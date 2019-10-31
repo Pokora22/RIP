@@ -98,7 +98,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public IEnumerator AIPatrol()
 	{        
 		agent.speed = patrolSpeed;
-        m_AiAnimatorScr.SetAttackAnim(false, selfAttr.attackSpeed);
 
         if (doNotMove)
             agent.SetDestination(transform.position);
@@ -106,16 +105,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent.SetDestination(randomWaypoint());
         
         while (gameObject && currentstate == ENEMY_STATE.PATROL)
-        {   
-            if(findTarget(FovAngle, FovDistance) != gameObject){
+        {
+            target = findTarget(FovAngle, FovDistance);
+            if(target != gameObject){
                 CurrentState = ENEMY_STATE.CHASE;                         
                 yield break;                
             }
-            
-            agent.isStopped = false;
-
-            
-//            Debug.Log(gameObject.name + ": " + agent.desiredVelocity);
 
             if (agent.remainingDistance > agent.stoppingDistance)
                 m_AiAnimatorScr.Move(agent.desiredVelocity);
@@ -133,25 +128,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //------------------------------------------
         public IEnumerator AIChase()
         {
-            agent.speed = chaseSpeed;        
-            m_AiAnimatorScr.SetAttackAnim(false, selfAttr.attackSpeed);
+            agent.speed = chaseSpeed;
             
             //Loop while chasing
             while(currentstate == ENEMY_STATE.CHASE)
-            {   
-                if(findTarget(FovAngle, FovDistance) != gameObject) //Update position when seeing player (multiplier for chase)
-                        agent.destination = player.transform.position;                                    
-                    //Otherwise leave it as is (last seen position applies)
+            {
+                if (doNotMove)
+                    agent.SetDestination(transform.position);
                 
-                agent.isStopped = false;			
+                else if (findTarget(FovAngle, FovDistance) != gameObject) //Update position when seeing player
+                    agent.destination = target.transform.position;
+                
+                //Otherwise leave it as is (last seen position applies)
+                			
                 while(agent.pathPending)
                     yield return null;
                 
-                //Have we reached destination?
-                if(agent.remainingDistance <= agent.stoppingDistance)
+                transform.LookAt(agent.destination);
+                
+                float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
+                if(remainingDistance <= agent.stoppingDistance)
                 {
-                    //Stop agent
-                   agent.isStopped = true;
+                    Debug.Log("In range");
     
                     if(findTarget(180, 5, true) != gameObject)
                         CurrentState = ENEMY_STATE.ATTACK;
@@ -160,9 +158,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     
                     yield break;
                 }
-                
-                if (doNotMove)
-                    agent.SetDestination(transform.position);
                 
                 m_AiAnimatorScr.Move(agent.desiredVelocity);            
     
@@ -177,23 +172,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Loop while chasing and attacking
             while(currentstate == ENEMY_STATE.ATTACK)
             {
-               //Chase to player position
-                agent.isStopped = true;			
                 transform.LookAt(target.transform);
 
-                float attackLength = m_AiAnimatorScr.SetAttackAnim(true, selfAttr.attackSpeed);
-                yield return new WaitForSeconds(attackLength);
-
-                if (targetAttr.health <= 0)
+                m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
+                while (m_AiAnimatorScr.CompareCurrentState("Attack"))
+                    yield return null;
+                
+                if (targetAttr.health <= 0) //TODO: Breaks here 
                 {
                     CurrentState = ENEMY_STATE.PATROL;
                     yield break;
                 }
                 
-                agent.destination = player.transform.position;
+                Debug.Log("Switching destination to " + target.name);
+                agent.destination = target.transform.position;
                 
                 if(agent.remainingDistance > agent.stoppingDistance)
                 {
+                    Debug.Log("target too far");
                     CurrentState = ENEMY_STATE.CHASE;
                     yield break;
                 }
@@ -210,7 +206,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (distToNewTarget < distToCurrentTarget)
             {
                 this.target = target;
-                Debug.Log("Target switched");
             }
         }
 
@@ -238,9 +233,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //TODO: Change distance check to sphere overlap -> iterate through [] and get list of entities in FOV angle -> target player if found in list or closest enemy
         private GameObject findTarget(float fovAngle, float fovDistance, bool forceCheck = false)
         {
-            if(target != gameObject) //Don't switch target if already has one
-                return target.gameObject;
-
             if(Time.time < NextAiCheckTimestamp && !forceCheck)
                 return gameObject; //Return self if it's not time to check yet
             NextAiCheckTimestamp = Time.time + AiCheckDelay;
@@ -252,11 +244,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             List<Collider> enemyList = new List<Collider>(nearbyEnemies); //TODO: Sort by distance
             while (enemyList.Count > 0)
             {
-                if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){
+                Collider currentTargetCollider = target.GetComponent<Collider>();
+                if (enemyList.Contains(currentTargetCollider))
+                {
+                    newTarget = this.target; //Check current target first if not self
+                    enemyList.Remove(currentTargetCollider);
+                }
+                else if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){ //Check player next if in range
                     newTarget = player;
                     enemyList.Remove(player.GetComponent<Collider>());
                 }                    
-                else{
+                else{ //Otherwise take first from nearby targets
                     newTarget = enemyList[0].gameObject;
                     enemyList.RemoveAt(0);
                 }
@@ -282,8 +280,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     return newTarget; 
                 }
             }
-
-            return gameObject; //Don't change if no targets found
+            
+            return gameObject; //set self if no targets found
         }
 
         private bool canHearTarget(GameObject target)

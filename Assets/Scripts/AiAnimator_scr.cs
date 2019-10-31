@@ -42,7 +42,7 @@ public class AiAnimator_scr : MonoBehaviour
 	    return m_Animator.GetCurrentAnimatorStateInfo(0).IsName(name);
     }
 
-    public float SetAttackAnim(bool attacking, float speed)
+    public float SetAttackAnim(float speed)
     {
 	    m_Animator.SetTrigger("Attacking");
 	    m_Animator.SetFloat("AttackSpeed", speed);

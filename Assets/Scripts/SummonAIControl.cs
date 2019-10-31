@@ -233,8 +233,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 transform.LookAt(target.transform);
                 m_AiAnimatorScr.Move(Vector3.zero);
                 
-                m_AiAnimatorScr.SetAttackAnim(true, minionAttributes.attackSpeed);
-//                yield return new WaitForSeconds(attackLength); //TODO: Sync with animation instead and then have a cooldown + animation speed based on attack speed formula
+                m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
 

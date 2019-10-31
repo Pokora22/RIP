@@ -81,7 +81,10 @@ public class Attributes_scr : MonoBehaviour
         {
             Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
             
-            this.damage(attackerAttr.attackDamage, attackerAttr);
+            if(CompareTag("Player"))
+                GetComponent<pAttributes_scr>().damage(); //Forward to player damage functions instead
+            else
+                this.damage(attackerAttr.attackDamage, attackerAttr);
         }
     }
 }
