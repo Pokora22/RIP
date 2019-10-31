@@ -25,7 +25,6 @@ public class Attributes_scr : MonoBehaviour
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
         playerAttr = GameObject.FindGameObjectWithTag("Player").GetComponent<pAttributes_scr>();
-        AnimatorScr = gameObject.GetComponent<SummonAnimator_scr>();
     }
 
     // private void OnCollisionEnter(Collision other)
@@ -48,12 +47,14 @@ public class Attributes_scr : MonoBehaviour
             {
                 gameObject.tag = "Body";
                 gameObject.layer = LayerMask.NameToLayer("Bodies");
+                gameObject.GetComponent<SummonAnimator_scr>();
                 playerAttr.addExp(expValue);
             }
             
             else if (gameObject.CompareTag("Minion"))
             {
                 summoner.minionRemove(gameObject);
+                AnimatorScr = gameObject.GetComponent<SummonAnimator_scr>();
                 AnimatorScr.setDeadAnim();
             }
         }        

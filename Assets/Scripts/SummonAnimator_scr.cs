@@ -18,6 +18,7 @@ public class SummonAnimator_scr : MonoBehaviour
     {
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
+        hitBox = findChildByTag(transform, "AttackHitbox");
         hitBox.SetActive(false);
     }
 
@@ -64,6 +65,26 @@ public class SummonAnimator_scr : MonoBehaviour
     private void toggleHitBox()
     {
 	    hitBox.SetActive(!hitBox.activeSelf);
+    }
+
+    private GameObject findChildByTag(Transform parent, string tag)
+    {
+	    Debug.Log(parent.childCount);
+	    for (int i = 0; i < parent.childCount; i++)
+	    {
+		    Debug.Log("From children of " + parent.name);
+		    Transform child = parent.GetChild(i);
+		    Debug.Log("Checking " + child.name);
+		    if (child.CompareTag(tag))
+			    return child.gameObject;
+		    
+		    if (child.childCount > 0)
+		    {
+			    findChildByTag(child, tag);
+		    }
+	    }
+	    
+	    return null;
     }
     
     private void CheckGroundStatus()

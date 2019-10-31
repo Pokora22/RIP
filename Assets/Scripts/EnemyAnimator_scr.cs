@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class EnemyAnimator_scr : MonoBehaviour
 {
@@ -49,9 +50,11 @@ public class EnemyAnimator_scr : MonoBehaviour
 	    return animationLength;
     }
     
-    public void setDeadAnim(bool dead)
+    public void setDeadAnim()
     {
+	    gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;
 	    m_Animator.SetTrigger("Dead");
+	    toggleHitBox();
     }
 
     private void UpdateAnimator(Vector3 move){

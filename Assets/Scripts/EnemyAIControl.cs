@@ -30,7 +30,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private LayerMask enemies;        
         private float NextAiCheckTimestamp;
         
-        public enum ENEMY_STATE {PATROL, CHASE, ATTACK};        
+        public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE};        
         
         //------------------------------------------
         public ENEMY_STATE CurrentState
@@ -56,8 +56,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case ENEMY_STATE.ATTACK:                        
                        StartCoroutine(AIAttack());
                         break;
+                    
+                    case ENEMY_STATE.NONE:
+                        StartCoroutine(AIDoNothing());
+                        break;
                 }
             }
+        }
+
+        private IEnumerator AIDoNothing()
+        {
+            yield break;
         }
 
         //------------------------------------------
