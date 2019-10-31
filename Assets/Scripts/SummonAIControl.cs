@@ -283,10 +283,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             List<Collider> enemyList = new List<Collider>(nearbyEnemies);
             while (enemyList.Count > 0) //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
             {
-                Debug.Log("Iterating enemies");
 //                int index = Random.Range(0, enemyList.Count - 1); 
                 newTarget = enemyList[0].gameObject;
-                Debug.Log("New target: " + newTarget.gameObject.name);
                 enemyList.RemoveAt(0);
                 
                 Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);

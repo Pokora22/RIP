@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
@@ -18,7 +19,7 @@ public class SummonAnimator_scr : MonoBehaviour
     {
         m_Animator = GetComponent<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
-        hitBox = findChildByTag(transform, "AttackHitbox");
+        getHitbox(transform, "AttackHitbox");
         hitBox.SetActive(false);
     }
 
@@ -67,24 +68,21 @@ public class SummonAnimator_scr : MonoBehaviour
 	    hitBox.SetActive(!hitBox.activeSelf);
     }
 
-    private GameObject findChildByTag(Transform parent, string tag)
+    private void getHitbox(Transform parent, string tag)
     {
-	    Debug.Log(parent.childCount);
+	    Console.Write(parent.childCount);
 	    for (int i = 0; i < parent.childCount; i++)
 	    {
-		    Debug.Log("From children of " + parent.name);
 		    Transform child = parent.GetChild(i);
-		    Debug.Log("Checking " + child.name);
 		    if (child.CompareTag(tag))
-			    return child.gameObject;
-		    
+		    {
+			    hitBox = child.gameObject;
+		    }
 		    if (child.childCount > 0)
 		    {
-			    findChildByTag(child, tag);
+			    getHitbox(child, tag);
 		    }
 	    }
-	    
-	    return null;
     }
     
     private void CheckGroundStatus()
