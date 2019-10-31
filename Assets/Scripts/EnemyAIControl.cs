@@ -260,29 +260,30 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     enemyList.RemoveAt(0);
                 }
 
-                if (canHearTarget(newTarget))
+                if (canHearTarget(newTarget) || canSeeTarget(newTarget, fovAngle))
                     return newTarget;
-                
-                float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);            
-                if(angle > fovAngle)
-                    continue;
-
-                Vector3 origin = new Vector3(transform.position.x, 1.5f, transform.position.z);
-                Vector3 destination = new Vector3(newTarget.transform.position.x, 1.5f, newTarget.transform.position.z) -
-                                      origin;
-                
-                Physics.Raycast(origin, destination, out hit);
-                
-                if (hit.transform.CompareTag("Minion") || hit.transform.CompareTag("Player"))
-                {
-                    targetAttr = hit.transform.GetComponent<Attributes_scr>();
-                    if(debug)
-                        Debug.Log("Target: " + newTarget.gameObject.name);
-                    return newTarget; 
-                }
             }
             
             return gameObject; //set self if no targets found
+        }
+
+        private bool canSeeTarget(GameObject target, float fovAngle)
+        {
+            RaycastHit hit;
+            
+            float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);
+            if (angle > fovAngle)
+                return false;
+
+            Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+            Vector3 destination = new Vector3(target.transform.position.x, 1f, target.transform.position.z) -
+                                  origin;
+                
+            Physics.Raycast(origin, destination, out hit);
+            if (hit.transform.CompareTag("Minion") || hit.transform.CompareTag("Player"))
+                return true;
+
+            return false;
         }
 
         private bool canHearTarget(GameObject target)
