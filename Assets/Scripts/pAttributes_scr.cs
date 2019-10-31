@@ -30,6 +30,7 @@ public class pAttributes_scr : MonoBehaviour
 
     public void damage()
     {
+        Debug.Log("Got hit");
         if (--health < 1)
             SceneManager.LoadScene(2); //TODO: Maybe a game over scren
         updateHud();

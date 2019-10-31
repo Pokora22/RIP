@@ -81,6 +81,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionDoNothing()
         {
+            agent.isStopped = true;
             yield break;
         }
 

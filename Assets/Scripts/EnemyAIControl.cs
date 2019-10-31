@@ -70,6 +70,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator AIDoNothing()
         {
+            agent.isStopped = true;
             yield break;
         }
 
@@ -132,6 +133,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //------------------------------------------
         public IEnumerator AIChase()
         {
+            ///Checking stack trace
+//            string stackTrace = StackTraceUtility.ExtractStackTrace();
+//            Debug.Log(stackTrace);
+
             agent.speed = chaseSpeed;
             
             //Loop while chasing
@@ -153,10 +158,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
                 if(remainingDistance <= agent.stoppingDistance)
                 {
-                    Debug.Log("In range");
-    
                     if(findTarget(180, 5, true) != gameObject)
-                        CurrentState = ENEMY_STATE.ATTACK;
+                        CurrentState = ENEMY_STATE.ATTACK; //TODO This should stop this coroutine while starting new one, but causes overflow. How ?
                     else
                         CurrentState = ENEMY_STATE.PATROL;
     
@@ -173,7 +176,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //------------------------------------------
         public IEnumerator AIAttack()
         {
-            //Loop while chasing and attacking
+//            string stackTrace = StackTraceUtility.ExtractStackTrace();
+//            Debug.Log(stackTrace);
+            
             while(currentstate == ENEMY_STATE.ATTACK)
             {
                 transform.LookAt(target.transform);
@@ -192,7 +197,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 if(agent.remainingDistance > agent.stoppingDistance)
                 {
-                    Debug.Log("target too far");
                     CurrentState = ENEMY_STATE.CHASE;
                     yield break;
                 }

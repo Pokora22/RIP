@@ -41,7 +41,7 @@ public class Attributes_scr : MonoBehaviour
         if (health <= 0)
         {
             m_AiAnimatorScr.setDeadAnim();
-            GetComponent<Collider>().enabled = false;
+            GetComponent<Collider>().enabled = false; //TODO ?? ??
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
 
