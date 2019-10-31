@@ -18,6 +18,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private GameObject terrain;
         private GameObject player;
+        private Coroutine currentCoroutine;
         private Attributes_scr targetAttr, selfAttr;
         [SerializeField] private float patrolSpeed;
         [SerializeField] private float chaseSpeed;
@@ -42,23 +43,26 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 currentstate = value;
                 if(debug)
                     Debug.Log("New state: " + currentstate);
+                
+                if(currentCoroutine != null)
+                    StopCoroutine(currentCoroutine);
 
                 switch(currentstate)
                 {                    
                     case ENEMY_STATE.PATROL:
-                        StartCoroutine(AIPatrol());
+                        currentCoroutine = StartCoroutine(AIPatrol());
                         break;
 
                     case ENEMY_STATE.CHASE:                        
-                        StartCoroutine(AIChase());
+                        currentCoroutine = StartCoroutine(AIChase());
                         break;
 
                     case ENEMY_STATE.ATTACK:                        
-                       StartCoroutine(AIAttack());
+                        currentCoroutine = StartCoroutine(AIAttack());
                         break;
                     
                     case ENEMY_STATE.NONE:
-                        StartCoroutine(AIDoNothing());
+                        currentCoroutine = StartCoroutine(AIDoNothing());
                         break;
                 }
             }
@@ -178,7 +182,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
                 
-                Debug.Log(targetAttr);
                 if (targetAttr.health <= 0) //TODO: Breaks here 
                 {
                     CurrentState = ENEMY_STATE.PATROL;
@@ -240,7 +243,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, fovDistance, enemies);
             GameObject newTarget;
-            RaycastHit hit;
             
             List<Collider> enemyList = new List<Collider>(nearbyEnemies); //TODO: Sort by distance
             while (enemyList.Count > 0)
@@ -261,7 +263,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 }
 
                 if (canHearTarget(newTarget) || canSeeTarget(newTarget, fovAngle))
+                {
+                    targetAttr = newTarget.GetComponent<Attributes_scr>();
                     return newTarget;
+                }
             }
             
             return gameObject; //set self if no targets found
