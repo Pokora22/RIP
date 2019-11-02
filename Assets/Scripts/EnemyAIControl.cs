@@ -30,7 +30,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private float FovDistance = 30f;
         [SerializeField] private float FovAngle = 45f;
         [SerializeField] private float hearingDistance = 5f;
-        [SerializeField] private LayerMask enemies;        
+        [SerializeField] private LayerMask enemiesMask;
+        [SerializeField] private LayerMask obstacleMask;
         private float NextAiCheckTimestamp;
         
         public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE};        
@@ -266,7 +267,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 return gameObject; //Return self if it's not time to check yet
             NextAiCheckTimestamp = Time.time + AiCheckDelay;
             
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, fovDistance, enemies);
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, fovDistance, enemiesMask);
             Collider currentTargetCollider = target.GetComponent<Collider>();
             GameObject newTarget;
             
@@ -307,30 +308,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             return gameObject; //set self if no targets found
         }
        
-        private bool canSeeTarget(GameObject target, float fovAngle)
+        private bool canSeeTarget(GameObject target)
         {
-            RaycastHit hit;
-                     
-            float angle = Vector3.Angle(transform.forward, target.transform.position - transform.position);
-         
-            if (Selection.Contains(gameObject) && debug)
-            {
-                Debug.Log("Target angle: " + angle);
-            }
-            if (angle > fovAngle)
-                return false;
-         
             Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
-            Vector3 destination = new Vector3(target.transform.position.x, 1f, target.transform.position.z) -
-                                  origin;
-                         
-                     
-            if (Selection.Contains (gameObject) && debug)
-                Debug.DrawRay(origin, destination, Color.red, 2f);
-            Physics.Raycast(origin, destination, out hit);
-            if (hit.transform.CompareTag("Minion") || hit.transform.CompareTag("Player"))
-                return true;
-         
+            Vector3 direction = (new Vector3(target.transform.position.x, 1f, target.transform.position.z) -
+                                origin).normalized;
+            float angle = Vector3.Angle(transform.forward, direction);
+
+            if (angle < FovAngle)
+            {
+                float distane = Vector3.Distance(transform.position, target.transform.position);
+                if(!Physics.Raycast(origin, direction, distane, obstacleMask))
+                    return true;
+            }
+
             return false;
         }
         
@@ -338,13 +329,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             Rigidbody rb = target.GetComponent<Rigidbody>();
             
-            if (Selection.Contains (gameObject) && debug)
-                Debug.Log("Targets vel: " + rb.velocity.magnitude);
-            if (rb.velocity.magnitude == 0)
-                return false;
-            
             float distance = Vector3.Distance(transform.position, target.transform.position);
-            return distance < hearingDistance;
+            return distance < hearingDistance && rb.velocity.magnitude != 0;
         }
     }
 }
