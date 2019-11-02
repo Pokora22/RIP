@@ -77,7 +77,7 @@ public class Attributes_scr : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("AttackHitbox") && !friendlyFire(other.gameObject))
+        if (health > 0 && other.CompareTag("AttackHitbox") && !friendlyFire(other.gameObject))
         {
             Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
             
