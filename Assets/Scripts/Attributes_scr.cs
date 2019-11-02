@@ -57,6 +57,12 @@ public class Attributes_scr : MonoBehaviour
         if (health <= 0)
         {
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH); //TODO: Add sounds for destructibles
+            if (LayerMask.LayerToName(gameObject.layer) == "Destructibles")
+            {
+                StartCoroutine(removeBody());
+                return;
+            }
+
             m_AiAnimatorScr.setDeadAnim();
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
@@ -113,7 +119,6 @@ public class Attributes_scr : MonoBehaviour
 
     private IEnumerator removeBody()
     {
-        Debug.Log("start");
         yield return new WaitForSeconds(5f);
 //        Rigidbody rb = GetComponent<Rigidbody>(); //TODO: This still doesn't sink into ground.. why?
 
@@ -123,8 +128,7 @@ public class Attributes_scr : MonoBehaviour
 //            rb.position += Vector3.down * Time.deltaTime; 
 //            yield return null;
 //        }
-
-        Debug.Log("Boom");
+        
         Destroy(gameObject);
         yield return null;
     }

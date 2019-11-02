@@ -115,6 +115,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             target = player;
             summoner.minionReturn(this.gameObject);
             agent.stoppingDistance = playerFollowowDistance;
+            targettingDestructible = false;
 //            m_AiAnimatorScr.SetAttackAnim(false, minionAttributes.attackSpeed);
             
             while (currentState == MINION_STATE.FOLLOW)
@@ -186,8 +187,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionChase()
         {
-            targettingDestructible = !CompareTag("Enemy");
-            agent.stoppingDistance = enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
+            targettingDestructible = !target.CompareTag("Enemy");
+            
+            agent.stoppingDistance = targettingDestructible ? .5f : enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
             
             summoner.minionLeave(gameObject);
             
