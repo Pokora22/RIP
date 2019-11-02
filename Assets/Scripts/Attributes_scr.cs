@@ -76,7 +76,7 @@ public class Attributes_scr : MonoBehaviour
                 StartCoroutine(removeBody());
             }
         }
-        else if (!alertUsed)
+        else if (!alertUsed && CompareTag("Enemy"))
             alertAllies();
     }
 

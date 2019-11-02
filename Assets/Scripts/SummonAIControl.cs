@@ -167,16 +167,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 }
                 
                 UpdatePosition(m_AdvanceDestination);
-                
+
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    //If there's a target?
-                    if (target.CompareTag("Destructible") || target.CompareTag("Barricade")) //This is redundant ?
-                        CurrentState = MINION_STATE.ATTACK;                     
-                    else
-                        CurrentState = MINION_STATE.FOLLOW;
+                    CurrentState = MINION_STATE.FOLLOW;
+                    yield break;
                 }
-                
+
                 yield return null;
             }
         }
@@ -186,7 +183,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent.stoppingDistance = enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
             
             summoner.minionLeave(gameObject);
-//            m_AiAnimatorScr.SetAttackAnim(false, minionAttributes.attackSpeed);
             
             while (currentState == MINION_STATE.CHASE)
             {
@@ -273,17 +269,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             List<Collider> enemyList = nearbyEnemies.OrderBy(
                 x => (this.transform.position - x.transform.position).sqrMagnitude
             ).ToList();
-            while (enemyList.Count > 0) //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
+            while (enemyList.Count > 0)
             {
                 GameObject newTarget = enemyList[0].gameObject;
                 enemyList.RemoveAt(0);
                 
                 Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
-                Vector3 direction = (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z) -
-                                      origin);
-                float distance = Vector3.Distance(origin, direction);
-
-                if (!Physics.Raycast(origin, direction, distance, obstaclesMask))
+                Vector3 destination = (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z));
+                float distance = Vector3.Distance(origin, destination);
+                
+                if (!Physics.Raycast(origin, origin - destination, distance, obstaclesMask))
                 {
                     targetAttr = newTarget.GetComponent<Attributes_scr>(); //Expensive but called rarely (comparatively)
                     return newTarget;
