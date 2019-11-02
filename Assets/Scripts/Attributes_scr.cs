@@ -77,7 +77,7 @@ public class Attributes_scr : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("AttackHitbox") && !other.CompareTag(gameObject.tag))
+        if (other.CompareTag("AttackHitbox") && !friendlyFire(other.gameObject))
         {
             Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
             
@@ -86,6 +86,11 @@ public class Attributes_scr : MonoBehaviour
             else
                 this.damage(attackerAttr.attackDamage, attackerAttr);
         }
+    }
+
+    private bool friendlyFire(GameObject other)
+    {
+        return transform.root.CompareTag(other.transform.root.tag);
     }
 
     private IEnumerator removeBody()
