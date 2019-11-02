@@ -57,6 +57,7 @@ public class Attributes_scr : MonoBehaviour
             {
                 gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
                 summoner.minionRemove(gameObject);
+                removeBody();
             }
         }        
     }
@@ -85,5 +86,15 @@ public class Attributes_scr : MonoBehaviour
             else
                 this.damage(attackerAttr.attackDamage, attackerAttr);
         }
+    }
+
+    private IEnumerator removeBody()
+    {
+        yield return new WaitForSeconds(5f);
+        while(transform.position.y > -1)
+            transform.Translate(Vector3.down * Time.deltaTime);
+        
+        Destroy(gameObject);
+        yield return null;
     }
 }

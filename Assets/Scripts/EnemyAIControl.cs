@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -247,25 +248,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             NextAiCheckTimestamp = Time.time + AiCheckDelay;
             
             Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, fovDistance, enemies);
+            Collider currentTargetCollider = target.GetComponent<Collider>();
             GameObject newTarget;
             
-            List<Collider> enemyList = new List<Collider>(nearbyEnemies); //TODO: Sort by distance
+            List<Collider> enemyList = nearbyEnemies.OrderBy(
+                x => (this.transform.position - x.transform.position).sqrMagnitude
+            ).ToList();
+            
             while (enemyList.Count > 0)
             {
-                Collider currentTargetCollider = target.GetComponent<Collider>();
                 if (enemyList.Contains(currentTargetCollider))
                 {
                     newTarget = this.target; //Check current target first if not self
                     enemyList.Remove(currentTargetCollider);
                 }
-                else if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){ //Check player next if in range
-                    newTarget = player;
-                    enemyList.Remove(player.GetComponent<Collider>());
-                }                    
+//                else if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){ //Check player next if in range
+//                    newTarget = player;
+//                    enemyList.Remove(player.GetComponent<Collider>());
+//                }                    
                 else{ //Otherwise take first from nearby targets
                     newTarget = enemyList[0].gameObject;
                        
-                    if (Selection.Contains (gameObject))
+                    if (Selection.Contains (gameObject) && debug)
                     {
                         Debug.Log(gameObject.name + " : " + newTarget.name);
                         Debug.Log("Can see: " + canSeeTarget(newTarget, fovAngle) + " Can hear: " +
@@ -290,7 +294,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             float angle = Vector3.Angle(transform.forward, target.transform.position - transform.position);
 
-            if (Selection.Contains(gameObject))
+            if (Selection.Contains(gameObject) && debug)
             {
                 Debug.Log("Target angle: " + angle);
             }
@@ -302,7 +306,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                                   origin;
                 
             
-            if (Selection.Contains (gameObject))
+            if (Selection.Contains (gameObject) && debug)
                 Debug.DrawRay(origin, destination, Color.red, 2f);
             Physics.Raycast(origin, destination, out hit);
             if (hit.transform.CompareTag("Minion") || hit.transform.CompareTag("Player"))
@@ -315,7 +319,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             Rigidbody rb = target.GetComponent<Rigidbody>();
             
-            if (Selection.Contains (gameObject))
+            if (Selection.Contains (gameObject) && debug)
                 Debug.Log("Targets vel: " + rb.velocity.magnitude);
             if (rb.velocity.magnitude == 0)
                 return false;
