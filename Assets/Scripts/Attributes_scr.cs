@@ -56,12 +56,12 @@ public class Attributes_scr : MonoBehaviour
 
         if (health <= 0)
         {
-            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH);
+            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH); //TODO: Add sounds for destructibles
             m_AiAnimatorScr.setDeadAnim();
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
             gameObject.layer = LayerMask.NameToLayer("Bodies");
-            //Todo: Change tag for enemies to bodies (and change layer)
+            
             if (gameObject.CompareTag("Enemy"))
             {
                 gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;

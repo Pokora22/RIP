@@ -18,7 +18,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         [SerializeField] private MINION_STATE currentState;
         [SerializeField] private GameObject player;
-        [SerializeField] private LayerMask enemiesMask, obstaclesMask;        
+        [SerializeField] private LayerMask enemiesMask, obstaclesMask, destructiblesMask;        
         [SerializeField] private float playerFollowowDistance = 2f;
         [SerializeField] private float enemyFollowDistance = 1f;
         [SerializeField] private float enemyDetectionRange = 10f;        
@@ -32,6 +32,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private NpcAudio_scr audioPlayer;
         private bool recalled = false;
         private bool dmgRoutineRunning = false;
+        private bool targettingDestructible = false;
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination;
@@ -121,7 +122,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (agent.pathPending)
                     yield return null;
                 
-                target = findTargetEnemy();
+                target = findTarget(enemiesMask);
                 
                 if (target != player)
                 {
@@ -157,11 +158,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (agent.pathPending)
                     yield return null;
                 
-                //TODO: Add search for obstacles
-                target = findTargetEnemy();
-                
+                target = findTarget(enemiesMask, true); //Check for enemies first
                 if (target != player)
                 {                    
+                    CurrentState = MINION_STATE.CHASE;
+                    yield break;
+                }
+                
+                target = findTarget(destructiblesMask, true); //Check for destructibles of no enemies in range
+                if (target != player)
+                {
                     CurrentState = MINION_STATE.CHASE;
                     yield break;
                 }
@@ -180,6 +186,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionChase()
         {
+            targettingDestructible = !CompareTag("Enemy");
             agent.stoppingDistance = enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
             
             summoner.minionLeave(gameObject);
@@ -247,6 +254,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void UpdatePosition(Vector3 destination)
         {
+            if (targettingDestructible)
+            {
+                Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
+                Vector3 r_destination = (new Vector3(target.transform.position.x, 1f, target.transform.position.z));
+                float distance = Vector3.Distance(r_origin, r_destination);
+
+                RaycastHit hit;
+                Physics.Raycast(r_origin, r_destination - r_origin, out hit, distance, destructiblesMask);
+                Debug.DrawRay(r_origin, r_destination - r_origin, Color.blue, 2f);
+                destination = hit.point;
+            }
+            
             agent.SetDestination(destination);
 
             float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
@@ -259,13 +278,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        private GameObject findTargetEnemy()
+        private GameObject findTarget(LayerMask targetMask, bool force = false)
         {
-            if (Time.time < nextEnemySearchTime || recalled)
+            if (!force && (Time.time < nextEnemySearchTime || recalled))
                 return target;
             nextEnemySearchTime += enemySearchDelay;
             
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemiesMask);
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, targetMask);
             List<Collider> enemyList = nearbyEnemies.OrderBy(
                 x => (this.transform.position - x.transform.position).sqrMagnitude
             ).ToList();
@@ -280,14 +299,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 if (!Physics.Raycast(origin, origin - destination, distance, obstaclesMask))
                 {
-                    targetAttr = newTarget.GetComponent<Attributes_scr>(); //Expensive but called rarely (comparatively)
+                    targetAttr = newTarget.GetComponent<Attributes_scr>();
                     return newTarget;
                 }
             }
 
             return target; //Don't change if no enemies found
         }
-        
 
         private void OnDrawGizmos()
         {

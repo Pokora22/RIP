@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NpcAudio_scr : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] clipsRaise, clipsZombieAttack, clipsHumanAttack, clipsZombieDeath, clipsHumanDeath, clipsHumanAlert;
+    [SerializeField] private AudioClip[] clipsRaise, clipsAttack, clipsDeath, clipsAlert;
 
     public enum CLIP_TYPE{RAISE, ATTACK, DEATH, ALERT}
     
@@ -23,22 +23,20 @@ public class NpcAudio_scr : MonoBehaviour
         switch (type) 
         {
             case CLIP_TYPE.RAISE:
-                m_AudioSource.PlayOneShot(clipsRaise[Random.Range(0, clipsRaise.Length)], Random.Range(.8f, 1.2f));
+                if(clipsRaise.Length > 0)
+                    m_AudioSource.PlayOneShot(clipsRaise[Random.Range(0, clipsRaise.Length)], Random.Range(.8f, 1.2f));
                 break;
             case CLIP_TYPE.ATTACK:
-                if(CompareTag("Minion"))
-                    m_AudioSource.PlayOneShot(clipsZombieAttack[Random.Range(0, clipsZombieAttack.Length)], Random.Range(.8f, 1.2f));
-                else
-                    m_AudioSource.PlayOneShot(clipsHumanAttack[Random.Range(0, clipsHumanAttack.Length)], Random.Range(.8f, 1.2f));
+                if(clipsAttack.Length > 0)
+                    m_AudioSource.PlayOneShot(clipsAttack[Random.Range(0, clipsAttack.Length)], Random.Range(.8f, 1.2f));
                 break;
             case CLIP_TYPE.DEATH:
-                if(CompareTag("Minion"))
-                    m_AudioSource.PlayOneShot(clipsZombieDeath[Random.Range(0, clipsZombieDeath.Length)], Random.Range(.8f, 1.2f));
-                else
-                    m_AudioSource.PlayOneShot(clipsHumanDeath[Random.Range(0, clipsHumanDeath.Length)], Random.Range(.8f, 1.2f));
+                if(clipsDeath.Length > 0)
+                    m_AudioSource.PlayOneShot(clipsDeath[Random.Range(0, clipsDeath.Length)], Random.Range(.8f, 1.2f));
                 break;
             case CLIP_TYPE.ALERT:
-                m_AudioSource.PlayOneShot(clipsHumanAlert[Random.Range(0, clipsHumanAlert.Length)], Random.Range(.8f, 1.2f));
+                if(clipsAlert.Length > 0)
+                    m_AudioSource.PlayOneShot(clipsAlert[Random.Range(0, clipsAlert.Length)], Random.Range(.8f, 1.2f));
                 break;
         }
     }
