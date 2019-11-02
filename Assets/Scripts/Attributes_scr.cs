@@ -41,7 +41,7 @@ public class Attributes_scr : MonoBehaviour
         if (health <= 0)
         {
             m_AiAnimatorScr.setDeadAnim();
-            GetComponent<Collider>().enabled = false; //TODO ?? ??
+            GetComponent<Collider>().isTrigger = true;
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
 
@@ -49,7 +49,6 @@ public class Attributes_scr : MonoBehaviour
             if (gameObject.CompareTag("Enemy"))
             {
                 gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;
-                gameObject.tag = "Body";
                 gameObject.layer = LayerMask.NameToLayer("Bodies");
                 playerAttr.addExp(expValue);
             }

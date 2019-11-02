@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,6 +17,7 @@ public class PlayerController_scr : MonoBehaviour
     public LayerMask bodiesMask;
     public LayerMask obstaclesMask;
 
+    public int summonsLimit = 5;
     public List<GameObject> minions;
     public List<GameObject> minionsAway; //public for debugging purpose TODO: Change to private later?
     private GameObject minionTarget;
@@ -41,6 +43,8 @@ public class PlayerController_scr : MonoBehaviour
     private void summonMinionCheck()
     {
         //Display on screen help -- need reverse conditions?
+        if(minions.Count + minionsAway.Count >= summonsLimit)
+            return;
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -99,10 +103,9 @@ public class PlayerController_scr : MonoBehaviour
         RaycastHit raycastHit;
 
         if (Physics.Raycast(transform.position, body.transform.position - transform.position, out raycastHit))
-            if(!(raycastHit.transform.CompareTag("Body") || raycastHit.transform.CompareTag("CorpseContainer")))
+            if(raycastHit.transform.CompareTag("Terrain") || raycastHit.transform.CompareTag("Obstacle"))
                 return;
-
-        Debug.Log("Summoning minion: " + raycastHit.transform.name);
+        
         Vector3 summonPos = body.transform.position;
         NavMesh.SamplePosition(summonPos, out hit, 10.0f, NavMesh.AllAreas);
         

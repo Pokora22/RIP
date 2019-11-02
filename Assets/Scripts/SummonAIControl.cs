@@ -23,7 +23,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private float enemyFollowDistance = 1f;
         [SerializeField] private float enemyDetectionRange = 10f;        
         [SerializeField] private float playerLeashRange = 15f;
-        [SerializeField] private float recallDelay = 3f;
         [SerializeField] private bool debug = true;
         [SerializeField] private GameObject target;
         [SerializeField] private float enemySearchDelay = 1f;
@@ -36,7 +35,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination;
-        private bool targetDead;
         private float nextEnemySearchTime;
         private Attributes_scr targetAttr;
 
@@ -196,7 +194,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     yield return null;
                 
                 //Return to player if enemies run out too far from player
-                if (targetDead || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
+                if (targetAttr.health <= 0 || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
                 {
                     CurrentState = MINION_STATE.FOLLOW;
                     yield break;                 
@@ -331,12 +329,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //            yield return new WaitForSeconds(recallDelay);
 //            recalled = false;
             yield break;
-        }
-
-
-        public void setTargetDead(bool dead)
-        {
-            targetDead = dead;
         }
     }
 }

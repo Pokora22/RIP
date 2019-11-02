@@ -30,7 +30,7 @@ public class pAttributes_scr : MonoBehaviour
 
     public void damage()
     {
-        Debug.Log("Got hit");
+        //TODO: Sometimes gets hit twice with same effect. Add delay
         if (--health < 1)
             SceneManager.LoadScene(2); //TODO: Maybe a game over scren
         updateHud();

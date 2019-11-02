@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -263,6 +264,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 }                    
                 else{ //Otherwise take first from nearby targets
                     newTarget = enemyList[0].gameObject;
+                       
+                    if (Selection.Contains (gameObject))
+                    {
+                        Debug.Log(gameObject.name + " : " + newTarget.name);
+                        Debug.Log("Can see: " + canSeeTarget(newTarget, fovAngle) + " Can hear: " +
+                                  canHearTarget(newTarget));
+                    }
                     enemyList.RemoveAt(0);
                 }
 
@@ -280,7 +288,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             RaycastHit hit;
             
-            float angle = Vector3.Angle(transform.forward, player.transform.position - transform.position);
+            float angle = Vector3.Angle(transform.forward, target.transform.position - transform.position);
+
+            if (Selection.Contains(gameObject))
+            {
+                Debug.Log("Target angle: " + angle);
+            }
             if (angle > fovAngle)
                 return false;
 
@@ -288,6 +301,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             Vector3 destination = new Vector3(target.transform.position.x, 1f, target.transform.position.z) -
                                   origin;
                 
+            
+            if (Selection.Contains (gameObject))
+                Debug.DrawRay(origin, destination, Color.red, 2f);
             Physics.Raycast(origin, destination, out hit);
             if (hit.transform.CompareTag("Minion") || hit.transform.CompareTag("Player"))
                 return true;
@@ -298,6 +314,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool canHearTarget(GameObject target)
         {
             Rigidbody rb = target.GetComponent<Rigidbody>();
+            
+            if (Selection.Contains (gameObject))
+                Debug.Log("Targets vel: " + rb.velocity.magnitude);
             if (rb.velocity.magnitude == 0)
                 return false;
             
