@@ -118,16 +118,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 CurrentState = ENEMY_STATE.CHASE;                         
                 yield break;                
             }
-
-            if (agent.remainingDistance > agent.stoppingDistance)
-                m_AiAnimatorScr.Move(agent.desiredVelocity);
-            else if (doNotMove)
-                agent.SetDestination(transform.position);
-            else
-                agent.SetDestination(randomWaypoint());
-                
-            while (agent.pathPending)
-                yield return null;
+            
+            updatePosition();
             
 			yield return null;
 		}
@@ -149,29 +141,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     CurrentState = ENEMY_STATE.PATROL;
                     yield break;
                 }
-                    
-                if (doNotMove)
-                    agent.SetDestination(transform.position);
                 
-                else if (findTarget(FovAngle, FovDistance) != gameObject) //Update position when seeing player
+                if (findTarget(FovAngle, FovDistance) != gameObject) //Update position when seeing player
                     agent.destination = target.transform.position;
                 
                 //Otherwise leave it as is (last seen position applies)
                 
-                transform.LookAt(agent.destination);
-                
-                float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
-                if(remainingDistance <= agent.stoppingDistance)
-                {
-                    if(findTarget(180, 5, true) != gameObject)
-                        CurrentState = ENEMY_STATE.ATTACK; //TODO This should stop this coroutine while starting new one, but causes overflow. How ?
-                    else
-                        CurrentState = ENEMY_STATE.PATROL;
-    
-                    yield break;
-                }
-                
-                m_AiAnimatorScr.Move(agent.desiredVelocity);            
+                 updatePosition();
     
                 //Wait until next frame
                 yield return null;
@@ -196,14 +172,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
-                
-                agent.destination = target.transform.position;
-                
-                if(agent.remainingDistance > agent.stoppingDistance)
+
+                if (!target || targetAttr.health <= 0)
                 {
-                    CurrentState = ENEMY_STATE.CHASE;
+                    CurrentState = ENEMY_STATE.PATROL;
                     yield break;
                 }
+
+                agent.destination = target.transform.position;
+                updatePosition();
     
                 //Wait until next frame
                 yield return null;
@@ -248,9 +225,41 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Debug.Log(gameObject.name + " heard the call and moving toward " + destination);
                 agent.destination = destination;
             }
-        }
+        } 
+       
+        private void updatePosition()
+        {
+            transform.LookAt(agent.destination);
+            if (doNotMove)
+            {
+                agent.SetDestination(transform.position);
+                return;
+            }
 
-        //TODO: Change distance check to sphere overlap -> iterate through [] and get list of entities in FOV angle -> target player if found in list or closest enemy
+            float remainingDistance = Vector3.Distance(transform.position, agent.destination);
+            if(remainingDistance <= agent.stoppingDistance)
+            {
+                if (CurrentState == ENEMY_STATE.PATROL)
+                    agent.SetDestination(randomWaypoint());
+                
+                else if (CurrentState == ENEMY_STATE.CHASE)
+                {
+                    if (findTarget(180, 5, true) != gameObject)
+                        CurrentState = ENEMY_STATE.ATTACK; //TODO This should stop this coroutine while starting new one, but causes overflow. How ?
+                    else
+                        CurrentState = ENEMY_STATE.PATROL;
+                }
+                
+                m_AiAnimatorScr.Move(Vector3.zero);
+                return;
+            }
+            
+            if(CurrentState == ENEMY_STATE.ATTACK)
+                CurrentState = ENEMY_STATE.CHASE;
+            else
+                m_AiAnimatorScr.Move(agent.desiredVelocity);
+        }
+        
         private GameObject findTarget(float fovAngle, float fovDistance, bool forceCheck = false)
         {
             if(Time.time < NextAiCheckTimestamp && !forceCheck)
@@ -297,34 +306,34 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             return gameObject; //set self if no targets found
         }
-
+       
         private bool canSeeTarget(GameObject target, float fovAngle)
         {
             RaycastHit hit;
-            
+                     
             float angle = Vector3.Angle(transform.forward, target.transform.position - transform.position);
-
+         
             if (Selection.Contains(gameObject) && debug)
             {
                 Debug.Log("Target angle: " + angle);
             }
             if (angle > fovAngle)
                 return false;
-
+         
             Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
             Vector3 destination = new Vector3(target.transform.position.x, 1f, target.transform.position.z) -
                                   origin;
-                
-            
+                         
+                     
             if (Selection.Contains (gameObject) && debug)
                 Debug.DrawRay(origin, destination, Color.red, 2f);
             Physics.Raycast(origin, destination, out hit);
             if (hit.transform.CompareTag("Minion") || hit.transform.CompareTag("Player"))
                 return true;
-
+         
             return false;
         }
-
+        
         private bool canHearTarget(GameObject target)
         {
             Rigidbody rb = target.GetComponent<Rigidbody>();

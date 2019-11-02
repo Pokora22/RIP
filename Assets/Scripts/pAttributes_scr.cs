@@ -73,7 +73,6 @@ public class pAttributes_scr : MonoBehaviour
             damage();
             rb.velocity = Vector3.zero;
             rb.AddForce((other.transform.right + (Vector3.up/20)) * 50, ForceMode.Impulse); //TODO: Push player back? Adjust force
-            Debug.Log(rb.velocity);
         }
     }
 }
