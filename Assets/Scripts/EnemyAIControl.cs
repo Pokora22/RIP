@@ -112,14 +112,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         else
             agent.SetDestination(randomWaypoint());
         
-        while (gameObject && currentstate == ENEMY_STATE.PATROL)
+        while (currentstate == ENEMY_STATE.PATROL)
         {
-            target = findTarget(FovAngle, FovDistance);
-            if(target != gameObject){
+            (bool foundTarget, GameObject target) = findTarget();
+            if (foundTarget)
+            {
+                this.target = target;
+                targetAttr = target.GetComponent<Attributes_scr>();
                 CurrentState = ENEMY_STATE.CHASE;                         
                 yield break;                
             }
             
+            this.target = gameObject;
             updatePosition();
             
 			yield return null;
@@ -128,29 +132,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //------------------------------------------
         public IEnumerator AIChase()
         {
-            ///Checking stack trace
-//            string stackTrace = StackTraceUtility.ExtractStackTrace();
-//            Debug.Log(stackTrace);
-
             agent.speed = chaseSpeed * selfAttr.moveSpeedMultiplier;
             
-            //Loop while chasing
             while(currentstate == ENEMY_STATE.CHASE)
             {
-                if (!target)
+                if (!target) //if target stops existing break back to patrol
                 {
                     CurrentState = ENEMY_STATE.PATROL;
                     yield break;
                 }
                 
-                if (findTarget(FovAngle, FovDistance) != gameObject) //Update position when seeing player
+                if (canSeeTarget(target) || canHearTarget(target)) //Update position when seeing player
                     agent.destination = target.transform.position;
-                
                 //Otherwise leave it as is (last seen position applies)
                 
-                 updatePosition();
+                updatePosition();
     
-                //Wait until next frame
                 yield return null;
             }
         }
@@ -163,7 +160,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             while(currentstate == ENEMY_STATE.ATTACK)
             {
-                if (targetAttr.health <= 0) //TODO: Breaks here 
+                if (!target || targetAttr.health <= 0) //If target stopped existing or dropped below 0 health break back to patrol
                 {
                      CurrentState = ENEMY_STATE.PATROL;
                      yield break;
@@ -174,7 +171,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
 
-                if (!target || targetAttr.health <= 0)
+                if (!target || targetAttr.health <= 0) //Check if target still exists after the animation is done
                 {
                     CurrentState = ENEMY_STATE.PATROL;
                     yield break;
@@ -183,7 +180,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 agent.destination = target.transform.position;
                 updatePosition();
     
-                //Wait until next frame
                 yield return null;
             }
         }
@@ -230,7 +226,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
        
         private void updatePosition()
         {
-            transform.LookAt(agent.destination);
+            transform.LookAt(agent.nextPosition);
             if (doNotMove)
             {
                 agent.SetDestination(transform.position);
@@ -245,7 +241,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 else if (CurrentState == ENEMY_STATE.CHASE)
                 {
-                    if (findTarget(180, 5, true) != gameObject)
+                    if (canSeeTarget(target) || canHearTarget(target))
                         CurrentState = ENEMY_STATE.ATTACK; //TODO This should stop this coroutine while starting new one, but causes overflow. How ?
                     else
                         CurrentState = ENEMY_STATE.PATROL;
@@ -261,51 +257,32 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_AiAnimatorScr.Move(agent.desiredVelocity);
         }
         
-        private GameObject findTarget(float fovAngle, float fovDistance, bool forceCheck = false)
+        private Tuple<bool, GameObject> findTarget()
         {
-            if(Time.time < NextAiCheckTimestamp && !forceCheck)
-                return gameObject; //Return self if it's not time to check yet
+            if(Time.time < NextAiCheckTimestamp)
+                return new Tuple<bool, GameObject>(false, gameObject); //Return self if it's not time to check yet
             NextAiCheckTimestamp = Time.time + AiCheckDelay;
             
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, fovDistance, enemiesMask);
-            Collider currentTargetCollider = target.GetComponent<Collider>();
-            GameObject newTarget;
-            
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, FovDistance, enemiesMask);
             List<Collider> enemyList = nearbyEnemies.OrderBy(
                 x => (this.transform.position - x.transform.position).sqrMagnitude
             ).ToList();
             
             while (enemyList.Count > 0)
             {
-                if (enemyList.Contains(currentTargetCollider))
-                {
-                    newTarget = this.target; //Check current target first if not self
-                    enemyList.Remove(currentTargetCollider);
-                }
-//                else if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){ //Check player next if in range
+//                if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){ //Check player next if in range
 //                    newTarget = player;
 //                    enemyList.Remove(player.GetComponent<Collider>());
-//                }                    
-                else{ //Otherwise take first from nearby targets
-                    newTarget = enemyList[0].gameObject;
-                       
-                    if (Selection.Contains (gameObject) && debug)
-                    {
-                        Debug.Log(gameObject.name + " : " + newTarget.name);
-                        Debug.Log("Can see: " + canSeeTarget(newTarget, fovAngle) + " Can hear: " +
-                                  canHearTarget(newTarget));
-                    }
-                    enemyList.RemoveAt(0);
-                }
+//                }
 
-                if (canHearTarget(newTarget) || canSeeTarget(newTarget, fovAngle))
-                {
-                    targetAttr = newTarget.GetComponent<Attributes_scr>();
-                    return newTarget;
-                }
+                GameObject newTarget = enemyList[0].gameObject;
+                enemyList.RemoveAt(0);
+
+                if (canHearTarget(newTarget) || canSeeTarget(newTarget))
+                    return new Tuple<bool, GameObject>(true, newTarget); //Return self if it's not time to check yet
             }
             
-            return gameObject; //set self if no targets found
+            return new Tuple<bool, GameObject>(false, gameObject); //Return self if no target found
         }
        
         private bool canSeeTarget(GameObject target)

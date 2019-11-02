@@ -18,7 +18,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         [SerializeField] private MINION_STATE currentState;
         [SerializeField] private GameObject player;
-        [SerializeField] private LayerMask enemies;        
+        [SerializeField] private LayerMask enemiesMask, obstaclesMask;        
         [SerializeField] private float playerFollowowDistance = 2f;
         [SerializeField] private float enemyFollowDistance = 1f;
         [SerializeField] private float enemyDetectionRange = 10f;        
@@ -269,28 +269,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 return target;
             nextEnemySearchTime += enemySearchDelay;
             
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemies);
-            GameObject newTarget;
-            RaycastHit hit;
-            
-            List<Collider> enemyList = new List<Collider>(nearbyEnemies);
+            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, enemiesMask);
+            List<Collider> enemyList = nearbyEnemies.OrderBy(
+                x => (this.transform.position - x.transform.position).sqrMagnitude
+            ).ToList();
             while (enemyList.Count > 0) //TODO: Make a list instead and choose closest target and switch if not currently attacking instead (sort by distance?)
             {
-//                int index = Random.Range(0, enemyList.Count - 1); 
-                newTarget = enemyList[0].gameObject;
+                GameObject newTarget = enemyList[0].gameObject;
                 enemyList.RemoveAt(0);
                 
                 Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
-                Vector3 direction = new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z) -
-                                      origin;
-                
-                Physics.Raycast(origin, direction, out hit);
-                Debug.DrawRay(origin, direction, Color.red, 2f);
-                
-                if (hit.transform.CompareTag("Enemy")){
-                    
-                    targetAttr = hit.transform.GetComponent<Attributes_scr>(); //Expensive but called rarely (comparatively)
-                    return newTarget; 
+                Vector3 direction = (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z) -
+                                      origin);
+                float distance = Vector3.Distance(origin, direction);
+
+                if (!Physics.Raycast(origin, direction, distance, obstaclesMask))
+                {
+                    targetAttr = newTarget.GetComponent<Attributes_scr>(); //Expensive but called rarely (comparatively)
+                    return newTarget;
                 }
             }
 
