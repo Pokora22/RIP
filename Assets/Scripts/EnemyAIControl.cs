@@ -104,7 +104,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         public IEnumerator AIPatrol()
 	{        
-		agent.speed = patrolSpeed;
+		agent.speed = patrolSpeed * selfAttr.moveSpeedMultiplier;
 
         if (doNotMove)
             agent.SetDestination(transform.position);
@@ -139,7 +139,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //            string stackTrace = StackTraceUtility.ExtractStackTrace();
 //            Debug.Log(stackTrace);
 
-            agent.speed = chaseSpeed;
+            agent.speed = chaseSpeed * selfAttr.moveSpeedMultiplier;
             
             //Loop while chasing
             while(currentstate == ENEMY_STATE.CHASE)
@@ -183,17 +183,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             while(currentstate == ENEMY_STATE.ATTACK)
             {
+                if (targetAttr.health <= 0) //TODO: Breaks here 
+                {
+                     CurrentState = ENEMY_STATE.PATROL;
+                     yield break;
+                }
                 transform.LookAt(target.transform);
 
                 m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
-                
-                if (targetAttr.health <= 0) //TODO: Breaks here 
-                {
-                    CurrentState = ENEMY_STATE.PATROL;
-                    yield break;
-                }
                 
                 agent.destination = target.transform.position;
                 

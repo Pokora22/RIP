@@ -10,6 +10,7 @@ public class Attributes_scr : MonoBehaviour
     public float health;
     public float attackDamage = 1f;
     public float attackSpeed = 2f;
+    public float moveSpeedMultiplier = 1f;
     public float reflectDamage = 3f;
     public float expValue = 5f; //Change for different minions when they're in
     public GameObject corpse;
@@ -22,6 +23,15 @@ public class Attributes_scr : MonoBehaviour
     
     void Start()
     {
+        if (CompareTag("Enemy"))
+        {
+            float diff = PlayerPrefs.GetInt("difficulty");
+            maxHealth += maxHealth * (diff / 5); //Add 20% stats per difficulty lvl
+            attackDamage += attackDamage * (diff / 5);
+            attackSpeed += attackSpeed * (diff / 5);
+            moveSpeedMultiplier += moveSpeedMultiplier * (diff / 5);
+        }
+        
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
         playerAttr = GameObject.FindGameObjectWithTag("Player").GetComponent<pAttributes_scr>();
@@ -94,13 +104,18 @@ public class Attributes_scr : MonoBehaviour
 
     private IEnumerator removeBody()
     {
+        Debug.Log("start");
         yield return new WaitForSeconds(5f);
-        while (transform.position.y > -1)
-        {
-            transform.Translate(Vector3.down * Time.deltaTime);
-            yield return null;
-        }
+//        Rigidbody rb = GetComponent<Rigidbody>(); //TODO: This still doesn't sink into ground.. why?
 
+//        rb.detectCollisions = false;
+//        while (transform.position.y > -1)
+//        {
+//            rb.position += Vector3.down * Time.deltaTime; 
+//            yield return null;
+//        }
+
+        Debug.Log("Boom");
         Destroy(gameObject);
         yield return null;
     }
