@@ -16,11 +16,16 @@ public class Attributes_scr : MonoBehaviour
     public GameObject corpse;
     
     [SerializeField] private bool debug;
+    [SerializeField] private float alertRange = 20;
+    [SerializeField] private float alertChance = 20;
+    private NpcAudio_scr audioPlayer;
+    private bool alertUsed = false;
     private pAttributes_scr playerAttr;
     private PlayerController_scr summoner;
     private GameObject attacker;
     private AiAnimator_scr m_AiAnimatorScr;
     
+
     void Start()
     {
         if (CompareTag("Enemy"))
@@ -36,6 +41,7 @@ public class Attributes_scr : MonoBehaviour
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
         playerAttr = GameObject.FindGameObjectWithTag("Player").GetComponent<pAttributes_scr>();
         m_AiAnimatorScr = gameObject.GetComponent<AiAnimator_scr>();
+        audioPlayer = GetComponent<NpcAudio_scr>();
     }
 
     // private void OnCollisionEnter(Collision other)
@@ -50,6 +56,7 @@ public class Attributes_scr : MonoBehaviour
 
         if (health <= 0)
         {
+            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH);
             m_AiAnimatorScr.setDeadAnim();
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
@@ -68,7 +75,9 @@ public class Attributes_scr : MonoBehaviour
                 gameObject.GetComponent<Collider>().enabled = false;
                 StartCoroutine(removeBody());
             }
-        }        
+        }
+        else if (!alertUsed)
+            alertAllies();
     }
 
     public void damage(float dmgAmnt, Attributes_scr minionAttacking) //Attack with reflect
@@ -118,5 +127,21 @@ public class Attributes_scr : MonoBehaviour
         Debug.Log("Boom");
         Destroy(gameObject);
         yield return null;
+    }
+
+    private void alertAllies()
+    {
+        float alert = Random.Range(0, maxHealth);
+        int diff = PlayerPrefs.GetInt("difficulty");
+        if (alert > 1 / (diff + 1) * health)
+        {
+            alertUsed = true;
+            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ALERT);
+            Collider[] nearbyAllies = Physics.OverlapSphere(transform.position, alertRange, gameObject.layer);
+            foreach (Collider ally in nearbyAllies)
+            {
+                ally.GetComponent<EnemyAIControl>().setNewDestination(transform.position);
+            }
+        }
     }
 }

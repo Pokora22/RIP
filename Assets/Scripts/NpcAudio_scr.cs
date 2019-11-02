@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class NpcAudio_scr : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] clipsRaise, clipsZombieAttack, clipsHumanAttack, clipsZombieDeath, clipsHumanDeath;
+    [SerializeField] private AudioClip[] clipsRaise, clipsZombieAttack, clipsHumanAttack, clipsZombieDeath, clipsHumanDeath, clipsHumanAlert;
 
-    public enum CLIP_TYPE{RAISE, ATTACK, DEATH}
+    public enum CLIP_TYPE{RAISE, ATTACK, DEATH, ALERT}
     
     private AudioSource m_AudioSource;
     // Start is called before the first frame update
@@ -36,6 +36,9 @@ public class NpcAudio_scr : MonoBehaviour
                     m_AudioSource.PlayOneShot(clipsZombieDeath[Random.Range(0, clipsZombieDeath.Length)], Random.Range(.8f, 1.2f));
                 else
                     m_AudioSource.PlayOneShot(clipsHumanDeath[Random.Range(0, clipsHumanDeath.Length)], Random.Range(.8f, 1.2f));
+                break;
+            case CLIP_TYPE.ALERT:
+                m_AudioSource.PlayOneShot(clipsHumanAlert[Random.Range(0, clipsHumanAlert.Length)], Random.Range(.8f, 1.2f));
                 break;
         }
     }

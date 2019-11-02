@@ -144,6 +144,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Loop while chasing
             while(currentstate == ENEMY_STATE.CHASE)
             {
+                if (!target)
+                {
+                    CurrentState = ENEMY_STATE.PATROL;
+                    yield break;
+                }
+                    
                 if (doNotMove)
                     agent.SetDestination(transform.position);
                 
@@ -151,9 +157,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     agent.destination = target.transform.position;
                 
                 //Otherwise leave it as is (last seen position applies)
-                			
-                while(agent.pathPending)
-                    yield return null;
                 
                 transform.LookAt(agent.destination);
                 
@@ -238,6 +241,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Gizmos.DrawWireSphere(agent.destination, 1f);
         }
 
+        public void setNewDestination(Vector3 destination)
+        {
+            if (CurrentState == ENEMY_STATE.PATROL)
+            {
+                Debug.Log(gameObject.name + " heard the call and moving toward " + destination);
+                agent.destination = destination;
+            }
+        }
 
         //TODO: Change distance check to sphere overlap -> iterate through [] and get list of entities in FOV angle -> target player if found in list or closest enemy
         private GameObject findTarget(float fovAngle, float fovDistance, bool forceCheck = false)
