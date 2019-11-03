@@ -19,6 +19,7 @@ TagManager:
   - UIPhylactery
   - UIZombieCount
   - UIExpBar
+  - UILevelNotification
   layers:
   - Default
   - TransparentFX

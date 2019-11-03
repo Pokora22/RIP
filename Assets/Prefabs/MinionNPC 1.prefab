@@ -164,7 +164,7 @@ MonoBehaviour:
   enemyFollowDistance: 1
   enemyDetectionRange: 5
   playerLeashRange: 15
-  debug: 1
+  debug: 0
   target: {fileID: 0}
   enemySearchDelay: 0.5
 --- !u!82 &6483661527495625800

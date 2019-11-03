@@ -21,6 +21,8 @@ public class pAttributes_scr : MonoBehaviour
     private Rigidbody rb;
     [SerializeField] private Sprite[] phylacteri;
     private GameObject[] livesDisplay;
+    private Image expBar;
+    private GameObject levelNotification;
 
     void Start()
     {
@@ -30,7 +32,8 @@ public class pAttributes_scr : MonoBehaviour
         hudZombieCount = GameObject.FindWithTag("UIZombieCount").GetComponentInChildren<TextMeshProUGUI>();
         rb = GetComponent<Rigidbody>();
         livesDisplay = GameObject.FindGameObjectsWithTag("UIPhylactery");
-        
+        expBar = GameObject.FindWithTag("UIExpBar").GetComponent<Image>();
+        levelNotification = GameObject.FindWithTag("UILevelNotification");
         updateHud();
     }
 
@@ -69,8 +72,12 @@ public class pAttributes_scr : MonoBehaviour
     {
         for (int i = 0; i < maxHealth; i++)
             livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0];
+
+        expBar.fillAmount = currentExp / nextLvlExpReq;
         
         hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count));
+        
+        levelNotification.SetActive(currentLvl > 0); //TODO: When skill points are in, check that against 0
     }
 
     private void OnCollisionEnter(Collision other)
