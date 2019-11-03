@@ -78,7 +78,7 @@ public class Attributes_scr : MonoBehaviour
             else if (gameObject.CompareTag("Minion"))
             {
                 gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
-                summoner.minionRemove(gameObject);
+                summoner.minionRemove(GetComponent<SummonAIControl>());
                 gameObject.GetComponent<Collider>().enabled = false;
                 StartCoroutine(removeBody());
             }

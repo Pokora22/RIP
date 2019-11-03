@@ -22,30 +22,32 @@ public class PlayerController_scr : MonoBehaviour
     public LayerMask obstaclesMask;
 
     public int summonsLimit = 5;
-    public List<GameObject> minions;
-    public List<GameObject> minionsAway; //public for debugging purpose TODO: Change to private later?
+    public List<SummonAIControl> minions;
+    public List<SummonAIControl> minionsAway; //public for debugging purpose TODO: Change to private later?
     private GameObject minionTarget;
     private bool consumeSummonInput = false;
-    private pAttributes_scr summonerAttr;
+    private pAttributes_scr playerAttributes;
+    private Attributes_scr characterAttributes;
     private Vector3 m_CamForward;
-    private CharacterController m_CharacterController;
-    [SerializeField] private float m_MoveSpeedMultiplier = 3f;
     private Transform m_Cam;
+    private Rigidbody m_Rigidbody;
+    private Vector3 move;
 
     // Start is called before the first frame update
     void Start()
     {
-        minions = new List<GameObject>();
-        minionsAway = new List<GameObject>();
-        summonerAttr = GetComponent<pAttributes_scr>();
+        minions = new List<SummonAIControl>();
+        minionsAway = new List<SummonAIControl>();
+        playerAttributes = GetComponent<pAttributes_scr>();
+        characterAttributes = GetComponent<Attributes_scr>();
         m_Cam = Camera.main.transform;
-        m_CharacterController = GetComponent<CharacterController>();
+        m_Rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-//        UpdatePosition();
+        HandleControlInput();
         summonMinionCheck();
         sendMinionCheck();
         recallMinionCheck();
@@ -75,7 +77,7 @@ public class PlayerController_scr : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && minions.Count > 0)
         {
             RaycastHit hit;
-            GameObject minionToSend = minions[0];                         
+            SummonAIControl minionToSend = minions[0];                         
 
             //Fix: start the raycast behind the player character to make sure we don't bypass first obstacle
             Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) - transform.forward; 
@@ -89,8 +91,7 @@ public class PlayerController_scr : MonoBehaviour
             ? hit.point
             : transform.position + direction * minionRunDistance;
 
-            minionToSend.GetComponent<SummonAIControl>()
-                .SendToDestination(destination, obstacleHit, hit);
+            minionToSend.SendToDestination(destination, obstacleHit, hit);
         }
     }
 
@@ -99,8 +100,8 @@ public class PlayerController_scr : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && minionsAway.Count > 0)
         {
             if(!consumeSummonInput){
-                GameObject minionToRecall = minionsAway[0];
-                StartCoroutine(minionToRecall.GetComponent<SummonAIControl>().recall());
+                SummonAIControl minionToRecall = minionsAway[0];
+                StartCoroutine(minionToRecall.recall());
             }
 
             consumeSummonInput = false; //Don't recall minion if summoned
@@ -128,7 +129,7 @@ public class PlayerController_scr : MonoBehaviour
         Destroy(body.transform.gameObject);
     }
 
-    public void minionLeave(GameObject minion)
+    public void minionLeave(SummonAIControl minion)
     {
 //        Debug.Log(minion.name + " leaving");
         minions.Remove(minion);
@@ -136,20 +137,20 @@ public class PlayerController_scr : MonoBehaviour
             minionsAway.Add(minion);
     }
 
-    public void minionRemove(GameObject minion)
+    public void minionRemove(SummonAIControl minion)
     {
         minions.Remove(minion);
         minionsAway.Remove(minion);
-        summonerAttr.updateHud();
+        playerAttributes.updateHud();
     }
 
-    public void minionReturn(GameObject minion)
+    public void minionReturn(SummonAIControl minion)
     {
 //        Debug.Log(minion.name + " returning");
         minionsAway.Remove(minion);
         if(!minions.Contains(minion))
             minions.Add(minion);
-        summonerAttr.updateHud(); //TODO: That would better be on summon, but it'd break minion follow routine
+        playerAttributes.updateHud(); //TODO: That would better be on summon, but it'd break minion follow routine
     }
 
     private void OnTriggerEnter(Collider other)
@@ -158,16 +159,19 @@ public class PlayerController_scr : MonoBehaviour
             SceneManager.LoadScene(2);
     }
     
-    private void UpdatePosition()
+    private void HandleControlInput()
     {
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
         m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-        Vector3 move = v*m_CamForward + h*m_Cam.right;
-        
-        m_CharacterController.Move(move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
+        move = v*m_CamForward + h*m_Cam.right;
+    }
+
+    private void FixedUpdate()
+    {
         if (move != Vector3.zero)
             transform.forward = move;
+        m_Rigidbody.MovePosition(m_Rigidbody.position + move * characterAttributes.moveSpeedMultiplier * Time.fixedDeltaTime);
     }
 
     private void OnDrawGizmos()

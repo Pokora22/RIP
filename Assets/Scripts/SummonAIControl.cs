@@ -113,7 +113,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private IEnumerator minionFollow()
         {
             target = player;
-            summoner.minionReturn(this.gameObject);
+            summoner.minionReturn(this);
             agent.stoppingDistance = playerFollowowDistance;
             targettingDestructible = false;
 //            m_AiAnimatorScr.SetAttackAnim(false, minionAttributes.attackSpeed);
@@ -150,7 +150,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAdvance()
         {
-            summoner.minionLeave(gameObject);
+            summoner.minionLeave(this);
             agent.stoppingDistance = .2f;
             recalled = false;
 
@@ -191,7 +191,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             agent.stoppingDistance = targettingDestructible ? .5f : enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
             
-            summoner.minionLeave(gameObject);
+            summoner.minionLeave(this);
 
             if (targettingDestructible) //Destructibles don't move - get position once only
             {

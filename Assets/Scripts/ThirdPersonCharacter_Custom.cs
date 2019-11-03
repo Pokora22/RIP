@@ -35,44 +35,44 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
-//			m_Rigidbody = GetComponent<Rigidbody>();
+			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CharacterController = GetComponent<CharacterController>();
-//			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_Cam = Camera.main.transform;
 		}
 
 
 		public void Move(Vector3 move)
 		{
-
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
-			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
+//			if (move.magnitude > 1f) move.Normalize();
+//			move = transform.InverseTransformDirection(move);
 //			CheckGroundStatus();
-			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-			m_ForwardAmount = move.z;
-
+//			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
+//			m_TurnAmount = Mathf.Atan2(move.x, move.z);
+//			m_ForwardAmount = move.z;
 			
 //			ApplyExtraTurnRotation();
-//			m_Rigidbody.MovePosition(m_Rigidbody.position + move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
-//			m_Rigidbody.MoveRotation(Quaternion.LookRotation(transform.position + move + m_Rigidbody.velocity));
-		}
 
-
-		private void Update()
-		{
-			float h = CrossPlatformInputManager.GetAxis("Horizontal");
-			float v = CrossPlatformInputManager.GetAxis("Vertical");
-			m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-			Vector3 move = v*m_CamForward + h*m_Cam.right;
-			m_CharacterController.Move(move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
 			if (move != Vector3.zero)
 				transform.forward = move;
+			m_Rigidbody.MovePosition(m_Rigidbody.position + move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
 		}
+
+
+//		private void Update()
+//		{
+//			float h = CrossPlatformInputManager.GetAxis("Horizontal");
+//			float v = CrossPlatformInputManager.GetAxis("Vertical");
+//			m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
+//			Vector3 move = v*m_CamForward + h*m_Cam.right;
+//			m_CharacterController.Move(move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
+//			if (move != Vector3.zero)
+//				transform.forward = move;
+//		}
 
 
 		void ApplyExtraTurnRotation()
