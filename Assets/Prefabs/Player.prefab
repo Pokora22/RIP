@@ -178,6 +178,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 300
   baseExpReq: 50
+  phylacteri:
+  - {fileID: 21300000, guid: 23058c5f1266ebb45812626b4ecd0a61, type: 3}
+  - {fileID: 21300000, guid: ed182349ae93ad344a2384b11a015916, type: 3}
 --- !u!114 &7044675944207343105
 MonoBehaviour:
   m_ObjectHideFlags: 0

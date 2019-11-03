@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class pAttributes_scr : MonoBehaviour
 {
@@ -15,16 +17,20 @@ public class pAttributes_scr : MonoBehaviour
     [SerializeField] private float baseExpReq = 50;
     private float nextLvlExpReq;
     private PlayerController_scr summoner;
-    private TextMeshProUGUI hudExp;
+    private TextMeshProUGUI hudZombieCount;
     private Rigidbody rb;
+    [SerializeField] private Sprite[] phylacteri;
+    private GameObject[] livesDisplay;
 
     void Start()
     {
         nextLvlExpReq = baseExpReq;
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
-        hudExp = GameObject.FindWithTag("HUDExp").GetComponent<TextMeshProUGUI>();
+        hudZombieCount = GameObject.FindWithTag("UIZombieCount").GetComponentInChildren<TextMeshProUGUI>();
         rb = GetComponent<Rigidbody>();
+        livesDisplay = GameObject.FindGameObjectsWithTag("UIPhylactery");
+        
         updateHud();
     }
 
@@ -61,7 +67,10 @@ public class pAttributes_scr : MonoBehaviour
 
     public void updateHud()
     {
-        hudExp.SetText("Lives: " + health  + "\nEXP: " + currentExp + "/" + nextLvlExpReq + "\nMinions: " + (summoner.minions.Count + summoner.minionsAway.Count));
+        for (int i = 0; i < maxHealth; i++)
+            livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0];
+        
+        hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count));
     }
 
     private void OnCollisionEnter(Collision other)

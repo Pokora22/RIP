@@ -12,11 +12,13 @@ TagManager:
   - Terrain
   - DontDestroyOnLoad
   - Barricade
-  - HUDExp
   - CorpseContainer
   - Exit
   - Obstacle
   - AttackHitbox
+  - UIPhylactery
+  - UIZombieCount
+  - UIExpBar
   layers:
   - Default
   - TransparentFX
