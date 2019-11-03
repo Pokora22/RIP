@@ -196,7 +196,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (targettingDestructible) //Destructibles don't move - get position once only
             {
                 Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
-                Vector3 r_destination = (new Vector3(target.transform.position.x, 1f, target.transform.position.z));
+                Vector3 r_destination = target.transform.GetComponent<Renderer>().bounds.center;
+                //(new Vector3(target.transform.position.x, 1f, target.transform.position.z));
                 float distance = Vector3.Distance(r_origin, r_destination);
 
                 RaycastHit hit;
