@@ -18,6 +18,7 @@ public class Attributes_scr : MonoBehaviour
     [SerializeField] private bool debug;
     [SerializeField] private float alertRange = 20;
     [SerializeField] private float alertChance = 20;
+    [SerializeField] private float removeDelay = 5;
     private NpcAudio_scr audioPlayer;
     private bool alertUsed = false;
     private pAttributes_scr playerAttr;
@@ -119,7 +120,7 @@ public class Attributes_scr : MonoBehaviour
 
     private IEnumerator removeBody()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(removeDelay);
 //        Rigidbody rb = GetComponent<Rigidbody>(); //TODO: This still doesn't sink into ground.. why?
 
 //        rb.detectCollisions = false;
@@ -135,16 +136,19 @@ public class Attributes_scr : MonoBehaviour
 
     private void alertAllies()
     {
-        float alert = Random.Range(0, maxHealth);
-        int diff = PlayerPrefs.GetInt("difficulty");
-        if (alert > 1 / (diff + 1) * health)
+        if (Random.Range(0, 100) < alertChance)
         {
-            alertUsed = true;
-            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ALERT);
-            Collider[] nearbyAllies = Physics.OverlapSphere(transform.position, alertRange, gameObject.layer);
-            foreach (Collider ally in nearbyAllies)
+            float alert = Random.Range(0, maxHealth);
+            int diff = PlayerPrefs.GetInt("difficulty");
+            if (alert > 1 / (diff + 1) * health)
             {
-                ally.GetComponent<EnemyAIControl>().setNewDestination(transform.position);
+                alertUsed = true;
+                audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.ALERT);
+                Collider[] nearbyAllies = Physics.OverlapSphere(transform.position, alertRange, gameObject.layer);
+                foreach (Collider ally in nearbyAllies)
+                {
+                    ally.GetComponent<EnemyAIControl>().setNewDestination(transform.position);
+                }
             }
         }
     }

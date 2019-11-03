@@ -35,7 +35,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool targettingDestructible = false;
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
-        private Vector3 m_AdvanceDestination;
+        private Vector3 m_AdvanceDestination, targetDestination;
         private float nextEnemySearchTime;
         private Attributes_scr targetAttr;
 
@@ -192,6 +192,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             agent.stoppingDistance = targettingDestructible ? .5f : enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
             
             summoner.minionLeave(gameObject);
+
+            if (targettingDestructible) //Destructibles don't move - get position once only
+            {
+                Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
+                Vector3 r_destination = (new Vector3(target.transform.position.x, 1f, target.transform.position.z));
+                float distance = Vector3.Distance(r_origin, r_destination);
+
+                RaycastHit hit;
+                Physics.Raycast(r_origin, r_destination - r_origin, out hit, distance, destructiblesMask);
+                Debug.DrawRay(r_origin, r_destination - r_origin, Color.blue, 2f);
+
+                targetDestination = hit.point;
+            }
             
             while (currentState == MINION_STATE.CHASE)
             {
@@ -205,7 +218,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     yield break;                 
                 }
 
-                UpdatePosition(target.transform.position);
+                if (!targettingDestructible)
+                    targetDestination = target.transform.position;
+                UpdatePosition(targetDestination);
                 
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {                    
@@ -256,18 +271,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void UpdatePosition(Vector3 destination)
         {
-            if (targettingDestructible)
-            {
-                Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
-                Vector3 r_destination = (new Vector3(target.transform.position.x, 1f, target.transform.position.z));
-                float distance = Vector3.Distance(r_origin, r_destination);
-
-                RaycastHit hit;
-                Physics.Raycast(r_origin, r_destination - r_origin, out hit, distance, destructiblesMask);
-                Debug.DrawRay(r_origin, r_destination - r_origin, Color.blue, 2f);
-                destination = hit.point;
-            }
-            
             agent.SetDestination(destination);
 
             float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
@@ -299,8 +302,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Vector3 destination = (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z));
                 float distance = Vector3.Distance(origin, destination);
                 
-                if (!Physics.Raycast(origin, origin - destination, distance, obstaclesMask))
+                if (!Physics.Raycast(origin, destination - origin, distance, obstaclesMask))
                 {
+                    Debug.DrawRay(origin, destination - origin, Color.gray, 2f);
                     targetAttr = newTarget.GetComponent<Attributes_scr>();
                     return newTarget;
                 }
