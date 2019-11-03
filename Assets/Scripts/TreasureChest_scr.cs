@@ -15,7 +15,10 @@ public class TreasureChest_scr : MonoBehaviour
         if (artifactCount > 0)
         {
             itemInside = Inventory_scr.allArtifacts[Random.Range(0, artifactCount)];
+            Inventory_scr.allArtifacts.Remove(itemInside);
+            hasTreasure = true;
         }
+        Debug.Log(artifactCount);
     }
 
     private void OnTriggerEnter(Collider other)

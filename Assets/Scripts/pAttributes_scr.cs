@@ -25,6 +25,8 @@ public class pAttributes_scr : MonoBehaviour
     private GameObject levelNotification;
     private List<Artifact_scr> playerInventory;
 
+    public List<Artifact_scr> listOfAllArtifactsInGame;
+
     void Start()
     {
         nextLvlExpReq = baseExpReq;
@@ -36,7 +38,10 @@ public class pAttributes_scr : MonoBehaviour
         expBar = GameObject.FindWithTag("UIExpBar").GetComponent<Image>();
         levelNotification = GameObject.FindWithTag("UILevelNotification");
         playerInventory = new List<Artifact_scr>();
+        
         updateHud();
+
+        listOfAllArtifactsInGame = Inventory_scr.allArtifacts;
     }
 
     public void damage()
@@ -97,5 +102,6 @@ public class pAttributes_scr : MonoBehaviour
     public void addItem(Artifact_scr item)
     {
         playerInventory.Add(item);
+        Debug.Log("Received " + item);
     }
 }
