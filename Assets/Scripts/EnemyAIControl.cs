@@ -20,6 +20,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private GameObject terrain;
         private GameObject player;
+        private Rigidbody m_Rigidbody;
         private Coroutine currentCoroutine;
         private Attributes_scr targetAttr, selfAttr;
         [SerializeField] private float patrolSpeed;
@@ -94,6 +95,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	        agent.updateRotation = true;
 	        agent.updatePosition = true;
 
+            m_Rigidbody = GetComponent<Rigidbody>();
+
             terrain = GameObject.FindWithTag("Terrain");
 
             NextAiCheckTimestamp = Time.time + AiCheckDelay;
@@ -166,6 +169,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                      yield break;
                 }
                 transform.LookAt(target.transform);
+//                m_Rigidbody.MoveRotation(Quaternion.LookRotation(target.transform.position)); //TODO: Should use this, but don't understand
 
                 m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
