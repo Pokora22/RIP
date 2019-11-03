@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking.Match;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.ThirdPerson;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController_scr : MonoBehaviour
 {
@@ -23,6 +27,10 @@ public class PlayerController_scr : MonoBehaviour
     private GameObject minionTarget;
     private bool consumeSummonInput = false;
     private pAttributes_scr summonerAttr;
+    private Vector3 m_CamForward;
+    private CharacterController m_CharacterController;
+    [SerializeField] private float m_MoveSpeedMultiplier = 3f;
+    private Transform m_Cam;
 
     // Start is called before the first frame update
     void Start()
@@ -30,11 +38,14 @@ public class PlayerController_scr : MonoBehaviour
         minions = new List<GameObject>();
         minionsAway = new List<GameObject>();
         summonerAttr = GetComponent<pAttributes_scr>();
+        m_Cam = Camera.main.transform;
+        m_CharacterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+//        UpdatePosition();
         summonMinionCheck();
         sendMinionCheck();
         recallMinionCheck();
@@ -145,6 +156,18 @@ public class PlayerController_scr : MonoBehaviour
     {
         if (other.CompareTag("Exit"))
             SceneManager.LoadScene(2);
+    }
+    
+    private void UpdatePosition()
+    {
+        float h = CrossPlatformInputManager.GetAxis("Horizontal");
+        float v = CrossPlatformInputManager.GetAxis("Vertical");
+        m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 move = v*m_CamForward + h*m_Cam.right;
+        
+        m_CharacterController.Move(move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
+        if (move != Vector3.zero)
+            transform.forward = move;
     }
 
     private void OnDrawGizmos()

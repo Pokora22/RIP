@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -18,6 +19,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
+		private CharacterController m_CharacterController;
 		bool m_IsGrounded;
 		const float k_Half = 0.5f;
 		float m_TurnAmount;
@@ -26,15 +28,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
+		private Vector3 m_CamForward;
+		private Transform m_Cam;
 
 
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
-			m_Rigidbody = GetComponent<Rigidbody>();
+//			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
-			
-			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+			m_CharacterController = GetComponent<CharacterController>();
+//			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+			m_Cam = Camera.main.transform;
 		}
 
 
@@ -51,13 +56,24 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
 			m_ForwardAmount = move.z;
 
+			
 //			ApplyExtraTurnRotation();
-			m_Rigidbody.MovePosition(m_Rigidbody.position + move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
+//			m_Rigidbody.MovePosition(m_Rigidbody.position + move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
 //			m_Rigidbody.MoveRotation(Quaternion.LookRotation(transform.position + move + m_Rigidbody.velocity));
 		}
 
 
-	
+		private void Update()
+		{
+			float h = CrossPlatformInputManager.GetAxis("Horizontal");
+			float v = CrossPlatformInputManager.GetAxis("Vertical");
+			m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
+			Vector3 move = v*m_CamForward + h*m_Cam.right;
+			m_CharacterController.Move(move * m_MoveSpeedMultiplier * Time.fixedDeltaTime);
+			if (move != Vector3.zero)
+				transform.forward = move;
+		}
+
 
 		void ApplyExtraTurnRotation()
 		{
