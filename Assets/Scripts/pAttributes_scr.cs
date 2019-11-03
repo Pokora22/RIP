@@ -23,6 +23,7 @@ public class pAttributes_scr : MonoBehaviour
     private GameObject[] livesDisplay;
     private Image expBar;
     private GameObject levelNotification;
+    private List<Artifact_scr> playerInventory;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class pAttributes_scr : MonoBehaviour
         livesDisplay = GameObject.FindGameObjectsWithTag("UIPhylactery");
         expBar = GameObject.FindWithTag("UIExpBar").GetComponent<Image>();
         levelNotification = GameObject.FindWithTag("UILevelNotification");
+        playerInventory = new List<Artifact_scr>();
         updateHud();
     }
 
@@ -90,5 +92,10 @@ public class pAttributes_scr : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce((other.transform.right + (Vector3.up/20)) * 50, ForceMode.Impulse); //TODO: Push player back? Adjust force
         }
+    }
+
+    public void addItem(Artifact_scr item)
+    {
+        playerInventory.Add(item);
     }
 }
