@@ -12,26 +12,21 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController_scr : MonoBehaviour
 {
-    public GameObject camera;
-    
     public GameObject minionNPC;
     public float summonRadius = 10f;
     public float minionRunDistance = 10f;
     public float minionCollisionCheckRadius = .5f;
     public LayerMask bodiesMask;
     public LayerMask obstaclesMask;
-
     public int summonsLimit = 5;
-    public List<SummonAIControl> minions;
-    public List<SummonAIControl> minionsAway; //public for debugging purpose TODO: Change to private later?
-    private GameObject minionTarget;
+    public List<SummonAIControl> minions, minionsAway;
+    
     private bool consumeSummonInput = false;
     private pAttributes_scr playerAttributes;
     private Attributes_scr characterAttributes;
-    private Vector3 m_CamForward;
+    private Vector3 m_CamForward, move;
     private Transform m_Cam;
     private Rigidbody m_Rigidbody;
-    private Vector3 move;
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +76,7 @@ public class PlayerController_scr : MonoBehaviour
 
             //Fix: start the raycast behind the player character to make sure we don't bypass first obstacle
             Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z) - transform.forward; 
-            Vector3 direction = new Vector3(camera.transform.forward.x, 0f, camera.transform.forward.z);
+            Vector3 direction = new Vector3(m_CamForward.x, 0f, m_CamForward.z);
             bool obstacleHit = Physics.SphereCast(origin, minionCollisionCheckRadius, direction, out hit,
                 minionRunDistance, obstaclesMask);
             
@@ -150,7 +145,7 @@ public class PlayerController_scr : MonoBehaviour
         minionsAway.Remove(minion);
         if(!minions.Contains(minion))
             minions.Add(minion);
-        playerAttributes.updateHud(); //TODO: That would better be on summon, but it'd break minion follow routine
+        playerAttributes.updateHud();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -183,11 +178,11 @@ public class PlayerController_scr : MonoBehaviour
         Gizmos.color = Color.blue;
         RaycastHit hit;
         Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); //TODO: +1 hardcoded for now, change to player height/2 later? 
-        if (Physics.SphereCast(origin, minionCollisionCheckRadius, camera.transform.forward, out hit,
+        if (Physics.SphereCast(origin, minionCollisionCheckRadius, m_CamForward, out hit,
             minionRunDistance, obstaclesMask))
             Gizmos.DrawWireSphere(hit.point, .2f);
         else
-            Gizmos.DrawWireSphere(transform.position + camera.transform.forward * minionRunDistance, .2f);
+            Gizmos.DrawWireSphere(transform.position + m_CamForward * minionRunDistance, .2f);
         
 //        Gizmos.color = Color.green;
 //        Vector3 direction = new Vector3(camera.transform.forward.x, 0f, camera.transform.forward.z);

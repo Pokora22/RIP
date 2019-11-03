@@ -257,6 +257,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
 
+                if (!target || targetAttr.health <= 0)
+                {
+                    CurrentState = MINION_STATE.FOLLOW;
+                    yield break;
+                }
+                
                 agent.SetDestination(target.transform.position);                
 
                 if (agent.remainingDistance > agent.stoppingDistance)
