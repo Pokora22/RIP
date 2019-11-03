@@ -1,0 +1,1395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="72" column="41" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+              <folding>
+                <marker date="1572702786337" expanded="true" signature="6:199" ph="..." />
+                <marker date="1572702786337" expanded="true" signature="250:5692" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="888:1044" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="1102:1199" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="1237:1781" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="1428:1775" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="1636:1765" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="1817:2809" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="1885:2803" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="2847:3220" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="2919:3214" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="2965:3129" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="3268:3908" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="3956:4126" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="4175:4289" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="4338:4617" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="4666:4755" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="4788:5690" ph="{...}" />
+                <marker date="1572702786337" expanded="true" signature="5484:5675" ph="/* Gizmos.color = Color.green; ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/DifficultyHandler_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+              <folding>
+                <marker date="1572698576578" expanded="false" signature="6:91" ph="..." />
+                <marker date="1572698576578" expanded="true" signature="143:656" ph="{...}" />
+                <marker date="1572698576578" expanded="true" signature="301:471" ph="{...}" />
+                <marker date="1572698576578" expanded="true" signature="501:654" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="198" column="96" lean-forward="true" selection-start-line="198" selection-start-column="96" selection-end-line="198" selection-end-column="96" />
+              <folding>
+                <marker date="1572786280602" expanded="false" signature="6:190" ph="..." />
+                <marker date="1572786280602" expanded="true" signature="244:13235" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="404:13233" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="1834:3219" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="1902:3209" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="2274:3071" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="3266:3347" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="3377:4423" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="4467:5290" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="4814:5280" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="5031:5155" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="5395:5672" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="5717:6897" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="5903:6887" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="6135:6279" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="6445:6569" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="6712:6837" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="6940:8954" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="7342:8005" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="8073:8944" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="8389:8531" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="8783:8895" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="8998:10309" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="9058:9349" ph="/* if (target.CompareTag(&quot;Enemy&quot;)) ... */" />
+                <marker date="1572786280602" expanded="true" signature="9418:10299" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="9487:9612" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="10089:10233" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="10368:10791" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="10667:10781" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="10872:12224" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="11376:12151" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="11907:12137" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="12261:12730" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="12775:12912" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="12949:13227" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="12986:13099" ph="{...}" />
+                <marker date="1572786280602" expanded="true" signature="13101:13192" ph="/* yield return new WaitForSeconds(recallDelay); ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+              <folding>
+                <marker date="1572543012594" expanded="false" signature="6:142" ph="..." />
+                <marker date="1572543012594" expanded="true" signature="187:3088" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="509:696" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="732:1175" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="746:900" ph="/* convert the world relative moveInput vector into a local-relative ... */" />
+                <marker date="1572543012594" expanded="true" signature="1225:1305" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="1350:1566" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="1601:1670" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="1717:1789" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="1822:1877" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="1935:2215" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="1990:2209" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="2074:2124" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="2156:2202" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="2257:3086" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="2531:2712" ph="/* 0.1f is a small offset to start the ray from inside the character ... */" />
+                <marker date="1572543012594" expanded="true" signature="2830:2951" ph="{...}" />
+                <marker date="1572543012594" expanded="true" signature="2961:3080" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/NpcAudio_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <marker date="1572727094302" expanded="false" signature="6:78" ph="..." />
+                <marker date="1572727094302" expanded="true" signature="121:1549" ph="{...}" />
+                <marker date="1572727094302" expanded="true" signature="391:456" ph="{...}" />
+                <marker date="1572727094302" expanded="true" signature="498:1547" ph="{...}" />
+                <marker date="1572727094302" expanded="true" signature="641:1541" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/EnemyAIControl.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="193">
+              <caret line="268" column="23" selection-start-line="266" selection-start-column="12" selection-end-line="268" selection-end-column="23" />
+              <folding>
+                <marker date="1572721262339" expanded="false" signature="6:187" ph="..." />
+                <marker date="1572721262339" expanded="true" signature="242:11830" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="401:11828" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="1651:2746" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="1716:2736" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="2008:2722" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="2789:2870" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="3052:3732" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="3779:4535" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="4053:4532" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="4158:4412" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="4625:5360" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="4770:5350" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="4861:4985" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="5456:6546" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="5467:5576" ph="/* string stackTrace = StackTraceUtility.ExtractStackTrace(); ... */" />
+                <marker date="1572721262339" expanded="true" signature="5643:6536" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="5788:5914" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="6260:6384" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="6597:7116" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="6972:7106" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="7158:7700" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="7737:7897" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="7957:8203" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="8019:8193" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="8250:9459" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="8337:8447" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="8603:9257" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="8810:9150" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="9521:10792" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="10099:10669" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="10114:10360" ph="/* else if(enemyList.Exists(c =&gt; c.gameObject.CompareTag(&quot;Player&quot;))){ //Check player next if in range ... */" />
+                <marker date="1572721262339" expanded="true" signature="10853:11494" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="11220:11457" ph="{...}" />
+                <marker date="1572721262339" expanded="true" signature="11557:11822" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/pAttributes_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="74" column="130" selection-start-line="74" selection-start-column="130" selection-end-line="74" selection-end-column="130" />
+              <folding>
+                <marker date="1572716682192" expanded="false" signature="6:126" ph="..." />
+                <marker date="1572716682192" expanded="true" signature="172:2479" ph="{...}" />
+                <marker date="1572716682192" expanded="true" signature="568:888" ph="{...}" />
+                <marker date="1572716682192" expanded="true" signature="914:1113" ph="{...}" />
+                <marker date="1572716682192" expanded="true" signature="1148:1750" ph="{...}" />
+                <marker date="1572716682192" expanded="true" signature="1222:1723" ph="{...}" />
+                <marker date="1572716682192" expanded="true" signature="1779:1955" ph="{...}" />
+                <marker date="1572716682192" expanded="true" signature="2007:2477" ph="{...}" />
+                <marker date="1572716682192" expanded="true" signature="2258:2471" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+              <folding>
+                <marker date="1572708763233" expanded="false" signature="6:97" ph="..." />
+                <marker date="1572708763233" expanded="true" signature="144:1046" ph="{...}" />
+                <marker date="1572708763233" expanded="true" signature="394:575" ph="{...}" />
+                <marker date="1572708763233" expanded="true" signature="633:1044" ph="{...}" />
+                <marker date="1572708763233" expanded="true" signature="681:1038" ph="{...}" />
+                <marker date="1572708763233" expanded="true" signature="719:970" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="122" column="51" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
+              <folding>
+                <marker date="1572783452034" expanded="false" signature="6:128" ph="..." />
+                <marker date="1572783452034" expanded="true" signature="173:5657" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="1007:1747" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="1046:1386" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="1753:2053" ph="/* private void OnCollisionEnter(Collision other) ... */" />
+                <marker date="1572783452034" expanded="true" signature="2092:3333" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="2151:3248" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="2338:2436" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="2689:2868" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="2935:3238" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="3426:3840" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="3730:3834" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="3893:4348" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="3994:4342" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="4397:4477" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="4515:4951" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="4576:4880" ph="/* Rigidbody rb = GetComponent&lt;Rigidbody&gt;(); //TODO: This still doesn't sink into ground.. why? ... */" />
+                <marker date="1572783452034" expanded="true" signature="4983:5655" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="5037:5649" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="5207:5639" ph="{...}" />
+                <marker date="1572783452034" expanded="true" signature="5494:5625" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Corpse_scr.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+              <folding>
+                <marker date="1572703607738" expanded="false" signature="6:97" ph="..." />
+                <marker date="1572703607738" expanded="true" signature="138:412" ph="{...}" />
+                <marker date="1572703607738" expanded="true" signature="169:410" ph="{...}" />
+                <marker date="1572703607738" expanded="true" signature="255:404" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>attackhit</find>
+      <find>AttackHit</find>
+      <find>target =</find>
+      <find>transform.lo</find>
+      <find>agent.destinati</find>
+      <find>destination</find>
+      <find>agent.destination =</find>
+      <find>target =</find>
+      <find>this.target =</find>
+      <find>.destination</find>
+      <find>agent</find>
+      <find>age</find>
+      <find>navme</find>
+      <find>agent.isst</find>
+      <find>targetAttr</find>
+      <find>setTarget</find>
+      <find>targetDe</find>
+      <find>drawRa</find>
+      <find>audio</find>
+      <find>newdest</find>
+      <find>remaining</find>
+      <find>yiel</find>
+      <find>yield bre</find>
+      <find>select</find>
+      <find>mask</find>
+      <find>enemies</find>
+      <find>reca</find>
+      <find>targettingDestr</find>
+      <find>chance</find>
+      <find>agent.destination</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Pokora" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="SingleAnimatorScript" />
+      </map>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../GDCA_Maze/Mazescape_Unity_Project/Assets/Scripts/scr_AI_Enemy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.0.13/UnityEditor.TestRunner/CommandLineParser/CommandLineOption.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///C# Console" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemyAnimator_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NpcAudio_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemyAIControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateWithCamera_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonCharacter.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Corpse_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TimeOutToMenu_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/DifficultyHandler_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/pAttributes_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AudioManager_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ButtonHandler_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Standard Assets/Utility/ParticleSystemDestroyer.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/AICharacterControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/TrackCamera_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RotateWithCamera_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Attributes.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AICharacterControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AudioManager_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Maze_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TimeOutToMenu_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SummonControl_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnemyAnimator_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SummonAnimator_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Animator_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ButtonHandler_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/DifficultyHandler_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Corpse_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/pAttributes_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EnemyAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/NpcAudio_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1920" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="UnityExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="FileSystemExplorer" />
+      <pane id="SolutionExplorer">
+        <option name="show-all-files" value="false" />
+      </pane>
+      <pane id="AssemblyExplorer" />
+      <pane id="UnityExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Project" type="e068e287:UnityExplorerRootNode" />
+              <item name="Assets" type="48f920db:UnityExplorerNode$AssetsRoot" />
+            </path>
+            <path>
+              <item name="Project" type="e068e287:UnityExplorerRootNode" />
+              <item name="Assets" type="48f920db:UnityExplorerNode$AssetsRoot" />
+              <item name="Scripts" type="1045f7f1:UnityExplorerNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-hidden-items" value="false" />
+        <option name="show-project-names" value="true" />
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="" />
+      <created>1570094075498</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570094075498</updated>
+      <workItem from="1570094076843" duration="23581000" />
+      <workItem from="1570281332636" duration="12200000" />
+      <workItem from="1570639062840" duration="3526000" />
+      <workItem from="1570720444682" duration="11788000" />
+      <workItem from="1570882893876" duration="22202000" />
+      <workItem from="1571242407647" duration="12728000" />
+      <workItem from="1571328879867" duration="292000" />
+      <workItem from="1571329388100" duration="12101000" />
+      <workItem from="1572364086940" duration="81505000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial Commit&#10;Some AI working&#10;Partial attribute for summons&#10;&#10;Need to change minion checks to cache the script instead of whole GO">
+      <created>1570113565304</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1570113565304</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Split Summon and Enemy AI&#10;Added states for enemy detection, chase and attack (not finished)">
+      <created>1570118348539</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1570118348539</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Initial Commit&#10;Some AI working&#10;Partial attribute for summons&#10;&#10;Need to change minion checks to cache the script instead of whole GO">
+      <created>1570118450004</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1570118450004</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Minions have a recall delay now so they're not stuck attacking.&#10;&#10;Somehow multiple minions can get summoned on one interaction - breaks a lot of things. Investigate!">
+      <created>1570122585009</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1570122585009</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Checks on minion list duplication implemented&#10;Changed some logic on minion states&#10;Added 'target' property for minions to reduce overhead in update (I think?)">
+      <created>1570294054843</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1570294054843</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added basic patrol routine for enemy AI&#10;Added random waypoints generation for enemy patrol routine">
+      <created>1570642525292</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1570642525292</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fixed minion send position (was using camera.forward when should've used only camera direction)&#10;Integrated the find destination and sendminion methods into one for simplicity&#10;Added sarcophagus animation when opening">
+      <created>1570900667519</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1570900667519</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fixed minion targetting barricades as well as destructibles (missed a tag) and removed redundant dmg routine">
+      <created>1570901605918</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1570901605918</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added leash to return minions when they chase too far">
+      <created>1570903660749</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1570903660749</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added a line of sight check on nearby enemies to only chase visible ones">
+      <created>1570908326191</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1570908326191</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Fixed vector math for line of sight&#10;Improved enemy targetting (was broken badly)">
+      <created>1570914201134</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1570914201134</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Refactored movement in minion AI to happen in routines instead&#10;Changed the target finding to get index 0 always&#10;TODO: Sort target finding to aim nearest first&#10;TODO: Retarget when blocked?">
+      <created>1571251235607</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1571251235607</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added animation triggers for attack and check for attack state&#10;Need to sync up animation with sound and damage">
+      <created>1571258386322</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1571258386322</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Enemy search now happens on a time delay instead of every frame">
+      <created>1571332289066</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1571332289066</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Added animation triggered attack&#10;Added animator script reference and setDeadAnim for attributes">
+      <created>1571338125591</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1571338125591</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Fixed minion forward raycast bypassing first obstacle">
+      <created>1571341548279</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1571341548279</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Changed recall to revert to false after getting close to target position&#10;Changed updatePosition to check distance between target and transform instead of using navmesh agent distance (inaccurate/not updating quick enough)">
+      <created>1572368133977</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1572368133977</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added missing untracked files... shame to me">
+      <created>1572368180013</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1572368180013</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Set minion to always turn towards target during attack (track)&#10;TODO: Consider not tracking while in attack animation (would need to check the animation time itself as the state doesn't change)">
+      <created>1572368354482</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1572368354482</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Agent set destination not working in coroutine... works in update. WIP">
+      <created>1572449855056</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1572449855056</updated>
+    </task>
+    <task id="LOCAL-00021" summary="'Fixed' agent following... (was just a stupid mistake - set 0 as speed in editor)&#10;Added hear check - dependant on target velocity (just a != 0 check)">
+      <created>1572451734912</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1572451734912</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Peasant forward animation in. &#10;Minion death animation fixed (new state that does nothing + disabling hitbox to avoid making more hits)">
+      <created>1572528902260</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1572528902260</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Added finding child by tag to animator">
+      <created>1572530914752</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1572530914752</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Changed find child by tag to a void that sets the hitbox. Need some help figuring how to return from recursive =/">
+      <created>1572533381619</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1572533381619</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Fixed enemy switching target">
+      <created>1572540226427</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1572540226427</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Fixed up enemy AI chase routine (hopefuly)">
+      <created>1572548913528</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1572548913528</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Delay on target check breaks things">
+      <created>1572550295090</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1572550295090</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Extracted fov check to its own method">
+      <created>1572550922067</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1572550922067</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Added same tag damage check (disables friendly fire)&#10;Added coroutine tracking in Enemy AI (might help avoid overflow ?)">
+      <created>1572552590004</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1572552590004</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Still working on coroutines. Sometimes there's an overflow, but normal run stacktrace seems fine (only a single coroutine running at a time ? )">
+      <created>1572555287557</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1572555287557</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Added limit to number of summons.&#10;Changed enemies to only switch layer on death so there's no accidental on trigger effects">
+      <created>1572695154016</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1572695154016</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Added difficulty handler in options">
+      <created>1572699151933</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1572699151933</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Target search sorts by distance and returns closest for enemy AI (experimental)">
+      <created>1572701076695</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1572701076695</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Added remove body coroutine for minions">
+      <created>1572701130707</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1572701130707</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Added friendly fire check (compare root tag)">
+      <created>1572702214067</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1572702214067</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Added checking for dead bodies not to take more damage">
+      <created>1572702252757</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1572702252757</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Disabling collider on minion bodies to prevent resummoning">
+      <created>1572703243128</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1572703243128</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Added difficulty scaling to spawn limit, time and enemy attributes">
+      <created>1572708826848</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1572708826848</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Barebones for enemy alerting in.&#10;Some issues with index out of range&#10;Overflow even more common - need to try a fix">
+      <created>1572715452052</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1572715452052</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Moved updating position to its own method in Enemy AI">
+      <created>1572716704532</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1572716704532</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Simplified canSee and canHear">
+      <created>1572719617963</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1572719617963</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Simplified minion AI find target">
+      <created>1572721953368</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1572721953368</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Specified alert to be only used by enemies. Simplified some collision and enemy checking in summon AI">
+      <created>1572723577273</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1572723577273</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Added check for no sound on audio player">
+      <created>1572727116562</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1572727116562</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Added body remove to destructibles (still need to 'animate' that)&#10;Added properly for reset of targetting destructibles on minions&#10;Added .5 stopping distance for destructibles : enemy follow in unity depending on what's being targetted">
+      <created>1572728683393</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1572728683393</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Added chance (0-100) for alert to happen and exposed in editor&#10;Changed targetting destructibles to only seek destination once (AI was getting confused repeating raycasts)">
+      <created>1572785920464</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1572785920465</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="179923000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21025437" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49920508" weight="0.32969603" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3998441" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49880764" weight="0.059236165" />
+      <window_info anchor="bottom" id="NuGet" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Performance Profiler" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49920508" weight="0.32969603" />
+      <window_info anchor="bottom" id="Unity" order="11" weight="0.32969603" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.32969603" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Unit Tests" order="14" />
+      <window_info anchor="bottom" id="Terminal" order="15" />
+      <window_info anchor="bottom" id="Event Log" order="16" sideWeight="0.5007949" side_tool="true" weight="0.13795792" />
+      <window_info anchor="bottom" id="Change Signature" order="17" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="SVN Repositories" order="18" weight="0.32969603" />
+      <window_info anchor="bottom" id="Messages" order="19" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Errors In Solution" order="4" visible="true" weight="0.26152623" />
+      <window_info anchor="right" id="Database" order="5" weight="0.3298887" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="6" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1991256" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3998441" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.059236165" />
+      <window_info anchor="bottom" id="NuGet" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Performance Profiler" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Unity" order="11" weight="0.32969603" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.32969603" />
+      <window_info anchor="bottom" id="Database Changes" order="13" />
+      <window_info anchor="bottom" id="Unit Tests" order="14" />
+      <window_info anchor="bottom" id="Terminal" order="15" />
+      <window_info anchor="bottom" id="Event Log" order="16" side_tool="true" />
+      <window_info anchor="bottom" id="Change Signature" order="17" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="SVN Repositories" order="18" weight="0.32969603" />
+      <window_info anchor="bottom" id="Messages" order="19" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Errors In Solution" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="6" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Peasant forward animation in. &#10;Minion death animation fixed (new state that does nothing + disabling hitbox to avoid making more hits)" />
+    <MESSAGE value="Added finding child by tag to animator" />
+    <MESSAGE value="Changed find child by tag to a void that sets the hitbox. Need some help figuring how to return from recursive =/" />
+    <MESSAGE value="Fixed enemy switching target" />
+    <MESSAGE value="Fixed up enemy AI chase routine (hopefuly)" />
+    <MESSAGE value="Delay on target check breaks things" />
+    <MESSAGE value="Extracted fov check to its own method" />
+    <MESSAGE value="Added same tag damage check (disables friendly fire)&#10;Added coroutine tracking in Enemy AI (might help avoid overflow ?)" />
+    <MESSAGE value="Still working on coroutines. Sometimes there's an overflow, but normal run stacktrace seems fine (only a single coroutine running at a time ? )" />
+    <MESSAGE value="Added limit to number of summons.&#10;Changed enemies to only switch layer on death so there's no accidental on trigger effects" />
+    <MESSAGE value="Added difficulty handler in options" />
+    <MESSAGE value="Target search sorts by distance and returns closest for enemy AI (experimental)" />
+    <MESSAGE value="Added remove body coroutine for minions" />
+    <MESSAGE value="Added friendly fire check (compare root tag)" />
+    <MESSAGE value="Added checking for dead bodies not to take more damage" />
+    <MESSAGE value="Disabling collider on minion bodies to prevent resummoning" />
+    <MESSAGE value="Added difficulty scaling to spawn limit, time and enemy attributes" />
+    <MESSAGE value="Barebones for enemy alerting in.&#10;Some issues with index out of range&#10;Overflow even more common - need to try a fix" />
+    <MESSAGE value="Moved updating position to its own method in Enemy AI" />
+    <MESSAGE value="Simplified canSee and canHear" />
+    <MESSAGE value="Simplified minion AI find target" />
+    <MESSAGE value="Specified alert to be only used by enemies. Simplified some collision and enemy checking in summon AI" />
+    <MESSAGE value="Added check for no sound on audio player" />
+    <MESSAGE value="Added body remove to destructibles (still need to 'animate' that)&#10;Added properly for reset of targetting destructibles on minions&#10;Added .5 stopping distance for destructibles : enemy follow in unity depending on what's being targetted" />
+    <MESSAGE value="Added chance (0-100) for alert to happen and exposed in editor&#10;Changed targetting destructibles to only seek destination once (AI was getting confused repeating raycasts)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added chance (0-100) for alert to happen and exposed in editor&#10;Changed targetting destructibles to only seek destination once (AI was getting confused repeating raycasts)" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" suspend="NONE" type="DotNet Exception Breakpoints">
+          <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/AICharacterControl.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/TrackCamera_scr.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Attributes.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/AICharacterControl.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/AudioManager_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="25" column="50" selection-start-line="25" selection-start-column="50" selection-end-line="25" selection-end-column="50" />
+          <folding>
+            <marker date="1570724714021" expanded="false" signature="6:139" ph="..." />
+            <marker date="1570724714021" expanded="true" signature="186:935" ph="{...}" />
+            <marker date="1570724714021" expanded="true" signature="538:559" ph="{...}" />
+            <marker date="1570724714021" expanded="true" signature="577:691" ph="{...}" />
+            <marker date="1570724714021" expanded="true" signature="752:844" ph="{...}" />
+            <marker date="1570724714021" expanded="true" signature="870:933" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Maze_scr.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Standard Assets/Utility/ParticleSystemDestroyer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <marker date="1570031548000" expanded="false" signature="6:93" ph="..." />
+            <marker date="1570031548000" expanded="true" signature="132:1763" ph="{...}" />
+            <marker date="1570031548000" expanded="true" signature="191:1761" ph="{...}" />
+            <marker date="1570031548000" expanded="true" signature="206:386" ph="/* allows a particle system to exist for a specified duration, ... */" />
+            <marker date="1570031548000" expanded="true" signature="574:1627" ph="{...}" />
+            <marker date="1570031548000" expanded="true" signature="775:897" ph="{...}" />
+            <marker date="1570031548000" expanded="true" signature="1078:1141" ph="{...}" />
+            <marker date="1570031548000" expanded="true" signature="1262:1380" ph="{...}" />
+            <marker date="1570031548000" expanded="true" signature="1656:1755" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/TimeOutToMenu_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="7" column="45" lean-forward="true" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
+          <folding>
+            <marker date="1570908662422" expanded="false" signature="6:113" ph="..." />
+            <marker date="1570908662422" expanded="true" signature="161:391" ph="{...}" />
+            <marker date="1570908662422" expanded="true" signature="267:389" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/RotateWithCamera_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <marker date="1570111096121" expanded="false" signature="6:78" ph="..." />
+            <marker date="1570111096121" expanded="true" signature="129:603" ph="{...}" />
+            <marker date="1570111096121" expanded="true" signature="230:306" ph="{...}" />
+            <marker date="1570111096121" expanded="true" signature="364:601" ph="{...}" />
+            <marker date="1570111096121" expanded="true" signature="402:582" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../GDCA_Maze/Mazescape_Unity_Project/Assets/Scripts/scr_AI_Enemy.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.probuilder@4.0.5/Runtime/Core/ColliderBehaviour.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#113#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonCharacter.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2074">
+          <caret line="122" selection-start-line="122" selection-end-line="122" />
+          <folding>
+            <marker date="1570036677000" expanded="true" signature="72:7194" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="247:7192" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="1094:1514" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="1573:2383" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="1582:1736" ph="/* convert the world relative moveInput vector into a local-relative ... */" />
+            <marker date="1570036677000" expanded="true" signature="2120:2172" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="2180:2220" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="2430:3108" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="2465:2620" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="2628:3104" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="2944:2994" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="3147:3581" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="3219:3577" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="3535:3572" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="3619:4877" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="3919:3986" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="3991:4247" ph="/* calculate which leg is behind, so as to leave that leg trailing in the jump animation ... */" />
+            <marker date="1570036677000" expanded="true" signature="4462:4517" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="4522:4693" ph="/* the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector, ... */" />
+            <marker date="1570036677000" expanded="true" signature="4736:4792" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="4800:4873" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="4911:5188" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="5244:5622" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="5394:5618" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="5655:5918" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="5951:6369" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="5959:6098" ph="/* we implement this function to override the default root motion. ... */" />
+            <marker date="1570036677000" expanded="true" signature="6141:6365" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="6398:7189" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="6662:6841" ph="/* 0.1f is a small offset to start the ray from inside the character ... */" />
+            <marker date="1570036677000" expanded="true" signature="6957:7068" ph="{...}" />
+            <marker date="1570036677000" expanded="true" signature="7076:7185" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/EnemyAnimator_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+          <folding>
+            <marker date="1572531001254" expanded="false" signature="6:128" ph="..." />
+            <marker date="1572531001254" expanded="true" signature="176:2814" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="498:641" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="677:1120" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="691:845" ph="/* convert the world relative moveInput vector into a local-relative ... */" />
+            <marker date="1572531001254" expanded="true" signature="1170:1250" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="1311:1535" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="1570:1734" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="1781:1853" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="1886:1941" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="1983:2812" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="2257:2438" ph="/* 0.1f is a small offset to start the ray from inside the character ... */" />
+            <marker date="1572531001254" expanded="true" signature="2556:2677" ph="{...}" />
+            <marker date="1572531001254" expanded="true" signature="2687:2806" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/ButtonHandler_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <marker date="1572698455864" expanded="false" signature="6:126" ph="..." />
+            <marker date="1572698455864" expanded="true" signature="174:371" ph="{...}" />
+            <marker date="1572698455864" expanded="true" signature="214:309" ph="{...}" />
+            <marker date="1572698455864" expanded="true" signature="333:369" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/DifficultyHandler_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+          <folding>
+            <marker date="1572698576578" expanded="false" signature="6:91" ph="..." />
+            <marker date="1572698576578" expanded="true" signature="143:656" ph="{...}" />
+            <marker date="1572698576578" expanded="true" signature="301:471" ph="{...}" />
+            <marker date="1572698576578" expanded="true" signature="501:654" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="17" column="40" selection-start-line="17" selection-start-column="40" selection-end-line="17" selection-end-column="40" />
+          <folding>
+            <marker date="1572708763233" expanded="false" signature="6:97" ph="..." />
+            <marker date="1572708763233" expanded="true" signature="144:1046" ph="{...}" />
+            <marker date="1572708763233" expanded="true" signature="394:575" ph="{...}" />
+            <marker date="1572708763233" expanded="true" signature="633:1044" ph="{...}" />
+            <marker date="1572708763233" expanded="true" signature="681:1038" ph="{...}" />
+            <marker date="1572708763233" expanded="true" signature="719:970" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+          <folding>
+            <marker date="1572543012594" expanded="false" signature="6:142" ph="..." />
+            <marker date="1572543012594" expanded="true" signature="187:3088" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="509:696" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="732:1175" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="746:900" ph="/* convert the world relative moveInput vector into a local-relative ... */" />
+            <marker date="1572543012594" expanded="true" signature="1225:1305" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="1350:1566" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="1601:1670" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="1717:1789" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="1822:1877" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="1935:2215" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="1990:2209" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="2074:2124" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="2156:2202" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="2257:3086" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="2531:2712" ph="/* 0.1f is a small offset to start the ray from inside the character ... */" />
+            <marker date="1572543012594" expanded="true" signature="2830:2951" ph="{...}" />
+            <marker date="1572543012594" expanded="true" signature="2961:3080" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/pAttributes_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="74" column="130" selection-start-line="74" selection-start-column="130" selection-end-line="74" selection-end-column="130" />
+          <folding>
+            <marker date="1572716682192" expanded="false" signature="6:126" ph="..." />
+            <marker date="1572716682192" expanded="true" signature="172:2479" ph="{...}" />
+            <marker date="1572716682192" expanded="true" signature="568:888" ph="{...}" />
+            <marker date="1572716682192" expanded="true" signature="914:1113" ph="{...}" />
+            <marker date="1572716682192" expanded="true" signature="1148:1750" ph="{...}" />
+            <marker date="1572716682192" expanded="true" signature="1222:1723" ph="{...}" />
+            <marker date="1572716682192" expanded="true" signature="1779:1955" ph="{...}" />
+            <marker date="1572716682192" expanded="true" signature="2007:2477" ph="{...}" />
+            <marker date="1572716682192" expanded="true" signature="2258:2471" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/EnemyAIControl.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="268" column="23" selection-start-line="266" selection-start-column="12" selection-end-line="268" selection-end-column="23" />
+          <folding>
+            <marker date="1572721262339" expanded="false" signature="6:187" ph="..." />
+            <marker date="1572721262339" expanded="true" signature="242:11830" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="401:11828" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="1651:2746" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="1716:2736" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="2008:2722" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="2789:2870" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="3052:3732" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="3779:4535" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="4053:4532" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="4158:4412" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="4625:5360" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="4770:5350" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="4861:4985" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="5456:6546" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="5467:5576" ph="/* string stackTrace = StackTraceUtility.ExtractStackTrace(); ... */" />
+            <marker date="1572721262339" expanded="true" signature="5643:6536" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="5788:5914" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="6260:6384" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="6597:7116" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="6972:7106" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="7158:7700" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="7737:7897" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="7957:8203" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="8019:8193" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="8250:9459" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="8337:8447" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="8603:9257" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="8810:9150" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="9521:10792" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="10099:10669" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="10114:10360" ph="/* else if(enemyList.Exists(c =&gt; c.gameObject.CompareTag(&quot;Player&quot;))){ //Check player next if in range ... */" />
+            <marker date="1572721262339" expanded="true" signature="10853:11494" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="11220:11457" ph="{...}" />
+            <marker date="1572721262339" expanded="true" signature="11557:11822" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Corpse_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding>
+            <marker date="1572703607738" expanded="false" signature="6:97" ph="..." />
+            <marker date="1572703607738" expanded="true" signature="138:412" ph="{...}" />
+            <marker date="1572703607738" expanded="true" signature="169:410" ph="{...}" />
+            <marker date="1572703607738" expanded="true" signature="255:404" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="72" column="41" selection-start-line="72" selection-start-column="41" selection-end-line="72" selection-end-column="41" />
+          <folding>
+            <marker date="1572702786337" expanded="true" signature="6:199" ph="..." />
+            <marker date="1572702786337" expanded="true" signature="250:5692" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="888:1044" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="1102:1199" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="1237:1781" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="1428:1775" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="1636:1765" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="1817:2809" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="1885:2803" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="2847:3220" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="2919:3214" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="2965:3129" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="3268:3908" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="3956:4126" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="4175:4289" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="4338:4617" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="4666:4755" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="4788:5690" ph="{...}" />
+            <marker date="1572702786337" expanded="true" signature="5484:5675" ph="/* Gizmos.color = Color.green; ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/NpcAudio_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <marker date="1572727094302" expanded="false" signature="6:78" ph="..." />
+            <marker date="1572727094302" expanded="true" signature="121:1549" ph="{...}" />
+            <marker date="1572727094302" expanded="true" signature="391:456" ph="{...}" />
+            <marker date="1572727094302" expanded="true" signature="498:1547" ph="{...}" />
+            <marker date="1572727094302" expanded="true" signature="641:1541" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="122" column="51" selection-start-line="122" selection-start-column="51" selection-end-line="122" selection-end-column="51" />
+          <folding>
+            <marker date="1572783452034" expanded="false" signature="6:128" ph="..." />
+            <marker date="1572783452034" expanded="true" signature="173:5657" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="1007:1747" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="1046:1386" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="1753:2053" ph="/* private void OnCollisionEnter(Collision other) ... */" />
+            <marker date="1572783452034" expanded="true" signature="2092:3333" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="2151:3248" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="2338:2436" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="2689:2868" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="2935:3238" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="3426:3840" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="3730:3834" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="3893:4348" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="3994:4342" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="4397:4477" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="4515:4951" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="4576:4880" ph="/* Rigidbody rb = GetComponent&lt;Rigidbody&gt;(); //TODO: This still doesn't sink into ground.. why? ... */" />
+            <marker date="1572783452034" expanded="true" signature="4983:5655" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="5037:5649" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="5207:5639" ph="{...}" />
+            <marker date="1572783452034" expanded="true" signature="5494:5625" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="198" column="96" lean-forward="true" selection-start-line="198" selection-start-column="96" selection-end-line="198" selection-end-column="96" />
+          <folding>
+            <marker date="1572786280602" expanded="false" signature="6:190" ph="..." />
+            <marker date="1572786280602" expanded="true" signature="244:13235" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="404:13233" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="1834:3219" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="1902:3209" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="2274:3071" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="3266:3347" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="3377:4423" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="4467:5290" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="4814:5280" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="5031:5155" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="5395:5672" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="5717:6897" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="5903:6887" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="6135:6279" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="6445:6569" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="6712:6837" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="6940:8954" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="7342:8005" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="8073:8944" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="8389:8531" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="8783:8895" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="8998:10309" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="9058:9349" ph="/* if (target.CompareTag(&quot;Enemy&quot;)) ... */" />
+            <marker date="1572786280602" expanded="true" signature="9418:10299" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="9487:9612" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="10089:10233" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="10368:10791" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="10667:10781" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="10872:12224" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="11376:12151" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="11907:12137" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="12261:12730" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="12775:12912" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="12949:13227" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="12986:13099" ph="{...}" />
+            <marker date="1572786280602" expanded="true" signature="13101:13192" ph="/* yield return new WaitForSeconds(recallDelay); ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
