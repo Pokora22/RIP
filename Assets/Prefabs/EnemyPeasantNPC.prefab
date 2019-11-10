@@ -270,7 +270,7 @@ MonoBehaviour:
   doNotMove: 0
   debug: 0
   AiCheckDelay: 1
-  FovDistance: 30
+  FovDistance: 15
   FovAngle: 45
   hearingDistance: 5
   enemiesMask:
@@ -278,7 +278,7 @@ MonoBehaviour:
     m_Bits: 512
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 2561
+    m_Bits: 1
   currentstate: 0
 --- !u!114 &8179706966285730082
 MonoBehaviour:
