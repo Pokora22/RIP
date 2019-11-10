@@ -176,11 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff11363a5cf74044992d2b54f0c24a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 300
+  maxHealth: 3
   baseExpReq: 50
   phylacteri:
   - {fileID: 21300000, guid: 23058c5f1266ebb45812626b4ecd0a61, type: 3}
   - {fileID: 21300000, guid: ed182349ae93ad344a2384b11a015916, type: 3}
+  playerInventory: []
+  useArtifactPeriod: 1
 --- !u!114 &7044675944207343105
 MonoBehaviour:
   m_ObjectHideFlags: 0

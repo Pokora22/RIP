@@ -10,7 +10,7 @@ public class pAttributes_scr : MonoBehaviour
 {
     // Start is called before the first frame update
     public float maxHealth = 3f;
-    private float health { get; set; }
+    private float health;
 
     private float currentExp;
     private float currentLvl;
@@ -46,7 +46,7 @@ public class pAttributes_scr : MonoBehaviour
     {
         //TODO: Sometimes gets hit twice with same effect. Add delay
         if (--health < 1)
-            SceneManager.LoadScene(2); //TODO: Maybe a game over scren
+            SceneManager.LoadScene(2); //TODO: Maybe a game over screen
         updateHud();
     }
 
@@ -75,8 +75,11 @@ public class pAttributes_scr : MonoBehaviour
 
     public void updateHud()
     {
-        for (int i = 0; i < maxHealth; i++)
-            livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0];
+        if (maxHealth <= phylacteri.Length)
+        {
+            for (int i = 0; i < maxHealth; i++)
+                livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0];
+        }
 
         expBar.fillAmount = currentExp / nextLvlExpReq;
         

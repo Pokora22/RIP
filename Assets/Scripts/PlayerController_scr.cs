@@ -105,23 +105,20 @@ public class PlayerController_scr : MonoBehaviour
 
     private void summonMinion(GameObject body)
     {
-        NavMeshHit hit;
+        float distance = Vector3.Distance(transform.position, body.transform.position);
 
-        RaycastHit raycastHit;
+        if (!Physics.Raycast(transform.position, body.transform.position - transform.position, distance, obstaclesMask))
+        {
+            NavMeshHit hit;
+            Vector3 summonPos = body.transform.position;
+            NavMesh.SamplePosition(summonPos, out hit, 10.0f, NavMesh.AllAreas);
 
-        if (Physics.Raycast(transform.position, body.transform.position - transform.position, out raycastHit))
-            if(raycastHit.transform.CompareTag("Terrain") || raycastHit.transform.CompareTag("Obstacle"))
-                return;
-        
-        Vector3 summonPos = body.transform.position;
-        NavMesh.SamplePosition(summonPos, out hit, 10.0f, NavMesh.AllAreas);
-        
+            //Summon minion
+            GameObject newMinion = Instantiate(minionNPC, hit.position, transform.rotation);
 
-        //Summon minion
-        GameObject newMinion = Instantiate(minionNPC, hit.position, transform.rotation);
-
-        //Destroy body
-        Destroy(body.transform.gameObject);
+            //Destroy body
+            Destroy(body.transform.gameObject);
+        }
     }
 
     public void minionLeave(SummonAIControl minion)

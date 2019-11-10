@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Attributes_scr : MonoBehaviour
@@ -68,6 +69,8 @@ public class Attributes_scr : MonoBehaviour
             if(debug)
                 Debug.Log(gameObject.name + " dropped dead");
             gameObject.layer = LayerMask.NameToLayer("Bodies");
+            gameObject.GetComponent<Collider>().isTrigger = true; //TODO: ???
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
             
             if (gameObject.CompareTag("Enemy"))
             {

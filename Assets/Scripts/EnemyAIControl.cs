@@ -192,8 +192,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             float distToCurrentTarget = this.target == gameObject ? 999 : Vector3.Distance(transform.position, this.target.transform.position); //Set distance to new target to 999 if targetting self (bandaid)
             float distToNewTarget = Vector3.Distance(transform.position, target.transform.position);
-            if (distToNewTarget < distToCurrentTarget)
+            Debug.Log("New target: " + distToNewTarget + " Old target: " + distToCurrentTarget);
+            if (this.target == player || distToNewTarget < distToCurrentTarget)
             {
+                Debug.Log(gameObject.name + " new target: " + target);
                 this.target = target;
                 targetAttr = target.GetComponent<Attributes_scr>();
             }
@@ -298,8 +300,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             if (angle < FovAngle)
             {
-                float distane = Vector3.Distance(transform.position, target.transform.position);
-                if(!Physics.Raycast(origin, direction, distane, obstacleMask))
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                if(!Physics.Raycast(origin, direction, distance, obstacleMask))
                     return true;
             }
 

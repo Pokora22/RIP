@@ -132,7 +132,7 @@ MonoBehaviour:
   reflectDamage: 0
   expValue: 5
   corpse: {fileID: 6236385349123600902, guid: 60020d365bd28d446858d6a9a0dd09b2, type: 3}
-  debug: 0
+  debug: 1
   alertRange: 20
   alertChance: 20
   removeDelay: 5
