@@ -75,7 +75,7 @@ public class pAttributes_scr : MonoBehaviour
 
     public void updateHud()
     {
-        if (maxHealth <= phylacteri.Length)
+        if (maxHealth <= livesDisplay.Length)
         {
             for (int i = 0; i < maxHealth; i++)
                 livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0];
