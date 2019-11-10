@@ -23,9 +23,9 @@ public class pAttributes_scr : MonoBehaviour
     private GameObject[] livesDisplay;
     private Image expBar;
     private GameObject levelNotification;
-    private List<Artifact_scr> playerInventory;
-
-    public List<Artifact_scr> listOfAllArtifactsInGame;
+    [SerializeField] private List<Artifact_scr> playerInventory;
+    [SerializeField] private float useArtifactPeriod = 1f;
+    
 
     void Start()
     {
@@ -40,8 +40,6 @@ public class pAttributes_scr : MonoBehaviour
         playerInventory = new List<Artifact_scr>();
         
         updateHud();
-
-        listOfAllArtifactsInGame = Inventory_scr.allArtifacts;
     }
 
     public void damage()
@@ -103,5 +101,13 @@ public class pAttributes_scr : MonoBehaviour
     {
         playerInventory.Add(item);
         Debug.Log("Received " + item);
+    }
+
+    private IEnumerator useArtifacts()
+    {
+        yield return new WaitForSeconds(useArtifactPeriod);
+        foreach (Artifact_scr artifact in playerInventory)
+            if (!artifact.useAbility())
+                playerInventory.Remove(artifact);
     }
 }

@@ -135,6 +135,7 @@ MonoBehaviour:
   debug: 0
   alertRange: 20
   alertChance: 20
+  removeDelay: 5
 --- !u!82 &6483661527495625800
 AudioSource:
   m_ObjectHideFlags: 0
@@ -274,7 +275,7 @@ MonoBehaviour:
   hearingDistance: 5
   enemiesMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 512
   obstacleMask:
     serializedVersion: 2
     m_Bits: 2561

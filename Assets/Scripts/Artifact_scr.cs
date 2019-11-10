@@ -20,13 +20,20 @@ public class Artifact_scr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Inventory_scr.allArtifacts.Add(this); //TODO: Not sure if I should instantiate it from here
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public bool useAbility()
+    {
+        //TODO: Add code for different items
+        //TODO: Add option for finite items
+        return true;
     }
 
     public override string ToString()
