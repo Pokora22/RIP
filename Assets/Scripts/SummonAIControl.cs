@@ -20,7 +20,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private GameObject player;
         [SerializeField] private LayerMask enemiesMask, obstaclesMask, destructiblesMask;        
         [SerializeField] private float playerFollowowDistance = 2f;
-        [SerializeField] private float enemyFollowDistance = 1f;
+        [SerializeField] private float enemyStoppingDistance = 1f;
+        [SerializeField] private float destructibleStoppingDistance = .5f;
         [SerializeField] private float enemyDetectionRange = 10f;        
         [SerializeField] private float playerLeashRange = 15f;
         [SerializeField] private bool debug = true;
@@ -68,7 +69,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         break;
                     
                     case MINION_STATE.CHASE:
-                        
+                        targettingDestructible = !target.CompareTag("Enemy");
+                        if (targettingDestructible)
+                            setTargetDestination();
+                        agent.stoppingDistance = targettingDestructible ? 
+                            destructibleStoppingDistance : enemyStoppingDistance; //Conditional distance depending on if target is enemy or destructible?
+                        summoner.minionLeave(this);
                         break;
                     
                     case MINION_STATE.ATTACK:
@@ -96,11 +102,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             minionAttributes = gameObject.GetComponent<Attributes_scr>();
 
             gameObject.name = "Minion " + (player.GetComponent<PlayerController_scr>().minions.Count  + player.GetComponent<PlayerController_scr>().minionsAway.Count);
-
-            // StartCoroutine(recall());
+            
             CurrentState = MINION_STATE.FOLLOW;
-
-//            StartCoroutine(stateDebug());
 
             audioPlayer = GetComponent<NpcAudio_scr>();
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);
@@ -120,6 +123,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     minionAdvance();
                     break;
                 case MINION_STATE.CHASE:
+                    minionChase();
                     break;
                 case MINION_STATE.ATTACK:
                     break;
@@ -133,12 +137,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void minionFollow()
         {
             if (target != player)
-            {
                 CurrentState = MINION_STATE.CHASE;
-                return;
-            }
-
-            targetDestination = player.transform.position;
+            else
+                targetDestination = player.transform.position;
         }
         
         public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
@@ -156,100 +157,69 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void minionAdvance()
         {
             if (target != player)
-            {                    
                 CurrentState = MINION_STATE.CHASE;
-                return;
-            }
-
-            targetDestination = m_AdvanceDestination;
-            float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-            
-            if (remainingDistance > agent.stoppingDistance)
+            else
             {
-                CurrentState = MINION_STATE.FOLLOW;
+                targetDestination = m_AdvanceDestination;
+                float remainingDistance = Vector3.Distance(transform.position, targetDestination);
+
+                if (remainingDistance <= agent.stoppingDistance)
+                {
+                    CurrentState = MINION_STATE.FOLLOW;
+                }
             }
         }
 
-        private IEnumerator minionChase()
+        private void minionChase()
         {
-            targettingDestructible = !target.CompareTag("Enemy");
-            
-            agent.stoppingDistance = targettingDestructible ? .5f : enemyFollowDistance; //Conditional distance depending on if target is enemy or destructible?
-            
-            summoner.minionLeave(this);
-
-            if (targettingDestructible) //Destructibles don't move - get position once only
+            //Return to player if enemies run out too far from player or die
+            if (targetAttr.health <= 0 || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
+                CurrentState = MINION_STATE.FOLLOW;
+            else
             {
-                Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
-                Vector3 r_destination = target.transform.GetComponent<Renderer>().bounds.center;
-                //(new Vector3(target.transform.position.x, 1f, target.transform.position.z));
-                float distance = Vector3.Distance(r_origin, r_destination);
-
-                RaycastHit hit;
-                Physics.Raycast(r_origin, r_destination - r_origin, out hit, distance, destructiblesMask);
-                Debug.DrawRay(r_origin, r_destination - r_origin, Color.blue, 2f);
-
-                targetDestination = hit.point;
-            }
-            
-            while (currentState == MINION_STATE.CHASE)
-            {
-                while (agent.pathPending)
-                    yield return null;
-                
-                //Return to player if enemies run out too far from player
-                if (targetAttr.health <= 0 || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
-                {
-                    CurrentState = MINION_STATE.FOLLOW;
-                    yield break;                 
-                }
-
+                //Need to only update destination for non destructible targets
                 if (!targettingDestructible)
                     targetDestination = target.transform.position;
-                UpdatePosition(targetDestination);
-                
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {                    
+
+                float remainingDistance = Vector3.Distance(transform.position, targetDestination);
+
+                if (remainingDistance <= agent.stoppingDistance)
                     CurrentState = MINION_STATE.ATTACK;
-                }
-                yield return null;
             }
         }
 
-        private IEnumerator minionAttack()
+        private void setTargetDestination()
         {
-            agent.isStopped = true;
-            
-            while (currentState == MINION_STATE.ATTACK)
+            Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
+            Vector3 r_destination = target.transform.GetComponent<Renderer>().bounds.center;
+            //(new Vector3(target.transform.position.x, 1f, target.transform.position.z));
+            float distance = Vector3.Distance(r_origin, r_destination);
+
+            RaycastHit hit;
+            Physics.Raycast(r_origin, r_destination - r_origin, out hit, distance, destructiblesMask);
+            Debug.DrawRay(r_origin, r_destination - r_origin, Color.blue, 2f);
+
+            targetDestination = hit.point;
+        }
+
+        private void minionAttack()
+        {
+            if (!m_AiAnimatorScr.CompareCurrentState("Attack"))
             {
-                if (!target || targetAttr.health <= 0)
-                {
-                    CurrentState = MINION_STATE.FOLLOW;
-                    yield break;
-                }
-                
                 transform.LookAt(target.transform);
-                m_AiAnimatorScr.Move(Vector3.zero);
                 
+                //Start attack animation
                 m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
-                while (m_AiAnimatorScr.CompareCurrentState("Attack"))
-                    yield return null;
+            }
+            
+            if (!target || targetAttr.health <= 0)
+                CurrentState = MINION_STATE.FOLLOW;
+            else
+            {
+                float remainingDistance = Vector3.Distance(transform.position, targetDestination);
 
-                if (!target || targetAttr.health <= 0)
-                {
-                    CurrentState = MINION_STATE.FOLLOW;
-                    yield break;
-                }
-                
-                agent.SetDestination(target.transform.position);                
-
-                if (agent.remainingDistance > agent.stoppingDistance)
-                {                    
+                if (remainingDistance <= agent.stoppingDistance)
                     CurrentState = MINION_STATE.CHASE;
-                    yield break;
-                }
-                
-                yield return null;
             }
         }
 
@@ -272,6 +242,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             while (true)
             {
+                //Wait if minion is already targeting something
+                while (target != player)
+                {
+                    yield return new WaitForSeconds(targetScanDelay);
+                }
+                
                 Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, targetMask);
                 List<Collider> enemyList = nearbyEnemies.OrderBy(
                     x => (this.transform.position - x.transform.position).sqrMagnitude
@@ -292,8 +268,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     if (!Physics.Raycast(origin, destination - origin, distance, obstaclesMask))
                     {
                         Debug.DrawRay(origin, destination - origin, Color.gray, 2f);
+                        this.target = newTarget;
                         targetAttr = newTarget.GetComponent<Attributes_scr>();
-                        yield return newTarget;
                     }
                 }
 
