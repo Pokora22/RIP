@@ -33,11 +33,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private float hearingDistance = 5f;
         [SerializeField] private LayerMask enemiesMask;
         [SerializeField] private LayerMask obstacleMask;
-        private float NextAiCheckTimestamp;
+        [SerializeField] private float targetScanDelay = .25f;
+        private Vector3 targetDestination;
         
-        public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE};        
-        
-        //------------------------------------------
+        public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE}
+        [SerializeField] private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
         public ENEMY_STATE CurrentState
         {
             get{return currentstate;}
@@ -48,41 +48,26 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if(debug)
                     Debug.Log("New state: " + currentstate);
                 
-                if(currentCoroutine != null)
-                    StopCoroutine(currentCoroutine);
-
                 switch(currentstate)
                 {                    
                     case ENEMY_STATE.PATROL:
-                        currentCoroutine = StartCoroutine(AIPatrol());
+                        agent.speed = patrolSpeed * selfAttr.moveSpeedMultiplier;
+                        if (doNotMove)
+                            agent.SetDestination(transform.position);
+                        else
+                            agent.SetDestination(randomWaypoint());
                         break;
 
                     case ENEMY_STATE.CHASE:                        
-                        currentCoroutine = StartCoroutine(AIChase());
+                        agent.speed = chaseSpeed * selfAttr.moveSpeedMultiplier;
                         break;
 
-                    case ENEMY_STATE.ATTACK:                        
-                        currentCoroutine = StartCoroutine(AIAttack());
-                        break;
-                    
-                    case ENEMY_STATE.NONE:
-                        currentCoroutine = StartCoroutine(AIDoNothing());
+                    case ENEMY_STATE.ATTACK:
+                        
                         break;
                 }
             }
         }
-
-        private IEnumerator AIDoNothing()
-        {
-            agent.isStopped = true;
-            yield break;
-        }
-
-        //------------------------------------------
-        [SerializeField]
-        private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
-
-        
 
         private void Start()
         {
@@ -99,75 +84,56 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             terrain = GameObject.FindWithTag("Terrain");
 
-            NextAiCheckTimestamp = Time.time + AiCheckDelay;
-
             player = GameObject.FindGameObjectWithTag("Player");
 
             CurrentState = ENEMY_STATE.PATROL;
+
+            StartCoroutine(findTarget(targetScanDelay));
+        }
+
+        private void Update()
+        {
+            switch (CurrentState)
+            {
+                case ENEMY_STATE.PATROL:
+                    AIPatrol();
+                    break;
+                case ENEMY_STATE.CHASE:
+                    AIChase();
+                    break;
+                case ENEMY_STATE.ATTACK:
+                    if (!m_AiAnimatorScr.CompareCurrentState("Attack"))
+                        StartCoroutine(AIAttack());
+                    break;
+            }
+            
+            updatePosition();
+        }
+
+        public void AIPatrol()
+        {   
+            if(target != gameObject)
+                CurrentState = ENEMY_STATE.CHASE;
+            else if (inStoppingDistance())
+                targetDestination = randomWaypoint();
         }
         
-        public IEnumerator AIPatrol()
-	{        
-		agent.speed = patrolSpeed * selfAttr.moveSpeedMultiplier;
-
-        if (doNotMove)
-            agent.SetDestination(transform.position);
-        else
-            agent.SetDestination(randomWaypoint());
-        
-        while (currentstate == ENEMY_STATE.PATROL)
-        {
-            (bool foundTarget, GameObject target) = findTarget();
-            if (foundTarget)
-            {
-                this.target = target;
-                targetAttr = target.GetComponent<Attributes_scr>();
-                CurrentState = ENEMY_STATE.CHASE;                         
-                yield break;                
-            }
-            
-            this.target = gameObject;
-            updatePosition();
-            
-			yield return null;
-		}
-	}
         //------------------------------------------
-        public IEnumerator AIChase()
+        public void AIChase()
         {
-            agent.speed = chaseSpeed * selfAttr.moveSpeedMultiplier;
+            if (!target || targetAttr.health <= 0) //if target stops existing break back to patrol
+                CurrentState = ENEMY_STATE.PATROL;
             
-            while(currentstate == ENEMY_STATE.CHASE)
-            {
-                if (!target) //if target stops existing break back to patrol
-                {
-                    CurrentState = ENEMY_STATE.PATROL;
-                    yield break;
-                }
-                
-                if (canSeeTarget(target) || canHearTarget(target)) //Update position when seeing player
-                    agent.destination = target.transform.position;
-                //Otherwise leave it as is (last seen position applies)
-                
-                updatePosition();
-    
-                yield return null;
-            }
+            if (canSeeTarget(target) || canHearTarget(target)) //Update position only when seeing player
+                targetDestination = target.transform.position;
         }
     
         //------------------------------------------
         public IEnumerator AIAttack()
         {
-//            string stackTrace = StackTraceUtility.ExtractStackTrace();
-//            Debug.Log(stackTrace);
-            
-            while(currentstate == ENEMY_STATE.ATTACK)
+            //If target stopped existing or dropped below 0 health break back to patrol
+            if (target && targetAttr.health > 0)
             {
-                if (!target || targetAttr.health <= 0) //If target stopped existing or dropped below 0 health break back to patrol
-                {
-                     CurrentState = ENEMY_STATE.PATROL;
-                     yield break;
-                }
                 transform.LookAt(target.transform);
 //                m_Rigidbody.MoveRotation(Quaternion.LookRotation(target.transform.position)); //TODO: Should use this, but don't understand
 
@@ -175,17 +141,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 while (m_AiAnimatorScr.CompareCurrentState("Attack"))
                     yield return null;
 
-                if (!target || targetAttr.health <= 0) //Check if target still exists after the animation is done
-                {
+                //Check if target still exists after the animation is done
+                if (!target || targetAttr.health <= 0) 
                     CurrentState = ENEMY_STATE.PATROL;
-                    yield break;
+                else
+                {
+                    targetDestination = target.transform.position;
+                    if (!inStoppingDistance())
+                        CurrentState = ENEMY_STATE.CHASE;
                 }
-
-                agent.destination = target.transform.position;
-                updatePosition();
-    
-                yield return null;
             }
+            else
+                CurrentState = ENEMY_STATE.PATROL;
         }
 	
         public void SetTarget(GameObject target)
@@ -211,6 +178,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2.0f, NavMesh.AllAreas);
             
             NavMeshPath path = new NavMeshPath();
+            //Dirty
             return agent.CalculatePath(hit.position, path) ? hit.position : randomWaypoint();
         }
 
@@ -226,69 +194,69 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (CurrentState == ENEMY_STATE.PATROL)
             {
                 Debug.Log(gameObject.name + " heard the call and moving toward " + destination);
-                agent.destination = destination;
+                targetDestination = destination;
             }
         } 
        
         private void updatePosition()
         {
-            transform.LookAt(agent.nextPosition);
-            if (doNotMove)
+            if (!doNotMove)
             {
-                agent.SetDestination(transform.position);
-                return;
-            }
-
-            float remainingDistance = Vector3.Distance(transform.position, agent.destination);
-            if(remainingDistance <= agent.stoppingDistance)
-            {
-                if (CurrentState == ENEMY_STATE.PATROL)
-                    agent.SetDestination(randomWaypoint());
+                transform.LookAt(agent.nextPosition);
                 
-                else if (CurrentState == ENEMY_STATE.CHASE)
-                {
-                    if (canSeeTarget(target) || canHearTarget(target))
-                        CurrentState = ENEMY_STATE.ATTACK; //TODO This should stop this coroutine while starting new one, but causes overflow. How ?
-                    else
-                        CurrentState = ENEMY_STATE.PATROL;
-                }
-                
-                m_AiAnimatorScr.Move(Vector3.zero);
-                return;
+                if(!inStoppingDistance())
+                    m_AiAnimatorScr.Move(agent.desiredVelocity);
+                else
+                    m_AiAnimatorScr.Move(Vector3.zero);
             }
-            
-            if(CurrentState == ENEMY_STATE.ATTACK)
-                CurrentState = ENEMY_STATE.CHASE;
-            else
-                m_AiAnimatorScr.Move(agent.desiredVelocity);
         }
         
-        private Tuple<bool, GameObject> findTarget()
+        private bool inStoppingDistance()
         {
-            if(Time.time < NextAiCheckTimestamp)
-                return new Tuple<bool, GameObject>(false, gameObject); //Return self if it's not time to check yet
-            NextAiCheckTimestamp = Time.time + AiCheckDelay;
-            
-            Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, FovDistance, enemiesMask);
-            List<Collider> enemyList = nearbyEnemies.OrderBy(
-                x => (this.transform.position - x.transform.position).sqrMagnitude
-            ).ToList();
-            
-            while (enemyList.Count > 0)
+            float remainingDistance = Vector3.Distance(transform.position, targetDestination);
+//            Debug.Log("Transform position: " + transform.position);
+//            Debug.Log("Agent position: " + agent.transform.position);
+//            Debug.Log("Remaining: " + remainingDistance);
+//            Debug.Log("Target: " + targetDestination);
+//            Debug.Log("Stopping distance: " + agent.stoppingDistance);
+
+            return remainingDistance <= agent.stoppingDistance;
+        }
+        
+        private IEnumerator findTarget(float targetScanDelay)
+        {
+            while (true)
             {
+                while (target != gameObject)
+                {
+                    yield return new WaitForSeconds(targetScanDelay);
+                }
+                
+                Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, FovDistance, enemiesMask);
+                List<Collider> enemyList = nearbyEnemies.OrderBy(
+                    x => (this.transform.position - x.transform.position).sqrMagnitude
+                ).ToList();
+
+                while (enemyList.Count > 0)
+                {
 //                if(enemyList.Exists(c => c.gameObject.CompareTag("Player"))){ //Check player next if in range
 //                    newTarget = player;
 //                    enemyList.Remove(player.GetComponent<Collider>());
 //                }
 
-                GameObject newTarget = enemyList[0].gameObject;
-                enemyList.RemoveAt(0);
+                    GameObject newTarget = enemyList[0].gameObject;
+                    enemyList.RemoveAt(0);
 
-                if (canHearTarget(newTarget) || canSeeTarget(newTarget))
-                    return new Tuple<bool, GameObject>(true, newTarget); //Return self if it's not time to check yet
+                    if (canHearTarget(newTarget) || canSeeTarget(newTarget))
+                    {
+                        target = newTarget;
+                        targetAttr = newTarget.GetComponent<Attributes_scr>();
+                        break;
+                    }
+                }
+
+                yield return new WaitForSeconds(targetScanDelay);
             }
-            
-            return new Tuple<bool, GameObject>(false, gameObject); //Return self if no target found
         }
        
         private bool canSeeTarget(GameObject target)
@@ -313,7 +281,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             Rigidbody rb = target.GetComponent<Rigidbody>();
             
             float distance = Vector3.Distance(transform.position, target.transform.position);
-            return distance < hearingDistance && rb.velocity.magnitude != 0;
+            return distance < hearingDistance && rb.velocity.magnitude != 0; //Any movement (might change formula someday)
         }
     }
 }
