@@ -35,6 +35,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private LayerMask obstacleMask;
         [SerializeField] private float targetScanDelay = .25f;
         private Vector3 targetDestination;
+
+        [SerializeField] private bool resetPath = false;
         
         public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE}
         [SerializeField] private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
@@ -53,9 +55,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case ENEMY_STATE.PATROL:
                         agent.speed = patrolSpeed * selfAttr.moveSpeedMultiplier;
                         if (doNotMove)
-                            agent.SetDestination(transform.position);
+                            targetDestination = transform.position;
                         else
-                            agent.SetDestination(randomWaypoint());
+                            targetDestination = randomWaypoint();
                         break;
 
                     case ENEMY_STATE.CHASE:                        
@@ -93,6 +95,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+            if (resetPath)
+            {
+                targetDestination = randomWaypoint();
+                resetPath = false;
+            }
+
             switch (CurrentState)
             {
                 case ENEMY_STATE.PATROL:
@@ -203,15 +211,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!doNotMove)
             {
                 agent.SetDestination(destination);
-                NavMeshPath path = new NavMeshPath();
-                Debug.Log(agent.CalculatePath(targetDestination, path));
                 
                 transform.LookAt(agent.nextPosition);
 
                 if (!inStoppingDistance())
                 {
-                    Debug.Log(gameObject.name + " Moving: " + agent.desiredVelocity);
-                    Debug.Log("Destination: " + agent.destination);
+//                    Debug.Log(gameObject.name + " Moving: " + agent.desiredVelocity);
+//                    Debug.Log("Destination: " + agent.destination);
                     m_AiAnimatorScr.Move(agent.desiredVelocity);
                 }
                 else

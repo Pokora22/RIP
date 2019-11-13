@@ -14,9 +14,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     public class SummonAIControl : MonoBehaviour
     {
         public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // the navmesh agent required for the path finding
-        
+        public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK, NONE}
 
-        
+        [SerializeField] private MINION_STATE currentState;
         [SerializeField] private GameObject player;
         [SerializeField] private LayerMask enemiesMask, obstaclesMask, destructiblesMask;        
         [SerializeField] private float playerFollowowDistance = 2f;
@@ -41,8 +41,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private Coroutine targetScan;
         
-        public enum MINION_STATE{FOLLOW, ADVANCE, CHASE, ATTACK, NONE}
-        [SerializeField] private MINION_STATE currentState;
         public MINION_STATE CurrentState
         {
             get { return currentState; }
@@ -292,7 +290,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         Debug.DrawRay(origin, destination - origin, Color.gray, 2f);
                         this.target = newTarget;
                         targetAttr = newTarget.GetComponent<Attributes_scr>();
-                        break;
                     }
                 }
 
