@@ -216,7 +216,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private IEnumerator minionAttack()
         {
             //Check if target exists first
-            if (target && targetAttr.health <= 0)
+            if (target && targetAttr.health > 0)
             {
                 transform.LookAt(target.transform);
 
