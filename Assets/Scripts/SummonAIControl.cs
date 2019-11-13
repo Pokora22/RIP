@@ -215,24 +215,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAttack()
         {
-            transform.LookAt(target.transform);
-                
-            //Start attack animation
-            m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
-
-            //Wait for animation to finish
-            while (m_AiAnimatorScr.CompareCurrentState("Attack"))
-                yield return null;
-            
-            //Check if target still exists
-            if (!target || targetAttr.health <= 0)
-                CurrentState = MINION_STATE.FOLLOW;
-            else
+            //Check if target exists first
+            if (target && targetAttr.health <= 0)
             {
-                //Update destination and check if target is too far for an attack
-                targetDestination = target.transform.position;
-                if (inStoppingDistance())
-                    CurrentState = MINION_STATE.CHASE;
+                transform.LookAt(target.transform);
+
+                //Start attack animation
+                m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
+
+                //Wait for animation to finish
+                while (m_AiAnimatorScr.CompareCurrentState("Attack"))
+                    yield return null;
+
+                //Check if target still exists
+                if (!target || targetAttr.health <= 0)
+                    CurrentState = MINION_STATE.FOLLOW;
+                else
+                {
+                    //Update destination and check if target is too far for an attack
+                    targetDestination = target.transform.position;
+                    if (inStoppingDistance())
+                        CurrentState = MINION_STATE.CHASE;
+                }
             }
         }
 
