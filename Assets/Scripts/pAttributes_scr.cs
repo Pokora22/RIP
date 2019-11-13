@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class pAttributes_scr : MonoBehaviour
 {
     // Start is called before the first frame update
+    public int summonsLimit = 5;
     public float maxHealth = 3f;
     private float health;
 
@@ -25,6 +26,8 @@ public class pAttributes_scr : MonoBehaviour
     private GameObject levelNotification;
     [SerializeField] private List<Artifact_scr> playerInventory;
     [SerializeField] private float useArtifactPeriod = 1f;
+    [SerializeField] private float invulnerableTime = 0.5f;
+    private bool invulnerable;
     
 
     void Start()
@@ -38,16 +41,22 @@ public class pAttributes_scr : MonoBehaviour
         expBar = GameObject.FindWithTag("UIExpBar").GetComponent<Image>();
         levelNotification = GameObject.FindWithTag("UILevelNotification");
         playerInventory = new List<Artifact_scr>();
+        invulnerable = false;
         
         updateHud();
     }
 
     public void damage()
     {
-        //TODO: Sometimes gets hit twice with same effect. Add delay
-        if (--health < 1)
-            SceneManager.LoadScene(2); //TODO: Maybe a game over screen
-        updateHud();
+        if (!invulnerable)
+        {
+            //TODO: Sometimes gets hit twice with same effect. Add delay
+            if (--health < 1)
+                SceneManager.LoadScene(2); //TODO: Maybe a game over screen
+
+            StartCoroutine(toggleInvulnerable(invulnerableTime));
+            updateHud();
+        }
     }
 
     public void addExp(float exp)
@@ -75,11 +84,9 @@ public class pAttributes_scr : MonoBehaviour
 
     public void updateHud()
     {
-        if (maxHealth <= livesDisplay.Length)
-        {
-            for (int i = 0; i < maxHealth; i++)
-                livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0];
-        }
+        if(livesDisplay.Length >= health)
+        for (int i = 0; i < maxHealth; i++)
+            livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0]; //TODO: Add some limiter to not ooi on test numbers
 
         expBar.fillAmount = currentExp / nextLvlExpReq;
         
@@ -112,5 +119,14 @@ public class pAttributes_scr : MonoBehaviour
         foreach (Artifact_scr artifact in playerInventory)
             if (!artifact.useAbility())
                 playerInventory.Remove(artifact);
+    }
+
+    private IEnumerator toggleInvulnerable(float time)
+    {
+        Debug.Log("invl");
+        invulnerable = true;
+        yield return new WaitForSeconds(time);
+        Debug.Log("invl end");
+        invulnerable = false;
     }
 }

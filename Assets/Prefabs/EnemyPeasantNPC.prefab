@@ -136,6 +136,7 @@ MonoBehaviour:
   alertRange: 20
   alertChance: 20
   removeDelay: 5
+  invulnerableTime: 0.5
 --- !u!82 &6483661527495625800
 AudioSource:
   m_ObjectHideFlags: 0
@@ -278,7 +279,7 @@ MonoBehaviour:
     m_Bits: 512
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   currentstate: 0
 --- !u!114 &8179706966285730082
 MonoBehaviour:

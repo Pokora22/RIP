@@ -183,6 +183,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ed182349ae93ad344a2384b11a015916, type: 3}
   playerInventory: []
   useArtifactPeriod: 1
+  invulnerableTime: 1.5
 --- !u!114 &7044675944207343105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +233,7 @@ MonoBehaviour:
   alertRange: 20
   alertChance: 20
   removeDelay: 5
+  invulnerableTime: 0.5
 --- !u!208 &95940419
 NavMeshObstacle:
   m_ObjectHideFlags: 0

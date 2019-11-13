@@ -18,7 +18,6 @@ public class PlayerController_scr : MonoBehaviour
     public float minionCollisionCheckRadius = .5f;
     public LayerMask bodiesMask;
     public LayerMask obstaclesMask;
-    public int summonsLimit = 5;
     public List<SummonAIControl> minions, minionsAway;
     
     private bool consumeSummonInput = false;
@@ -27,6 +26,9 @@ public class PlayerController_scr : MonoBehaviour
     private Vector3 m_CamForward, move;
     private Transform m_Cam;
     private Rigidbody m_Rigidbody;
+
+    private float inputTimeDelay = .2f;
+    private float inputTimeStamp;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,8 @@ public class PlayerController_scr : MonoBehaviour
         characterAttributes = GetComponent<Attributes_scr>();
         m_Cam = Camera.main.transform;
         m_Rigidbody = GetComponent<Rigidbody>();
+
+        inputTimeStamp = Time.time + inputTimeDelay;
     }
 
     // Update is called once per frame
@@ -45,32 +49,38 @@ public class PlayerController_scr : MonoBehaviour
         HandleControlInput();
         summonMinionCheck();
         sendMinionCheck();
-        recallMinionCheck();
     }
 
     private void summonMinionCheck()
     {
         //Display on screen help -- need reverse conditions?
-        if(minions.Count + minionsAway.Count >= summonsLimit)
+        if(minions.Count + minionsAway.Count >= playerAttributes.summonsLimit)
             return;
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetButton("Fire2") && inputTimeStamp < Time.time)
         {
+            inputTimeStamp = Time.time + inputTimeDelay;
             Collider[] nearbyBodies = Physics.OverlapSphere(transform.position, summonRadius, bodiesMask);
             
             //secondary mouse button
-            if (nearbyBodies.Length > 0)
+            if (nearbyBodies.Length > 0 && minions.Count + minionsAway.Count < playerAttributes.summonsLimit)
             {
                 summonMinion(nearbyBodies[0].gameObject);
                 consumeSummonInput = true;
+            }
+            else if (minionsAway.Count > 0)
+            {
+                SummonAIControl minionToRecall = minionsAway[0];
+                StartCoroutine(minionToRecall.recall());
             }
         }
     }
 
     private void sendMinionCheck()
     {
-        if (Input.GetMouseButtonDown(0) && minions.Count > 0)
+        if (Input.GetButton("Fire1") && minions.Count > 0  && inputTimeStamp < Time.time)
         {
+            inputTimeStamp = Time.time + inputTimeDelay;
             RaycastHit hit;
             SummonAIControl minionToSend = minions[0];                         
 
@@ -87,19 +97,6 @@ public class PlayerController_scr : MonoBehaviour
             : transform.position + direction * minionRunDistance;
 
             minionToSend.SendToDestination(destination, obstacleHit, hit);
-        }
-    }
-
-    private void recallMinionCheck()
-    {
-        if (Input.GetMouseButtonDown(1) && minionsAway.Count > 0)
-        {
-            if(!consumeSummonInput){
-                SummonAIControl minionToRecall = minionsAway[0];
-                StartCoroutine(minionToRecall.recall());
-            }
-
-            consumeSummonInput = false; //Don't recall minion if summoned
         }
     }
 

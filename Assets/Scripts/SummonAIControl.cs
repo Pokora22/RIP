@@ -300,6 +300,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             List<Collider> enemyList = nearbyEnemies.OrderBy(
                 x => (this.transform.position - x.transform.position).sqrMagnitude
             ).ToList();
+            
             while (enemyList.Count > 0)
             {
                 GameObject newTarget = enemyList[0].gameObject;
@@ -308,6 +309,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
                 Vector3 destination = (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z));
                 float distance = Vector3.Distance(origin, destination);
+                
+                Debug.DrawRay(origin, destination - origin, Color.red, 1f);
                 
                 if (!Physics.Raycast(origin, destination - origin, distance, obstaclesMask))
                 {

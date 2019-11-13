@@ -26,7 +26,8 @@ public class Attributes_scr : MonoBehaviour
     private PlayerController_scr summoner;
     private GameObject attacker;
     private AiAnimator_scr m_AiAnimatorScr;
-    
+    [SerializeField] private float invulnerableTime = 0.5f;
+    private bool invulnerable;
 
     void Start()
     {
@@ -54,40 +55,45 @@ public class Attributes_scr : MonoBehaviour
 
     public void damage(float dmgAmnt)
     {
-        health -= dmgAmnt;
-
-        if (health <= 0)
+        if (!invulnerable)
         {
-            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH); //TODO: Add sounds for destructibles
-            if (LayerMask.LayerToName(gameObject.layer) == "Destructibles")
-            {
-                StartCoroutine(removeBody());
-                return;
-            }
+            health -= dmgAmnt;
 
-            m_AiAnimatorScr.setDeadAnim();
-            if(debug)
-                Debug.Log(gameObject.name + " dropped dead");
-            gameObject.layer = LayerMask.NameToLayer("Bodies");
-            gameObject.GetComponent<Collider>().isTrigger = true; //TODO: ???
-            gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            
-            if (gameObject.CompareTag("Enemy"))
+            if (health <= 0)
             {
-                gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;
-                playerAttr.addExp(expValue);
+                audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH); //TODO: Add sounds for destructibles
+                if (LayerMask.LayerToName(gameObject.layer) == "Destructibles")
+                {
+                    StartCoroutine(removeBody());
+                    return;
+                }
+
+                m_AiAnimatorScr.setDeadAnim();
+                if (debug)
+                    Debug.Log(gameObject.name + " dropped dead");
+                gameObject.layer = LayerMask.NameToLayer("Bodies");
+                gameObject.GetComponent<Collider>().isTrigger = true; //TODO: ??? Need a better solution as coroutine doesn't update well it seems
+                gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+                if (gameObject.CompareTag("Enemy"))
+                {
+                    gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;
+                    playerAttr.addExp(expValue);
+                }
+
+                else if (gameObject.CompareTag("Minion"))
+                {
+                    gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
+                    summoner.minionRemove(GetComponent<SummonAIControl>());
+                    gameObject.GetComponent<Collider>().enabled = false;
+                    StartCoroutine(removeBody());
+                }
             }
-            
-            else if (gameObject.CompareTag("Minion"))
-            {
-                gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
-                summoner.minionRemove(GetComponent<SummonAIControl>());
-                gameObject.GetComponent<Collider>().enabled = false;
-                StartCoroutine(removeBody());
-            }
+            else if (!alertUsed && CompareTag("Enemy"))
+                alertAllies();
+
+            StartCoroutine(toggleInvulnerable(invulnerableTime));
         }
-        else if (!alertUsed && CompareTag("Enemy"))
-            alertAllies();
     }
 
     public void damage(float dmgAmnt, Attributes_scr minionAttacking) //Attack with reflect
@@ -154,5 +160,12 @@ public class Attributes_scr : MonoBehaviour
                 }
             }
         }
+    }
+    
+    private IEnumerator toggleInvulnerable(float time)
+    {
+        invulnerable = true;
+        yield return new WaitForSeconds(time);
+        invulnerable = false;
     }
 }
