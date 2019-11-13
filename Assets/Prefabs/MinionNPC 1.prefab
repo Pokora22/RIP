@@ -107,7 +107,7 @@ NavMeshAgent:
   m_AngularSpeed: 360
   m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -137,6 +137,7 @@ MonoBehaviour:
   alertRange: 20
   alertChance: 20
   removeDelay: 5
+  invulnerableTime: 0.5
 --- !u!114 &11402594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   playerFollowowDistance: 2
-  enemyFollowDistance: 1
+  enemyStoppingDistance: 1
+  destructibleStoppingDistance: 0.5
   enemyDetectionRange: 5
   playerLeashRange: 15
   debug: 0

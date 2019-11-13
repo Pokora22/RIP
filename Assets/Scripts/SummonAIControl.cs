@@ -63,6 +63,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         break;
                     
                     case MINION_STATE.ADVANCE:
+                        targetDestination = m_AdvanceDestination;
                         summoner.minionLeave(this);
                         agent.stoppingDistance = .2f;
                         recalled = false;
@@ -139,8 +140,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void minionFollow()
         {
+            //Check if there's a new target
             if (target != player)
                 CurrentState = MINION_STATE.CHASE;
+            //Update destination to player position
             else
                 targetDestination = player.transform.position;
         }
@@ -163,14 +166,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 CurrentState = MINION_STATE.CHASE;
             else
             {
-                targetDestination = m_AdvanceDestination;
-                float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-
-                if (remainingDistance <= agent.stoppingDistance)
-                {
+                if (inStoppingDistance())
                     CurrentState = MINION_STATE.FOLLOW;
-                }
             }
+        }
+
+        private bool inStoppingDistance()
+        {
+            float remainingDistance = Vector3.Distance(transform.position, targetDestination);
+//            Debug.Log("Transform position: " + transform.position);
+//            Debug.Log("Agent position: " + agent.transform.position);
+//            Debug.Log("Remaining: " + remainingDistance);
+//            Debug.Log("Target: " + targetDestination);
+//            Debug.Log("Stopping distance: " + agent.stoppingDistance);
+
+            return remainingDistance <= agent.stoppingDistance;
         }
 
         private void minionChase()
@@ -184,9 +194,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if (!targettingDestructible)
                     targetDestination = target.transform.position;
 
-                float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-
-                if (remainingDistance <= agent.stoppingDistance)
+                if (inStoppingDistance())
                     CurrentState = MINION_STATE.ATTACK;
             }
         }
@@ -221,10 +229,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 CurrentState = MINION_STATE.FOLLOW;
             else
             {
-                //Check if target is too far for an attack
-                float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-                 
-                if (remainingDistance <= agent.stoppingDistance)
+                //Update destination and check if target is too far for an attack
+                targetDestination = target.transform.position;
+                if (inStoppingDistance())
                     CurrentState = MINION_STATE.CHASE;
             }
         }
@@ -234,9 +241,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             agent.SetDestination(destination);
             float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
-            
+
             if (remainingDistance > agent.stoppingDistance)
+            {
                 m_AiAnimatorScr.Move(agent.desiredVelocity);
+            }
             else
             {
                 m_AiAnimatorScr.Move(Vector3.zero);
