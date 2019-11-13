@@ -126,6 +126,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     minionChase();
                     break;
                 case MINION_STATE.ATTACK:
+                    //Check if already mid attack animation
+                    if (!m_AiAnimatorScr.CompareCurrentState("Attack"))
+                        StartCoroutine(minionAttack());
                     break;
                 default:
                        break;
@@ -202,22 +205,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             targetDestination = hit.point;
         }
 
-        private void minionAttack()
+        private IEnumerator minionAttack()
         {
-            if (!m_AiAnimatorScr.CompareCurrentState("Attack"))
-            {
-                transform.LookAt(target.transform);
+            transform.LookAt(target.transform);
                 
-                //Start attack animation
-                m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
-            }
+            //Start attack animation
+            m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
+
+            //Wait for animation to finish
+            while (m_AiAnimatorScr.CompareCurrentState("Attack"))
+                yield return null;
             
+            //Check if target still exists
             if (!target || targetAttr.health <= 0)
                 CurrentState = MINION_STATE.FOLLOW;
             else
             {
+                //Check if target is too far for an attack
                 float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-
+                 
                 if (remainingDistance <= agent.stoppingDistance)
                     CurrentState = MINION_STATE.CHASE;
             }
