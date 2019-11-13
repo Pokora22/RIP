@@ -1295,7 +1295,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-4496
+  m_Name: pb_Mesh-4540
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4706,7 +4706,7 @@ PrefabInstance:
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: maxHealth
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
@@ -14346,7 +14346,7 @@ PrefabInstance:
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: maxHealth
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
@@ -18104,7 +18104,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh241076
+  m_Name: pb_Mesh-4560
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -24677,7 +24677,7 @@ PrefabInstance:
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: maxHealth
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
@@ -25625,7 +25625,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh239304
+  m_Name: pb_Mesh18784
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28828,7 +28828,7 @@ PrefabInstance:
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: maxHealth
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}

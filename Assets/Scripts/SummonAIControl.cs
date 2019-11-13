@@ -65,7 +65,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.ADVANCE:
                         targetDestination = m_AdvanceDestination;
                         summoner.minionLeave(this);
-                        agent.stoppingDistance = .2f;
+                        agent.stoppingDistance = 5f;
                         recalled = false;
                         break;
                     
@@ -152,7 +152,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             recalled = false;
             
-            if (obstacleHit) 
+            if (obstacleHit)
                 m_AdvanceDestination = rayHit.point;
             else
                 m_AdvanceDestination = destination;
@@ -234,19 +234,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     //Update destination and check if target is too far for an attack
                     targetDestination = target.transform.position;
-                    if (inStoppingDistance())
+                    if (!inStoppingDistance())
                         CurrentState = MINION_STATE.CHASE;
                 }
             }
+            else
+                CurrentState = MINION_STATE.FOLLOW;
         }
 
 
         private void UpdatePosition(Vector3 destination)
         {
             agent.SetDestination(destination);
-            float remainingDistance = Vector3.Distance(transform.position, target.transform.position);
-
-            if (remainingDistance > agent.stoppingDistance)
+            
+            if(!inStoppingDistance())
             {
                 m_AiAnimatorScr.Move(agent.desiredVelocity);
             }
