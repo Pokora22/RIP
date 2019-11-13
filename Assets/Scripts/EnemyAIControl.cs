@@ -107,7 +107,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     break;
             }
             
-            updatePosition();
+            updatePosition(targetDestination);
         }
 
         public void AIPatrol()
@@ -198,14 +198,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         } 
        
-        private void updatePosition()
+        private void updatePosition(Vector3 destination)
         {
             if (!doNotMove)
             {
-                transform.LookAt(agent.nextPosition);
+                agent.SetDestination(destination);
+                NavMeshPath path = new NavMeshPath();
+                Debug.Log(agent.CalculatePath(targetDestination, path));
                 
-                if(!inStoppingDistance())
+                transform.LookAt(agent.nextPosition);
+
+                if (!inStoppingDistance())
+                {
+                    Debug.Log(gameObject.name + " Moving: " + agent.desiredVelocity);
+                    Debug.Log("Destination: " + agent.destination);
                     m_AiAnimatorScr.Move(agent.desiredVelocity);
+                }
                 else
                     m_AiAnimatorScr.Move(Vector3.zero);
             }
