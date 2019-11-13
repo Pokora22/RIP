@@ -40,6 +40,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE}
         [SerializeField] private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
+        
+        private LineRenderer lr;
+
         public ENEMY_STATE CurrentState
         {
             get{return currentstate;}
@@ -89,12 +92,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             player = GameObject.FindGameObjectWithTag("Player");
 
             CurrentState = ENEMY_STATE.PATROL;
+            //Fix for path computation time delay
+            targetDestination = transform.position;
 
             StartCoroutine(findTarget(targetScanDelay));
+            
+            lr = GetComponent<LineRenderer>();
         }
 
         private void Update()
         {
+            if (agent.path != null)
+            {
+                lr.SetPositions(agent.path.corners);
+            }
+            
             if (resetPath)
             {
                 targetDestination = randomWaypoint();
@@ -115,7 +127,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     break;
             }
             
-            updatePosition(targetDestination);
+            updatePosition(); //TODO: This works, the other one (newer) does not!
         }
 
         public void AIPatrol()
@@ -123,7 +135,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if(target != gameObject)
                 CurrentState = ENEMY_STATE.CHASE;
             else if (inStoppingDistance())
+            {
+                Debug.Log("Patrol reached end");
                 targetDestination = randomWaypoint();
+                
+            }
+                
         }
         
         //------------------------------------------
@@ -184,17 +201,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             NavMeshHit hit;
             NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2.0f, NavMesh.AllAreas);
+            Debug.Log("Generating random wp" + hit.position);
             
             NavMeshPath path = new NavMeshPath();
             //Dirty
+            Debug.Log(agent.CalculatePath(hit.position, path));
             return agent.CalculatePath(hit.position, path) ? hit.position : randomWaypoint();
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.white;
-            if(Application.isPlaying)
-                Gizmos.DrawWireSphere(agent.destination, 1f);
         }
 
         public void setNewDestination(Vector3 destination)
@@ -206,6 +218,40 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         } 
        
+        private void updatePosition()
+        {
+            transform.LookAt(agent.nextPosition);
+            if (doNotMove)
+            {
+                agent.SetDestination(transform.position);
+                return;
+            }
+
+            Debug.Log("Position: " + transform.position);
+            Debug.Log("Target destination: " + targetDestination);
+            Debug.Log("Agent destination: " + agent.destination);
+            
+            
+            float remainingDistance = Vector3.Distance(transform.position, agent.destination);
+            if(remainingDistance <= agent.stoppingDistance)
+            {
+                Debug.Log("Update reached end point");
+                if (CurrentState == ENEMY_STATE.PATROL)
+                    agent.SetDestination(randomWaypoint());
+                
+//                Debug.Log("Arrived: " + inStoppingDistance());
+//                Debug.Log("Destination target: " + targetDestination);
+                
+                m_AiAnimatorScr.Move(Vector3.zero);
+                return;
+            }
+            
+            if(CurrentState == ENEMY_STATE.ATTACK)
+                CurrentState = ENEMY_STATE.CHASE;
+            else
+                m_AiAnimatorScr.Move(agent.desiredVelocity);
+        }
+        
         private void updatePosition(Vector3 destination)
         {
             if (!doNotMove)
@@ -233,6 +279,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //            Debug.Log("Remaining: " + remainingDistance);
 //            Debug.Log("Target: " + targetDestination);
 //            Debug.Log("Stopping distance: " + agent.stoppingDistance);
+
+            
 
             return remainingDistance <= agent.stoppingDistance;
         }
@@ -296,6 +344,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             float distance = Vector3.Distance(transform.position, target.transform.position);
             return distance < hearingDistance && rb.velocity.magnitude != 0; //Any movement (might change formula someday)
+        }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.white;
+            if(Application.isPlaying)
+                Gizmos.DrawWireSphere(agent.destination, 1f);
         }
     }
 }
