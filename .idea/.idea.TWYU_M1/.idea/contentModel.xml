@@ -45,6 +45,7 @@
           <e p="pAttributes_scr.cs" t="Include" />
           <e p="PlayerController_scr.cs" t="Include" />
           <e p="RotateWithCamera_scr.cs" t="Include" />
+          <e p="ShowClosestPoint.cs" t="Include" />
           <e p="SummonAIControl.cs" t="Include" />
           <e p="ThirdPersonCharacter_Custom.cs" t="Include" />
           <e p="ThirdPersonUserControl_Custom.cs" t="Include" />

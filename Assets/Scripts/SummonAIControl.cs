@@ -72,7 +72,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.CHASE:
                         targettingDestructible = !target.CompareTag("Enemy");
                         if (targettingDestructible)
-                            setDestructibleDestination();
+                            setDestructibleDestination(target.GetComponent<Collider>());
                         agent.stoppingDistance = targettingDestructible ? 
                             destructibleStoppingDistance : enemyStoppingDistance; //Conditional distance depending on if target is enemy or destructible?
                         summoner.minionLeave(this);
@@ -171,13 +171,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool inStoppingDistance()
         {
             float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-//            Debug.DrawRay(transform.position, targetDestination - transform.position, Color.yellow,  1f);
-            Debug.Log("Transform position: " + transform.position);
-            Debug.Log("Agent position: " + agent.transform.position);
-            Debug.Log("Remaining: " + remainingDistance);
-            Debug.Log("Target: " + targetDestination);
-            Debug.Log("Stopping distance: " + agent.stoppingDistance);
-
             return remainingDistance <= agent.stoppingDistance;
         }
 
@@ -188,9 +181,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 CurrentState = MINION_STATE.FOLLOW;
             else
             {
-                Debug.Log("Targetting destructible: " + targettingDestructible);
-                Debug.Log("Arrived: " + inStoppingDistance());
-
                 //Need to only update destination for non destructible targets
                 if (!targettingDestructible)
                     targetDestination = target.transform.position;
@@ -200,19 +190,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        private void setDestructibleDestination()
+        private void setDestructibleDestination(Collider target)
         {
-            Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
-            Vector3 r_destination = target.transform.GetComponent<Renderer>().bounds.center;
-            
-            float distance = Vector3.Distance(r_origin, r_destination);
-
-            RaycastHit hit;
-            Physics.Raycast(r_origin, r_destination - r_origin, out hit, distance, destructiblesMask);
-            Debug.DrawRay(r_origin, r_destination - r_origin, Color.blue, 2f);
-
-            //Set destination to hit.point, but with y level of the object
-            targetDestination =  new Vector3(hit.point.x, hit.transform.position.y, hit.point.z);
+            Vector3 closestPoint = target.ClosestPointOnBounds(transform.position);
+            Debug.DrawRay(transform.position, closestPoint - transform.position, Color.blue, 1f);
+            Debug.Log(closestPoint);
+            targetDestination = new Vector3(closestPoint.x, transform.position.y, closestPoint.z);
         }
 
         private IEnumerator minionAttack()

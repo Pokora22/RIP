@@ -28,6 +28,9 @@ public class Attributes_scr : MonoBehaviour
     private AiAnimator_scr m_AiAnimatorScr;
     [SerializeField] private float invulnerableTime = 0.5f;
     private bool invulnerable;
+    private Rigidbody m_Rigidbody;
+    private NavMeshAgent m_Agent;
+    private Collider m_Collider;
 
     void Start()
     {
@@ -39,6 +42,14 @@ public class Attributes_scr : MonoBehaviour
             attackSpeed += attackSpeed * (diff / 5);
             moveSpeedMultiplier += moveSpeedMultiplier * (diff / 5);
         }
+
+        if (CompareTag("Enemy") || CompareTag("Minion"))
+        {
+            m_Rigidbody = GetComponent<Rigidbody>();
+            m_Agent = GetComponent<NavMeshAgent>();
+        }
+
+        m_Collider = GetComponent<Collider>();
         
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
@@ -130,14 +141,14 @@ public class Attributes_scr : MonoBehaviour
     private IEnumerator removeBody()
     {
         yield return new WaitForSeconds(removeDelay);
-//        Rigidbody rb = GetComponent<Rigidbody>(); //TODO: This still doesn't sink into ground.. why?
 
-//        rb.detectCollisions = false;
-//        while (transform.position.y > -1)
-//        {
-//            rb.position += Vector3.down * Time.deltaTime; 
-//            yield return null;
-//        }
+        if (m_Rigidbody)
+            m_Rigidbody.detectCollisions = false;
+        while (transform.position.y > -10)
+        {
+            transform.position += Vector3.down * Time.deltaTime; 
+            yield return null;
+        }
         
         Destroy(gameObject);
         yield return null;

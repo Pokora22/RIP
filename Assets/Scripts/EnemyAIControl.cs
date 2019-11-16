@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public GameObject target;                                    // target to aim for
 
         private GameObject terrain;
+        private Bounds levelBounds;
         private GameObject player;
         private Rigidbody m_Rigidbody;
         private Coroutine currentCoroutine;
@@ -83,6 +84,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Rigidbody = GetComponent<Rigidbody>();
 
             terrain = GameObject.FindWithTag("Terrain");
+            levelBounds = terrain.gameObject.GetComponent<Collider>().bounds;
 
             player = GameObject.FindGameObjectWithTag("Player");
 
@@ -192,7 +194,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private Vector3 randomWaypoint()
         {
-            Bounds levelBounds = terrain.gameObject.GetComponent<Collider>().bounds;
+            
             float x = Random.Range(levelBounds.min.x, levelBounds.max.x);
             float z = Random.Range(levelBounds.min.z, levelBounds.max.z);
             
@@ -216,26 +218,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 Debug.Log(gameObject.name + " heard the call and moving toward " + destination);
                 targetDestination = destination;
             }
-        } 
-       
-        private void updatePosition()
-        {
-            if (!doNotMove)
-            {
-                transform.LookAt(agent.nextPosition);
-
-                // Debug.Log("Agent destination: " + agent.destination);
-                // Debug.Log("Target destination: " + targetDestination);                
-                
-                // if(inStoppingDistance())
-                // {
-                //     agent.SetDestination(randomWaypoint());
-                // }               
-                
-                    m_AiAnimatorScr.Move(agent.desiredVelocity);
-            }
         }
-        
+       
         private void updatePosition(Vector3 destination)
         {
             if (!doNotMove)
@@ -255,14 +239,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool inStoppingDistance()
         {
            float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-        //    Debug.Log("Transform position: " + transform.position);
-        //    Debug.Log("Agent position: " + agent.transform.position);
-        //    Debug.Log("Remaining: " + remainingDistance);
-        //    Debug.Log("Target: " + targetDestination);
-        //    Debug.Log("Agent destination: " + agent.destination);
-        //    Debug.Log("Stopping distance: " + agent.stoppingDistance);            
 
-            return remainingDistance <= agent.stoppingDistance;
+           return remainingDistance <= agent.stoppingDistance;
         }
         
         private IEnumerator findTarget(float targetScanDelay)

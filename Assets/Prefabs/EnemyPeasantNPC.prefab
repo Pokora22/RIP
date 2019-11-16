@@ -279,7 +279,9 @@ MonoBehaviour:
     m_Bits: 512
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 1
+  targetScanDelay: 0.25
+  resetPath: 0
   currentstate: 0
 --- !u!114 &8179706966285730082
 MonoBehaviour:

@@ -8,7 +8,6 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class AiAnimator_scr : MonoBehaviour
 {
     private Animator m_Animator;
-    private Rigidbody m_Rigidbody;
 
     [SerializeField] private float m_GroundCheckDistance = 0.1f;
     [SerializeField] private GameObject hitBox;
@@ -19,7 +18,6 @@ public class AiAnimator_scr : MonoBehaviour
     void Awake()
     {
         m_Animator = GetComponent<Animator>();
-        m_Rigidbody = GetComponent<Rigidbody>();
         getHitbox(transform, "AttackHitbox");
         hitBox.SetActive(false);
     }
@@ -45,7 +43,6 @@ public class AiAnimator_scr : MonoBehaviour
 
     public float SetAttackAnim(float speed)
     {
-	    Debug.Log("Starting attack anim");
 	    m_Animator.SetTrigger("Attacking");
 	    m_Animator.SetFloat("AttackSpeed", speed);
 
