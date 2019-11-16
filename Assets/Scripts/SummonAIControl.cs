@@ -248,8 +248,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
+        //TODO: Might need to split this into two routines - low and high priority and cycle them when changing states
         private IEnumerator findTarget(float targetScanDelay)
         {
+            //Use scanDelay time on low priority search
+            float lowPriorityDelay = targetScanDelay;
+            //Use average frame time when advancing instead (high priority search)
+            float highPriorityDelay = Time.smoothDeltaTime;
+            
             while (true)
             {
                 if (!recalled)
@@ -257,7 +263,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     //Wait if minion is already targeting something
                     while (target != player)
                     {
-                        yield return new WaitForSeconds(targetScanDelay);
+                        yield return new WaitForSeconds(lowPriorityDelay);
                     }
 
                     Collider[] nearbyEnemies =
@@ -272,6 +278,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         enemyList = nearbyEnemies.OrderBy(
                             x => (this.transform.position - x.transform.position).sqrMagnitude
                         ).ToList();
+                        Debug.Log("Getting destructibles instead: " + enemyList.Count);
                     }
 
                     while (enemyList.Count > 0)
@@ -295,8 +302,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         }
                     }
                 }
-
-                yield return new WaitForSeconds(targetScanDelay);
+                //Search more often when minion is advancing forward
+                yield return CurrentState == MINION_STATE.ADVANCE ? new WaitForSeconds(highPriorityDelay) : new WaitForSeconds(lowPriorityDelay);
             }
         }
 

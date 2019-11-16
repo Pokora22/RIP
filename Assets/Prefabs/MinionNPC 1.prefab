@@ -166,9 +166,9 @@ MonoBehaviour:
   destructibleStoppingDistance: 0.5
   enemyDetectionRange: 5
   playerLeashRange: 15
-  debug: 0
+  debug: 1
   target: {fileID: 0}
-  enemySearchDelay: 0.2
+  enemySearchDelay: 0.5
 --- !u!82 &6483661527495625800
 AudioSource:
   m_ObjectHideFlags: 0

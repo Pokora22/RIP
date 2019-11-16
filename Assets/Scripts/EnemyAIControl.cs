@@ -222,7 +222,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
        
         private void updatePosition(Vector3 destination)
         {
-            if (!doNotMove && !agent.isStopped)
+            if (!doNotMove && agent && !agent.isStopped)
             {
                 agent.SetDestination(destination);
                 transform.LookAt(agent.nextPosition);
@@ -298,6 +298,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         private bool canHearTarget(GameObject target)
         {
+            //TODO: Ask object for it's velocity instead (from attributes)
             Rigidbody rb = target.GetComponent<Rigidbody>();
             
             float distance = Vector3.Distance(transform.position, target.transform.position);
