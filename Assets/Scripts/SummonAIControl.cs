@@ -72,7 +72,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.CHASE:
                         targettingDestructible = !target.CompareTag("Enemy");
                         if (targettingDestructible)
-                            setTargetDestination();
+                            setDestructibleDestination();
                         agent.stoppingDistance = targettingDestructible ? 
                             destructibleStoppingDistance : enemyStoppingDistance; //Conditional distance depending on if target is enemy or destructible?
                         summoner.minionLeave(this);
@@ -171,11 +171,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool inStoppingDistance()
         {
             float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-//            Debug.Log("Transform position: " + transform.position);
-//            Debug.Log("Agent position: " + agent.transform.position);
-//            Debug.Log("Remaining: " + remainingDistance);
-//            Debug.Log("Target: " + targetDestination);
-//            Debug.Log("Stopping distance: " + agent.stoppingDistance);
+//            Debug.DrawRay(transform.position, targetDestination - transform.position, Color.yellow,  1f);
+            Debug.Log("Transform position: " + transform.position);
+            Debug.Log("Agent position: " + agent.transform.position);
+            Debug.Log("Remaining: " + remainingDistance);
+            Debug.Log("Target: " + targetDestination);
+            Debug.Log("Stopping distance: " + agent.stoppingDistance);
 
             return remainingDistance <= agent.stoppingDistance;
         }
@@ -199,33 +200,35 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        private void setTargetDestination()
+        private void setDestructibleDestination()
         {
             Vector3 r_origin = new Vector3(transform.position.x, 1f, transform.position.z);
             Vector3 r_destination = target.transform.GetComponent<Renderer>().bounds.center;
-            //(new Vector3(target.transform.position.x, 1f, target.transform.position.z));
+            
             float distance = Vector3.Distance(r_origin, r_destination);
 
             RaycastHit hit;
             Physics.Raycast(r_origin, r_destination - r_origin, out hit, distance, destructiblesMask);
             Debug.DrawRay(r_origin, r_destination - r_origin, Color.blue, 2f);
 
-            targetDestination = hit.point;
+            //Set destination to hit.point, but with y level of the object
+            targetDestination =  new Vector3(hit.point.x, hit.transform.position.y, hit.point.z);
         }
 
         private IEnumerator minionAttack()
         {
+            agent.isStopped = true;
+            
             //Check if target exists first
             if (target && targetAttr.health > 0)
             {
                 transform.LookAt(target.transform);
 
                 //Start attack animation
-                m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
+                float animLength = m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
 
                 //Wait for animation to finish
-                while (m_AiAnimatorScr.CompareCurrentState("Attack"))
-                    yield return null;
+                yield return new WaitForSeconds(animLength);
 
                 //Check if target still exists
                 if (!target || targetAttr.health <= 0)
@@ -240,6 +243,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
             else
                 CurrentState = MINION_STATE.FOLLOW;
+
+            agent.isStopped = false;
         }
 
 

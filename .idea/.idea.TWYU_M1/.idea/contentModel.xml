@@ -39,6 +39,7 @@
           <e p="EnemyAIControl.cs" t="Include" />
           <e p="EnemyAnimator_scr.cs" t="Include" />
           <e p="EnemySpawner_scr.cs" t="Include" />
+          <e p="GenerateMaze.cs" t="Include" />
           <e p="Inventory_scr.cs" t="Include" />
           <e p="NpcAudio_scr.cs" t="Include" />
           <e p="pAttributes_scr.cs" t="Include" />

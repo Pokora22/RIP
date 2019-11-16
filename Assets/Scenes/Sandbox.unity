@@ -4631,6 +4631,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 113348, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: doNotMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: debug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
@@ -4677,10 +4687,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 19597056, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: corpse
@@ -4705,16 +4711,6 @@ PrefabInstance:
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: attackDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: doNotMove
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: debug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3525775113477250864, guid: 20fd7288cd4fefc42bb408939463160e,
@@ -5971,6 +5967,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 380.223
+      objectReference: {fileID: 0}
+    - target: {fileID: 19597056, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
+      propertyPath: m_Radius
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
@@ -7823,7 +7823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &715966172
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14284,6 +14284,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyPeasantNPC (1)
       objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 78.27
@@ -14342,11 +14347,6 @@ PrefabInstance:
         type: 3}
       propertyPath: maxHealth
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: debug
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
@@ -18104,7 +18104,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-102568
+  m_Name: pb_Mesh-8698
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21438,6 +21438,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: doNotMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: debug
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.84
@@ -21507,16 +21517,6 @@ PrefabInstance:
         type: 3}
       propertyPath: attackDamage
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: doNotMove
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: debug
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3525775113477250864, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
@@ -23239,6 +23239,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7747293573073375896, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Name
+      value: Torch
+      objectReference: {fileID: 0}
     - target: {fileID: 6762352399834308747, guid: c2e96360339f6b94d83374ccf623c900,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23293,11 +23298,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 23.822
-      objectReference: {fileID: 0}
-    - target: {fileID: 7747293573073375896, guid: c2e96360339f6b94d83374ccf623c900,
-        type: 3}
-      propertyPath: m_Name
-      value: Torch
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2e96360339f6b94d83374ccf623c900, type: 3}
@@ -24602,6 +24602,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 113348, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: doNotMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: debug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
@@ -24648,10 +24658,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 19597056, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: corpse
@@ -24676,16 +24682,6 @@ PrefabInstance:
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: attackDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: doNotMove
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: debug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3525775113477250864, guid: 20fd7288cd4fefc42bb408939463160e,
@@ -25248,6 +25244,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 380.223
       objectReference: {fileID: 0}
+    - target: {fileID: 19597056, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
 --- !u!43 &1707746621
@@ -25625,7 +25625,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh343932
+  m_Name: pb_Mesh20774
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -28753,6 +28753,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 113348, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: doNotMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: debug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
@@ -28799,10 +28809,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 19597056, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: corpse
@@ -28827,16 +28833,6 @@ PrefabInstance:
     - target: {fileID: 7007863952775523347, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: attackDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: doNotMove
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: debug
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3525775113477250864, guid: 20fd7288cd4fefc42bb408939463160e,
@@ -30094,6 +30090,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 380.223
       objectReference: {fileID: 0}
+    - target: {fileID: 19597056, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
 --- !u!1 &2078020877
@@ -31184,7 +31184,7 @@ PrefabInstance:
     - target: {fileID: 4407780995917578860, guid: eb62962f83ee62342bc11ea37c8eb7d3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4407780995917578857, guid: eb62962f83ee62342bc11ea37c8eb7d3,
         type: 3}
