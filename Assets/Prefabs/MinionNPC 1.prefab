@@ -154,7 +154,7 @@ MonoBehaviour:
   player: {fileID: 0}
   enemiesMask:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 1024
   obstaclesMask:
     serializedVersion: 2
     m_Bits: 1
@@ -168,7 +168,7 @@ MonoBehaviour:
   playerLeashRange: 15
   debug: 0
   target: {fileID: 0}
-  enemySearchDelay: 0.5
+  enemySearchDelay: 0.2
 --- !u!82 &6483661527495625800
 AudioSource:
   m_ObjectHideFlags: 0

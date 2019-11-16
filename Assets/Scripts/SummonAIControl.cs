@@ -37,7 +37,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination, targetDestination;
-        private float nextEnemySearchTime;
 
         private Coroutine targetScan;
         
@@ -52,6 +51,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 currentState = value;
                 agent.isStopped = false;
+                StopCoroutine(setDestructibleDestination(target.GetComponent<Collider>()));
                 
                 switch (currentState)
                 {
@@ -72,7 +72,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.CHASE:
                         targettingDestructible = !target.CompareTag("Enemy");
                         if (targettingDestructible)
-                            setDestructibleDestination(target.GetComponent<Collider>());
+                            StartCoroutine(setDestructibleDestination(target.GetComponent<Collider>()));
                         agent.stoppingDistance = targettingDestructible ? 
                             destructibleStoppingDistance : enemyStoppingDistance; //Conditional distance depending on if target is enemy or destructible?
                         summoner.minionLeave(this);
@@ -108,9 +108,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             audioPlayer = GetComponent<NpcAudio_scr>();
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);
-
-            nextEnemySearchTime = Time.time + enemySearchDelay;
-            targetScan = StartCoroutine(findTarget(enemiesMask, .25f));
+            
+            targetScan = StartCoroutine(findTarget(.25f));
         }
 
         private void Update()
@@ -141,7 +140,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void minionFollow()
         {
             //Check if there's a new target
-            if (target != player)
+            if (!recalled && target != player)
                 CurrentState = MINION_STATE.CHASE;
             //Update destination to player position
             else
@@ -177,7 +176,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void minionChase()
         {
             //Return to player if enemies run out too far from player or die
-            if (targetAttr.health <= 0 || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
+            if (!target || targetAttr.health <= 0 || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
                 CurrentState = MINION_STATE.FOLLOW;
             else
             {
@@ -190,12 +189,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        private void setDestructibleDestination(Collider target)
+        private IEnumerator setDestructibleDestination(Collider target)
         {
-            Vector3 closestPoint = target.ClosestPointOnBounds(transform.position);
-            Debug.DrawRay(transform.position, closestPoint - transform.position, Color.blue, 1f);
-            Debug.Log(closestPoint);
-            targetDestination = new Vector3(closestPoint.x, transform.position.y, closestPoint.z);
+            while (true)
+            {
+//                Vector3 closestPoint = target.ClosestPointOnBounds(transform.position);
+                targetDestination = target.ClosestPointOnBounds(transform.position);
+                
+                yield return new WaitForSeconds(1f); //Update location once a second
+            }
         }
 
         private IEnumerator minionAttack()
@@ -246,38 +248,51 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        private IEnumerator findTarget(LayerMask targetMask, float targetScanDelay)
+        private IEnumerator findTarget(float targetScanDelay)
         {
             while (true)
             {
-                //Wait if minion is already targeting something
-                while (target != player)
+                if (!recalled)
                 {
-                    yield return new WaitForSeconds(targetScanDelay);
-                }
-                
-                Collider[] nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, targetMask);
-                List<Collider> enemyList = nearbyEnemies.OrderBy(
-                    x => (this.transform.position - x.transform.position).sqrMagnitude
-                ).ToList();
-
-                while (enemyList.Count > 0)
-                {
-                    GameObject newTarget = enemyList[0].gameObject;
-                    enemyList.RemoveAt(0);
-
-                    Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
-                    Vector3 destination =
-                        (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z));
-                    float distance = Vector3.Distance(origin, destination);
-
-                    Debug.DrawRay(origin, destination - origin, Color.red, 1f);
-
-                    if (!Physics.Raycast(origin, destination - origin, distance, obstaclesMask))
+                    //Wait if minion is already targeting something
+                    while (target != player)
                     {
-                        Debug.DrawRay(origin, destination - origin, Color.gray, 2f);
-                        this.target = newTarget;
-                        targetAttr = newTarget.GetComponent<Attributes_scr>();
+                        yield return new WaitForSeconds(targetScanDelay);
+                    }
+
+                    Collider[] nearbyEnemies =
+                        Physics.OverlapSphere(transform.position, enemyDetectionRange, enemiesMask);
+                    List<Collider> enemyList = nearbyEnemies.OrderBy(
+                        x => (this.transform.position - x.transform.position).sqrMagnitude
+                    ).ToList();
+
+                    if (enemyList.Count == 0 && CurrentState == MINION_STATE.ADVANCE)
+                    {
+                        nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, destructiblesMask);
+                        enemyList = nearbyEnemies.OrderBy(
+                            x => (this.transform.position - x.transform.position).sqrMagnitude
+                        ).ToList();
+                    }
+
+                    while (enemyList.Count > 0)
+                    {
+                        GameObject newTarget = enemyList[0].gameObject;
+                        Debug.Log(newTarget.name);
+                        enemyList.RemoveAt(0);
+
+                        Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+                        Vector3 destination =
+                            (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z));
+                        float distance = Vector3.Distance(origin, destination);
+
+                        Debug.DrawRay(origin, destination - origin, Color.red, 1f);
+
+                        if (!Physics.Raycast(origin, destination - origin, distance, obstaclesMask))
+                        {
+                            Debug.DrawRay(origin, destination - origin, Color.blue, 2f);
+                            this.target = newTarget;
+                            targetAttr = newTarget.GetComponent<Attributes_scr>();
+                        }
                     }
                 }
 
