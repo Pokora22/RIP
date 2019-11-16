@@ -222,7 +222,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
        
         private void updatePosition(Vector3 destination)
         {
-            if (!doNotMove && agent)
+            if (!doNotMove && !agent.isStopped)
             {
                 agent.SetDestination(destination);
                 transform.LookAt(agent.nextPosition);
