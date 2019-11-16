@@ -154,7 +154,7 @@ MonoBehaviour:
   player: {fileID: 0}
   enemiesMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 3072
   obstaclesMask:
     serializedVersion: 2
     m_Bits: 1

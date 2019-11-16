@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -44,11 +45,12 @@ public class AiAnimator_scr : MonoBehaviour
 
     public float SetAttackAnim(float speed)
     {
+	    Debug.Log("Starting attack anim");
 	    m_Animator.SetTrigger("Attacking");
 	    m_Animator.SetFloat("AttackSpeed", speed);
-	    
-	    float animationLength = m_Animator.GetCurrentAnimatorStateInfo(0).length;
 
+	    float animationLength = m_Animator.GetCurrentAnimatorStateInfo(0).length;
+	    
 	    return animationLength;
     }
     

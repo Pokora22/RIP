@@ -164,11 +164,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if (target != player)
                 CurrentState = MINION_STATE.CHASE;
-            else
-            {
-                if (inStoppingDistance())
-                    CurrentState = MINION_STATE.FOLLOW;
-            }
+            else if (inStoppingDistance())
+                CurrentState = MINION_STATE.FOLLOW;
         }
 
         private bool inStoppingDistance()
@@ -190,6 +187,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 CurrentState = MINION_STATE.FOLLOW;
             else
             {
+                Debug.Log("Targetting destructible: " + targettingDestructible);
+                Debug.Log("Arrived: " + inStoppingDistance());
+
                 //Need to only update destination for non destructible targets
                 if (!targettingDestructible)
                     targetDestination = target.transform.position;

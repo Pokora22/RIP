@@ -41,8 +41,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE}
         [SerializeField] private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
         
-        private LineRenderer lr;
-
         public ENEMY_STATE CurrentState
         {
             get{return currentstate;}
@@ -57,10 +55,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {                    
                     case ENEMY_STATE.PATROL:
                         agent.speed = patrolSpeed * selfAttr.moveSpeedMultiplier;
-                        if (doNotMove)
-                            targetDestination = transform.position;
-                        else
-                            targetDestination = randomWaypoint();
+                        target = gameObject;
                         break;
 
                     case ENEMY_STATE.CHASE:                        
@@ -96,17 +91,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             targetDestination = transform.position;
 
             StartCoroutine(findTarget(targetScanDelay));
-            
-            lr = GetComponent<LineRenderer>();
         }
 
         private void Update()
         {
-            if (agent.path != null)
-            {
-                lr.SetPositions(agent.path.corners);
-            }
-            
             if (resetPath)
             {
                 targetDestination = randomWaypoint();
@@ -122,12 +110,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     AIChase();
                     break;
                 case ENEMY_STATE.ATTACK:
-                    if (!m_AiAnimatorScr.CompareCurrentState("Attack"))
+                    if (!m_AiAnimatorScr.CompareCurrentState("Attacking"))
                         StartCoroutine(AIAttack());
                     break;
             }
             
-            updatePosition(); //TODO: This works, the other one (newer) does not!
+            updatePosition(targetDestination); //TODO: This works, the other one (newer) does not!
         }
 
         public void AIPatrol()
@@ -135,12 +123,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if(target != gameObject)
                 CurrentState = ENEMY_STATE.CHASE;
             else if (inStoppingDistance())
-            {
-                Debug.Log("Patrol reached end");
-                targetDestination = randomWaypoint();
-                
+            {                
+                agent.destination = randomWaypoint();
             }
-                
+
+            targetDestination = agent.destination;
         }
         
         //------------------------------------------
@@ -148,23 +135,31 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             if (!target || targetAttr.health <= 0) //if target stops existing break back to patrol
                 CurrentState = ENEMY_STATE.PATROL;
-            
+
             if (canSeeTarget(target) || canHearTarget(target)) //Update position only when seeing player
+            {
                 targetDestination = target.transform.position;
+                if (inStoppingDistance())
+                    CurrentState = ENEMY_STATE.ATTACK;
+            }
+            else if(inStoppingDistance())
+                CurrentState = ENEMY_STATE.PATROL;
         }
     
         //------------------------------------------
         public IEnumerator AIAttack()
         {
+            agent.isStopped = true;
+            
             //If target stopped existing or dropped below 0 health break back to patrol
             if (target && targetAttr.health > 0)
             {
                 transform.LookAt(target.transform);
 //                m_Rigidbody.MoveRotation(Quaternion.LookRotation(target.transform.position)); //TODO: Should use this, but don't understand
 
-                m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
-                while (m_AiAnimatorScr.CompareCurrentState("Attack"))
-                    yield return null;
+                float animTime = m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
+                
+                yield return new WaitForSeconds(animTime);
 
                 //Check if target still exists after the animation is done
                 if (!target || targetAttr.health <= 0) 
@@ -178,6 +173,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
             else
                 CurrentState = ENEMY_STATE.PATROL;
+            
+            agent.isStopped = false;
         }
 	
         public void SetTarget(GameObject target)
@@ -201,12 +198,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             NavMeshHit hit;
             NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2.0f, NavMesh.AllAreas);
-            Debug.Log("Generating random wp" + hit.position);
             
             NavMeshPath path = new NavMeshPath();
-            //Dirty
-            Debug.Log(agent.CalculatePath(hit.position, path));
-            return agent.CalculatePath(hit.position, path) ? hit.position : randomWaypoint();
+            //Dirty            
+            try{
+                return agent.CalculatePath(hit.position, path) ? hit.position : randomWaypoint();
+            }
+            catch{
+                return randomWaypoint();
+            }
         }
 
         public void setNewDestination(Vector3 destination)
@@ -220,36 +220,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
        
         private void updatePosition()
         {
-            transform.LookAt(agent.nextPosition);
-            if (doNotMove)
+            if (!doNotMove)
             {
-                agent.SetDestination(transform.position);
-                return;
-            }
+                transform.LookAt(agent.nextPosition);
 
-            Debug.Log("Position: " + transform.position);
-            Debug.Log("Target destination: " + targetDestination);
-            Debug.Log("Agent destination: " + agent.destination);
-            
-            
-            float remainingDistance = Vector3.Distance(transform.position, agent.destination);
-            if(remainingDistance <= agent.stoppingDistance)
-            {
-                Debug.Log("Update reached end point");
-                if (CurrentState == ENEMY_STATE.PATROL)
-                    agent.SetDestination(randomWaypoint());
+                // Debug.Log("Agent destination: " + agent.destination);
+                // Debug.Log("Target destination: " + targetDestination);                
                 
-//                Debug.Log("Arrived: " + inStoppingDistance());
-//                Debug.Log("Destination target: " + targetDestination);
+                // if(inStoppingDistance())
+                // {
+                //     agent.SetDestination(randomWaypoint());
+                // }               
                 
-                m_AiAnimatorScr.Move(Vector3.zero);
-                return;
+                    m_AiAnimatorScr.Move(agent.desiredVelocity);
             }
-            
-            if(CurrentState == ENEMY_STATE.ATTACK)
-                CurrentState = ENEMY_STATE.CHASE;
-            else
-                m_AiAnimatorScr.Move(agent.desiredVelocity);
         }
         
         private void updatePosition(Vector3 destination)
@@ -257,13 +241,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!doNotMove)
             {
                 agent.SetDestination(destination);
-                
                 transform.LookAt(agent.nextPosition);
 
                 if (!inStoppingDistance())
                 {
-//                    Debug.Log(gameObject.name + " Moving: " + agent.desiredVelocity);
-//                    Debug.Log("Destination: " + agent.destination);
                     m_AiAnimatorScr.Move(agent.desiredVelocity);
                 }
                 else
@@ -273,14 +254,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         private bool inStoppingDistance()
         {
-            float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-//            Debug.Log("Transform position: " + transform.position);
-//            Debug.Log("Agent position: " + agent.transform.position);
-//            Debug.Log("Remaining: " + remainingDistance);
-//            Debug.Log("Target: " + targetDestination);
-//            Debug.Log("Stopping distance: " + agent.stoppingDistance);
-
-            
+           float remainingDistance = Vector3.Distance(transform.position, targetDestination);
+        //    Debug.Log("Transform position: " + transform.position);
+        //    Debug.Log("Agent position: " + agent.transform.position);
+        //    Debug.Log("Remaining: " + remainingDistance);
+        //    Debug.Log("Target: " + targetDestination);
+        //    Debug.Log("Agent destination: " + agent.destination);
+        //    Debug.Log("Stopping distance: " + agent.stoppingDistance);            
 
             return remainingDistance <= agent.stoppingDistance;
         }
