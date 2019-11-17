@@ -32,7 +32,8 @@ public class NpcAudio_scr : MonoBehaviour
                 break;
             case CLIP_TYPE.DEATH:
                 if(clipsDeath.Length > 0)
-                    m_AudioSource.PlayOneShot(clipsDeath[Random.Range(0, clipsDeath.Length)], Random.Range(.8f, 1.2f));
+                    AudioSource.PlayClipAtPoint(clipsDeath[Random.Range(0, clipsDeath.Length)], transform.position, Random.Range(.8f, 1.2f));
+//                    m_AudioSource.PlayOneShot(clipsDeath[Random.Range(0, clipsDeath.Length)], Random.Range(.8f, 1.2f));
                 break;
             case CLIP_TYPE.ALERT:
                 if(clipsAlert.Length > 0)

@@ -48,9 +48,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             set
             {
+                ENEMY_STATE oldState = currentstate;
                 currentstate = value;
                 if(debug)
-                    Debug.Log("New state: " + currentstate);
+                    Debug.Log(gameObject.name + " going from " + oldState +  " to new state: " + currentstate);
                 
                 switch(currentstate)
                 {                    
@@ -66,6 +67,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case ENEMY_STATE.ATTACK:
                         
                         break;
+                    
+//                    case ENEMY_STATE.NONE:
+//                        StopCoroutine(findTarget(targetScanDelay));
+//                        break;
                 }
             }
         }
@@ -116,8 +121,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         StartCoroutine(AIAttack());
                     break;
             }
-            
-            updatePosition(targetDestination); //TODO: This works, the other one (newer) does not!
+
+            updatePosition(targetDestination);
         }
 
         public void AIPatrol()
@@ -181,12 +186,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	
         public void SetTarget(GameObject target)
         {
-            float distToCurrentTarget = this.target == gameObject ? 999 : Vector3.Distance(transform.position, this.target.transform.position); //Set distance to new target to 999 if targetting self (bandaid)
+            float distToCurrentTarget = this.target && this.target != gameObject ? Vector3.Distance(transform.position, this.target.transform.position) : 999; //Set distance to new target to 999 if targetting self (bandaid)
             float distToNewTarget = Vector3.Distance(transform.position, target.transform.position);
-            Debug.Log("New target: " + distToNewTarget + " Old target: " + distToCurrentTarget);
+            
             if (this.target == player || distToNewTarget < distToCurrentTarget)
             {
-                Debug.Log(gameObject.name + " new target: " + target);
                 this.target = target;
                 targetAttr = target.GetComponent<Attributes_scr>();
             }
@@ -302,7 +306,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             Rigidbody rb = target.GetComponent<Rigidbody>();
             
             float distance = Vector3.Distance(transform.position, target.transform.position);
-            return distance < hearingDistance && rb.velocity.magnitude != 0; //Any movement (might change formula someday)
+            return distance < hearingDistance;
+            
+                //&& rb.velocity.magnitude != 0; //Any movement (might change formula someday)
         }
         
         private void OnDrawGizmos()

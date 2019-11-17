@@ -53,7 +53,7 @@ public class Attributes_scr : MonoBehaviour
         
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
-        playerAttr = GameObject.FindGameObjectWithTag("Player").GetComponent<pAttributes_scr>();
+        playerAttr = GameObject.FindGameObjectWithTag("GameManager").GetComponent<pAttributes_scr>();
         m_AiAnimatorScr = gameObject.GetComponent<AiAnimator_scr>();
         audioPlayer = GetComponent<NpcAudio_scr>();
     }
@@ -78,32 +78,25 @@ public class Attributes_scr : MonoBehaviour
                     StartCoroutine(removeBody());
                     return;
                 }
-
-                m_AiAnimatorScr.setDeadAnim();
+                
                 if (debug)
                     Debug.Log(gameObject.name + " dropped dead");
-                gameObject.layer = LayerMask.NameToLayer("Bodies");
-                gameObject.GetComponent<Collider>().isTrigger = true; //TODO: ??? Need a better solution as coroutine doesn't update well it seems
-                gameObject.GetComponent<NavMeshAgent>().enabled = false;
-
+                
                 if (gameObject.CompareTag("Enemy"))
-                {
-                    gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;
                     playerAttr.addExp(expValue);
-                }
-
                 else if (gameObject.CompareTag("Minion"))
-                {
-                    gameObject.GetComponent<SummonAIControl>().CurrentState = SummonAIControl.MINION_STATE.NONE;
                     summoner.minionRemove(GetComponent<SummonAIControl>());
-                    gameObject.GetComponent<Collider>().enabled = false;
-                    StartCoroutine(removeBody());
-                }
+                
+                Instantiate(corpse, transform.position, transform.rotation);
+                Destroy(gameObject);
             }
-            else if (!alertUsed && CompareTag("Enemy"))
-                alertAllies();
+            else
+            {
+                if (!alertUsed && CompareTag("Enemy"))
+                    alertAllies();
 
-            StartCoroutine(toggleInvulnerable(invulnerableTime));
+                StartCoroutine(toggleInvulnerable(invulnerableTime));
+            }
         }
     }
 
@@ -113,11 +106,7 @@ public class Attributes_scr : MonoBehaviour
             Debug.Log(gameObject.name + " received " +dmgAmnt + " dmg from " + minionAttacking.gameObject.name);
             
         damage(dmgAmnt);
-        minionAttacking.damage(reflectDamage); //Don't reflect from reflect        
-
-        if (gameObject.CompareTag("Enemy")){
-            gameObject.GetComponent<EnemyAIControl>().SetTarget(minionAttacking.gameObject);
-        }
+        minionAttacking.damage(reflectDamage); //Don't reflect from reflect
     }
     
     private void OnTriggerEnter(Collider other)
@@ -127,7 +116,7 @@ public class Attributes_scr : MonoBehaviour
             Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
             
             if(CompareTag("Player"))
-                GetComponent<pAttributes_scr>().damage(); //Forward to player damage functions instead
+                playerAttr.damage(); //Forward to player damage functions instead
             else
                 this.damage(attackerAttr.attackDamage, attackerAttr);
         }
@@ -141,9 +130,7 @@ public class Attributes_scr : MonoBehaviour
     private IEnumerator removeBody()
     {
         yield return new WaitForSeconds(removeDelay);
-
-        if (m_Rigidbody)
-            m_Rigidbody.detectCollisions = false;
+        
         while (transform.position.y > -10)
         {
             transform.position += Vector3.down * Time.deltaTime; 

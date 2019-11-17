@@ -27,6 +27,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private bool debug = true;
         [SerializeField] private GameObject target;
         private Attributes_scr targetAttr;
+        private EnemyAIControl targetAI;
         [SerializeField] private float enemySearchDelay = 1f;
         
         private AiAnimator_scr m_AiAnimatorScr;
@@ -51,7 +52,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 currentState = value;
                 agent.isStopped = false;
-                StopCoroutine(setDestructibleDestination(target.GetComponent<Collider>()));
+                StopCoroutine(setDestructibleDestination(GetComponent<Collider>()));
                 
                 switch (currentState)
                 {
@@ -208,6 +209,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (target && targetAttr.health > 0)
             {
                 transform.LookAt(target.transform);
+                if(target.CompareTag("Enemy") && targetAI.target != gameObject)
+                    targetAI.SetTarget(this.gameObject);
 
                 //Start attack animation
                 float animLength = m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
@@ -278,13 +281,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         enemyList = nearbyEnemies.OrderBy(
                             x => (this.transform.position - x.transform.position).sqrMagnitude
                         ).ToList();
-                        Debug.Log("Getting destructibles instead: " + enemyList.Count);
                     }
 
                     while (enemyList.Count > 0)
                     {
                         GameObject newTarget = enemyList[0].gameObject;
-                        Debug.Log(newTarget.name);
                         enemyList.RemoveAt(0);
 
                         Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
@@ -299,6 +300,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                             Debug.DrawRay(origin, destination - origin, Color.blue, 2f);
                             this.target = newTarget;
                             targetAttr = newTarget.GetComponent<Attributes_scr>();
+                            if (newTarget.CompareTag("Enemy"))
+                                targetAI = newTarget.GetComponent<EnemyAIControl>();
                         }
                     }
                 }

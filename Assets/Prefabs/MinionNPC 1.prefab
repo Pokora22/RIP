@@ -125,15 +125,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfee47c19814224dbaac687982c03b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 2
   health: 0
   attackDamage: 2
   attackSpeed: 2
   moveSpeedMultiplier: 1
   reflectDamage: 0
   expValue: 5
-  corpse: {fileID: 0}
-  debug: 1
+  corpse: {fileID: 5359939786188790811, guid: 80b4d2d2c74991b4288f03e9f8aec96e, type: 3}
+  debug: 0
   alertRange: 20
   alertChance: 20
   removeDelay: 5
@@ -166,7 +166,7 @@ MonoBehaviour:
   destructibleStoppingDistance: 0.5
   enemyDetectionRange: 5
   playerLeashRange: 15
-  debug: 1
+  debug: 0
   target: {fileID: 0}
   enemySearchDelay: 0.5
 --- !u!82 &6483661527495625800

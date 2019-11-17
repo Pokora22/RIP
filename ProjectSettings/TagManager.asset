@@ -20,6 +20,7 @@ TagManager:
   - UIZombieCount
   - UIExpBar
   - UILevelNotification
+  - GameManager
   layers:
   - Default
   - TransparentFX

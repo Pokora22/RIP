@@ -26,7 +26,6 @@ public class PlayerController_scr : MonoBehaviour
     private Vector3 m_CamForward, move;
     private Transform m_Cam;
     private Rigidbody m_Rigidbody;
-
     private float inputTimeDelay = .2f;
     private float inputTimeStamp;
 
@@ -35,7 +34,7 @@ public class PlayerController_scr : MonoBehaviour
     {
         minions = new List<SummonAIControl>();
         minionsAway = new List<SummonAIControl>();
-        playerAttributes = GetComponent<pAttributes_scr>();
+        playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<pAttributes_scr>();
         characterAttributes = GetComponent<Attributes_scr>();
         m_Cam = Camera.main.transform;
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -182,5 +181,16 @@ public class PlayerController_scr : MonoBehaviour
 //        Vector3 direction = new Vector3(camera.transform.forward.x, 0f, camera.transform.forward.z);
 //        Gizmos.DrawRay(origin, direction * 10f);
         
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Barricade") && other.GetContact(0).normal == other.transform.right
+        ) //transform.right is the spiky side
+        {
+            playerAttributes.damage();
+            m_Rigidbody.velocity = Vector3.zero;
+            m_Rigidbody.AddForce((other.transform.right + (Vector3.up/20)) * 50, ForceMode.Impulse); //TODO: Push player back? Adjust force
+        }
     }
 }

@@ -131,8 +131,8 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   reflectDamage: 0
   expValue: 5
-  corpse: {fileID: 6236385349123600902, guid: 60020d365bd28d446858d6a9a0dd09b2, type: 3}
-  debug: 1
+  corpse: {fileID: 8177375798088622285, guid: 2c7e474bc4d867c47b191de433452fea, type: 3}
+  debug: 0
   alertRange: 20
   alertChance: 20
   removeDelay: 5
