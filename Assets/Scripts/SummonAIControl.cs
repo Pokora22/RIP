@@ -66,7 +66,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.ADVANCE:
                         targetDestination = m_AdvanceDestination;
                         summoner.minionLeave(this);
-                        agent.stoppingDistance = 5f;
                         recalled = false;
                         break;
                     
@@ -153,7 +152,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             recalled = false;
             
             if (obstacleHit)
-                m_AdvanceDestination = rayHit.point;
+                m_AdvanceDestination = new Vector3(rayHit.point.x, transform.position.y, rayHit.point.z);
             else
                 m_AdvanceDestination = destination;
             
@@ -171,6 +170,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool inStoppingDistance()
         {
             float remainingDistance = Vector3.Distance(transform.position, targetDestination);
+            Debug.Log(remainingDistance);
+            Debug.Log(targetDestination);
+            Debug.Log(transform.position);
             return remainingDistance <= agent.stoppingDistance;
         }
 
