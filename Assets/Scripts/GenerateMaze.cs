@@ -5,7 +5,7 @@ using UnityEngine;
 public class GenerateMaze : MonoBehaviour
 {
     private MazeDataGenerator dataGenerator;
-    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade;
+    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, player;
     [SerializeField] private float wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
@@ -19,11 +19,17 @@ public class GenerateMaze : MonoBehaviour
 
     private void Start()
     {
-        GenerateNewMaze(terrain.transform.localScale.x, terrain.transform.localScale.z);
+        float width = terrain.GetComponent<Renderer>().bounds.max.x;
+        float length = terrain.GetComponent<Renderer>().bounds.max.z;
+        
+        Debug.Log(length + " " + width);
+        
+        GenerateNewMaze(length, width);
     }
 
     public void GenerateNewMaze(float length, float width){
         data = dataGenerator.FromDimensions((int)(length/cellSize), (int)(width/cellSize));
+        bool playerPlaced = false;
         
         int rMax = data.GetUpperBound(0);
         int cMax = data.GetUpperBound(1);
@@ -42,7 +48,13 @@ public class GenerateMaze : MonoBehaviour
                 }
                 else
                 {
-                    
+                    if (!playerPlaced)
+                    {
+                        playerPlaced = true;
+                        Instantiate(player,
+                            new Vector3(i * cellSize - length / 2, terrain.transform.localScale.y + 1,
+                                j * cellSize), Quaternion.identity);
+                    }
                     
                 }
             }
@@ -87,11 +99,8 @@ public class GenerateMaze : MonoBehaviour
         float obstacleHeight = obstacle.GetComponent<Renderer>().bounds.max.y;
         
         Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
-            height/2 + obstacleHeight, j * cellSize - width / 2);
+            obstacleHeight, j * cellSize - width / 2);
         Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : randomCardinalRotation();
-        
-        if(obstacle == barricade)
-            Debug.Log("Height: " + obstacle.GetComponent<Renderer>().bounds.max.y);
         
         Instantiate(obstacle,
             obstacleLocation,

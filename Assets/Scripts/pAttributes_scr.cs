@@ -27,12 +27,17 @@ public class pAttributes_scr : MonoBehaviour
     [SerializeField] private float useArtifactPeriod = 1f;
     [SerializeField] private float invulnerableTime = 0.5f;
     private bool invulnerable;
+
+    private static int count = 0;
     
 
     void Start()
     {
+        Debug.Log(++count);
+        Debug.Log(GameObject.FindWithTag("UILevelNotification"));
         nextLvlExpReq = baseExpReq;
         health = maxHealth;
+        currentLvl = 0;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
         hudZombieCount = GameObject.FindWithTag("UIZombieCount").GetComponentInChildren<TextMeshProUGUI>();
         livesDisplay = GameObject.FindGameObjectsWithTag("UIPhylactery");
@@ -89,6 +94,8 @@ public class pAttributes_scr : MonoBehaviour
         
         hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count));
         
+        
+        Debug.Log(levelNotification);
         levelNotification.SetActive(currentLvl > 0); //TODO: When skill points are in, check that against 0
     }
 

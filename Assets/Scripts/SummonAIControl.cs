@@ -170,9 +170,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool inStoppingDistance()
         {
             float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-            Debug.Log(remainingDistance);
-            Debug.Log(targetDestination);
-            Debug.Log(transform.position);
             return remainingDistance <= agent.stoppingDistance;
         }
 

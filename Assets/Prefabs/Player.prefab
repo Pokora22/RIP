@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff11363a5cf74044992d2b54f0c24a73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  summonsLimit: 5
   maxHealth: 3
   baseExpReq: 50
   phylacteri:
@@ -206,7 +207,6 @@ MonoBehaviour:
   obstaclesMask:
     serializedVersion: 2
     m_Bits: 2049
-  summonsLimit: 5
   minions: []
   minionsAway: []
 --- !u!114 &4450414843463200064
