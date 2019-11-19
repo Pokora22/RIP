@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 71201287}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,7 +206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71201286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 47.363712, y: 4.0047417, z: 39.447994}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 1, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -303,6 +303,66 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &841733811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841733812}
+  m_Layer: 0
+  m_Name: ProcGenThings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &841733812
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841733811}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1120256619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1120256620}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1120256620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120256619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 143.33014, y: -295.4916, z: 237.26718}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1991059825
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +392,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41cdad4149a4ba44ea9b1d324f170e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall: {fileID: 2466086474607867139, guid: 6ae7477b80c3c2a46ade587521905257, type: 3}
+  wall: {fileID: 5352217564945598738, guid: 1c76d6ef7085ce449ba8f89ae999d282, type: 3}
+  wallTresure: {fileID: 8720753597716220025, guid: 05d65852e934b2e4091725a92555735c,
+    type: 3}
+  pillar: {fileID: 6107139042556464850, guid: 9872cf56e3aa68d458ffce8973d8d1a3, type: 3}
+  sarcophagus: {fileID: 9110757350558094985, guid: 1cf432f56b5f8ad4b9bd00a66daa8b0d,
+    type: 3}
+  barricade: {fileID: 1705433511141110120, guid: 04f94c93a7806ec40aa3d849847cb5cc,
+    type: 3}
+  wallChance: 0.8
+  treasureChance: 0.1
+  sarcophhagusChance: 0.6
+  barricadeChance: 0.3
+  pillarChance: 0.5
+  parentCollection: {fileID: 841733811}
+  cellSize: 3
+  cellHeight: 3
 --- !u!4 &1991059827
 Transform:
   m_ObjectHideFlags: 0

@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Pillar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Pillar.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ProcTutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ProcTutorial.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProBuilderSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProBuilderSettings.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,46 +66,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/pAttributes_scr.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="34" column="27" selection-start-line="34" selection-start-column="27" selection-end-line="34" selection-end-column="27" />
-              <folding>
-                <marker date="1574015332596" expanded="false" signature="6:171" ph="..." />
-                <marker date="1574015332596" expanded="true" signature="217:3665" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="992:1612" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="1638:1895" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="1671:1889" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="1930:2532" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="2004:2505" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="2561:3092" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="3142:3228" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="3268:3489" ph="{...}" />
-                <marker date="1574015332596" expanded="true" signature="3545:3663" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/DontDestroyOnLoad_scr.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="5" selection-start-line="7" selection-start-column="4" selection-end-line="14" selection-end-column="5" />
-              <folding>
-                <marker date="1570720206713" expanded="false" signature="6:78" ph="..." />
-                <marker date="1570720206713" expanded="true" signature="130:426" ph="{...}" />
-                <marker date="1570720206713" expanded="true" signature="202:424" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="246">
-              <caret line="154" column="105" lean-forward="true" selection-start-line="154" selection-start-column="105" selection-end-line="154" selection-end-column="105" />
+              <caret line="154" column="105" selection-start-line="154" selection-start-column="105" selection-end-line="154" selection-end-column="105" />
               <folding>
                 <marker date="1574023005715" expanded="false" signature="6:190" ph="..." />
                 <marker date="1574023005715" expanded="true" signature="244:13731" ph="{...}" />
@@ -137,6 +106,65 @@
                 <marker date="1574023005715" expanded="true" signature="13445:13723" ph="{...}" />
                 <marker date="1574023005715" expanded="true" signature="13482:13595" ph="{...}" />
                 <marker date="1574023005715" expanded="true" signature="13597:13688" ph="/* yield return new WaitForSeconds(recallDelay); ... */" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="32" />
+              <folding>
+                <marker date="1574182373994" expanded="false" signature="6:78" ph="..." />
+                <marker date="1574182373994" expanded="true" signature="121:2828" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="653:762" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="788:889" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="949:2119" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="1176:2113" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="1230:2090" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="1281:1977" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="1679:1959" ph="/* Instantiate(RandomObstacle(), ... */" />
+                <marker date="1574182373994" expanded="true" signature="1998:2076" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="2168:2277" ph="{...}" />
+                <marker date="1574182373994" expanded="true" signature="2318:2824" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/MazeDataGenerator.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+              <folding>
+                <marker date="1574179047194" expanded="false" signature="6:78" ph="..." />
+                <marker date="1574179047194" expanded="true" signature="81:272" ph="/* Taken from https://www.raywenderlich.com/82-procedural-generation-of-mazes-with-unity ... */" />
+                <marker date="1574179047194" expanded="true" signature="303:1418" ph="{...}" />
+                <marker date="1574179047194" expanded="true" signature="374:415" ph="{...}" />
+                <marker date="1574179047194" expanded="true" signature="477:1416" ph="{...}" />
+                <marker date="1574179047194" expanded="true" signature="655:1388" ph="{...}" />
+                <marker date="1574179047194" expanded="true" signature="709:1378" ph="{...}" />
+                <marker date="1574179047194" expanded="true" signature="807:879" ph="{...}" />
+                <marker date="1574179047194" expanded="true" signature="951:1364" ph="{...}" />
+                <marker date="1574179047194" expanded="true" signature="1028:1346" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+              <folding>
+                <marker date="1574104148280" expanded="false" signature="6:78" ph="..." />
+                <marker date="1574104148280" expanded="true" signature="123:417" ph="{...}" />
+                <marker date="1574104148280" expanded="true" signature="232:336" ph="{...}" />
+                <marker date="1574104148280" expanded="true" signature="394:415" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -238,25 +266,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/ButtonHandler_scr.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-              <folding>
-                <marker date="1574014910140" expanded="false" signature="6:126" ph="..." />
-                <marker date="1574014910140" expanded="true" signature="174:371" ph="{...}" />
-                <marker date="1574014910140" expanded="true" signature="214:309" ph="{...}" />
-                <marker date="1574014910140" expanded="true" signature="333:369" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="120" column="16" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
+            <state relative-caret-position="867">
+              <caret line="55" selection-start-line="55" selection-end-line="55" />
               <folding>
                 <marker date="1574022419493" expanded="false" signature="6:150" ph="..." />
                 <marker date="1574022419493" expanded="true" signature="195:5872" ph="{...}" />
@@ -374,10 +387,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/Standard Assets/Utility/ParticleSystemDestroyer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../GDCA_Maze/Mazescape_Unity_Project/Assets/Scripts/scr_AI_Enemy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Exit.prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MazeDataGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.0.13/UnityEditor.TestRunner/CommandLineParser/CommandLineOption.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Player.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ThirdPersonUserControl_Custom.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Corpse_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ThirdPersonCharacter_Custom.cs" root0="FORCE_HIGHLIGHTING" />
@@ -420,6 +436,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/NpcAudio_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MazeDataGenerator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" />
       </list>
     </option>
   </component>
@@ -518,14 +536,7 @@
       <workItem from="1572364086940" duration="97273000" />
       <workItem from="1573398579419" duration="20393000" />
       <workItem from="1573677563683" duration="5324000" />
-      <workItem from="1573925495427" duration="24517000" />
-    </task>
-    <task id="LOCAL-00027" summary="Delay on target check breaks things">
-      <created>1572550295090</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1572550295090</updated>
+      <workItem from="1573925495427" duration="30635000" />
     </task>
     <task id="LOCAL-00028" summary="Extracted fov check to its own method">
       <created>1572550922067</created>
@@ -863,11 +874,18 @@
       <option name="project" value="LOCAL" />
       <updated>1574022643437</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="Fixed advance destination to use transform y for distance calculation">
+      <created>1574023158232</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1574023158232</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="245925000" />
+    <option name="totallyTimeSpent" value="252043000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -880,7 +898,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21502385" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1006,7 +1023,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Cleaned up character controller slightly" />
     <MESSAGE value="Added lives hud&#10;Added zombie count hud" />
     <MESSAGE value="Added exp bar to HUD" />
     <MESSAGE value="Added scaling to HUD" />
@@ -1031,7 +1047,8 @@
     <MESSAGE value="Fixed calling update position on disabled navmesh agents" />
     <MESSAGE value="Fixed calling update position on disabled navmesh agents v2&#10;Added framework for low and high priority target searches" />
     <MESSAGE value="Modified peasant to drop a corpse on death instead animating death on alive object&#10;Moved player attributes to game manager (not destroyed on load)&#10;Moved collision to player controller&#10;Changed hearing to only care for distance (for now, so the enemy doesn't ignore player standing barely out of their FOV)&#10;Made a separate corpse for minions as well&#10;Death audio is now playing at point (instancing new source)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified peasant to drop a corpse on death instead animating death on alive object&#10;Moved player attributes to game manager (not destroyed on load)&#10;Moved collision to player controller&#10;Changed hearing to only care for distance (for now, so the enemy doesn't ignore player standing barely out of their FOV)&#10;Made a separate corpse for minions as well&#10;Death audio is now playing at point (instancing new source)" />
+    <MESSAGE value="Fixed advance destination to use transform y for distance calculation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed advance destination to use transform y for distance calculation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1313,12 +1330,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <marker date="1572708763233" expanded="false" signature="6:97" ph="..." />
-            <marker date="1572708763233" expanded="true" signature="144:1046" ph="{...}" />
-            <marker date="1572708763233" expanded="true" signature="394:575" ph="{...}" />
-            <marker date="1572708763233" expanded="true" signature="633:1044" ph="{...}" />
-            <marker date="1572708763233" expanded="true" signature="681:1038" ph="{...}" />
-            <marker date="1572708763233" expanded="true" signature="719:970" ph="{...}" />
+            <marker date="1574104148281" expanded="false" signature="6:97" ph="..." />
+            <marker date="1574104148281" expanded="true" signature="144:1248" ph="{...}" />
+            <marker date="1574104148281" expanded="true" signature="394:575" ph="{...}" />
+            <marker date="1574104148281" expanded="true" signature="633:1246" ph="{...}" />
+            <marker date="1574104148281" expanded="true" signature="883:1240" ph="{...}" />
+            <marker date="1574104148281" expanded="true" signature="921:1172" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1487,37 +1504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="120" column="16" selection-start-line="120" selection-start-column="16" selection-end-line="120" selection-end-column="16" />
-          <folding>
-            <marker date="1574022419493" expanded="false" signature="6:150" ph="..." />
-            <marker date="1574022419493" expanded="true" signature="195:5872" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="1217:2193" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="1256:1596" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="1654:1779" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="2199:2499" ph="/* private void OnCollisionEnter(Collision other) ... */" />
-            <marker date="1574022419493" expanded="true" signature="2538:3684" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="2571:3678" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="2642:3462" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="2841:2955" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="3479:3668" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="3777:4034" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="4087:4521" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="4188:4515" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="4570:4650" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="4688:4988" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="4800:4917" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="5020:5692" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="5074:5686" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="5244:5676" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="5531:5662" ph="{...}" />
-            <marker date="1574022419493" expanded="true" signature="5752:5870" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -1552,7 +1538,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
-          <caret line="154" column="105" lean-forward="true" selection-start-line="154" selection-start-column="105" selection-end-line="154" selection-end-column="105" />
+          <caret line="154" column="105" selection-start-line="154" selection-start-column="105" selection-end-line="154" selection-end-column="105" />
           <folding>
             <marker date="1574023005715" expanded="false" signature="6:190" ph="..." />
             <marker date="1574023005715" expanded="true" signature="244:13731" ph="{...}" />
@@ -1589,6 +1575,90 @@
             <marker date="1574023005715" expanded="true" signature="13445:13723" ph="{...}" />
             <marker date="1574023005715" expanded="true" signature="13482:13595" ph="{...}" />
             <marker date="1574023005715" expanded="true" signature="13597:13688" ph="/* yield return new WaitForSeconds(recallDelay); ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding>
+            <marker date="1574104148280" expanded="false" signature="6:78" ph="..." />
+            <marker date="1574104148280" expanded="true" signature="123:417" ph="{...}" />
+            <marker date="1574104148280" expanded="true" signature="232:336" ph="{...}" />
+            <marker date="1574104148280" expanded="true" signature="394:415" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+          <folding>
+            <marker date="1574022419493" expanded="false" signature="6:150" ph="..." />
+            <marker date="1574022419493" expanded="true" signature="195:5872" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="1217:2193" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="1256:1596" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="1654:1779" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="2199:2499" ph="/* private void OnCollisionEnter(Collision other) ... */" />
+            <marker date="1574022419493" expanded="true" signature="2538:3684" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="2571:3678" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="2642:3462" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="2841:2955" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="3479:3668" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="3777:4034" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="4087:4521" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="4188:4515" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="4570:4650" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="4688:4988" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="4800:4917" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="5020:5692" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="5074:5686" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="5244:5676" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="5531:5662" ph="{...}" />
+            <marker date="1574022419493" expanded="true" signature="5752:5870" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/MazeDataGenerator.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+          <folding>
+            <marker date="1574179047194" expanded="false" signature="6:78" ph="..." />
+            <marker date="1574179047194" expanded="true" signature="81:272" ph="/* Taken from https://www.raywenderlich.com/82-procedural-generation-of-mazes-with-unity ... */" />
+            <marker date="1574179047194" expanded="true" signature="303:1418" ph="{...}" />
+            <marker date="1574179047194" expanded="true" signature="374:415" ph="{...}" />
+            <marker date="1574179047194" expanded="true" signature="477:1416" ph="{...}" />
+            <marker date="1574179047194" expanded="true" signature="655:1388" ph="{...}" />
+            <marker date="1574179047194" expanded="true" signature="709:1378" ph="{...}" />
+            <marker date="1574179047194" expanded="true" signature="807:879" ph="{...}" />
+            <marker date="1574179047194" expanded="true" signature="951:1364" ph="{...}" />
+            <marker date="1574179047194" expanded="true" signature="1028:1346" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="32" />
+          <folding>
+            <marker date="1574182373994" expanded="false" signature="6:78" ph="..." />
+            <marker date="1574182373994" expanded="true" signature="121:2828" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="653:762" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="788:889" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="949:2119" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="1176:2113" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="1230:2090" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="1281:1977" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="1679:1959" ph="/* Instantiate(RandomObstacle(), ... */" />
+            <marker date="1574182373994" expanded="true" signature="1998:2076" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="2168:2277" ph="{...}" />
+            <marker date="1574182373994" expanded="true" signature="2318:2824" ph="{...}" />
           </folding>
         </state>
       </provider>

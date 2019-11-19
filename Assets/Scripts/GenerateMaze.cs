@@ -4,39 +4,82 @@ using UnityEngine;
 
 public class GenerateMaze : MonoBehaviour
 {
-    public GameObject wall;
-    public int[,] worldMap = new int[,]
-    {
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1},
-        {1,1,1,1,1,1,1,1,1,1,1,1}        
-    };
+    private MazeDataGenerator dataGenerator;
+    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade;
+    [SerializeField] private float wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
+    int[,] data;
+    [SerializeField] private GameObject parentCollection;
+    [SerializeField] private float cellSize = 3f;
+    [SerializeField] private float cellHeight = 3f;
+    private GameObject terrain;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        int i, j;
+    void Awake(){
+        dataGenerator = new MazeDataGenerator();
+        terrain = GameObject.FindWithTag("Terrain");
+    }
 
-        for(i = 0; i < 10; i++){
-            for(j = 0; j < 10; j++){
-                GameObject t;
-                if(worldMap[i,j] == 1){
-                    t = (GameObject)(Instantiate(wall, new Vector3(50f - i * wall.transform.localScale.x, 1.5f, 50 - j * 10), Quaternion.identity));
+    private void Start()
+    {
+        GenerateNewMaze(terrain.transform.localScale.x, terrain.transform.localScale.z);
+    }
+
+    public void GenerateNewMaze(float length, float width){
+        data = dataGenerator.FromDimensions((int)(length/cellSize), (int)(width/cellSize));
+        
+        int rMax = data.GetUpperBound(0);
+        int cMax = data.GetUpperBound(1);
+
+        for (int i = rMax; i >= 0; i--)
+        {
+            for (int j = 0; j <= cMax; j++)
+            {
+                if (data[i, j] != 0)
+                {
+                    if(i == 0 || j == 0 || i == rMax || j == cMax)
+                        Instantiate(wall,
+                                new Vector3(i * cellSize - length/2, terrain.transform.localScale.y/2, j * cellSize - width/2),
+                                randomCardinalRotation(),
+                                parentCollection.transform);
+                    
+                    Instantiate(RandomObstacle(),
+                        new Vector3(i * cellSize - length/2, terrain.transform.localScale.y/2, j * cellSize - width/2),
+                        randomCardinalRotation(),
+                        parentCollection.transform);
+                }
+                else
+                {
+                    
+                    
                 }
             }
+            
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private Quaternion randomCardinalRotation()
     {
-        
+        int rotation = Random.Range(0, 3);
+        return Quaternion.Euler(0, 90 * rotation, 0);
     }
+
+    private GameObject RandomObstacle()
+    {
+        GameObject prefab;
+        float rng = Random.Range(0, treasureChance + barricadeChance + sarcophhagusChance + pillarChance + wallChance);
+        if (rng < treasureChance)
+            prefab = wallTresure;
+        else if (rng < barricadeChance)
+            prefab = barricade;
+        else if (rng < sarcophhagusChance)
+            prefab = sarcophagus;
+        else if (rng < pillarChance)
+            prefab = pillar;
+        else
+            prefab = wall;
+
+        return prefab;
+    }
+
+
 }
