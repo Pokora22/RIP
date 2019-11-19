@@ -393,18 +393,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall: {fileID: 5352217564945598738, guid: 1c76d6ef7085ce449ba8f89ae999d282, type: 3}
-  wallTresure: {fileID: 8720753597716220025, guid: 05d65852e934b2e4091725a92555735c,
+  wallTresure: {fileID: 5352217564945598738, guid: 5efa238a95246b24ea0b3ef6f551d84e,
     type: 3}
   pillar: {fileID: 6107139042556464850, guid: 9872cf56e3aa68d458ffce8973d8d1a3, type: 3}
   sarcophagus: {fileID: 9110757350558094985, guid: 1cf432f56b5f8ad4b9bd00a66daa8b0d,
     type: 3}
   barricade: {fileID: 1705433511141110120, guid: 04f94c93a7806ec40aa3d849847cb5cc,
     type: 3}
-  wallChance: 0.8
+  wallChance: 0.9
   treasureChance: 0.1
   sarcophhagusChance: 0.6
   barricadeChance: 0.3
-  pillarChance: 0.5
+  pillarChance: 0.3
   parentCollection: {fileID: 841733811}
   cellSize: 3
   cellHeight: 3

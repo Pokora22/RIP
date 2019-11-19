@@ -8,9 +8,7 @@ public class GenerateMaze : MonoBehaviour
     [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade;
     [SerializeField] private float wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
     int[,] data;
-    [SerializeField] private GameObject parentCollection;
     [SerializeField] private float cellSize = 3f;
-    [SerializeField] private float cellHeight = 3f;
     private GameObject terrain;
 
     // Start is called before the first frame update
@@ -36,20 +34,11 @@ public class GenerateMaze : MonoBehaviour
             {
                 if (data[i, j] != 0)
                 {
-                    Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
-                        terrain.transform.localScale.y / 2 + cellHeight / 2, j * cellSize - width / 2);
                     
                     if (i == 0 || j == 0 || i == rMax || j == cMax)
-                        Instantiate(wall,
-                                obstacleLocation,
-                                randomCardinalRotation(),
-                                parentCollection.transform);
-                    
+                        PlaceObstacle(i, j, wall);
                     else
-                        Instantiate(RandomObstacle(),
-                            obstacleLocation,
-                            randomCardinalRotation(),
-                            parentCollection.transform);
+                        PlaceObstacle(i, j);
                 }
                 else
                 {
@@ -67,21 +56,38 @@ public class GenerateMaze : MonoBehaviour
         return Quaternion.Euler(0, 90 * rotation, 0);
     }
 
-    private GameObject RandomObstacle()
+    private void PlaceObstacle(int i, int j, GameObject obstacle = null)
     {
-        GameObject prefab;
-        float rng = Random.Range(0, treasureChance + barricadeChance + sarcophhagusChance + pillarChance + wallChance);
-        if (rng < treasureChance)
-            prefab = wallTresure;
-        else if (rng < barricadeChance)
-            prefab = barricade;
-        else if (rng < sarcophhagusChance)
-            prefab = sarcophagus;
-        else if (rng < pillarChance)
-            prefab = pillar;
-        else
-            prefab = wall;
+        if (obstacle == null)
+        {
+            float rng = Random.Range(0,
+                treasureChance + barricadeChance + sarcophhagusChance + pillarChance + wallChance);
+            if (rng < treasureChance)
+                obstacle = wallTresure;
+            else if (rng < barricadeChance)
+                obstacle = barricade;
+            else if (rng < sarcophhagusChance)
+                obstacle = sarcophagus;
+            else if (rng < pillarChance)
+                obstacle = pillar;
+            else
+                obstacle = wall;
+        }
 
-        return prefab;
+
+        float length = terrain.transform.localScale.x;
+        float width = terrain.transform.localScale.z;
+        float height = terrain.transform.localScale.y;
+        float obstacleHeight = obstacle.GetComponent<Renderer>().bounds.max.y;
+        
+        Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
+            height / 2 + obstacleHeight / 2, j * cellSize - width / 2);
+        
+        Instantiate(obstacle,
+            obstacleLocation,
+            randomCardinalRotation(),
+            transform);
     }
+
+
 }
