@@ -55,6 +55,12 @@ public class GenerateMaze : MonoBehaviour
         int rotation = Random.Range(0, 3);
         return Quaternion.Euler(0, 90 * rotation, 0);
     }
+    
+    private Quaternion randomFreeformRotation()
+    {
+        int rotation = Random.Range(0, 360);
+        return Quaternion.Euler(0, rotation, 0);
+    }
 
     private void PlaceObstacle(int i, int j, GameObject obstacle = null)
     {
@@ -78,18 +84,18 @@ public class GenerateMaze : MonoBehaviour
         float length = terrain.transform.localScale.x;
         float width = terrain.transform.localScale.z;
         float height = terrain.transform.localScale.y;
-        //Weird fix for barricade pivot being off centre (for now at least)
-        float obstacleHeight = obstacle == barricade ? 0:  obstacle.GetComponent<Renderer>().bounds.max.y;
+        float obstacleHeight = obstacle.GetComponent<Renderer>().bounds.max.y;
         
         Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
             height/2 + obstacleHeight, j * cellSize - width / 2);
+        Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : randomCardinalRotation();
         
         if(obstacle == barricade)
             Debug.Log("Height: " + obstacle.GetComponent<Renderer>().bounds.max.y);
         
         Instantiate(obstacle,
             obstacleLocation,
-            randomCardinalRotation(),
+            obstacleRotation,
             transform);
     }
 
