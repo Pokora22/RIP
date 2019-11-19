@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
+    <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="Random Maze Gen v1">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Pillar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Pillar.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ProcTutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ProcTutorial.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall 3x3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall 3x3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/WallTreasure.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/WallTreasure.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProBuilderSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProBuilderSettings.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,21 +112,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="32" />
+            <state relative-caret-position="183">
+              <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
               <folding>
-                <marker date="1574182373994" expanded="false" signature="6:78" ph="..." />
-                <marker date="1574182373994" expanded="true" signature="121:2828" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="653:762" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="788:889" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="949:2119" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="1176:2113" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="1230:2090" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="1281:1977" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="1679:1959" ph="/* Instantiate(RandomObstacle(), ... */" />
-                <marker date="1574182373994" expanded="true" signature="1998:2076" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="2168:2277" ph="{...}" />
-                <marker date="1574182373994" expanded="true" signature="2318:2824" ph="{...}" />
+                <marker date="1574183383740" expanded="false" signature="6:78" ph="..." />
+                <marker date="1574183383740" expanded="true" signature="121:2913" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="653:762" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="788:889" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="949:2206" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="1176:2200" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="1230:2177" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="1281:2064" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="2085:2163" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="2255:2364" ph="{...}" />
+                <marker date="1574183383740" expanded="true" signature="2405:2911" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -138,7 +135,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/MazeDataGenerator.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+              <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
               <folding>
                 <marker date="1574179047194" expanded="false" signature="6:78" ph="..." />
                 <marker date="1574179047194" expanded="true" signature="81:272" ph="/* Taken from https://www.raywenderlich.com/82-procedural-generation-of-mazes-with-unity ... */" />
@@ -381,6 +378,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TimeOutToMenu_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/EnemyPeasantNPC.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/MinionNPC 1.prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Wall 3x3.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Artifact_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs" root0="FORCE_HIGHLIGHTING" />
@@ -536,14 +534,7 @@
       <workItem from="1572364086940" duration="97273000" />
       <workItem from="1573398579419" duration="20393000" />
       <workItem from="1573677563683" duration="5324000" />
-      <workItem from="1573925495427" duration="30635000" />
-    </task>
-    <task id="LOCAL-00028" summary="Extracted fov check to its own method">
-      <created>1572550922067</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1572550922067</updated>
+      <workItem from="1573925495427" duration="31527000" />
     </task>
     <task id="LOCAL-00029" summary="Added same tag damage check (disables friendly fire)&#10;Added coroutine tracking in Enemy AI (might help avoid overflow ?)">
       <created>1572552590004</created>
@@ -881,11 +872,18 @@
       <option name="project" value="LOCAL" />
       <updated>1574023158232</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Random Maze Gen v1">
+      <created>1574182510843</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1574182510954</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252043000" />
+    <option name="totallyTimeSpent" value="252935000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -898,8 +896,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21502385" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21502385" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -928,7 +927,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="right" id="Errors In Solution" order="4" visible="true" weight="0.26152623" />
+      <window_info active="true" anchor="right" id="Errors In Solution" order="4" visible="true" weight="0.26152623" />
       <window_info anchor="right" id="Database" order="5" weight="0.3298887" />
       <window_info anchor="right" id="Unit Tests Coverage" order="6" />
     </layout>
@@ -1023,7 +1022,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added lives hud&#10;Added zombie count hud" />
     <MESSAGE value="Added exp bar to HUD" />
     <MESSAGE value="Added scaling to HUD" />
     <MESSAGE value="Added inventory (skeleton)&#10;Added artifact model&#10;Added treasure chest with animation&#10;Added list of artifacts to player" />
@@ -1048,7 +1046,8 @@
     <MESSAGE value="Fixed calling update position on disabled navmesh agents v2&#10;Added framework for low and high priority target searches" />
     <MESSAGE value="Modified peasant to drop a corpse on death instead animating death on alive object&#10;Moved player attributes to game manager (not destroyed on load)&#10;Moved collision to player controller&#10;Changed hearing to only care for distance (for now, so the enemy doesn't ignore player standing barely out of their FOV)&#10;Made a separate corpse for minions as well&#10;Death audio is now playing at point (instancing new source)" />
     <MESSAGE value="Fixed advance destination to use transform y for distance calculation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed advance destination to use transform y for distance calculation" />
+    <MESSAGE value="Random Maze Gen v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Random Maze Gen v1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1626,7 +1625,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/MazeDataGenerator.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
           <folding>
             <marker date="1574179047194" expanded="false" signature="6:78" ph="..." />
             <marker date="1574179047194" expanded="true" signature="81:272" ph="/* Taken from https://www.raywenderlich.com/82-procedural-generation-of-mazes-with-unity ... */" />
@@ -1644,21 +1643,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="31" lean-forward="true" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="32" />
+        <state relative-caret-position="183">
+          <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
           <folding>
-            <marker date="1574182373994" expanded="false" signature="6:78" ph="..." />
-            <marker date="1574182373994" expanded="true" signature="121:2828" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="653:762" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="788:889" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="949:2119" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="1176:2113" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="1230:2090" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="1281:1977" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="1679:1959" ph="/* Instantiate(RandomObstacle(), ... */" />
-            <marker date="1574182373994" expanded="true" signature="1998:2076" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="2168:2277" ph="{...}" />
-            <marker date="1574182373994" expanded="true" signature="2318:2824" ph="{...}" />
+            <marker date="1574183383740" expanded="false" signature="6:78" ph="..." />
+            <marker date="1574183383740" expanded="true" signature="121:2913" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="653:762" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="788:889" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="949:2206" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="1176:2200" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="1230:2177" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="1281:2064" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="2085:2163" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="2255:2364" ph="{...}" />
+            <marker date="1574183383740" expanded="true" signature="2405:2911" ph="{...}" />
           </folding>
         </state>
       </provider>

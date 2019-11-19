@@ -36,16 +36,20 @@ public class GenerateMaze : MonoBehaviour
             {
                 if (data[i, j] != 0)
                 {
-                    if(i == 0 || j == 0 || i == rMax || j == cMax)
+                    Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
+                        terrain.transform.localScale.y / 2 + cellHeight / 2, j * cellSize - width / 2);
+                    
+                    if (i == 0 || j == 0 || i == rMax || j == cMax)
                         Instantiate(wall,
-                                new Vector3(i * cellSize - length/2, terrain.transform.localScale.y/2, j * cellSize - width/2),
+                                obstacleLocation,
                                 randomCardinalRotation(),
                                 parentCollection.transform);
                     
-                    Instantiate(RandomObstacle(),
-                        new Vector3(i * cellSize - length/2, terrain.transform.localScale.y/2, j * cellSize - width/2),
-                        randomCardinalRotation(),
-                        parentCollection.transform);
+                    else
+                        Instantiate(RandomObstacle(),
+                            obstacleLocation,
+                            randomCardinalRotation(),
+                            parentCollection.transform);
                 }
                 else
                 {
@@ -80,6 +84,4 @@ public class GenerateMaze : MonoBehaviour
 
         return prefab;
     }
-
-
 }
