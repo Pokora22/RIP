@@ -78,10 +78,14 @@ public class GenerateMaze : MonoBehaviour
         float length = terrain.transform.localScale.x;
         float width = terrain.transform.localScale.z;
         float height = terrain.transform.localScale.y;
-        float obstacleHeight = obstacle.GetComponent<Renderer>().bounds.max.y;
+        //Weird fix for barricade pivot being off centre (for now at least)
+        float obstacleHeight = obstacle == barricade ? 0:  obstacle.GetComponent<Renderer>().bounds.max.y;
         
         Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
-            height / 2 + obstacleHeight / 2, j * cellSize - width / 2);
+            height/2 + obstacleHeight, j * cellSize - width / 2);
+        
+        if(obstacle == barricade)
+            Debug.Log("Height: " + obstacle.GetComponent<Renderer>().bounds.max.y);
         
         Instantiate(obstacle,
             obstacleLocation,
