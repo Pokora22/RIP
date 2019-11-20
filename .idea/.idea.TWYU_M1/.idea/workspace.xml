@@ -1,24 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="Fixed up maze generation weighting&#10;Added nav mesh generation on runtime">
+    <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Exit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Exit.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Wall 3x3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Wall 3x3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/WallTreasure.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/WallTreasure.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sandbox.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sandbox.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sandbox/NavMesh-MazeGenerator.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sandbox/NavMesh-MazeGenerator.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SummonAIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/pAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/pAttributes_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProBuilderSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProBuilderSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,24 +53,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="13" column="60" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
+            <state relative-caret-position="357">
+              <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
               <folding>
-                <marker date="1574278269573" expanded="false" signature="6:100" ph="..." />
-                <marker date="1574278269573" expanded="true" signature="143:4405" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="624:733" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="759:1242" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="1276:1811" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="1861:2209" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="1920:2180" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="2269:3249" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="2531:3243" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="2585:3233" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="2636:2882" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="2899:3219" ph="/* else if (!playerPlaced) ... */" />
-                <marker date="1574278269573" expanded="true" signature="3298:3407" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="3460:3566" ph="{...}" />
-                <marker date="1574278269573" expanded="true" signature="3640:4401" ph="{...}" />
+                <marker date="1574279132624" expanded="false" signature="6:100" ph="..." />
+                <marker date="1574279132624" expanded="true" signature="143:4405" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="624:733" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="759:1242" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="1276:1811" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="1861:2209" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="1920:2180" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="2269:3249" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="2531:3243" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="2585:3233" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="2636:2882" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="2899:3219" ph="/* else if (!playerPlaced) ... */" />
+                <marker date="1574279132624" expanded="true" signature="3298:3407" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="3460:3566" ph="{...}" />
+                <marker date="1574279132624" expanded="true" signature="3640:4401" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -499,14 +485,7 @@
       <workItem from="1573398579419" duration="20393000" />
       <workItem from="1573677563683" duration="5324000" />
       <workItem from="1573925495427" duration="31527000" />
-      <workItem from="1574272167732" duration="6473000" />
-    </task>
-    <task id="LOCAL-00033" summary="Target search sorts by distance and returns closest for enemy AI (experimental)">
-      <created>1572701076695</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1572701076695</updated>
+      <workItem from="1574272167732" duration="6514000" />
     </task>
     <task id="LOCAL-00034" summary="Added remove body coroutine for minions">
       <created>1572701130707</created>
@@ -844,11 +823,18 @@
       <option name="project" value="LOCAL" />
       <updated>1574275002097</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="Added restricted zones to maze generator">
+      <created>1574279120355</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1574279120355</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="267245000" />
+    <option name="totallyTimeSpent" value="267286000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -861,6 +847,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21661367" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -986,7 +973,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added game manager to hold inventory&#10;Set up methods to use inventory items (need to be revised)&#10;Set up skeleton for artifact creation (will try https://www.youtube.com/watch?v=aPXvoWVabPY)" />
     <MESSAGE value="Removed unnecessary using directives" />
     <MESSAGE value="Changed summon raycheck to use masks" />
     <MESSAGE value="Limited hudUpdate to only work when enough containers are in the display (avoid out of index on lives)" />
@@ -1011,7 +997,8 @@
     <MESSAGE value="Random Maze Gen v2.1" />
     <MESSAGE value="Random Maze Gen v2.2" />
     <MESSAGE value="Fixed up maze generation weighting&#10;Added nav mesh generation on runtime" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed up maze generation weighting&#10;Added nav mesh generation on runtime" />
+    <MESSAGE value="Added restricted zones to maze generator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added restricted zones to maze generator" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1623,24 +1610,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="13" column="60" selection-start-line="13" selection-start-column="60" selection-end-line="13" selection-end-column="60" />
+        <state relative-caret-position="357">
+          <caret line="24" column="19" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
           <folding>
-            <marker date="1574278269573" expanded="false" signature="6:100" ph="..." />
-            <marker date="1574278269573" expanded="true" signature="143:4405" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="624:733" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="759:1242" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="1276:1811" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="1861:2209" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="1920:2180" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="2269:3249" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="2531:3243" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="2585:3233" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="2636:2882" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="2899:3219" ph="/* else if (!playerPlaced) ... */" />
-            <marker date="1574278269573" expanded="true" signature="3298:3407" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="3460:3566" ph="{...}" />
-            <marker date="1574278269573" expanded="true" signature="3640:4401" ph="{...}" />
+            <marker date="1574279132624" expanded="false" signature="6:100" ph="..." />
+            <marker date="1574279132624" expanded="true" signature="143:4405" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="624:733" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="759:1242" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="1276:1811" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="1861:2209" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="1920:2180" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="2269:3249" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="2531:3243" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="2585:3233" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="2636:2882" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="2899:3219" ph="/* else if (!playerPlaced) ... */" />
+            <marker date="1574279132624" expanded="true" signature="3298:3407" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="3460:3566" ph="{...}" />
+            <marker date="1574279132624" expanded="true" signature="3640:4401" ph="{...}" />
           </folding>
         </state>
       </provider>

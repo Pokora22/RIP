@@ -21,8 +21,8 @@ public class GenerateMaze : MonoBehaviour
 
     private void Start()
     {
-        float width = terrain.GetComponent<Renderer>().bounds.max.x;
-        float length = terrain.GetComponent<Renderer>().bounds.max.z;
+        float length = terrain.GetComponent<Renderer>().bounds.max.x;
+        float width = terrain.GetComponent<Renderer>().bounds.max.z;
 
         weightedObstacles = new GameObject[wallChance + treasureChance + sarcophhagusChance + barricadeChance + pillarChance];
         prepObstacles();
