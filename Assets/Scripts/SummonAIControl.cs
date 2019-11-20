@@ -52,6 +52,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 currentState = value;
                 agent.isStopped = false;
+                m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed, false);
                 StopCoroutine(setDestructibleDestination(GetComponent<Collider>()));
                 
                 switch (currentState)
@@ -301,7 +302,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         RaycastHit hit;
                         if (!Physics.Raycast(origin, destination - origin, out hit, distance, obstaclesMask))
                         {
-                            Debug.Log("?");
                             Debug.DrawRay(origin, destination - origin, Color.blue, 2f);
                             this.target = newTarget;
                             targetAttr = newTarget.GetComponent<Attributes_scr>();

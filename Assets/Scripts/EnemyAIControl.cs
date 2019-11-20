@@ -50,6 +50,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 ENEMY_STATE oldState = currentstate;
                 currentstate = value;
+                m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed, false);
                 if(debug)
                     Debug.Log(gameObject.name + " going from " + oldState +  " to new state: " + currentstate);
                 
