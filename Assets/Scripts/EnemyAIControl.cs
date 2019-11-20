@@ -129,9 +129,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {   
             if(target != gameObject)
                 CurrentState = ENEMY_STATE.CHASE;
-            else if (inStoppingDistance())
+            else if (inStoppingDistance() && !doNotMove)
             {                
-                agent.destination = randomWaypoint();
+                agent.SetDestination(randomWaypoint());
             }
 
             targetDestination = agent.destination;

@@ -70,7 +70,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         break;
                     
                     case MINION_STATE.CHASE:
-                        targettingDestructible = !target.CompareTag("Enemy");
+                        targettingDestructible = target && !target.CompareTag("Enemy");
                         if (targettingDestructible)
                             StartCoroutine(setDestructibleDestination(target.GetComponent<Collider>()));
                         agent.stoppingDistance = targettingDestructible ? 
