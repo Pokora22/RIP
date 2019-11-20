@@ -117,7 +117,7 @@ public class Attributes_scr : MonoBehaviour
             
             if(CompareTag("Player"))
                 playerAttr.damage(); //Forward to player damage functions instead
-            else
+            else if (attackerAttr)
                 this.damage(attackerAttr.attackDamage, attackerAttr);
         }
     }

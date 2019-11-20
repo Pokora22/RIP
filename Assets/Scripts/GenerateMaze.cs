@@ -8,6 +8,7 @@ public class GenerateMaze : MonoBehaviour
     private MazeDataGenerator dataGenerator;
     [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade;
     [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
+    [SerializeField] private bool generateMaze;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
     private GameObject terrain;
@@ -28,7 +29,9 @@ public class GenerateMaze : MonoBehaviour
         prepObstacles();
         restrictedZones = GameObject.FindGameObjectsWithTag("Restricted");
         
-        GenerateNewMaze(length, width);
+        if(generateMaze)
+            GenerateNewMaze(length, width);
+        
         GetComponent<NavMeshSurface>().BuildNavMesh();
     }
 
