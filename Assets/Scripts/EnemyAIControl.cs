@@ -36,6 +36,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private LayerMask obstacleMask;
         [SerializeField] private float targetScanDelay = .25f;
         private Vector3 targetDestination;
+        private IEnumerator attackRoutine, targetScanRoutine;
 
         [SerializeField] private bool resetPath = false;
         
@@ -98,7 +99,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Fix for path computation time delay
             targetDestination = transform.position;
 
-            StartCoroutine(findTarget(targetScanDelay));
+            attackRoutine = AIAttack();
+            targetScanRoutine = findTarget(targetScanDelay);
+            
+            StartCoroutine(targetScanRoutine);
         }
 
         private void Update()
@@ -119,7 +123,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     break;
                 case ENEMY_STATE.ATTACK:
                     if (!m_AiAnimatorScr.CompareCurrentState("Attacking"))
-                        StartCoroutine(AIAttack());
+                        StartCoroutine(attackRoutine);
                     break;
             }
 

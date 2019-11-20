@@ -38,6 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination, targetDestination;
+        private IEnumerator scanTargetRoutine, attackRoutine;
 
         private Coroutine targetScan;
 
@@ -111,8 +112,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             audioPlayer = GetComponent<NpcAudio_scr>();
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);
+
+            scanTargetRoutine = findTarget(.25f);
+            attackRoutine = minionAttack();
             
-            targetScan = StartCoroutine(findTarget(.25f));
+            targetScan = StartCoroutine(scanTargetRoutine);
         }
 
         private void Update()
@@ -131,7 +135,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 case MINION_STATE.ATTACK:
                     //Check if already mid attack animation
                     if (!m_AiAnimatorScr.CompareCurrentState("Attack"))
-                        StartCoroutine(minionAttack());
+                        StartCoroutine(attackRoutine);
                     break;
                 default:
                        break;
@@ -188,10 +192,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     targetDestination = target.transform.position;
 
                 if (inStoppingDistance())
-                {
-                    Debug.Log("In stopping distance");
                     CurrentState = MINION_STATE.ATTACK;
-                }
             }
         }
 
@@ -208,6 +209,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAttack()
         {
+            Debug.LogException(new Exception("Stack trace?"));
             agent.isStopped = true;
             Debug.Log(transform.name + ": " + ++counter);
             //TODO: Why does this run multiple times(~40), but condition for this happens only once ? 
@@ -218,6 +220,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Check if target exists first
             if (target && targetAttr.health > 0)
             {
+                Debug.Log("Has a valid target");
                 transform.LookAt(target.transform);
                 if(target.CompareTag("Enemy") && targetAI.target != gameObject)
                     targetAI.SetTarget(this.gameObject);
@@ -225,23 +228,36 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 //Start attack animation
                 float animLength = m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
 
+                Debug.Log("Waiting");
                 //Wait for animation to finish
                 yield return new WaitForSeconds(animLength);
 
+                Debug.Log("Finished waiting");
                 //Check if target still exists
                 if (!target || targetAttr.health <= 0)
+                {
+                    Debug.Log("Target no longer valid");
                     CurrentState = MINION_STATE.FOLLOW;
+                }
                 else
                 {
+                    Debug.Log("Updating target position");
                     //Update destination and check if target is too far for an attack
                     targetDestination = target.transform.position;
                     if (!inStoppingDistance())
+                    {
+                        Debug.Log("Target too far - chasing");
                         CurrentState = MINION_STATE.CHASE;
+                    }
                 }
             }
             else
+            {
+                Debug.Log("Going back to follow");
                 CurrentState = MINION_STATE.FOLLOW;
+            }
 
+            Debug.Log("Coroutine finished");
             agent.isStopped = false;
         }
 
