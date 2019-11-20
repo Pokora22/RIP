@@ -40,6 +40,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_AdvanceDestination, targetDestination;
 
         private Coroutine targetScan;
+
+        private int counter = 0;
         
         public MINION_STATE CurrentState
         {
@@ -186,7 +188,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     targetDestination = target.transform.position;
 
                 if (inStoppingDistance())
+                {
+                    Debug.Log("In stopping distance");
                     CurrentState = MINION_STATE.ATTACK;
+                }
             }
         }
 
@@ -204,6 +209,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private IEnumerator minionAttack()
         {
             agent.isStopped = true;
+            Debug.Log(transform.name + ": " + ++counter);
+            //TODO: Why does this run multiple times(~40), but condition for this happens only once ? 
+//            Debug.Log(target);
+//            if(target)
+//                Debug.Log("?");
             
             //Check if target exists first
             if (target && targetAttr.health > 0)
