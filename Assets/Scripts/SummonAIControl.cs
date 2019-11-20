@@ -239,6 +239,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             agent.SetDestination(destination);
             
+            //https://docs.unity3d.com/ScriptReference/Rigidbody.SweepTest.html
+            //TODO: Check above for possible solution for AIs walking into each other
+            
             if(!inStoppingDistance())
             {
                 m_AiAnimatorScr.Move(agent.desiredVelocity);

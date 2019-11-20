@@ -90,9 +90,7 @@ public class pAttributes_scr : MonoBehaviour
         
         hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count));
         
-        //TODO: Figure why this runs twice
-        if(!levelNotification)
-            levelNotification.SetActive(currentLvl > 0); //TODO: When skill points are in, check that against 0
+        levelNotification.SetActive(currentLvl > 0); //TODO: When skill points are in, check that against 0
     }
 
     

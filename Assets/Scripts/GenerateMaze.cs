@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public class GenerateMaze : MonoBehaviour
 {
     private MazeDataGenerator dataGenerator;
-    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, player;
+    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade;
     [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
     private GameObject terrain;
-    private GameObject[] weightedObstacles;
+    private GameObject[] weightedObstacles, restrictedZones;
 
     // Start is called before the first frame update
     void Awake(){
@@ -26,6 +26,7 @@ public class GenerateMaze : MonoBehaviour
 
         weightedObstacles = new GameObject[wallChance + treasureChance + sarcophhagusChance + barricadeChance + pillarChance];
         prepObstacles();
+        restrictedZones = GameObject.FindGameObjectsWithTag("Restricted");
         
         GenerateNewMaze(length, width);
         GetComponent<NavMeshSurface>().BuildNavMesh();
@@ -33,7 +34,6 @@ public class GenerateMaze : MonoBehaviour
 
     private void prepObstacles()
     {
-        Debug.Log(weightedObstacles);
         int index = 0;
         for (int i = 0; i < treasureChance; i++)
             weightedObstacles[index++] = wallTresure;
@@ -45,6 +45,19 @@ public class GenerateMaze : MonoBehaviour
             weightedObstacles[index++] = pillar;
         for (int i = 0; i < wallChance; i++)
             weightedObstacles[index++] = wall;
+    }
+    
+    private bool IsRestricted(Vector3 point)
+    {
+        foreach (GameObject zone in restrictedZones)
+        {
+            Collider c = zone.GetComponent<Collider>();
+            Vector3 closest = c.ClosestPoint(point);
+            // Because closest=point if point is inside - not clear from docs I feel
+            if(closest == point) return true;
+        }
+
+        return false;
     }
 
     public void GenerateNewMaze(float length, float width){
@@ -66,17 +79,13 @@ public class GenerateMaze : MonoBehaviour
                     else
                         PlaceObstacle(i, j);
                 }
-                else
-                {
-                    if (!playerPlaced)
-                    {
-                        playerPlaced = true;
-                        GameObject.FindWithTag("Player").transform.position = new Vector3(i * cellSize, 0, j * cellSize);
-                    }
-                    
-                }
+                //Predetermined player position in restricted zones instead
+//                else if (!playerPlaced)
+//                    {
+//                        playerPlaced = true;
+//                        GameObject.FindWithTag("Player").transform.position = new Vector3(i * cellSize, 0, j * cellSize);
+//                    }
             }
-            
         }
     }
 
@@ -106,10 +115,11 @@ public class GenerateMaze : MonoBehaviour
             obstacleHeight, j * cellSize - width / 2);
         Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : randomCardinalRotation();
         
-        Instantiate(obstacle,
-            obstacleLocation,
-            obstacleRotation,
-            transform);
+        if(!IsRestricted(obstacleLocation))
+            Instantiate(obstacle,
+                obstacleLocation,
+                obstacleRotation,
+                transform);
     }
 
 

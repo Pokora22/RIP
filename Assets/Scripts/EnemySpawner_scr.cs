@@ -7,6 +7,7 @@ public class EnemySpawner_scr : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemies;
     [SerializeField] private float spawnDelay, spawnUnitLimit;
+    private Vector3 spawnPoint;
     private float timer;
     private int unitsSpawned = 0;
     
@@ -14,6 +15,7 @@ public class EnemySpawner_scr : MonoBehaviour
     void Start()
     {
         float diff = PlayerPrefs.GetInt("difficulty");
+        spawnPoint = transform.GetChild(0).position;
         spawnDelay -= spawnDelay * (diff/4);
         spawnUnitLimit = diff * 10 + 10;
         timer = spawnDelay;
@@ -29,7 +31,7 @@ public class EnemySpawner_scr : MonoBehaviour
             if (timer <= 0)
             {
                 timer = spawnDelay;
-                Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position - transform.forward * 5,
+                Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPoint,
                     transform.rotation);
                 unitsSpawned++;
             }

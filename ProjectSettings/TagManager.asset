@@ -21,6 +21,7 @@ TagManager:
   - UIExpBar
   - UILevelNotification
   - GameManager
+  - Restricted
   layers:
   - Default
   - TransparentFX
