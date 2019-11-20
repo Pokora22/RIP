@@ -28,13 +28,9 @@ public class pAttributes_scr : MonoBehaviour
     [SerializeField] private float invulnerableTime = 0.5f;
     private bool invulnerable;
 
-    private static int count = 0;
     
-
     void Start()
     {
-        Debug.Log(++count);
-        Debug.Log(GameObject.FindWithTag("UILevelNotification"));
         nextLvlExpReq = baseExpReq;
         health = maxHealth;
         currentLvl = 0;
@@ -94,9 +90,9 @@ public class pAttributes_scr : MonoBehaviour
         
         hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count));
         
-        
-        Debug.Log(levelNotification);
-        levelNotification.SetActive(currentLvl > 0); //TODO: When skill points are in, check that against 0
+        //TODO: Figure why this runs twice
+        if(!levelNotification)
+            levelNotification.SetActive(currentLvl > 0); //TODO: When skill points are in, check that against 0
     }
 
     

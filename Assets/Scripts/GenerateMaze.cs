@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GenerateMaze : MonoBehaviour
 {
     private MazeDataGenerator dataGenerator;
     [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, player;
-    [SerializeField] private float wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
+    [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
     private GameObject terrain;
+    private GameObject[] weightedObstacles;
 
     // Start is called before the first frame update
     void Awake(){
@@ -21,10 +23,28 @@ public class GenerateMaze : MonoBehaviour
     {
         float width = terrain.GetComponent<Renderer>().bounds.max.x;
         float length = terrain.GetComponent<Renderer>().bounds.max.z;
-        
-        Debug.Log(length + " " + width);
+
+        weightedObstacles = new GameObject[wallChance + treasureChance + sarcophhagusChance + barricadeChance + pillarChance];
+        prepObstacles();
         
         GenerateNewMaze(length, width);
+        GetComponent<NavMeshSurface>().BuildNavMesh();
+    }
+
+    private void prepObstacles()
+    {
+        Debug.Log(weightedObstacles);
+        int index = 0;
+        for (int i = 0; i < treasureChance; i++)
+            weightedObstacles[index++] = wallTresure;
+        for (int i = 0; i < barricadeChance; i++)
+            weightedObstacles[index++] = barricade;
+        for (int i = 0; i < sarcophhagusChance; i++)
+            weightedObstacles[index++] = sarcophagus;
+        for (int i = 0; i < pillarChance; i++)
+            weightedObstacles[index++] = pillar;
+        for (int i = 0; i < wallChance; i++)
+            weightedObstacles[index++] = wall;
     }
 
     public void GenerateNewMaze(float length, float width){
@@ -51,9 +71,7 @@ public class GenerateMaze : MonoBehaviour
                     if (!playerPlaced)
                     {
                         playerPlaced = true;
-                        Instantiate(player,
-                            new Vector3(i * cellSize - length / 2, terrain.transform.localScale.y + 1,
-                                j * cellSize), Quaternion.identity);
+                        GameObject.FindWithTag("Player").transform.position = new Vector3(i * cellSize, 0, j * cellSize);
                     }
                     
                 }
@@ -77,25 +95,11 @@ public class GenerateMaze : MonoBehaviour
     private void PlaceObstacle(int i, int j, GameObject obstacle = null)
     {
         if (obstacle == null)
-        {
-            float rng = Random.Range(0,
-                treasureChance + barricadeChance + sarcophhagusChance + pillarChance + wallChance);
-            if (rng < treasureChance)
-                obstacle = wallTresure;
-            else if (rng < barricadeChance)
-                obstacle = barricade;
-            else if (rng < sarcophhagusChance)
-                obstacle = sarcophagus;
-            else if (rng < pillarChance)
-                obstacle = pillar;
-            else
-                obstacle = wall;
-        }
-
+            obstacle = weightedObstacles[Random.Range(0, weightedObstacles.Length)];
 
         float length = terrain.transform.localScale.x;
         float width = terrain.transform.localScale.z;
-        float height = terrain.transform.localScale.y;
+        
         float obstacleHeight = obstacle.GetComponent<Renderer>().bounds.max.y;
         
         Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,

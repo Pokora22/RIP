@@ -2929,9 +2929,9 @@ GameObject:
   - component: {fileID: 9110757351022426478}
   - component: {fileID: 64143507}
   - component: {fileID: 64143513}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Lid
-  m_TagString: Untagged
+  m_TagString: CorpseContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 26
