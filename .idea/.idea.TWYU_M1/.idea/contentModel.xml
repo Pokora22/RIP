@@ -313,6 +313,9 @@
             </e>
           </e>
         </e>
+        <e p="stylezed low poly props" t="Include">
+          <e p="Readme.txt" t="Include" />
+        </e>
         <e p="Supercyan Character Pack Zombie Sample" t="Include">
           <e p="Scripts" t="Include">
             <e p="ZombieCameraLogic.cs" t="Include" />
