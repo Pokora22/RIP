@@ -38,9 +38,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination, targetDestination;
-        private IEnumerator scanTargetRoutine, attackRoutine;
-
-        private Coroutine targetScan;
 
         private int counter = 0;
         
@@ -113,10 +110,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             audioPlayer = GetComponent<NpcAudio_scr>();
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);
 
-            scanTargetRoutine = findTarget(.25f);
-            attackRoutine = minionAttack();
-            
-            targetScan = StartCoroutine(scanTargetRoutine);
+            StartCoroutine(findTarget(.25f));
         }
 
         private void Update()
@@ -134,8 +128,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     break;
                 case MINION_STATE.ATTACK:
                     //Check if already mid attack animation
-                    if (!m_AiAnimatorScr.CompareCurrentState("Attack"))
-                        StartCoroutine(attackRoutine);
+                    if (!agent.isStopped)
+                        StartCoroutine(minionAttack());
+
                     break;
                 default:
                        break;
@@ -191,8 +186,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if (!targettingDestructible)
                     targetDestination = target.transform.position;
 
-                if (inStoppingDistance())
+                if (inStoppingDistance()){
                     CurrentState = MINION_STATE.ATTACK;
+                    Debug.Log("Condition met");
+                }
             }
         }
 
@@ -209,56 +206,66 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAttack()
         {
-            Debug.LogException(new Exception("Stack trace?"));
             agent.isStopped = true;
             Debug.Log(transform.name + ": " + ++counter);
             //TODO: Why does this run multiple times(~40), but condition for this happens only once ? 
 //            Debug.Log(target);
 //            if(target)
 //                Debug.Log("?");
+
+            Debug.Log("Agent is stopped: " + agent.isStopped);
             
             //Check if target exists first
             if (target && targetAttr.health > 0)
             {
-                Debug.Log("Has a valid target");
+//                Debug.Log("Has a valid target");
                 transform.LookAt(target.transform);
                 if(target.CompareTag("Enemy") && targetAI.target != gameObject)
                     targetAI.SetTarget(this.gameObject);
+                
+                Debug.Log("Agent is stopped: " + agent.isStopped);
 
                 //Start attack animation
                 float animLength = m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
 
-                Debug.Log("Waiting");
+//                Debug.Log("Waiting for " + animLength);
                 //Wait for animation to finish
                 yield return new WaitForSeconds(animLength);
+                Debug.Log("Agent is stopped: " + agent.isStopped);
 
-                Debug.Log("Finished waiting");
+//                Debug.Log("Finished waiting");
                 //Check if target still exists
                 if (!target || targetAttr.health <= 0)
                 {
-                    Debug.Log("Target no longer valid");
+//                    Debug.Log("Target no longer valid");
                     CurrentState = MINION_STATE.FOLLOW;
                 }
                 else
                 {
-                    Debug.Log("Updating target position");
+//                    Debug.Log("Updating target position");
                     //Update destination and check if target is too far for an attack
                     targetDestination = target.transform.position;
                     if (!inStoppingDistance())
                     {
-                        Debug.Log("Target too far - chasing");
+//                        Debug.Log("Target too far - chasing");
                         CurrentState = MINION_STATE.CHASE;
                     }
                 }
+                Debug.Log("Agent is stopped: " + agent.isStopped);
             }
             else
             {
-                Debug.Log("Going back to follow");
+                Debug.Log("Agent is stopped: " + agent.isStopped);
+//                Debug.Log("Going back to follow");
                 CurrentState = MINION_STATE.FOLLOW;
             }
 
-            Debug.Log("Coroutine finished");
+//            Debug.Log("Coroutine finished");
+            Debug.Log("Agent is stopped: " + agent.isStopped);
             agent.isStopped = false;
+            Debug.Log("Agent is stopped: " + agent.isStopped);
+            
+//            StopCoroutine(attackRoutine);
         }
 
 

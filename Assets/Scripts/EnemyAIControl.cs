@@ -36,7 +36,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private LayerMask obstacleMask;
         [SerializeField] private float targetScanDelay = .25f;
         private Vector3 targetDestination;
-        private IEnumerator attackRoutine, targetScanRoutine;
 
         [SerializeField] private bool resetPath = false;
         
@@ -98,11 +97,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             CurrentState = ENEMY_STATE.PATROL;
             //Fix for path computation time delay
             targetDestination = transform.position;
-
-            attackRoutine = AIAttack();
-            targetScanRoutine = findTarget(targetScanDelay);
             
-            StartCoroutine(targetScanRoutine);
+            StartCoroutine(findTarget(targetScanDelay));
         }
 
         private void Update()
@@ -123,7 +119,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     break;
                 case ENEMY_STATE.ATTACK:
                     if (!m_AiAnimatorScr.CompareCurrentState("Attacking"))
-                        StartCoroutine(attackRoutine);
+                        StartCoroutine(AIAttack());
                     break;
             }
 
@@ -308,7 +304,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool canHearTarget(GameObject target)
         {
             //TODO: Ask object for it's velocity instead (from attributes)
-            Rigidbody rb = target.GetComponent<Rigidbody>();
+//            Rigidbody rb = target.GetComponent<Rigidbody>();
             
             float distance = Vector3.Distance(transform.position, target.transform.position);
             return distance < hearingDistance;
