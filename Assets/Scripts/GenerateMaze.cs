@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class GenerateMaze : MonoBehaviour
 {
     private MazeDataGenerator dataGenerator;
-    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade;
-    [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance;
+    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, light;
+    [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity;
     [SerializeField] private bool generateMaze;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
@@ -28,11 +31,54 @@ public class GenerateMaze : MonoBehaviour
         weightedObstacles = new GameObject[wallChance + treasureChance + sarcophhagusChance + barricadeChance + pillarChance];
         prepObstacles();
         restrictedZones = GameObject.FindGameObjectsWithTag("Restricted");
-        
-        if(generateMaze)
+
+        if (generateMaze)
+        {
             GenerateNewMaze(length, width);
-        
+            PlaceLights();
+        }
+
         GetComponent<NavMeshSurface>().BuildNavMesh();
+    }
+
+    private void PlaceLights()
+    {
+        int rMax = data.GetUpperBound(0);
+        int cMax = data.GetUpperBound(1);
+
+        //Ignore edges
+        for (int i = 1; i < rMax; i++)
+        {
+            for (int j = 1; j < cMax; j++)
+            {
+                if (data[i, j] != 0)
+                {
+                    Collider[] colliders = Physics.OverlapSphere(new Vector3(i * cellSize, 1.5f, j * cellSize), .1f);
+                    if (colliders.Length > 0 && colliders[0].CompareTag("Wall"))
+                    {
+                        bool lightInRange = false;
+                        colliders = Physics.OverlapSphere(new Vector3(i * cellSize, 1.5f, j * cellSize), lightingDensity);
+                        foreach (Collider c in colliders)
+                        {
+                            if (c.CompareTag("Light"))
+                            {
+                                lightInRange = true;
+                                break;
+                            }
+                        }
+
+                        if (!lightInRange)
+                        {
+                            Quaternion rotation = ForwardFreeRotation(i, j);
+                            Instantiate(light,
+                                new Vector3(i * cellSize, 1.5f, j * cellSize),
+                                rotation,
+                                colliders[0].transform);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void prepObstacles()
@@ -70,7 +116,7 @@ public class GenerateMaze : MonoBehaviour
         int rMax = data.GetUpperBound(0);
         int cMax = data.GetUpperBound(1);
 
-        for (int i = rMax; i >= 0; i--)
+        for (int i = 0; i <= rMax; i++)
         {
             for (int j = 0; j <= cMax; j++)
             {
@@ -102,6 +148,30 @@ public class GenerateMaze : MonoBehaviour
     {
         int rotation = Random.Range(0, 360);
         return Quaternion.Euler(0, rotation, 0);
+    }
+    
+    private Quaternion ForwardFreeRotation(int i, int j)
+    {
+        Debug.Log(i +", " + j);
+        Debug.Log(data[4, 0]);
+        List<int> rotations = new List<int>();
+        
+        //Check left
+        if(data[i - 1, j] == 0)
+            rotations.Add(270);
+        //Check up
+        if(data[i, j - 1] == 0)
+            rotations.Add(0);
+        //Check right
+        if(data[i + 1, j] == 0)
+            rotations.Add(90);
+        //Check down
+        if(data[i, j + 1] == 0)
+            rotations.Add(180);
+
+        int rotation = rotations[Random.Range(0, rotations.Count)];
+        Debug.Log(rotation);
+        return Quaternion.Euler(new Vector3(0, rotation, 0));
     }
 
     private void PlaceObstacle(int i, int j, GameObject obstacle = null)

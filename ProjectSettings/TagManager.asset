@@ -22,6 +22,8 @@ TagManager:
   - UILevelNotification
   - GameManager
   - Restricted
+  - Wall
+  - Light
   layers:
   - Default
   - TransparentFX
