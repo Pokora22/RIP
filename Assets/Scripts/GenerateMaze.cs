@@ -53,11 +53,13 @@ public class GenerateMaze : MonoBehaviour
             {
                 if (data[i, j] != 0)
                 {
+                    Transform wallTransform = null;
                     Collider[] colliders = Physics.OverlapSphere(new Vector3(i * cellSize, 1.5f, j * cellSize), .1f);
                     if (colliders.Length > 0 && colliders[0].CompareTag("Wall"))
                     {
+                        wallTransform = colliders[0].transform;
                         bool lightInRange = false;
-                        colliders = Physics.OverlapSphere(new Vector3(i * cellSize, 1.5f, j * cellSize), lightingDensity);
+                        colliders = Physics.OverlapSphere(wallTransform.position, lightingDensity);
                         foreach (Collider c in colliders)
                         {
                             if (c.CompareTag("Light"))
@@ -71,9 +73,9 @@ public class GenerateMaze : MonoBehaviour
                         {
                             Quaternion rotation = ForwardFreeRotation(i, j);
                             Instantiate(light,
-                                new Vector3(i * cellSize, 1.5f, j * cellSize),
+                                wallTransform.position,
                                 rotation,
-                                colliders[0].transform);
+                                wallTransform);
                         }
                     }
                 }
@@ -152,8 +154,6 @@ public class GenerateMaze : MonoBehaviour
     
     private Quaternion ForwardFreeRotation(int i, int j)
     {
-        Debug.Log(i +", " + j);
-        Debug.Log(data[4, 0]);
         List<int> rotations = new List<int>();
         
         //Check left
@@ -170,7 +170,6 @@ public class GenerateMaze : MonoBehaviour
             rotations.Add(180);
 
         int rotation = rotations[Random.Range(0, rotations.Count)];
-        Debug.Log(rotation);
         return Quaternion.Euler(new Vector3(0, rotation, 0));
     }
 
@@ -186,7 +185,7 @@ public class GenerateMaze : MonoBehaviour
         
         Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
             obstacleHeight, j * cellSize - width / 2);
-        Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : randomCardinalRotation();
+        Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : obstacle == wallTresure ? ForwardFreeRotation(i, j) : randomCardinalRotation();
         
         if(!IsRestricted(obstacleLocation))
             Instantiate(obstacle,
