@@ -10,7 +10,7 @@ public class GenerateMaze : MonoBehaviour
 {
     private MazeDataGenerator dataGenerator;
     [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, light, exit;
-    [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity, numberOfExits;
+    [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity, numberOfExits, exitWidthOffset, exitLengthOffset;
     [SerializeField] private bool generateMaze;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
@@ -28,13 +28,14 @@ public class GenerateMaze : MonoBehaviour
         float length = terrain.GetComponent<Renderer>().bounds.max.x;
         float width = terrain.GetComponent<Renderer>().bounds.max.z;
 
+        restrictedZones = GameObject.FindGameObjectsWithTag("Restricted");
         weightedObstacles = new GameObject[wallChance + treasureChance + sarcophhagusChance + barricadeChance + pillarChance];
         prepObstacles();
-        restrictedZones = GameObject.FindGameObjectsWithTag("Restricted");
 
         if (generateMaze)
         {
             PlaceExits(length, width);
+            restrictedZones = GameObject.FindGameObjectsWithTag("Restricted"); //Update after putting down exits
             GenerateNewMaze(length, width);
             PlaceLights();
         }
@@ -44,23 +45,20 @@ public class GenerateMaze : MonoBehaviour
 
     private void PlaceExits(float tLength, float tWidth)
     {
-        float height = exit.GetComponent<Renderer>().bounds.max.y;
-        float length = exit.GetComponent<Renderer>().bounds.max.x;
-        float width = exit.GetComponent<Renderer>().bounds.max.z;
-        
         for (int i = 0; i < numberOfExits; i++)
         {
             GameObject exit = Instantiate(this.exit, terrain.transform.position, Quaternion.identity);
-
+            Vector3 exitLocation;
+                
             do
             {
-                float x = Random.Range(length, tLength - length);
-                float y = 1.5f;
-                float z = Random.Range(width, tWidth - width);
-
-                exit.transform.position = new Vector3(x, y, z);
-            } while (IsRestricted(exit.GetComponent<Collider>().bounds));
-
+                float x = Random.Range(exitWidthOffset + tWidth/numberOfExits*i, (tWidth/numberOfExits + tWidth/numberOfExits*i) - exitWidthOffset);
+                float y = 1.25f;
+                float z = Random.Range(exitLengthOffset, tWidth - exitLengthOffset);
+                
+                exitLocation = new Vector3(x, y, z);
+                exit.transform.position = exitLocation;
+            } while (IsRestricted(exitLocation) || exit.GetComponentInChildren<ExitVolume>().intersects());
         }
     }
 
@@ -134,17 +132,18 @@ public class GenerateMaze : MonoBehaviour
         return false;
     }
 
-    private bool IsRestricted(Bounds bounds)
-    {
-        foreach (GameObject zone in restrictedZones)
-        {
-            Bounds restrictedBounds = zone.GetComponent<Collider>().bounds;
-            if (bounds.Intersects(restrictedBounds))
-                return true;
-        }
-
-        return false;
-    }
+//    private bool IsRestricted(Bounds bounds)
+//    {
+//        //TODO: Needs proper testing
+//        foreach (GameObject zone in restrictedZones)
+//        {
+//            Bounds restrictedBounds = zone.GetComponent<Collider>().bounds;
+//            if (bounds.Intersects(restrictedBounds))
+//                return true;
+//        }
+//
+//        return false;
+//    }
 
     public void GenerateNewMaze(float length, float width){
         data = dataGenerator.FromDimensions((int)(length/cellSize), (int)(width/cellSize));
@@ -204,7 +203,7 @@ public class GenerateMaze : MonoBehaviour
         if(data[i, j + 1] == 0)
             rotations.Add(180);
 
-        int rotation = rotations[Random.Range(0, rotations.Count)];
+        int rotation = rotations.Count > 0 ? rotations[Random.Range(0, rotations.Count)] : 0;
         return Quaternion.Euler(new Vector3(0, rotation, 0));
     }
 
