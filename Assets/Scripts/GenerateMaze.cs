@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 public class GenerateMaze : MonoBehaviour
 {
     private MazeDataGenerator dataGenerator;
-    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, light;
-    [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity;
+    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, light, exit;
+    [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity, numberOfExits;
     [SerializeField] private bool generateMaze;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
@@ -34,11 +34,34 @@ public class GenerateMaze : MonoBehaviour
 
         if (generateMaze)
         {
+            PlaceExits(length, width);
             GenerateNewMaze(length, width);
             PlaceLights();
         }
 
         GetComponent<NavMeshSurface>().BuildNavMesh();
+    }
+
+    private void PlaceExits(float tLength, float tWidth)
+    {
+        float height = exit.GetComponent<Renderer>().bounds.max.y;
+        float length = exit.GetComponent<Renderer>().bounds.max.x;
+        float width = exit.GetComponent<Renderer>().bounds.max.z;
+        
+        for (int i = 0; i < numberOfExits; i++)
+        {
+            GameObject exit = Instantiate(this.exit, terrain.transform.position, Quaternion.identity);
+
+            do
+            {
+                float x = Random.Range(length, tLength - length);
+                float y = 1.5f;
+                float z = Random.Range(width, tWidth - width);
+
+                exit.transform.position = new Vector3(x, y, z);
+            } while (IsRestricted(exit.GetComponent<Collider>().bounds));
+
+        }
     }
 
     private void PlaceLights()
@@ -106,6 +129,18 @@ public class GenerateMaze : MonoBehaviour
             Vector3 closest = c.ClosestPoint(point);
             // Because closest=point if point is inside - not clear from docs I feel
             if(closest == point) return true;
+        }
+
+        return false;
+    }
+
+    private bool IsRestricted(Bounds bounds)
+    {
+        foreach (GameObject zone in restrictedZones)
+        {
+            Bounds restrictedBounds = zone.GetComponent<Collider>().bounds;
+            if (bounds.Intersects(restrictedBounds))
+                return true;
         }
 
         return false;

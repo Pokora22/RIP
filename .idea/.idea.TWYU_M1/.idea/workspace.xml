@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/WallTreasure.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/WallTreasure.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sandbox.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sandbox.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" afterDir="false" />
     </list>
@@ -54,34 +53,38 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
+            <state relative-caret-position="209">
+              <caret line="17" column="60" lean-forward="true" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="60" />
               <folding>
-                <marker date="1574358148589" expanded="true" signature="6:168" ph="..." />
-                <marker date="1574358148589" expanded="true" signature="211:6814" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="764:873" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="899:1452" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="1299:1390" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="1484:3000" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="1637:2994" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="1690:2984" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="1741:2970" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="2010:2952" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="2305:2564" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="2386:2538" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="2608:2930" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="3034:3569" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="3619:3967" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="3678:3938" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="4027:5007" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="4289:5001" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="4343:4991" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="4394:4640" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="4657:4977" ph="/* Predetermined player position in restricted zones instead ... */" />
-                <marker date="1574358148589" expanded="true" signature="5056:5165" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="5218:5324" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="5386:5921" ph="{...}" />
-                <marker date="1574358148589" expanded="true" signature="5995:6810" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="6:168" ph="..." />
+                <marker date="1574360092100" expanded="true" signature="211:7967" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="785:894" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="920:1512" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="1320:1450" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="1570:2293" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="1833:2287" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="2325:3841" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="2478:3835" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="2531:3825" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="2582:3811" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="2851:3793" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="3146:3405" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="3227:3379" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="3449:3771" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="3875:4410" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="4460:4808" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="4519:4779" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="4854:5120" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="4913:5091" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="5180:6160" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="5442:6154" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="5496:6144" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="5547:5793" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="5810:6130" ph="/* Predetermined player position in restricted zones instead ... */" />
+                <marker date="1574360092100" expanded="true" signature="6209:6318" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="6371:6477" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="6539:7074" ph="{...}" />
+                <marker date="1574360092100" expanded="true" signature="7148:7963" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -90,7 +93,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
+            <state relative-caret-position="425">
               <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
               <folding>
                 <marker date="1574277597700" expanded="false" signature="6:97" ph="..." />
@@ -174,7 +177,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
+            <state relative-caret-position="391">
               <caret line="43" column="65" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
               <folding>
                 <marker date="1574285479058" expanded="false" signature="6:172" ph="..." />
@@ -263,7 +266,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="-34">
               <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
               <folding>
                 <marker date="1574183744208" expanded="false" signature="6:78" ph="..." />
@@ -312,7 +315,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>agent.setdestin</find>
       <find>1</find>
       <find>Debug.Draw</find>
       <find>destructible</find>
@@ -342,6 +344,7 @@
       <find>CurrentState = MINION_STATE.ATTACK;</find>
       <find>IEnum</find>
       <find>index</find>
+      <find>restri</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -539,14 +542,7 @@
       <workItem from="1573677563683" duration="5324000" />
       <workItem from="1573925495427" duration="31527000" />
       <workItem from="1574272167732" duration="13735000" />
-      <workItem from="1574287777427" duration="14367000" />
-    </task>
-    <task id="LOCAL-00044" summary="Added check for no sound on audio player">
-      <created>1572727116562</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1572727116562</updated>
+      <workItem from="1574287777427" duration="16080000" />
     </task>
     <task id="LOCAL-00045" summary="Added body remove to destructibles (still need to 'animate' that)&#10;Added properly for reset of targetting destructibles on minions&#10;Added .5 stopping distance for destructibles : enemy follow in unity depending on what's being targetted">
       <created>1572728683393</created>
@@ -884,11 +880,18 @@
       <option name="project" value="LOCAL" />
       <updated>1574356964871</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="Light placement system v1&#10;Added forward freespace checking on wall treasures">
+      <created>1574358581537</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1574358581537</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="288874000" />
+    <option name="totallyTimeSpent" value="290587000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1026,7 +1029,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="WIP updatePosition (pulling my hair)" />
     <MESSAGE value="Finished moving coroutines into update block&#10;Fixed random waypoint generating/navigating&#10;Fixed animation double playing&#10;Fixed animation not locking nav agent" />
     <MESSAGE value="Fixed summon agent not locking in animation&#10;Fixed summon ai getting wrong distance towards destructibles" />
     <MESSAGE value="Changed minion AI to use closestPointOnBounds instead of raycast hit point&#10;Added FOV blocking wall inside the destructible wall" />
@@ -1051,7 +1053,8 @@
     <MESSAGE value="Fix for summon attack firing off multiple times (animator state change reports too slow)" />
     <MESSAGE value="Removed debug logs" />
     <MESSAGE value="Light placement system v0.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Light placement system v0.1" />
+    <MESSAGE value="Light placement system v1&#10;Added forward freespace checking on wall treasures" />
+    <option name="LAST_COMMIT_MESSAGE" value="Light placement system v1&#10;Added forward freespace checking on wall treasures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1484,7 +1487,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
+        <state relative-caret-position="425">
           <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
           <folding>
             <marker date="1574277597700" expanded="false" signature="6:97" ph="..." />
@@ -1499,7 +1502,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
+        <state relative-caret-position="391">
           <caret line="43" column="65" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
           <folding>
             <marker date="1574285479058" expanded="false" signature="6:172" ph="..." />
@@ -1533,7 +1536,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="-34">
           <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
           <folding>
             <marker date="1574183744208" expanded="false" signature="6:78" ph="..." />
@@ -1689,34 +1692,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
+        <state relative-caret-position="209">
+          <caret line="17" column="60" lean-forward="true" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="60" />
           <folding>
-            <marker date="1574358148589" expanded="true" signature="6:168" ph="..." />
-            <marker date="1574358148589" expanded="true" signature="211:6814" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="764:873" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="899:1452" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="1299:1390" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="1484:3000" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="1637:2994" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="1690:2984" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="1741:2970" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="2010:2952" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="2305:2564" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="2386:2538" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="2608:2930" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="3034:3569" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="3619:3967" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="3678:3938" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="4027:5007" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="4289:5001" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="4343:4991" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="4394:4640" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="4657:4977" ph="/* Predetermined player position in restricted zones instead ... */" />
-            <marker date="1574358148589" expanded="true" signature="5056:5165" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="5218:5324" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="5386:5921" ph="{...}" />
-            <marker date="1574358148589" expanded="true" signature="5995:6810" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="6:168" ph="..." />
+            <marker date="1574360092100" expanded="true" signature="211:7967" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="785:894" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="920:1512" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="1320:1450" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="1570:2293" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="1833:2287" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="2325:3841" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="2478:3835" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="2531:3825" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="2582:3811" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="2851:3793" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="3146:3405" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="3227:3379" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="3449:3771" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="3875:4410" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="4460:4808" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="4519:4779" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="4854:5120" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="4913:5091" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="5180:6160" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="5442:6154" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="5496:6144" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="5547:5793" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="5810:6130" ph="/* Predetermined player position in restricted zones instead ... */" />
+            <marker date="1574360092100" expanded="true" signature="6209:6318" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="6371:6477" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="6539:7074" ph="{...}" />
+            <marker date="1574360092100" expanded="true" signature="7148:7963" ph="{...}" />
           </folding>
         </state>
       </provider>
