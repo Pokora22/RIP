@@ -204,8 +204,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private IEnumerator minionAttack()
         {
-            agent.isStopped = true;
-
             //Check if target exists first
             if (target && targetAttr.health > 0)
             {
@@ -219,7 +217,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 //                Debug.Log("Waiting for " + animLength);
                 //Wait for animation to finish
-                yield return new WaitForSeconds(animLength);
+//                yield return new WaitForSeconds(animLength);
+
+                yield return new WaitUntil(() => !agent.isStopped);
 
                 //Check if target still exists
                 if (!target || targetAttr.health <= 0)
@@ -234,8 +234,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
             else
                 CurrentState = MINION_STATE.FOLLOW;
-
-            agent.isStopped = false;
         }
 
 
@@ -349,6 +347,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //            yield return new WaitForSeconds(recallDelay);
 //            recalled = false;
             yield break;
+        }
+        
+        private void LockInPlace(int locked)
+        {
+            agent.isStopped = locked != 0;
         }
     }
 }

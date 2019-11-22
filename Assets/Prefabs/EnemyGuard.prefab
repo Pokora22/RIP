@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 8842931170519606562}
   - component: {fileID: 8842931170519606560}
   - component: {fileID: 8842931170519606561}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyGuard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -423,7 +423,7 @@ MonoBehaviour:
   moveSpeedMultiplier: 1
   reflectDamage: 0
   expValue: 10
-  corpse: {fileID: 0}
+  corpse: {fileID: 8177375798088622285, guid: 9fe12e6e1bf78bf4883a167d1b82d046, type: 3}
   debug: 0
   alertRange: 20
   alertChance: 20
