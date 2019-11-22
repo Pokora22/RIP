@@ -24,6 +24,9 @@ TagManager:
   - Restricted
   - Wall
   - Light
+  - InventoryUI
+  - PauseMenu
+  - CharacterUI
   layers:
   - Default
   - TransparentFX

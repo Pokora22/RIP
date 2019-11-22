@@ -179,6 +179,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     : target.transform.position;
                 
                 transform.LookAt(target.transform);
+                transform.LookAt(target.transform);
                 
                 if (TargetInAttackRange())
                     CurrentState = ENEMY_STATE.ATTACK;
