@@ -279,7 +279,7 @@ MonoBehaviour:
     m_Bits: 512
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4097
   targetScanDelay: 0.25
   resetPath: 0
   currentstate: 0

@@ -158,7 +158,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //------------------------------------------
         public IEnumerator AIAttack()
         {
-            agent.isStopped = true;
+//            agent.isStopped = true;
             
             //If target stopped existing or dropped below 0 health break back to patrol
             if (target && targetAttr.health > 0)
@@ -167,8 +167,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //                m_Rigidbody.MoveRotation(Quaternion.LookRotation(target.transform.position)); //TODO: Should use this, but don't understand
 
                 float animTime = m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
-                
-                yield return new WaitForSeconds(animTime);
+
+//                yield return new WaitForSeconds(animTime);
+                yield return new WaitUntil(() => !agent.isStopped);
 
                 //Check if target still exists after the animation is done
                 if (!target || targetAttr.health <= 0) 
@@ -183,7 +184,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             else
                 CurrentState = ENEMY_STATE.PATROL;
             
-            agent.isStopped = false;
+//            agent.isStopped = false;
         }
 	
         public void SetTarget(GameObject target)
@@ -318,6 +319,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             Gizmos.color = Color.white;
             if(Application.isPlaying)
                 Gizmos.DrawWireSphere(agent.destination, 1f);
+        }
+
+        private void LockInPlace(int locked)
+        {
+            agent.isStopped = locked != 0;
         }
     }
 }

@@ -51,8 +51,6 @@ public class pAttributes_scr : MonoBehaviour
         {
             if (--health < 1)
                 SceneManager.LoadScene(2); //TODO: Maybe a game over screen
-
-            StartCoroutine(toggleInvulnerable(invulnerableTime));
             updateHud();
         }
     }
@@ -107,12 +105,5 @@ public class pAttributes_scr : MonoBehaviour
         foreach (Artifact_scr artifact in playerInventory)
             if (!artifact.useAbility())
                 playerInventory.Remove(artifact);
-    }
-
-    private IEnumerator toggleInvulnerable(float time)
-    {
-        invulnerable = true;
-        yield return new WaitForSeconds(time);
-        invulnerable = false;
     }
 }

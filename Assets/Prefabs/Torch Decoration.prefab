@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2150529180813915156}
   - component: {fileID: 7409005760507481254}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Torch Decoration
   m_TagString: Light
   m_Icon: {fileID: 0}
@@ -56,6 +56,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Torch
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747293573073375896, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6762352399834308747, guid: c2e96360339f6b94d83374ccf623c900,
         type: 3}
@@ -111,6 +116,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 23.822
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210626, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 687137707842746893, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210624, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210630, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2e96360339f6b94d83374ccf623c900, type: 3}

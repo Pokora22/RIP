@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6051927819324204945}
   - component: {fileID: 6051927819324204946}
   - component: {fileID: 6051927819324204949}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 6051927820999108143}
   - component: {fileID: 6051927820999108145}
   - component: {fileID: 6051927820999108146}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Unlocked Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,6 +1599,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Torch1
       objectReference: {fileID: 0}
+    - target: {fileID: 7747293573073375896, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6762352399834308747, guid: c2e96360339f6b94d83374ccf623c900,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1654,6 +1659,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 23.822
       objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210626, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 687137707842746893, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210624, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210630, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2e96360339f6b94d83374ccf623c900, type: 3}
 --- !u!4 &1623108442909165903 stripped
@@ -1673,6 +1698,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Torch2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747293573073375896, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6762352399834308747, guid: c2e96360339f6b94d83374ccf623c900,
         type: 3}
@@ -1728,6 +1758,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 23.822
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210626, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 687137707842746893, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210624, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577978256190210630, guid: c2e96360339f6b94d83374ccf623c900,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2e96360339f6b94d83374ccf623c900, type: 3}
