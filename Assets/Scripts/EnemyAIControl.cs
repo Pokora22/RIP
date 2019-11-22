@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,20 +27,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Attributes_scr targetAttr, selfAttr;
         [SerializeField] private float patrolSpeed;
         [SerializeField] private float chaseSpeed;
-        [SerializeField] private bool doNotMove;
+        [SerializeField] private bool doNotMove, guard;
         [SerializeField] private bool debug;
-        [SerializeField] private float AiCheckDelay = 1f;
+        [SerializeField] private float lookAroundDelay = 3f;
         [SerializeField] private float FovDistance = 30f;
         [SerializeField] private float FovAngle = 45f;
         [SerializeField] private float hearingDistance = 5f;
         [SerializeField] private LayerMask enemiesMask;
         [SerializeField] private LayerMask obstacleMask;
         [SerializeField] private float targetScanDelay = .25f;
+        [SerializeField] private Vector3 guardPosition;
+        [SerializeField] private float guardLeashRange = 20f;
         private Vector3 targetDestination;
+        private Quaternion desiredRotQ;
 
         [SerializeField] private bool resetPath = false;
         
-        public enum ENEMY_STATE {PATROL, CHASE, ATTACK, NONE}
+        public enum ENEMY_STATE {PATROL, CHASE, ATTACK, GUARD}
         [SerializeField] private ENEMY_STATE currentstate = ENEMY_STATE.PATROL;
         
         public ENEMY_STATE CurrentState
@@ -51,6 +55,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 ENEMY_STATE oldState = currentstate;
                 currentstate = value;
                 m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed, false);
+                StopCoroutine(LookAround(lookAroundDelay));
                 if(debug)
                     Debug.Log(gameObject.name + " going from " + oldState +  " to new state: " + currentstate);
                 
@@ -69,9 +74,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         
                         break;
                     
-//                    case ENEMY_STATE.NONE:
-//                        StopCoroutine(findTarget(targetScanDelay));
-//                        break;
+                    case ENEMY_STATE.GUARD:
+                        StartCoroutine(LookAround(lookAroundDelay));
+                        agent.speed = patrolSpeed * selfAttr.moveSpeedMultiplier;
+                        targetDestination = guardPosition;
+                        target = gameObject;
+                        break;
                 }
             }
         }
@@ -94,9 +102,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             player = GameObject.FindGameObjectWithTag("Player");
 
-            CurrentState = ENEMY_STATE.PATROL;
-            //Fix for path computation time delay
-            targetDestination = transform.position;
+            if (guard)
+            {
+                guardPosition = transform.position;
+                CurrentState = ENEMY_STATE.GUARD;
+            }
+            else
+            {
+                CurrentState = ENEMY_STATE.PATROL;
+                //Fix for path computation time delay
+                targetDestination = transform.position;
+            }
             
             StartCoroutine(findTarget(targetScanDelay));
         }
@@ -122,9 +138,20 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     if (!agent.isStopped)
                         StartCoroutine(AIAttack());
                     break;
+                case ENEMY_STATE.GUARD:
+                    AIGuard();
+                    break;
             }
 
             updatePosition(targetDestination);
+            if(CurrentState == ENEMY_STATE.GUARD)
+                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotQ, Time.deltaTime );
+        }
+
+        private void AIGuard()
+        {
+            if(target != gameObject)
+                CurrentState = ENEMY_STATE.CHASE;
         }
 
         public void AIPatrol()
@@ -143,18 +170,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         public void AIChase()
         {
             if (!target || targetAttr.health <= 0) //if target stops existing break back to patrol
-                CurrentState = ENEMY_STATE.PATROL;
+                CurrentState = guard? ENEMY_STATE.GUARD : ENEMY_STATE.PATROL;
 
             if (canSeeTarget(target) || canHearTarget(target)) //Update position only when seeing player
             {
-                targetDestination = target.transform.position;
-                if (inStoppingDistance())
+                targetDestination = guard && Vector3.Distance(transform.position, guardPosition) > guardLeashRange
+                    ? transform.position
+                    : target.transform.position;
+                
+                transform.LookAt(target.transform);
+                
+                if (TargetInAttackRange())
                     CurrentState = ENEMY_STATE.ATTACK;
             }
             else if(inStoppingDistance())
-                CurrentState = ENEMY_STATE.PATROL;
+                CurrentState = guard? ENEMY_STATE.GUARD : ENEMY_STATE.PATROL;
         }
-    
+
+        private bool TargetInAttackRange()
+        {
+            return Vector3.Distance(transform.position, target.transform.position) <= agent.stoppingDistance;
+        }
+
         //------------------------------------------
         public IEnumerator AIAttack()
         {
@@ -164,6 +201,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (target && targetAttr.health > 0)
             {
                 transform.LookAt(target.transform);
+                
 //                m_Rigidbody.MoveRotation(Quaternion.LookRotation(target.transform.position)); //TODO: Should use this, but don't understand
 
                 float animTime = m_AiAnimatorScr.SetAttackAnim(selfAttr.attackSpeed);
@@ -177,7 +215,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 else
                 {
                     targetDestination = target.transform.position;
-                    if (!inStoppingDistance())
+                    if (!TargetInAttackRange())
                         CurrentState = ENEMY_STATE.CHASE;
                 }
             }
@@ -312,6 +350,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             return distance < hearingDistance;
             
                 //&& rb.velocity.magnitude != 0; //Any movement (might change formula someday)
+        }
+
+        private IEnumerator LookAround(float time)
+        {
+            while (true)
+            {
+                if (inStoppingDistance())
+                {
+                    float direction = Random.Range(0, 360);
+                    
+                    desiredRotQ = Quaternion.Euler(transform.eulerAngles.x, direction, transform.eulerAngles.z);
+                }
+
+                yield return new WaitForSeconds(time);
+            }
+            
         }
         
         private void OnDrawGizmos()

@@ -52,7 +52,7 @@ public class EnemyAnimator_scr : MonoBehaviour
     
     public void setDeadAnim()
     {
-	    gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.NONE;
+	    gameObject.GetComponent<EnemyAIControl>().CurrentState = EnemyAIControl.ENEMY_STATE.GUARD;
 	    m_Animator.SetTrigger("Dead");
 	    toggleHitBox();
     }

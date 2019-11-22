@@ -281,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 691735862901734125}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 0, z: 2.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 7193313816108337241}
   - {fileID: 5082021394431203230}
@@ -360,8 +360,9 @@ MonoBehaviour:
   patrolSpeed: 4
   chaseSpeed: 5
   doNotMove: 0
+  guard: 0
   debug: 0
-  AiCheckDelay: 1
+  lookAroundDelay: 3
   FovDistance: 30
   FovAngle: 45
   hearingDistance: 5
@@ -372,6 +373,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4097
   targetScanDelay: 0.25
+  guardPosition: {x: 0, y: 0, z: 0}
+  guardLeashRange: 10
   resetPath: 0
   currentstate: 0
 --- !u!54 &8842931170519606566
