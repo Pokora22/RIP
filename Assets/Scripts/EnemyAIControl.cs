@@ -118,7 +118,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     AIChase();
                     break;
                 case ENEMY_STATE.ATTACK:
-                    if (!m_AiAnimatorScr.CompareCurrentState("Attacking"))
+//                    if (!m_AiAnimatorScr.CompareCurrentState("Attacking"))
+                    if (!agent.isStopped)
                         StartCoroutine(AIAttack());
                     break;
             }

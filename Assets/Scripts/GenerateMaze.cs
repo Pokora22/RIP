@@ -11,7 +11,7 @@ public class GenerateMaze : MonoBehaviour
     private MazeDataGenerator dataGenerator;
     [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, light, exit;
     [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity, numberOfExits, exitWidthOffset, exitLengthOffset;
-    [SerializeField] private bool generateMaze;
+    [SerializeField] private bool generateMaze, randomExits;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
     private GameObject terrain;
@@ -34,8 +34,17 @@ public class GenerateMaze : MonoBehaviour
 
         if (generateMaze)
         {
-            PlaceExits(length, width);
-            restrictedZones = GameObject.FindGameObjectsWithTag("Restricted"); //Update after putting down exits
+            if (randomExits)
+            {
+                Debug.Log("?");
+                GameObject[] exits = GameObject.FindGameObjectsWithTag("Exit");
+                foreach (GameObject exit in exits)
+                    //TODO : This hangs the game 
+//                    exit.SetActive(false);
+                PlaceExits(length, width);
+                restrictedZones = GameObject.FindGameObjectsWithTag("Restricted"); //Update after putting down exits
+            }
+
             GenerateNewMaze(length, width);
             PlaceLights();
         }
@@ -58,6 +67,7 @@ public class GenerateMaze : MonoBehaviour
                 
                 exitLocation = new Vector3(x, y, z);
                 exit.transform.position = exitLocation;
+                exit.transform.rotation = randomCardinalRotation();
             } while (IsRestricted(exitLocation) || exit.GetComponentInChildren<ExitVolume>().intersects());
         }
     }
