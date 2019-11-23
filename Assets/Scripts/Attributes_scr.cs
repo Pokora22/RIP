@@ -68,32 +68,37 @@ public class Attributes_scr : MonoBehaviour
 
     public void damage(float dmgAmnt)
     {
-        health -= dmgAmnt;
-
-        if (health <= 0)
-        {
-            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH); //TODO: Add sounds for destructibles
-            if (LayerMask.LayerToName(gameObject.layer) == "Destructibles")
-            {
-                StartCoroutine(removeBody());
-                return;
-            }
-            
-            if (debug)
-                Debug.Log(gameObject.name + " dropped dead");
-            
-            if (gameObject.CompareTag("Enemy"))
-                playerAttr.addExp(expValue);
-            else if (gameObject.CompareTag("Minion"))
-                summoner.minionRemove(GetComponent<SummonAIControl>());
-            
-            Instantiate(corpse, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
+        if (CompareTag("Player"))
+            playerAttr.damage(); //Forward to player damage functions instead
         else
         {
-            if (!alertUsed && CompareTag("Enemy"))
-                alertAllies();
+            health -= dmgAmnt;
+
+            if (health <= 0)
+            {
+                audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH); //TODO: Add sounds for destructibles
+                if (LayerMask.LayerToName(gameObject.layer) == "Destructibles")
+                {
+                    StartCoroutine(removeBody());
+                    return;
+                }
+
+                if (debug)
+                    Debug.Log(gameObject.name + " dropped dead");
+
+                if (gameObject.CompareTag("Enemy"))
+                    playerAttr.addExp(expValue);
+                else if (gameObject.CompareTag("Minion"))
+                    summoner.minionRemove(GetComponent<SummonAIControl>());
+
+                Instantiate(corpse, transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
+            else
+            {
+                if (!alertUsed && CompareTag("Enemy"))
+                    alertAllies();
+            }
         }
     }
 
@@ -119,10 +124,8 @@ public class Attributes_scr : MonoBehaviour
         {
             StartCoroutine(toggleInvulnerable(invulnerableTime));
             Attributes_scr attackerAttr = other.GetComponentInParent<Attributes_scr>();
-
-            if (CompareTag("Player"))
-                playerAttr.damage(); //Forward to player damage functions instead
-            else if (attackerAttr)
+            
+            if (attackerAttr)
                 this.damage(attackerAttr.attackDamage, attackerAttr);
         }
     }

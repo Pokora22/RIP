@@ -79,6 +79,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2688b77a51554034b9566bca341743a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trap: {fileID: 834940928609820469, guid: e402eef38aad59447beeba82ca2c191c, type: 3}
+  healthPotion: {fileID: 11400000, guid: 11ff96b4fbea27a479b92d706a34be69, type: 2}
+  artifactChance: 0.5
+  trapChance: 0.5
+  healthChance: 0.3
 --- !u!1 &6944418612517151604
 GameObject:
   m_ObjectHideFlags: 0

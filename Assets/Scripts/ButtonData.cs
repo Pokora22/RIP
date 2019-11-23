@@ -23,7 +23,6 @@ public class ButtonData : MonoBehaviour, IPointerClickHandler
 
     public void updateImage()
     {
-        Debug.Log(gameObject.name + " updating image");
         image.sprite = active ? activeSprite : inactiveSprite;
     }
     
