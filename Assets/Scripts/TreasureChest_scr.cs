@@ -28,6 +28,7 @@ public class TreasureChest_scr : MonoBehaviour
             if (hasTreasure)
             {
                 inventory.AddItem(itemInside);
+                hasTreasure = false;
             }
         }
     }
