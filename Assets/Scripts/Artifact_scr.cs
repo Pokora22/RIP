@@ -17,6 +17,7 @@ public class Artifact_scr : MonoBehaviour
     public Artifact_scr(string description)
     {
         m_description = description;
+        
     }
     
     public bool useAbility()

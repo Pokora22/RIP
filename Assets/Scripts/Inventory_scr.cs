@@ -12,6 +12,8 @@ public class Inventory_scr : MonoBehaviour
 {
     public static List<Artifact_scr> allArtifacts = new List<Artifact_scr>();
     private List<Artifact_scr> playerInventory;
+    private Artifact_scr equippedItem = null;
+    private TextMeshProUGUI itemDescription;
     [SerializeField] private float useArtifactPeriod;
     [SerializeField] private GameObject buttonPrefab;
     private GameObject characterSheet, inventoryDisplay;
@@ -23,6 +25,8 @@ public class Inventory_scr : MonoBehaviour
         CreateArtifacts();
         characterSheet = GameObject.FindWithTag("CharacterUI");
         inventoryDisplay = GameObject.FindWithTag("InventoryUI");
+        itemDescription = GameObject.FindWithTag("InventoryUIText").GetComponent<TextMeshProUGUI>();
+        itemDescription.text = "";
         Hide();
         playerInventory = new List<Artifact_scr>();
     }
@@ -87,7 +91,12 @@ public class Inventory_scr : MonoBehaviour
 
     private void EquipItem(GameObject source)
     {
-        Debug.Log(source.GetComponent<Artifact_scr>());
+        Button button = source.GetComponent<Button>();
+        ColorBlock colors = button.colors;
+        colors.normalColor = Color.green;
+        
+        equippedItem = source.GetComponent<Artifact_scr>();
+        itemDescription.text = equippedItem.ToString();
         //TODO: Add real activation methods
     }
 
@@ -97,11 +106,9 @@ public class Inventory_scr : MonoBehaviour
         Artifact_scr buttonStats = button.AddComponent<Artifact_scr>();
         buttonStats.m_description = item.m_description;
         buttonStats.m_sprite = item.m_sprite;
+        button.GetComponent<Image>().sprite = buttonStats.m_sprite;
         
         button.GetComponent<Button>().onClick.AddListener(delegate { EquipItem(button); });
-        button.GetComponent<Image>().color = Color.red;
-        
-        Debug.Log("Inventory updated ");
     }
     
     private IEnumerator useArtifacts()
