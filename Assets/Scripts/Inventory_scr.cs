@@ -16,7 +16,7 @@ public class Inventory_scr : MonoBehaviour
     private TextMeshProUGUI itemDescription;
     [SerializeField] private float useArtifactPeriod, inventorySize = 9f;
     [SerializeField] private GameObject buttonPrefab;
-    private List<GameObject> displayButtons;
+    private List<ButtonData> displayButtons;
     private GameObject characterSheet, inventoryDisplay;
     private bool characterSheetOpen = false;
     
@@ -25,7 +25,7 @@ public class Inventory_scr : MonoBehaviour
     {
         characterSheet = GameObject.FindWithTag("CharacterUI");
         inventoryDisplay = GameObject.FindWithTag("InventoryUI");
-        displayButtons = new List<GameObject>();
+        displayButtons = new List<ButtonData>();
         itemDescription = GameObject.FindWithTag("InventoryUIText").GetComponent<TextMeshProUGUI>();
         itemDescription.text = "";
         Hide();
@@ -87,16 +87,15 @@ public class Inventory_scr : MonoBehaviour
         return true;
     }
 
-    private void EquipItem(GameObject source)
+    private void EquipItem(ButtonData data)
     {
-        ButtonData data = source.GetComponent<ButtonData>();
-        Image image = source.GetComponent<Image>();
-
         //Deactivate current item if changing
         if (equippedItem && data.artifact != equippedItem)
         {
             equippedItem.deactivate();
-//            findButtonWithItem(equippedItem).GetComponent<>()
+            ButtonData button = findButtonWithItem(equippedItem);
+            button.active = false;
+            button.updateImage();
         }
 
         equippedItem = data.artifact;
@@ -104,7 +103,6 @@ public class Inventory_scr : MonoBehaviour
 
         if (data.active)
         {
-            image.sprite = data.activeSprite;
             itemDescription.text = equippedItem.ToString();
             
             if(equippedItem.activate())
@@ -112,11 +110,12 @@ public class Inventory_scr : MonoBehaviour
         }
         else
         {
-            image.sprite = data.inactiveSprite;
             itemDescription.text = "";
 
             equippedItem.deactivate();
         }
+        
+        data.updateImage();
     }
 
     public void RemoveItem(Artifact item)
@@ -127,11 +126,11 @@ public class Inventory_scr : MonoBehaviour
         Destroy(findButtonWithItem(item));
     }
 
-    private GameObject findButtonWithItem(Artifact item)
+    private ButtonData findButtonWithItem(Artifact item)
     {
-        foreach (GameObject button in displayButtons)
+        foreach (ButtonData button in displayButtons)
         {
-            if (button.GetComponent<ButtonData>().artifact == item)
+            if (button.artifact == item)
                 return button;
         }
 
@@ -141,8 +140,8 @@ public class Inventory_scr : MonoBehaviour
     private void AddItemToDisplay(Artifact item)
     {
         GameObject button = Instantiate(buttonPrefab, inventoryDisplay.transform);
-        displayButtons.Add(button);
         ButtonData data = button.GetComponent<ButtonData>();
+        displayButtons.Add(data);
 
         data.activeSprite = item.m_spriteActive;
         data.inactiveSprite = item.m_spriteInactive;
@@ -150,8 +149,6 @@ public class Inventory_scr : MonoBehaviour
         data.artifact = item;
         data.active = false;
         
-        button.GetComponent<Image>().sprite = data.inactiveSprite;
-        
-        button.GetComponent<Button>().onClick.AddListener(delegate { EquipItem(button); });
+        button.GetComponent<Button>().onClick.AddListener(delegate { EquipItem(data); });
     }
 }

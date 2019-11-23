@@ -7,18 +7,20 @@ public class ButtonData : MonoBehaviour
 {
     private Image image;
 
-    private void Start()
-    {
-        image = GetComponent<Image>();
-    }
-
     public bool active;
     public Artifact artifact;
     public string description;
     public Sprite activeSprite, inactiveSprite;
+    
+    private void Awake()
+    {
+        image = GetComponent<Image>();
+        updateImage();
+    }
 
     public void updateImage()
     {
+        Debug.Log(gameObject.name + " updating image");
         image.sprite = active ? activeSprite : inactiveSprite;
     }
 }
