@@ -5,6 +5,7 @@ using System.Security;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.Networking.Match;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.ThirdPerson;
@@ -19,6 +20,7 @@ public class PlayerController_scr : MonoBehaviour
     public LayerMask bodiesMask;
     public LayerMask obstaclesMask;
     public List<SummonAIControl> minions, minionsAway;
+    public UnityEvent newMinionEvent;
     
     private bool consumeSummonInput = false;
     private pAttributes_scr playerAttributes;
@@ -114,6 +116,8 @@ public class PlayerController_scr : MonoBehaviour
 
             //Destroy body
             Destroy(body.transform.gameObject);
+            
+            newMinionEvent.Invoke();
         }
     }
 

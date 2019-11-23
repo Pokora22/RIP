@@ -14,7 +14,7 @@ public class Inventory_scr : MonoBehaviour
     private List<Artifact> playerInventory;
     private Artifact equippedItem = null;
     private TextMeshProUGUI itemDescription;
-    [SerializeField] private float useArtifactPeriod;
+    [SerializeField] private float useArtifactPeriod, inventorySize = 9f;
     [SerializeField] private GameObject buttonPrefab;
     private List<GameObject> displayButtons;
     private GameObject characterSheet, inventoryDisplay;
@@ -78,6 +78,9 @@ public class Inventory_scr : MonoBehaviour
 
     public bool AddItem(Artifact item)
     {
+        if (playerInventory.Count == inventorySize)
+            return false;
+        
         playerInventory.Add(item);
         AddItemToDisplay(item);
 
@@ -88,14 +91,32 @@ public class Inventory_scr : MonoBehaviour
     {
         ButtonData data = source.GetComponent<ButtonData>();
         Image image = source.GetComponent<Image>();
-        
+
+        //Deactivate current item if changing
+        if (equippedItem && data.artifact != equippedItem)
+        {
+            equippedItem.deactivate();
+//            findButtonWithItem(equippedItem).GetComponent<>()
+        }
+
         equippedItem = data.artifact;
         data.active = !data.active;
-        
-        image.sprite = data.active? data.activeSprite : data.inactiveSprite;
-        itemDescription.text = equippedItem.ToString();
-        useArtifact();
-        //TODO: Add real activation methods
+
+        if (data.active)
+        {
+            image.sprite = data.activeSprite;
+            itemDescription.text = equippedItem.ToString();
+            
+            if(equippedItem.activate())
+                RemoveItem(equippedItem);
+        }
+        else
+        {
+            image.sprite = data.inactiveSprite;
+            itemDescription.text = "";
+
+            equippedItem.deactivate();
+        }
     }
 
     public void RemoveItem(Artifact item)
@@ -103,14 +124,18 @@ public class Inventory_scr : MonoBehaviour
         playerInventory.Remove(item);
         equippedItem = null;
 
+        Destroy(findButtonWithItem(item));
+    }
+
+    private GameObject findButtonWithItem(Artifact item)
+    {
         foreach (GameObject button in displayButtons)
         {
             if (button.GetComponent<ButtonData>().artifact == item)
-            {
-                Destroy(button);
-                return;
-            }
+                return button;
         }
+
+        return null;
     }
 
     private void AddItemToDisplay(Artifact item)
@@ -128,11 +153,5 @@ public class Inventory_scr : MonoBehaviour
         button.GetComponent<Image>().sprite = data.inactiveSprite;
         
         button.GetComponent<Button>().onClick.AddListener(delegate { EquipItem(button); });
-    }
-
-    private void useArtifact()
-    {
-        if(equippedItem.activate())
-            RemoveItem(equippedItem);
     }
 }

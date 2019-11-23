@@ -49,7 +49,6 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="AiAnimator_scr.cs" t="Include" />
-          <e p="Artifact.cs" t="Include" />
           <e p="Attributes_scr.cs" t="Include" />
           <e p="AudioManager_scr.cs" t="Include" />
           <e p="ButtonData.cs" t="Include" />
@@ -71,6 +70,11 @@
           <e p="RotateWithCamera_scr.cs" t="Include" />
           <e p="ShowClosestPoint.cs" t="Include" />
           <e p="SummonAIControl.cs" t="Include" />
+          <e p="Templates" t="Include">
+            <e p="Artifact.cs" t="Include" />
+            <e p="PermanentMinionModifier.cs" t="Include" />
+            <e p="Potion.cs" t="Include" />
+          </e>
           <e p="ThirdPersonCharacter_Custom.cs" t="Include" />
           <e p="ThirdPersonUserControl_Custom.cs" t="Include" />
           <e p="TimeOutToMenu_scr.cs" t="Include" />

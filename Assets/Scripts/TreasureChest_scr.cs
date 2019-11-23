@@ -27,8 +27,8 @@ public class TreasureChest_scr : MonoBehaviour
             animator.SetBool("Open", true);
             if (hasTreasure)
             {
-                inventory.AddItem(itemInside);
-                hasTreasure = false;
+                if(inventory.AddItem(itemInside))
+                    hasTreasure = false;
             }
         }
     }

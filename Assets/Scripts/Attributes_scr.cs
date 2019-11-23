@@ -15,6 +15,7 @@ public class Attributes_scr : MonoBehaviour
     public float reflectDamage = 3f;
     public float lifeLeech = 0;
     public float expValue = 5f; //Change for different minions when they're in
+    public bool modified = false;
     public GameObject corpse;
     
     [SerializeField] private bool debug;
