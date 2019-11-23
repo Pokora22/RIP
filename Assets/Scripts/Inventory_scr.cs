@@ -10,31 +10,26 @@ using Image = UnityEngine.UI.Image;
 
 public class Inventory_scr : MonoBehaviour
 {
-    public static List<Artifact_scr> allArtifacts = new List<Artifact_scr>();
-    private List<Artifact_scr> playerInventory;
-    private Artifact_scr equippedItem = null;
+    public List<Artifact> allArtifacts; //Add in editor
+    private List<Artifact> playerInventory;
+    private Artifact equippedItem = null;
     private TextMeshProUGUI itemDescription;
     [SerializeField] private float useArtifactPeriod;
     [SerializeField] private GameObject buttonPrefab;
+    private List<GameObject> displayButtons;
     private GameObject characterSheet, inventoryDisplay;
     private bool characterSheetOpen = false;
     
     // Start is called before the first frame update
     void Awake()
     {
-        CreateArtifacts();
         characterSheet = GameObject.FindWithTag("CharacterUI");
         inventoryDisplay = GameObject.FindWithTag("InventoryUI");
+        displayButtons = new List<GameObject>();
         itemDescription = GameObject.FindWithTag("InventoryUIText").GetComponent<TextMeshProUGUI>();
         itemDescription.text = "";
         Hide();
-        playerInventory = new List<Artifact_scr>();
-    }
-
-    private void CreateArtifacts()
-    {
-        for(int i = 0; i < 10; i++)
-            allArtifacts.Add(new Artifact_scr("Some item"));
+        playerInventory = new List<Artifact>();
     }
 
     // Update is called once per frame
@@ -81,9 +76,9 @@ public class Inventory_scr : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public bool AddItem(Artifact_scr item)
+    public bool AddItem(Artifact item)
     {
-        allArtifacts.Add(item);
+        playerInventory.Add(item);
         AddItemToDisplay(item);
 
         return true;
@@ -91,31 +86,53 @@ public class Inventory_scr : MonoBehaviour
 
     private void EquipItem(GameObject source)
     {
-        Button button = source.GetComponent<Button>();
-        ColorBlock colors = button.colors;
-        colors.normalColor = Color.green;
+        ButtonData data = source.GetComponent<ButtonData>();
+        Image image = source.GetComponent<Image>();
         
-        equippedItem = source.GetComponent<Artifact_scr>();
+        equippedItem = data.artifact;
+        data.active = !data.active;
+        
+        image.sprite = data.active? data.activeSprite : data.inactiveSprite;
         itemDescription.text = equippedItem.ToString();
+        useArtifact();
         //TODO: Add real activation methods
     }
 
-    private void AddItemToDisplay(Artifact_scr item)
+    public void RemoveItem(Artifact item)
+    {
+        playerInventory.Remove(item);
+        equippedItem = null;
+
+        foreach (GameObject button in displayButtons)
+        {
+            if (button.GetComponent<ButtonData>().artifact == item)
+            {
+                Destroy(button);
+                return;
+            }
+        }
+    }
+
+    private void AddItemToDisplay(Artifact item)
     {
         GameObject button = Instantiate(buttonPrefab, inventoryDisplay.transform);
-        Artifact_scr buttonStats = button.AddComponent<Artifact_scr>();
-        buttonStats.m_description = item.m_description;
-        buttonStats.m_sprite = item.m_sprite;
-        button.GetComponent<Image>().sprite = buttonStats.m_sprite;
+        displayButtons.Add(button);
+        ButtonData data = button.GetComponent<ButtonData>();
+
+        data.activeSprite = item.m_spriteActive;
+        data.inactiveSprite = item.m_spriteInactive;
+        data.description = item.m_description;
+        data.artifact = item;
+        data.active = false;
+        
+        button.GetComponent<Image>().sprite = data.inactiveSprite;
         
         button.GetComponent<Button>().onClick.AddListener(delegate { EquipItem(button); });
     }
-    
-    private IEnumerator useArtifacts()
+
+    private void useArtifact()
     {
-        yield return new WaitForSeconds(useArtifactPeriod);
-        foreach (Artifact_scr artifact in playerInventory)
-            if (!artifact.useAbility())
-                playerInventory.Remove(artifact);
+        if(equippedItem.activate())
+            RemoveItem(equippedItem);
     }
 }

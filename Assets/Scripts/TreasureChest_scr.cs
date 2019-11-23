@@ -2,7 +2,7 @@
 
 public class TreasureChest_scr : MonoBehaviour
 {
-    private Artifact_scr itemInside;
+    private Artifact itemInside;
     private Animator animator;
     private Inventory_scr inventory;
     private bool hasTreasure = false;
@@ -10,12 +10,12 @@ public class TreasureChest_scr : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         inventory = GameObject.FindWithTag("GameManager").GetComponent<Inventory_scr>();
-        int artifactCount = Inventory_scr.allArtifacts.Count;
+        int artifactCount = inventory.allArtifacts.Count;
         if (artifactCount > 0)
         {
             int index = Random.Range(0, artifactCount);
-            itemInside = Inventory_scr.allArtifacts[index];
-            Inventory_scr.allArtifacts.RemoveAt(index);
+            itemInside = inventory.allArtifacts[index];
+            inventory.allArtifacts.RemoveAt(index);
             hasTreasure = true;
         }
     }

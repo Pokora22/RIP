@@ -57,6 +57,18 @@ public class pAttributes_scr : MonoBehaviour
         updateHud();
     }
 
+    public bool heal()
+    {
+        if (health + 1 <= maxHealth)
+        {
+            health++;
+            updateHud();
+            return true;
+        }
+
+        return false;
+    }
+
     public void addExp(float exp)
     {
         currentExp += exp;

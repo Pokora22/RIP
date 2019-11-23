@@ -13,6 +13,7 @@ public class Attributes_scr : MonoBehaviour
     public float attackSpeed = 2f;
     public float moveSpeedMultiplier = 1f;
     public float reflectDamage = 3f;
+    public float lifeLeech = 0;
     public float expValue = 5f; //Change for different minions when they're in
     public GameObject corpse;
     
@@ -95,13 +96,20 @@ public class Attributes_scr : MonoBehaviour
         }
     }
 
-    public void damage(float dmgAmnt, Attributes_scr minionAttacking) //Attack with reflect
+    public void damage(float dmgAmnt, Attributes_scr attacker) //Attack with reflect
     {
         if(debug)
-            Debug.Log(gameObject.name + " received " +dmgAmnt + " dmg from " + minionAttacking.gameObject.name);
+            Debug.Log(gameObject.name + " received " +dmgAmnt + " dmg from " + attacker.gameObject.name);
             
         damage(dmgAmnt);
-        minionAttacking.damage(reflectDamage); //Don't reflect from reflect
+        if(health <= 0)
+            attacker.grantHealth();
+        attacker.damage(reflectDamage); //Don't reflect from reflect
+    }
+
+    public void grantHealth()
+    {
+        health = health + lifeLeech > maxHealth ? maxHealth : health + lifeLeech;
     }
     
     private void OnTriggerEnter(Collider other)

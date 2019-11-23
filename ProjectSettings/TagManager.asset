@@ -28,6 +28,7 @@ TagManager:
   - PauseMenu
   - CharacterUI
   - InventoryUIText
+  - ItemButton
   layers:
   - Default
   - TransparentFX
