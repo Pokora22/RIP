@@ -27,6 +27,7 @@ TagManager:
   - InventoryUI
   - PauseMenu
   - CharacterUI
+  - InventoryUIText
   layers:
   - Default
   - TransparentFX

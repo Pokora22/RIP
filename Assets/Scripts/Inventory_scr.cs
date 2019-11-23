@@ -4,12 +4,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 using Cursor = UnityEngine.Cursor;
 using Image = UnityEngine.UI.Image;
 
 public class Inventory_scr : MonoBehaviour
 {
     public static List<Artifact_scr> allArtifacts = new List<Artifact_scr>();
+    private List<Artifact_scr> playerInventory;
+    [SerializeField] private float useArtifactPeriod;
     [SerializeField] private GameObject buttonPrefab;
     private GameObject characterSheet, inventoryDisplay;
     private bool characterSheetOpen = false;
@@ -21,6 +24,7 @@ public class Inventory_scr : MonoBehaviour
         characterSheet = GameObject.FindWithTag("CharacterUI");
         inventoryDisplay = GameObject.FindWithTag("InventoryUI");
         Hide();
+        playerInventory = new List<Artifact_scr>();
     }
 
     private void CreateArtifacts()
@@ -41,7 +45,7 @@ public class Inventory_scr : MonoBehaviour
         }
     }
 
-    public static void printInventory()
+    public void printInventory()
     {
         Debug.Log("------------------");
         string inventory = "";
@@ -81,11 +85,30 @@ public class Inventory_scr : MonoBehaviour
         return true;
     }
 
+    private void EquipItem(GameObject source)
+    {
+        Debug.Log(source.GetComponent<Artifact_scr>());
+        //TODO: Add real activation methods
+    }
+
     private void AddItemToDisplay(Artifact_scr item)
     {
-        GameObject newButton = Instantiate(buttonPrefab, inventoryDisplay.transform);
-        newButton.GetComponent<Image>().color = Color.red;
+        GameObject button = Instantiate(buttonPrefab, inventoryDisplay.transform);
+        Artifact_scr buttonStats = button.AddComponent<Artifact_scr>();
+        buttonStats.m_description = item.m_description;
+        buttonStats.m_sprite = item.m_sprite;
+        
+        button.GetComponent<Button>().onClick.AddListener(delegate { EquipItem(button); });
+        button.GetComponent<Image>().color = Color.red;
         
         Debug.Log("Inventory updated ");
+    }
+    
+    private IEnumerator useArtifacts()
+    {
+        yield return new WaitForSeconds(useArtifactPeriod);
+        foreach (Artifact_scr artifact in playerInventory)
+            if (!artifact.useAbility())
+                playerInventory.Remove(artifact);
     }
 }

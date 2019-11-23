@@ -15,6 +15,7 @@ public class pAttributes_scr : MonoBehaviour
 
     private float currentExp;
     private float currentLvl;
+    private int skillPoints = 0;
     [SerializeField] private float baseExpReq = 50;
     private float nextLvlExpReq;
     private PlayerController_scr summoner;
@@ -23,10 +24,6 @@ public class pAttributes_scr : MonoBehaviour
     private GameObject[] livesDisplay;
     private Image expBar;
     private GameObject levelNotification;
-    [SerializeField] private List<Artifact_scr> playerInventory;
-    [SerializeField] private float useArtifactPeriod = 1f;
-    [SerializeField] private float invulnerableTime = 0.5f;
-    private bool invulnerable;
 
     
     void Start()
@@ -39,20 +36,25 @@ public class pAttributes_scr : MonoBehaviour
         livesDisplay = GameObject.FindGameObjectsWithTag("UIPhylactery");
         expBar = GameObject.FindWithTag("UIExpBar").GetComponent<Image>();
         levelNotification = GameObject.FindWithTag("UILevelNotification");
-        playerInventory = new List<Artifact_scr>();
-        invulnerable = false;
         
         updateHud();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.C))
+            addExp(100);
+    }
+
     public void damage()
     {
-        if (!invulnerable)
+        if (--health < 1)
         {
-            if (--health < 1)
-                SceneManager.LoadScene(2); //TODO: Maybe a game over screen
-            updateHud();
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(++currentScene); //TODO: Maybe a game over screen
         }
+
+        updateHud();
     }
 
     public void addExp(float exp)
@@ -65,7 +67,7 @@ public class pAttributes_scr : MonoBehaviour
             float overflow = exp - (nextLvlExpReq - currentExp); //Get exp that would go over the amnt required
 
             currentLvl++;
-            Debug.Log("Advanced to " + currentLvl + " level.");
+            skillPoints++;
             currentExp = 0;
 
             nextLvlExpReq += baseExpReq * 1.5f; //TODO: Better formula for next lvl
@@ -82,28 +84,12 @@ public class pAttributes_scr : MonoBehaviour
     {
         if(livesDisplay.Length >= health)
         for (int i = 0; i < maxHealth; i++)
-            livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0]; //TODO: Add some limiter to not ooi on test numbers
+            livesDisplay[i].GetComponent<Image>().sprite = i < health ? phylacteri[1] : phylacteri[0];
 
         expBar.fillAmount = currentExp / nextLvlExpReq;
         
         hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count));
         
-        levelNotification.SetActive(currentLvl > 0); //TODO: When skill points are in, check that against 0
-    }
-
-    
-
-    public void addItem(Artifact_scr item)
-    {
-        playerInventory.Add(item);
-        Debug.Log("Received " + item);
-    }
-
-    private IEnumerator useArtifacts()
-    {
-        yield return new WaitForSeconds(useArtifactPeriod);
-        foreach (Artifact_scr artifact in playerInventory)
-            if (!artifact.useAbility())
-                playerInventory.Remove(artifact);
+        levelNotification.SetActive(skillPoints > 0); //TODO: When skill points are in, check that against 0
     }
 }
