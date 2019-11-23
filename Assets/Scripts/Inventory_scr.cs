@@ -123,7 +123,7 @@ public class Inventory_scr : MonoBehaviour
         playerInventory.Remove(item);
         equippedItem = null;
 
-        Destroy(findButtonWithItem(item));
+        Destroy(findButtonWithItem(item).gameObject);
     }
 
     private ButtonData findButtonWithItem(Artifact item)
