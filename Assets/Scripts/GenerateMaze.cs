@@ -134,10 +134,7 @@ public class GenerateMaze : MonoBehaviour
                 weightedObstacles[index++] = pillar[j];
         for (int i = 0; i < wallChance; i++)
             for (int j = 0; j < wall.Length; j++)
-            {
-                Debug.Log(j);
                 weightedObstacles[index++] = wall[j];
-            }
     }
     
     private bool IsRestricted(Vector3 point)

@@ -50,7 +50,6 @@
         <e p="Scripts" t="Include">
           <e p="AiAnimator_scr.cs" t="Include" />
           <e p="Attributes_scr.cs" t="Include" />
-          <e p="AudioManager_scr.cs" t="Include" />
           <e p="ButtonData.cs" t="Include" />
           <e p="ButtonHandler_scr.cs" t="Include" />
           <e p="Corpse_scr.cs" t="Include" />
@@ -60,6 +59,7 @@
           <e p="EnemyAnimator_scr.cs" t="Include" />
           <e p="EnemySpawner_scr.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
+          <e p="GameManager_Scr.cs" t="Include" />
           <e p="GenerateMaze.cs" t="Include" />
           <e p="Inventory_scr.cs" t="Include" />
           <e p="MazeDataGenerator.cs" t="Include" />

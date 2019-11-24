@@ -197,8 +197,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //------------------------------------------
         public IEnumerator AIAttack()
         {
-//            agent.isStopped = true;
-            
             //If target stopped existing or dropped below 0 health break back to patrol
             if (target && targetAttr.health > 0)
             {
@@ -223,8 +221,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
             else
                 CurrentState = ENEMY_STATE.PATROL;
-            
-//            agent.isStopped = false;
         }
 	
         public void SetTarget(GameObject target)

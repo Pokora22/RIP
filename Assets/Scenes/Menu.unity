@@ -2207,7 +2207,7 @@ GameObject:
   - component: {fileID: 1204248755}
   - component: {fileID: 1204248754}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: SceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2242,10 +2242,9 @@ MonoBehaviour:
   music:
   - {fileID: 8300000, guid: 01dc83fb2c5a0084299f1458b99d60a3, type: 3}
   - {fileID: 8300000, guid: 3a030a56ecbd0b449824a8c2346e20fc, type: 3}
+  - {fileID: 8300000, guid: 3a030a56ecbd0b449824a8c2346e20fc, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
-  startingPitch: 4
-  timeToDecrease: 5
+  baseNumberOfUnitsPerScene: 00000000080000000c00000012000000
 --- !u!82 &1204248755
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2260,7 +2259,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

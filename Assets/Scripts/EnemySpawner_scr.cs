@@ -10,6 +10,7 @@ public class EnemySpawner_scr : MonoBehaviour
     private Vector3 spawnPoint;
     private float timer;
     private int unitsSpawned = 0;
+    public static int totalUnitsSpawned;
     
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class EnemySpawner_scr : MonoBehaviour
         spawnDelay -= spawnDelay * (diff/4);
         spawnUnitLimit = diff * 10 + 10;
         timer = spawnDelay;
+        Debug.Log("start timer: " + timer);
     }
 
     // Update is called once per frame
@@ -30,10 +32,21 @@ public class EnemySpawner_scr : MonoBehaviour
         {
             if (timer <= 0)
             {
-                timer = spawnDelay;
+                if (totalUnitsSpawned < GameManager_Scr.BaseNumberOfUnits)
+                {
+                    GameManager_Scr.DifficultyMod *= 1.5f;
+                    spawnUnitLimit++;
+                }
+                else if (totalUnitsSpawned > GameManager_Scr.BaseNumberOfUnits)
+                    GameManager_Scr.DifficultyMod /= 1.5f;
+                
+                timer = spawnDelay - GameManager_Scr.DifficultyMod;
+                timer = timer < 1f ? 1f : timer;
+                Debug.Log("Next unit in: " + timer);
                 Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPoint,
                     transform.rotation);
                 unitsSpawned++;
+                totalUnitsSpawned++;
             }
             else
                 timer -= Time.deltaTime;

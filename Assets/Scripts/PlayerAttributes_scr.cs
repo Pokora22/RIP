@@ -28,6 +28,7 @@ public class PlayerAttributes_scr : MonoBehaviour
     private void Awake()
     {
         //Initialize values for other things to use
+        PlayerPrefs.SetFloat("DifficultyMod", 0);
         PlayerPrefs.SetInt("MinionsKept", 0); //set held minions to 0 at start of game
     }
 

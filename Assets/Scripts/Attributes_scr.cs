@@ -39,10 +39,14 @@ public class Attributes_scr : MonoBehaviour
         if (CompareTag("Enemy"))
         {
             float diff = PlayerPrefs.GetInt("difficulty");
-            maxHealth += maxHealth * (diff / 5); //Add 20% stats per difficulty lvl
-            attackDamage += attackDamage * (diff / 5);
-            attackSpeed += attackSpeed * (diff / 5);
-            moveSpeedMultiplier += moveSpeedMultiplier * (diff / 5);
+            float diffMod = GameManager_Scr.DifficultyMod;
+            Debug.Log(diff);
+            Debug.Log(diffMod);
+            maxHealth += maxHealth * (diff * diffMod / 5); //Add 20% stats per difficulty lvl
+            Debug.Log(maxHealth);
+            attackDamage += attackDamage * (diff * diffMod/ 5);
+            attackSpeed += attackSpeed * (diff * diffMod/ 5);
+            moveSpeedMultiplier += moveSpeedMultiplier * (diff * diffMod/ 5);
         }
 
         if (CompareTag("Enemy") || CompareTag("Minion"))

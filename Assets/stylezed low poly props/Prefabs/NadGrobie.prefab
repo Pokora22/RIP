@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4356785226791406}
   - component: {fileID: 33865371683569384}
   - component: {fileID: 23969334049155670}
+  - component: {fileID: 1576955881826068555}
   m_Layer: 0
   m_Name: NadGrobie
   m_TagString: Untagged
@@ -78,3 +79,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1576955881826068555
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435246674670002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2884758, y: 0.98790413, z: 0.7320496}
+  m_Center: {x: 0.00058203936, y: 0.06534782, z: -0.000089123845}

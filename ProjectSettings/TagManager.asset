@@ -29,6 +29,7 @@ TagManager:
   - CharacterUI
   - InventoryUIText
   - ItemButton
+  - SceneManager
   layers:
   - Default
   - TransparentFX
