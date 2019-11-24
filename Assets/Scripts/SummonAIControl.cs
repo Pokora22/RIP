@@ -174,6 +174,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool inStoppingDistance()
         {
             float remainingDistance = Vector3.Distance(transform.position, targetDestination);
+            //Bandaid for remaining distance being different on agent and manual calculation. NavMesh agent sucks
+            remainingDistance = remainingDistance < agent.remainingDistance
+                ? remainingDistance
+                : agent.remainingDistance;
+            if(remainingDistance < .1)
+                Debug.Log(remainingDistance);
+//            Debug.Log(agent.remainingDistance);
             return remainingDistance <= agent.stoppingDistance;
         }
 
@@ -209,8 +216,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Check if target exists first
             if (target && targetAttr.health > 0)
             {
-//                Debug.Log("Has a valid target");
-                transform.LookAt(target.transform);
+                Vector3 lookTarget = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
+                transform.LookAt(lookTarget, Vector3.up);
                 if(target.CompareTag("Enemy") && targetAI.target != gameObject)
                     targetAI.SetTarget(this.gameObject);
                 
@@ -242,20 +249,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void UpdatePosition(Vector3 destination)
         {
             agent.SetDestination(destination);
-            
-            //https://docs.unity3d.com/ScriptReference/Rigidbody.SweepTest.html
-            //TODO: Check above for possible solution for AIs walking into each other
-            
-            if(!inStoppingDistance())
+
+            if (!agent.pathPending)
             {
+                //https://docs.unity3d.com/ScriptReference/Rigidbody.SweepTest.html
+                //TODO: Check above for possible solution for AIs walking into each other
+
+                if (!inStoppingDistance())
+                {
 //                Debug.Log("Moving: " + agent.desiredVelocity);
-                m_AiAnimatorScr.Move(agent.desiredVelocity);
-            }
-            else
-            {
+                    m_AiAnimatorScr.Move(agent.desiredVelocity);
+                }
+                else
+                {
 //                Debug.Log("Arrived");
-                m_AiAnimatorScr.Move(Vector3.zero);
-                recalled = false;
+                    m_AiAnimatorScr.Move(Vector3.zero);
+                    recalled = false;
+                }
             }
         }
 

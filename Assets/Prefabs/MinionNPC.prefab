@@ -75,7 +75,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &13654204
 CapsuleCollider:
@@ -133,6 +133,7 @@ MonoBehaviour:
   reflectDamage: 0
   lifeLeech: 0
   expValue: 0
+  modified: 0
   corpse: {fileID: 5359939786188790811, guid: 80b4d2d2c74991b4288f03e9f8aec96e, type: 3}
   debug: 0
   alertRange: 20
@@ -169,7 +170,6 @@ MonoBehaviour:
   playerLeashRange: 15
   debug: 0
   target: {fileID: 0}
-  enemySearchDelay: 0.5
 --- !u!82 &6483661527495625800
 AudioSource:
   m_ObjectHideFlags: 0
