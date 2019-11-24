@@ -324,13 +324,6 @@
         <e p="stylezed low poly props" t="Include">
           <e p="Readme.txt" t="Include" />
         </e>
-        <e p="Supercyan Character Pack Zombie Sample" t="Include">
-          <e p="Scripts" t="Include">
-            <e p="ZombieCameraLogic.cs" t="Include" />
-            <e p="ZombieCharacterControl.cs" t="Include" />
-            <e p="ZombieFree.cs" t="Include" />
-          </e>
-        </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Examples &amp; Extras" t="Include">
             <e p="Fonts" t="Include">

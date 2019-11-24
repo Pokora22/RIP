@@ -11,7 +11,7 @@ public class GenerateMaze : MonoBehaviour
     private MazeDataGenerator dataGenerator;
     [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, light, exit;
     [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity, numberOfExits, exitWidthOffset, exitLengthOffset;
-    [SerializeField] private bool generateMaze, randomExits;
+    [SerializeField] private bool generateMaze, randomExits, alwaysTurnTowardsFree;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
     private GameObject terrain;
@@ -43,6 +43,8 @@ public class GenerateMaze : MonoBehaviour
             }
 
             GenerateNewMaze(length, width);
+            
+            
             PlaceLights();
         }
 
@@ -196,19 +198,34 @@ public class GenerateMaze : MonoBehaviour
     private Quaternion ForwardFreeRotation(int i, int j)
     {
         List<int> rotations = new List<int>();
-        
-        //Check left
-        if(data[i - 1, j] == 0)
-            rotations.Add(270);
-        //Check up
-        if(data[i, j - 1] == 0)
-            rotations.Add(0);
-        //Check right
-        if(data[i + 1, j] == 0)
+
+        try
+        {
+            //Check left
+            if (data[i - 1, j] == 0)
+                rotations.Add(270);
+            //Check right
+            if (data[i + 1, j] == 0)
+                rotations.Add(90);
+        }
+        catch
+        {
             rotations.Add(90);
-        //Check down
-        if(data[i, j + 1] == 0)
-            rotations.Add(180);
+        }
+
+        try
+        {
+            //Check up
+            if (data[i, j - 1] == 0)
+                rotations.Add(0);
+            //Check down
+            if (data[i, j + 1] == 0)
+                rotations.Add(180);
+        }
+        catch
+        {
+            rotations.Add(0);
+        }
 
         int rotation = rotations.Count > 0 ? rotations[Random.Range(0, rotations.Count)] : 0;
         return Quaternion.Euler(new Vector3(0, rotation, 0));
@@ -222,11 +239,11 @@ public class GenerateMaze : MonoBehaviour
         float length = terrain.transform.localScale.x;
         float width = terrain.transform.localScale.z;
         
-        float obstacleHeight = obstacle.GetComponent<Renderer>().bounds.max.y;
+        float obstacleHeight = obstacle.GetComponentInChildren<Renderer>().bounds.max.y;
         
         Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
             obstacleHeight, j * cellSize - width / 2);
-        Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : obstacle == wallTresure ? ForwardFreeRotation(i, j) : randomCardinalRotation();
+        Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : obstacle == wallTresure || alwaysTurnTowardsFree ? ForwardFreeRotation(i, j) : randomCardinalRotation();
         
         if(!IsRestricted(obstacleLocation))
             Instantiate(obstacle,

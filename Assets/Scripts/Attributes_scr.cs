@@ -137,6 +137,7 @@ public class Attributes_scr : MonoBehaviour
 
     private IEnumerator removeBody()
     {
+        gameObject.layer = LayerMask.NameToLayer("Default");
         yield return new WaitForSeconds(removeDelay);
         
         while (transform.position.y > -10)
