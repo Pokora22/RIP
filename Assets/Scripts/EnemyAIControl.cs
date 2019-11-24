@@ -119,6 +119,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+            updatePosition(targetDestination);
+            
             if (resetPath)
             {
                 targetDestination = randomWaypoint();
@@ -142,8 +144,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     AIGuard();
                     break;
             }
-
-            updatePosition(targetDestination);
+            
             if(CurrentState == ENEMY_STATE.GUARD)
                 transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotQ, Time.deltaTime );
         }

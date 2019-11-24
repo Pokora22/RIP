@@ -67,7 +67,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.ADVANCE:
                         targetDestination = m_AdvanceDestination;
                         summoner.minionLeave(this);
-                        recalled = false;
                         break;
                     
                     case MINION_STATE.CHASE:
@@ -153,8 +152,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         
         public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
         {
-            recalled = false;
-            
             if (obstacleHit)
                 m_AdvanceDestination = new Vector3(rayHit.point.x, transform.position.y, rayHit.point.z);
             else
@@ -256,14 +253,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
                 if (!inStoppingDistance())
                 {
-//                Debug.Log("Moving: " + agent.desiredVelocity);
                     m_AiAnimatorScr.Move(agent.desiredVelocity);
                 }
                 else
                 {
-//                Debug.Log("Arrived");
                     m_AiAnimatorScr.Move(Vector3.zero);
-                    recalled = false;
+//                    recalled = false;
                 }
             }
         }
@@ -357,9 +352,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 CurrentState = MINION_STATE.FOLLOW;
             }
 
-//            yield return new WaitForSeconds(recallDelay);
-//            recalled = false;
-            yield break;
+            yield return new WaitForSeconds(.5f);
+
+            while (!inStoppingDistance() && CurrentState != MINION_STATE.ADVANCE)
+                yield return null;
+            
+            recalled = false;
         }
         
         private void LockInPlace(int locked)
