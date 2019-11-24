@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 public class GenerateMaze : MonoBehaviour
 {
     private MazeDataGenerator dataGenerator;
-    [SerializeField] private GameObject wall, wallTresure, pillar, sarcophagus, barricade, light, exit;
+    [SerializeField] private GameObject[] wall, wallTresure, pillar, sarcophagus, barricade, light, exit;
     [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity, numberOfExits, exitWidthOffset, exitLengthOffset;
     [SerializeField] private bool generateMaze, randomExits, alwaysTurnTowardsFree;
     int[,] data;
@@ -26,7 +26,11 @@ public class GenerateMaze : MonoBehaviour
         float width = terrain.GetComponent<Renderer>().bounds.max.z;
 
         restrictedZones = GameObject.FindGameObjectsWithTag("Restricted");
-        weightedObstacles = new GameObject[wallChance + treasureChance + sarcophhagusChance + barricadeChance + pillarChance];
+        weightedObstacles = new GameObject[wallChance * wall.Length
+                                           + treasureChance * wallTresure.Length
+                                           + sarcophhagusChance * sarcophagus.Length
+                                           + barricadeChance * barricade.Length
+                                           + pillarChance * pillar.Length];
         prepObstacles();
 
         if (generateMaze)
@@ -55,7 +59,7 @@ public class GenerateMaze : MonoBehaviour
     {
         for (int i = 0; i < numberOfExits; i++)
         {
-            GameObject exit = Instantiate(this.exit, terrain.transform.position, Quaternion.identity);
+            GameObject exit = Instantiate(this.exit[Random.Range(0, this.exit.Length)], terrain.transform.position, Quaternion.identity);
             Vector3 exitLocation;
                 
             do
@@ -102,7 +106,7 @@ public class GenerateMaze : MonoBehaviour
                         if (!lightInRange)
                         {
                             Quaternion rotation = ForwardFreeRotation(i, j);
-                            Instantiate(light,
+                            Instantiate(light[Random.Range(0, light.Length)],
                                 wallTransform.position,
                                 rotation,
                                 wallTransform);
@@ -117,15 +121,23 @@ public class GenerateMaze : MonoBehaviour
     {
         int index = 0;
         for (int i = 0; i < treasureChance; i++)
-            weightedObstacles[index++] = wallTresure;
+            for(int j = 0; j < wallTresure.Length; j++)
+                weightedObstacles[index++] = wallTresure[j];
         for (int i = 0; i < barricadeChance; i++)
-            weightedObstacles[index++] = barricade;
+            for(int j = 0; j < barricade.Length; j++)
+                weightedObstacles[index++] = barricade[j];
         for (int i = 0; i < sarcophhagusChance; i++)
-            weightedObstacles[index++] = sarcophagus;
+            for(int j = 0; j < sarcophagus.Length; j++)
+                weightedObstacles[index++] = sarcophagus[j];
         for (int i = 0; i < pillarChance; i++)
-            weightedObstacles[index++] = pillar;
+            for(int j = 0; j < pillar.Length; j++)
+                weightedObstacles[index++] = pillar[j];
         for (int i = 0; i < wallChance; i++)
-            weightedObstacles[index++] = wall;
+            for (int j = 0; j < wall.Length; j++)
+            {
+                Debug.Log(j);
+                weightedObstacles[index++] = wall[j];
+            }
     }
     
     private bool IsRestricted(Vector3 point)
@@ -169,7 +181,7 @@ public class GenerateMaze : MonoBehaviour
                 {
                     
                     if (i == 0 || j == 0 || i == rMax || j == cMax)
-                        PlaceObstacle(i, j, wall);
+                        PlaceObstacle(i, j, wall[Random.Range(0, wall.Length)]);
                     else
                         PlaceObstacle(i, j);
                 }
@@ -243,7 +255,9 @@ public class GenerateMaze : MonoBehaviour
         
         Vector3 obstacleLocation = new Vector3(i * cellSize - length / 2,
             obstacleHeight, j * cellSize - width / 2);
-        Quaternion obstacleRotation = obstacle == barricade ? randomFreeformRotation() : obstacle == wallTresure || alwaysTurnTowardsFree ? ForwardFreeRotation(i, j) : randomCardinalRotation();
+        Quaternion obstacleRotation = obstacle.CompareTag("Barricade") ? randomFreeformRotation() 
+            : obstacle == wallTresure[Random.Range(0, wallTresure.Length)] 
+              || alwaysTurnTowardsFree ? ForwardFreeRotation(i, j) : randomCardinalRotation();
         
         if(!IsRestricted(obstacleLocation))
             Instantiate(obstacle,
