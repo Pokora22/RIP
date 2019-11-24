@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CoroutineTest : MonoBehaviour
 {
-    private IEnumerator tensec, stopper;
+    private IEnumerator tensec, stopper, forever;
     private bool stopperRunning = false;
 
     // Start is called before the first frame update
@@ -13,19 +13,34 @@ public class CoroutineTest : MonoBehaviour
         tensec = TenSecRoutine();
         stopper = StopperRoutine();
 
-        
+        forever = foreverRoutine();
+
+        StartCoroutine(forever);
+
 //        StartCoroutine(stopper);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!stopperRunning)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            StartCoroutine(stopper);
-            Debug.Log("Starting stopper");
+            StopCoroutine(forever);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+            StartCoroutine(forever);
+
+    }
+
+    IEnumerator foreverRoutine()
+    {
+        while (true)
+        {
+            Debug.Log("Running routine");
+            yield return new WaitForSeconds(1);
         }
 
+        yield return null;
     }
 
     IEnumerator TenSecRoutine()

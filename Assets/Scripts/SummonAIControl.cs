@@ -26,10 +26,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private float playerLeashRange = 15f;
         [SerializeField] private bool debug = true;
         [SerializeField] private GameObject target;
+        
         private Attributes_scr targetAttr;
         private EnemyAIControl targetAI;
-        [SerializeField] private float enemySearchDelay = 1f;
-        
         private AiAnimator_scr m_AiAnimatorScr;
         private NpcAudio_scr audioPlayer;
         private bool recalled = false;
@@ -38,8 +37,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination, targetDestination;
+        private IEnumerator targetDestructibleRoutine;
 
-        private int counter = 0;
+        
         
         public MINION_STATE CurrentState
         {
@@ -53,7 +53,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 currentState = value;
                 agent.isStopped = false;
                 m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed, false);
-                StopCoroutine(setDestructibleDestination(GetComponent<Collider>()));
+                StopCoroutine(targetDestructibleRoutine);
                 
                 switch (currentState)
                 {
@@ -73,7 +73,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     case MINION_STATE.CHASE:
                         targettingDestructible = target && !target.CompareTag("Enemy");
                         if (targettingDestructible)
-                            StartCoroutine(setDestructibleDestination(target.GetComponent<Collider>()));
+                            StartCoroutine(targetDestructibleRoutine);
                         agent.stoppingDistance = targettingDestructible ? 
                             destructibleStoppingDistance : enemyStoppingDistance; //Conditional distance depending on if target is enemy or destructible?
                         summoner.minionLeave(this);
@@ -91,6 +91,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Start()
         {
+            targetDestructibleRoutine = setDestructibleDestination();
+            
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             m_AiAnimatorScr = GetComponent<AiAnimator_scr>();
@@ -191,11 +193,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        private IEnumerator setDestructibleDestination(Collider target)
+        private IEnumerator setDestructibleDestination()
         {
+            Collider target = this.target.GetComponent<Collider>();
             while (true)
             {
-//                Vector3 closestPoint = target.ClosestPointOnBounds(transform.position);
                 targetDestination = target.ClosestPointOnBounds(transform.position);
                 
                 yield return new WaitForSeconds(1f); //Update location once a second
@@ -246,11 +248,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             
             if(!inStoppingDistance())
             {
+//                Debug.Log("Moving: " + agent.desiredVelocity);
                 m_AiAnimatorScr.Move(agent.desiredVelocity);
             }
             else
             {
-                Debug.Log("?");
+//                Debug.Log("Arrived");
                 m_AiAnimatorScr.Move(Vector3.zero);
                 recalled = false;
             }
