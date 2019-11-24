@@ -117,6 +117,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+            UpdatePosition(targetDestination);
+            
             switch (CurrentState)
             {
                 case MINION_STATE.FOLLOW:
@@ -137,8 +139,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 default:
                        break;
             }
-            
-            UpdatePosition(targetDestination);
         }
 
         private void minionFollow()
@@ -173,14 +173,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private bool inStoppingDistance()
         {
-            float remainingDistance = Vector3.Distance(transform.position, targetDestination);
-            //Bandaid for remaining distance being different on agent and manual calculation. NavMesh agent sucks
-            remainingDistance = remainingDistance < agent.remainingDistance
-                ? remainingDistance
-                : agent.remainingDistance;
-            if(remainingDistance < .1)
-                Debug.Log(remainingDistance);
-//            Debug.Log(agent.remainingDistance);
+            float remainingDistance = Vector3.Distance(transform.position, agent.destination);
+            
+            //Bandaid for remaining distance being different on agent and manual calculation. NavMesh agent sucks ??
+//            remainingDistance = remainingDistance < agent.remainingDistance
+//                ? remainingDistance
+//                : agent.remainingDistance;
+
             return remainingDistance <= agent.stoppingDistance;
         }
 
