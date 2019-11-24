@@ -7,7 +7,7 @@ public class Potion : Artifact
 {
     public override bool activate()
     {
-        return GameObject.FindWithTag("GameManager").GetComponent<pAttributes_scr>().heal();
+        return GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>().heal();
     }
 
     public override bool deactivate()

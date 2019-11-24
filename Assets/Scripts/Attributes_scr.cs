@@ -24,7 +24,7 @@ public class Attributes_scr : MonoBehaviour
     [SerializeField] private float removeDelay = 5;
     private NpcAudio_scr audioPlayer;
     private bool alertUsed = false;
-    private pAttributes_scr playerAttr;
+    private PlayerAttributes_scr playerAttr;
     private PlayerController_scr summoner;
     private GameObject attacker;
     private AiAnimator_scr m_AiAnimatorScr;
@@ -55,7 +55,7 @@ public class Attributes_scr : MonoBehaviour
         
         health = maxHealth;
         summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
-        playerAttr = GameObject.FindGameObjectWithTag("GameManager").GetComponent<pAttributes_scr>();
+        playerAttr = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
         m_AiAnimatorScr = gameObject.GetComponent<AiAnimator_scr>();
         audioPlayer = GetComponent<NpcAudio_scr>();
     }

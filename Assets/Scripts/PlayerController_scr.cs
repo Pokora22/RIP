@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security;
-using TMPro;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using UnityEngine.Networking.Match;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.Characters.ThirdPerson;
 using UnityStandardAssets.CrossPlatformInput;
+using Random = UnityEngine.Random;
 
 public class PlayerController_scr : MonoBehaviour
 {
@@ -23,7 +19,7 @@ public class PlayerController_scr : MonoBehaviour
     public UnityEvent newMinionEvent;
     
     private bool consumeSummonInput = false;
-    private pAttributes_scr playerAttributes;
+    private PlayerAttributes_scr playerAttributes;
     private Attributes_scr characterAttributes;
     private Vector3 m_CamForward, move;
     private Transform m_Cam;
@@ -31,20 +27,37 @@ public class PlayerController_scr : MonoBehaviour
     private float inputTimeDelay = .2f;
     private float inputTimeStamp;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         minions = new List<SummonAIControl>();
         minionsAway = new List<SummonAIControl>();
-        playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<pAttributes_scr>();
+        playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
         characterAttributes = GetComponent<Attributes_scr>();
         m_Cam = Camera.main.transform;
         m_Rigidbody = GetComponent<Rigidbody>();
 
         inputTimeStamp = Time.time + inputTimeDelay;
+
+        int minionsKept = PlayerPrefs.GetInt("MinionsKept");
+
+        for (int i = 0; i < minionsKept; i++)
+        {
+            InstantiateMinionNearby();
+        }
     }
 
-    // Update is called once per frame
+    private void InstantiateMinionNearby()
+    {
+        NavMeshHit hit;
+        Vector3 randomNearby = transform.position + Random.insideUnitSphere * 5;
+        Vector3 summonPos = new Vector3(randomNearby.x, 0, randomNearby.z);
+        NavMesh.SamplePosition(summonPos, out hit, 10.0f, NavMesh.AllAreas);
+
+        //Summon minion
+        Instantiate(minionNPC, hit.position, transform.rotation);
+    }
+
     void Update()
     {
         HandleControlInput();
@@ -54,7 +67,6 @@ public class PlayerController_scr : MonoBehaviour
 
     private void summonMinionCheck()
     {
-        //Display on screen help -- need reverse conditions?
         if(minions.Count + minionsAway.Count >= playerAttributes.summonsLimit)
             return;
 
@@ -104,7 +116,7 @@ public class PlayerController_scr : MonoBehaviour
     private void summonMinion(GameObject body)
     {
         float distance = Vector3.Distance(transform.position, body.transform.position);
-
+        
         if (!Physics.Raycast(transform.position, body.transform.position - transform.position, distance, obstaclesMask))
         {
             NavMeshHit hit;
@@ -123,7 +135,6 @@ public class PlayerController_scr : MonoBehaviour
 
     public void minionLeave(SummonAIControl minion)
     {
-//        Debug.Log(minion.name + " leaving");
         minions.Remove(minion);
         if(!minionsAway.Contains(minion))
             minionsAway.Add(minion);
@@ -196,5 +207,10 @@ public class PlayerController_scr : MonoBehaviour
             m_Rigidbody.velocity = Vector3.zero;
             m_Rigidbody.AddForce((other.transform.right + (Vector3.up/20)) * 50, ForceMode.Impulse); //TODO: Push player back? Adjust force
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("MinionsKept", minions.Count); 
     }
 }

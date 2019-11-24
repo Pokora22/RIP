@@ -64,8 +64,8 @@
           <e p="Inventory_scr.cs" t="Include" />
           <e p="MazeDataGenerator.cs" t="Include" />
           <e p="NpcAudio_scr.cs" t="Include" />
-          <e p="pAttributes_scr.cs" t="Include" />
           <e p="PauseMenu_scr.cs" t="Include" />
+          <e p="PlayerAttributes_scr.cs" t="Include" />
           <e p="PlayerController_scr.cs" t="Include" />
           <e p="RotateWithCamera_scr.cs" t="Include" />
           <e p="ShowClosestPoint.cs" t="Include" />
@@ -404,6 +404,7 @@
         <e p="torch" t="Include">
           <e p="Readme.txt" t="Include" />
         </e>
+        <e p="Trap.cs" t="Include" />
       </e>
       <e p="Library" t="ExcludeRecursive" />
       <e p="NavMeshComponents.csproj" t="IncludeRecursive" />

@@ -184,9 +184,12 @@ MonoBehaviour:
     m_Bits: 256
   obstaclesMask:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 1
   minions: []
   minionsAway: []
+  newMinionEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4450414843463200064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +208,9 @@ MonoBehaviour:
   attackSpeed: 2
   moveSpeedMultiplier: 3
   reflectDamage: 3
+  lifeLeech: 0
   expValue: 0
+  modified: 0
   corpse: {fileID: 0}
   debug: 0
   alertRange: 20

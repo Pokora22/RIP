@@ -17,14 +17,11 @@ public class GenerateMaze : MonoBehaviour
     private GameObject terrain;
     private GameObject[] weightedObstacles, restrictedZones;
 
-    // Start is called before the first frame update
-    void Awake(){
+    private void Awake()
+    {
         dataGenerator = new MazeDataGenerator();
         terrain = GameObject.FindWithTag("Terrain");
-    }
-
-    private void Start()
-    {
+        
         float length = terrain.GetComponent<Renderer>().bounds.max.x;
         float width = terrain.GetComponent<Renderer>().bounds.max.z;
 

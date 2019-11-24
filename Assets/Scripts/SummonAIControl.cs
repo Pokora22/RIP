@@ -250,6 +250,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
             else
             {
+                Debug.Log("?");
                 m_AiAnimatorScr.Move(Vector3.zero);
                 recalled = false;
             }
