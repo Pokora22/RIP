@@ -103,7 +103,6 @@ public class Inventory_scr : MonoBehaviour
         }
 
         equippedItem = artifact;
-        Debug.Log("New: " + artifact);
         if (active)
         {
             if(equippedItem.activate())

@@ -22,7 +22,6 @@ public class Trap : MonoBehaviour
             Collider[] characters = Physics.OverlapSphere(transform.position, range, canBeDamaged);
             foreach (Collider c in characters)
             {
-                Debug.Log(c.name);
                 c.GetComponent<Attributes_scr>().damage(damage);
             }
         }

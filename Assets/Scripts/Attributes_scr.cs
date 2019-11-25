@@ -41,7 +41,6 @@ public class Attributes_scr : MonoBehaviour
             float diff = PlayerPrefs.GetInt("difficulty");
             float diffMod = GameManager_Scr.DifficultyMod;
             maxHealth += maxHealth * (diff * diffMod / 5); //Add 20% stats per difficulty lvl
-            Debug.Log(maxHealth);
             attackDamage += attackDamage * (diff * diffMod/ 5);
             attackSpeed += attackSpeed * (diff * diffMod/ 5);
             moveSpeedMultiplier += moveSpeedMultiplier * (diff * diffMod/ 5);

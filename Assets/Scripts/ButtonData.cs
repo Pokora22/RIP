@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class ButtonData : MonoBehaviour, IPointerClickHandler
 {
     private Image image;
+    private GameObject border;
+    private Color borderColor;
     private Inventory_scr playerInventory;
 
     public bool active = false;
@@ -17,13 +19,19 @@ public class ButtonData : MonoBehaviour, IPointerClickHandler
     
     private void Awake()
     {
+        borderColor = transform.GetChild(0).GetComponent<Image>().color;
         image = GetComponent<Image>();
+        image.sprite = activeSprite;
         updateImage();
     }
 
     public void updateImage()
     {
-        image.sprite = active ? activeSprite : inactiveSprite;
+        
+////        image.sprite = active ? activeSprite : inactiveSprite;
+        borderColor.a = active ? 1 : .02f;
+
+        borderColor = transform.GetChild(0).GetComponent<Image>().color = borderColor;
     }
     
     public virtual void OnPointerClick(PointerEventData eventData)

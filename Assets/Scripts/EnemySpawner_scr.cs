@@ -20,7 +20,6 @@ public class EnemySpawner_scr : MonoBehaviour
         spawnDelay -= spawnDelay * (diff/4);
         spawnUnitLimit = diff * 10 + 10;
         timer = spawnDelay;
-        Debug.Log("start timer: " + timer);
     }
 
     // Update is called once per frame
@@ -42,7 +41,6 @@ public class EnemySpawner_scr : MonoBehaviour
                 
                 timer = spawnDelay - GameManager_Scr.DifficultyMod;
                 timer = timer < 1f ? 1f : timer;
-                Debug.Log("Next unit in: " + timer);
                 Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPoint,
                     transform.rotation);
                 unitsSpawned++;

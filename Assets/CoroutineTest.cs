@@ -15,7 +15,7 @@ public class CoroutineTest : MonoBehaviour
 
         forever = foreverRoutine();
 
-        StartCoroutine(forever);
+//        StartCoroutine(forever);
 
 //        StartCoroutine(stopper);
     }
