@@ -27,8 +27,6 @@ public class ButtonData : MonoBehaviour, IPointerClickHandler
 
     public void updateImage()
     {
-        
-////        image.sprite = active ? activeSprite : inactiveSprite;
         borderColor.a = active ? 1 : .02f;
 
         borderColor = transform.GetChild(0).GetComponent<Image>().color = borderColor;

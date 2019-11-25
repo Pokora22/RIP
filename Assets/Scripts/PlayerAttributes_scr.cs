@@ -10,6 +10,7 @@ public class PlayerAttributes_scr : MonoBehaviour
 {
     // Start is called before the first frame update
     public int summonsLimit = 5;
+    public int minionsAtDisposal = 0;
     public float maxHealth = 3f;
     private float health;
 

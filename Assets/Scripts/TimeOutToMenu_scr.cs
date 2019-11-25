@@ -7,6 +7,12 @@ public class TimeOutToMenu_scr : MonoBehaviour
 {
     [SerializeField] private float time = 5f;
 
+    private void Awake()
+    {
+        Destroy(GameObject.FindWithTag("GameManager"));
+        Destroy(GameObject.FindWithTag("DontDestroyOnLoad"));
+    }
+
     // Update is called once per frame
     void Update()
     {

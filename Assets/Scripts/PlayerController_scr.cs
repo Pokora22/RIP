@@ -30,6 +30,7 @@ public class PlayerController_scr : MonoBehaviour
     
     void Start()
     {
+        Debug.Log("Start of player ctrl");
         minions = new List<SummonAIControl>();
         minionsAway = new List<SummonAIControl>();
         playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
@@ -39,10 +40,9 @@ public class PlayerController_scr : MonoBehaviour
 
         inputTimeStamp = Time.time + inputTimeDelay;
 
-        int minionsKept = PlayerPrefs.GetInt("MinionsKept");
-
-        for (int i = 0; i < minionsKept; i++)
+        for (int i = 0; i < playerAttributes.minionsAtDisposal; i++)
         {
+            Debug.Log("?");
             InstantiateMinionNearby();
         }
     }
@@ -159,7 +159,7 @@ public class PlayerController_scr : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Exit"))
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     
     private void HandleControlInput()
@@ -211,6 +211,8 @@ public class PlayerController_scr : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt("MinionsKept", minions.Count); 
+//        PlayerPrefs.SetInt("MinionsKept", minions.Count);
+
+        playerAttributes.minionsAtDisposal = minions.Count;
     }
 }
