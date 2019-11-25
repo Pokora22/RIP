@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
-using UnityEngine;
-using UnityStandardAssets.Characters.ThirdPerson;
+﻿using UnityEngine;
 
 public class AiAnimator_scr : MonoBehaviour
 {
