@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: -4871600976387969211}
   - component: {fileID: 8179706966285730082}
   m_Layer: 10
-  m_Name: EnemyPeasantNPC
+  m_Name: EnemyPeasant
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,9 @@ MonoBehaviour:
   attackSpeed: 2
   moveSpeedMultiplier: 1
   reflectDamage: 0
+  lifeLeech: 0
   expValue: 5
+  modified: 0
   corpse: {fileID: 8177375798088622285, guid: 2c7e474bc4d867c47b191de433452fea, type: 3}
   debug: 0
   alertRange: 20
@@ -247,11 +249,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipsRaise:
   - {fileID: 8300000, guid: 7c039d51f1490b148a35b9011e3a0e08, type: 3}
-  clipsAttack: []
+  clipsAttack:
+  - {fileID: 8300000, guid: a0f44fc1a2aa410489c304e8c54f7c16, type: 3}
+  - {fileID: 8300000, guid: dcf4165e16636e7499ca75bae4b80e26, type: 3}
+  - {fileID: 8300000, guid: 8aeed8da292a2cc4aab61035c737a248, type: 3}
+  - {fileID: 8300000, guid: 18688fefa91b3904e882ff4169c662bb, type: 3}
+  - {fileID: 8300000, guid: 25351ec87461cca4c9a59ced288b45e0, type: 3}
+  - {fileID: 8300000, guid: 0feb9e1a9e93a074b969de2c74ea6c69, type: 3}
+  - {fileID: 8300000, guid: d133e2818bb322b49b4e7176e9901d91, type: 3}
   clipsDeath:
   - {fileID: 8300000, guid: 49d1bb18d387b7b49b407f69eb8f9e5c, type: 3}
+  - {fileID: 8300000, guid: 94d6ed721afd95b499a1d2dbeea8fb07, type: 3}
+  - {fileID: 8300000, guid: 453fc1b83304fbc41930ddb6901b0225, type: 3}
+  - {fileID: 8300000, guid: a6454b7a4c77c5c4cb4f76dccfd3e635, type: 3}
   clipsAlert:
-  - {fileID: 8300000, guid: 3ab03a3327da4734291af5672c43e18b, type: 3}
+  - {fileID: 8300000, guid: 46ca8f7301c62f543850b2647cc1be20, type: 3}
 --- !u!114 &-4871600976387969211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,8 +281,9 @@ MonoBehaviour:
   patrolSpeed: 3
   chaseSpeed: 4
   doNotMove: 0
+  guard: 0
   debug: 0
-  AiCheckDelay: 1
+  lookAroundDelay: 3
   FovDistance: 15
   FovAngle: 45
   hearingDistance: 5
@@ -281,6 +294,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4097
   targetScanDelay: 0.25
+  guardPosition: {x: 0, y: 0, z: 0}
+  guardLeashRange: 20
   resetPath: 0
   currentstate: 0
 --- !u!114 &8179706966285730082

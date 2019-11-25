@@ -279,11 +279,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clipsRaise:
-  - {fileID: 8300000, guid: 7c039d51f1490b148a35b9011e3a0e08, type: 3}
+  - {fileID: 8300000, guid: 307e8c2dd1ddbf8449f7ca1e1f288baa, type: 3}
+  - {fileID: 8300000, guid: 3ac845c53d38f5c4eae6074fc650095a, type: 3}
   clipsAttack:
-  - {fileID: 8300000, guid: 934d101a8e241c6459c8ff4d5454fcc7, type: 3}
+  - {fileID: 8300000, guid: 6f3845aa4b48fb340ab9877d2e20cc7c, type: 3}
+  - {fileID: 8300000, guid: e03ac58ca07e3ff45a03702f66e69c06, type: 3}
+  - {fileID: 8300000, guid: 4b20cbd366018b54da767e48ca67750e, type: 3}
+  - {fileID: 8300000, guid: e49b993603f94c4489496570f661021d, type: 3}
   clipsDeath:
-  - {fileID: 8300000, guid: 7c039d51f1490b148a35b9011e3a0e08, type: 3}
+  - {fileID: 8300000, guid: d90ec4b088949af4485e852ba0ac937a, type: 3}
+  - {fileID: 8300000, guid: 5f537a5774bcaa4469814cf2c53f29d7, type: 3}
   clipsAlert: []
 --- !u!114 &664734178439649737
 MonoBehaviour:

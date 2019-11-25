@@ -22,6 +22,7 @@ public class GenerateMaze : MonoBehaviour
         dataGenerator = new MazeDataGenerator();
         terrain = GameObject.FindWithTag("Terrain");
         
+        
         float length = terrain.GetComponent<Renderer>().bounds.max.x;
         float width = terrain.GetComponent<Renderer>().bounds.max.z;
 

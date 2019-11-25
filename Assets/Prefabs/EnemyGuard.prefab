@@ -425,7 +425,9 @@ MonoBehaviour:
   attackSpeed: 1
   moveSpeedMultiplier: 1
   reflectDamage: 0
+  lifeLeech: 0
   expValue: 10
+  modified: 0
   corpse: {fileID: 8177375798088622285, guid: 9fe12e6e1bf78bf4883a167d1b82d046, type: 3}
   debug: 0
   alertRange: 20
@@ -444,12 +446,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271fcf6d5a4760644b04d6869f488154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipsRaise: []
-  clipsAttack: []
+  clipsRaise:
+  - {fileID: 8300000, guid: 7c039d51f1490b148a35b9011e3a0e08, type: 3}
+  clipsAttack:
+  - {fileID: 8300000, guid: a0f44fc1a2aa410489c304e8c54f7c16, type: 3}
+  - {fileID: 8300000, guid: dcf4165e16636e7499ca75bae4b80e26, type: 3}
+  - {fileID: 8300000, guid: 8aeed8da292a2cc4aab61035c737a248, type: 3}
+  - {fileID: 8300000, guid: 18688fefa91b3904e882ff4169c662bb, type: 3}
+  - {fileID: 8300000, guid: 25351ec87461cca4c9a59ced288b45e0, type: 3}
+  - {fileID: 8300000, guid: 0feb9e1a9e93a074b969de2c74ea6c69, type: 3}
+  - {fileID: 8300000, guid: d133e2818bb322b49b4e7176e9901d91, type: 3}
   clipsDeath:
   - {fileID: 8300000, guid: 49d1bb18d387b7b49b407f69eb8f9e5c, type: 3}
+  - {fileID: 8300000, guid: 94d6ed721afd95b499a1d2dbeea8fb07, type: 3}
+  - {fileID: 8300000, guid: 453fc1b83304fbc41930ddb6901b0225, type: 3}
+  - {fileID: 8300000, guid: a6454b7a4c77c5c4cb4f76dccfd3e635, type: 3}
   clipsAlert:
-  - {fileID: 8300000, guid: 3ab03a3327da4734291af5672c43e18b, type: 3}
+  - {fileID: 8300000, guid: ee2dd898f5d60374faedd07e39614d5d, type: 3}
+  - {fileID: 8300000, guid: d7c9d240712dc5342a464ea527418af4, type: 3}
+  - {fileID: 8300000, guid: a44093b8280f21f4eb8993f51c6f406c, type: 3}
 --- !u!82 &8842931170519606561
 AudioSource:
   m_ObjectHideFlags: 0
