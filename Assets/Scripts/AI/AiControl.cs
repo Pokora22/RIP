@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,6 +8,8 @@ namespace AI
 {
     [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
     [RequireComponent(typeof (AiAnimator_scr))]
+    [RequireComponent(typeof (Attributes_scr))]
+    [RequireComponent(typeof (NpcAudio_scr))]
     public class AiControl : MonoBehaviour
     {
         public GameObject target;
@@ -36,15 +39,15 @@ namespace AI
 	        Agent.updatePosition = true;
             
             Player = GameObject.FindGameObjectWithTag("Player");
-        }
-        
+        }        
+
         //------------------------------------------
-        protected bool AiChase()
-        {
+        protected virtual bool AiChase()
+        {            
             Agent.speed = chaseSpeed;
                 
             if (CanSeeTarget(target) || CanHearTarget(target)) //Update position only when seeing player
-            {
+            {                
                 TargetDestination = target.transform.position;                
             }
             else if (InStoppingDistance()) 
@@ -86,7 +89,7 @@ namespace AI
         }
 
         protected void UpdatePosition(Vector3 destination)
-        {
+        {            
             if (!doNotMove && Agent && !Agent.isStopped)
             {                
                 Agent.SetDestination(destination);
@@ -104,7 +107,6 @@ namespace AI
         protected bool InStoppingDistance()
         {
            float remainingDistance = Vector3.Distance(transform.position, TargetDestination);
-
            return remainingDistance <= Agent.stoppingDistance;
         }
         
@@ -152,7 +154,9 @@ namespace AI
         {
             Gizmos.color = Color.white;
             if (Application.isPlaying)
+            {
                 Gizmos.DrawWireSphere(Agent.destination, 1f);
+            }
         }
 
         //Used from animation event

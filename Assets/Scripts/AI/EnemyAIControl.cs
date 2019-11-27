@@ -11,9 +11,7 @@ using Random = UnityEngine.Random;
 
 
 namespace UnityStandardAssets.Characters.ThirdPerson
-{
-    [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-    [RequireComponent(typeof (AiAnimator_scr))]
+{    
     public class EnemyAIControl : AiControl
     {
         [SerializeField] private float targetScanDelay = .25f;
@@ -52,8 +50,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         break;
                     }
                 }
-                
-                yield return new WaitForSeconds(targetScanDelay);
+
+                //TODO: Decide on delay
+                yield return null;
+//                yield return new WaitForSeconds(targetScanDelay);
             }
         }
     }

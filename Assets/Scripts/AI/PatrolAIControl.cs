@@ -11,10 +11,6 @@ using Random = UnityEngine.Random;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
-    [RequireComponent(typeof (UnityEngine.AI.NavMeshAgent))]
-    [RequireComponent(typeof (AiAnimator_scr))]
-    [RequireComponent(typeof (Attributes_scr))]
-    [RequireComponent(typeof (NpcAudio_scr))]
     public class PatrolAIControl : EnemyAIControl
     {
         private GameObject terrain;
@@ -62,6 +58,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             levelBounds = terrain.gameObject.GetComponent<Collider>().bounds;
             
             CurrentState = ENEMY_STATE.PATROL;
+            if(name.Equals("EnemyPeasant (2)"))
+                Debug.Log(Agent);
         }
 
         private void Update()
@@ -71,7 +69,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             switch (CurrentState)
             {
                 case ENEMY_STATE.PATROL:
-                    AIPatrol();
+                    AiPatrol();
                     break;
                 case ENEMY_STATE.CHASE:
                     //If still chasing
@@ -91,7 +89,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        public void AIPatrol()
+        public void AiPatrol()
         {   
             if(target != gameObject)
                 CurrentState = ENEMY_STATE.CHASE;

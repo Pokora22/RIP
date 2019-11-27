@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/GuardAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/GuardAIControl.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,40 +29,6 @@
     <expand />
     <select />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>UILevelNotification</find>
-      <find>agent.set</find>
-      <find>targettingDe</find>
-      <find>closest</find>
-      <find>ClosestPointOnBounds(transform.position)</find>
-      <find>target.ClosestPointOnBounds(transform.position);</find>
-      <find>agent.destination =</find>
-      <find>attack</find>
-      <find>CurrentState = MINION_STATE.ATTACK;</find>
-      <find>IEnum</find>
-      <find>index</find>
-      <find>restri</find>
-      <find>nav</find>
-      <find>toggle</find>
-      <find>corpse</find>
-      <find>stoppingDista</find>
-      <find>lockin</find>
-      <find>Deb</find>
-      <find>minions.add</find>
-      <find>Random</find>
-      <find>minionCollisionCheck</find>
-      <find>setDestructibleDestination</find>
-      <find>Debug.DrawR</find>
-      <find>Lookat</find>
-      <find>Player</find>
-      <find>exit</find>
-      <find>SceneMana</find>
-      <find>PlayerAt</find>
-      <find>setnewde</find>
-      <find>targetsc</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
@@ -74,18 +43,13 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Artifacts/Thorns.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/CoffinOpen.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Player.prefab" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Barricade.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Wall 3x3.prefab" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/Exit.prefab" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Standard Assets/Utility/ParticleSystemDestroyer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/NavMeshComponents/Editor/NavMeshAssetManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/PoisonCloud.prefab" root0="FORCE_HIGHLIGHTING" />
@@ -93,11 +57,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Trap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.0.13/UnityEditor.TestRunner/CommandLineParser/CommandLineOption.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/EnemyGuard.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TimeOutToMenu_scr.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ExitVolume.cs.meta" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PauseMenu_scr.cs" root0="FORCE_HIGHLIGHTING" />
@@ -111,9 +72,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/CoroutineTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ThirdPersonUserControl_Custom.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Menu.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DifficultyHandler_scr.cs" root0="FORCE_HIGHLIGHTING" />
@@ -122,8 +81,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RotateWithCamera_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AiAnimator_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0D555F45-51EF-4F4A-858F-0AE7C1078C2C/19/279680fc/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MazeDataGenerator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Sandbox/OcclusionCullingData.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" root0="FORCE_HIGHLIGHTING" />
@@ -131,10 +88,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DontDestroyOnLoad_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TreasureChest_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ThirdPersonCharacter_Custom.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Corpse_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/GuardCorpse.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/GuardAIControl.cs" root0="FORCE_HIGHLIGHTING" />
@@ -196,12 +151,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/EnemyAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PatrolAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AIControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/GuardAIControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/AIControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/GuardAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" />
       </list>
     </option>
   </component>
@@ -279,14 +234,8 @@
       <workItem from="1574709656670" duration="7635000" />
       <workItem from="1574847188847" duration="9328000" />
       <workItem from="1574857052677" duration="529000" />
-      <workItem from="1574857604021" duration="6245000" />
-    </task>
-    <task id="LOCAL-00074" summary="Fixed calling update position on disabled navmesh agents v2&#10;Added framework for low and high priority target searches">
-      <created>1573940105201</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1573940105201</updated>
+      <workItem from="1574857604021" duration="8125000" />
+      <workItem from="1574865761226" duration="3586000" />
     </task>
     <task id="LOCAL-00075" summary="Modified peasant to drop a corpse on death instead animating death on alive object&#10;Moved player attributes to game manager (not destroyed on load)&#10;Moved collision to player controller&#10;Changed hearing to only care for distance (for now, so the enemy doesn't ignore player standing barely out of their FOV)&#10;Made a separate corpse for minions as well&#10;Death audio is now playing at point (instancing new source)">
       <created>1574022643400</created>
@@ -624,7 +573,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574860769861</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="Chase and attack functions in AI are done (for good hopefully)">
+      <created>1574863901742</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1574863901742</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -671,7 +627,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Added guard corpse&#10;Fixed wrong layers for new guard" />
     <MESSAGE value="Added optional guard routine and necessary leash checks to enemy AI" />
     <MESSAGE value="Added skeleton for inventory display" />
     <MESSAGE value="Added mouse click interaction to inventory" />
@@ -696,7 +651,8 @@
     <MESSAGE value="Removes imports that were throwing errors in webgl build" />
     <MESSAGE value="Splitting into inheritance checkpoint 1:&#10;AI Control, EnemyAIControl" />
     <MESSAGE value="PatrolAI is in" />
-    <option name="LAST_COMMIT_MESSAGE" value="PatrolAI is in" />
+    <MESSAGE value="Chase and attack functions in AI are done (for good hopefully)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Chase and attack functions in AI are done (for good hopefully)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
