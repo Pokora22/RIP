@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager_Scr : MonoBehaviour
 {
-    //TODO: This should possible not be kept between scenes, but have an instance in each scene? Otherwise - find a callback from scene manager (Lookup OnSceneLoaded / OnEnable)
     public AudioClip[] music;
 
     private AudioSource audioSource;

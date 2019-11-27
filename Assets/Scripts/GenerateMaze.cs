@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Sisus.Attributes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,6 +14,7 @@ public class GenerateMaze : MonoBehaviour
     [SerializeField] private GameObject[] wall, wallTresure, pillar, sarcophagus, barricade, light, exit;
     [SerializeField] private int wallChance, treasureChance, sarcophhagusChance, barricadeChance, pillarChance, lightingDensity, numberOfExits, exitWidthOffset, exitLengthOffset;
     [SerializeField] private bool generateMaze, randomExits, alwaysTurnTowardsFree;
+    [EditorBrowsable] private Dictionary<int, string> aiSpawns;
     int[,] data;
     [SerializeField] private float cellSize = 3f;
     private GameObject terrain;
@@ -54,6 +57,16 @@ public class GenerateMaze : MonoBehaviour
         }
 
         GetComponent<NavMeshSurface>().BuildNavMesh();
+
+        SpawnAis();
+    }
+
+    private void SpawnAis()
+    {
+        foreach (var pair in aiSpawns)
+        {
+//            Instantiate(pair.Value, pair.Key.position, Quaternion.identity);
+        }
     }
 
     private void PlaceExits(float tLength, float tWidth)

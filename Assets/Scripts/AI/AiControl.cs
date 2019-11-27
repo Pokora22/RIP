@@ -59,7 +59,6 @@ namespace AI
         //------------------------------------------
         protected IEnumerator AiAttack()
         {
-            //TODO: Return when lost target
             //If target stopped existing or dropped below 0 health break back to patrol
             if (target && TargetAttr.health > 0)
             {

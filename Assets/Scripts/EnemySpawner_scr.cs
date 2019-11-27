@@ -25,8 +25,6 @@ public class EnemySpawner_scr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO: Track number of spawned enemies. If number of current enemies is lower than the starting number, keep increasing spawn frequency. If the number is start * modifier, lower the frequency
-
         if(unitsSpawned < spawnUnitLimit)
         {
             if (timer <= 0)

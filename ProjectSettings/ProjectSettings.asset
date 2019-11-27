@@ -553,6 +553,7 @@ PlayerSettings:
     1: CROSS_PLATFORM_INPUT
     4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
     7: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    13: POWER_INSPECTOR
     14: MOBILE_INPUT
   platformArchitecture: {}
   scriptingBackend: {}

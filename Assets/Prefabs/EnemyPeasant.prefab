@@ -291,7 +291,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  chaseSpeed: 4
+  TargetDestination: {x: 0, y: 0, z: 0}
+  chaseSpeed: 5
   doNotMove: 0
   debug: 0
   fovDistance: 15

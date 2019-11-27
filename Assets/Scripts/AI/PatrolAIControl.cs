@@ -58,8 +58,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             levelBounds = terrain.gameObject.GetComponent<Collider>().bounds;
             
             CurrentState = ENEMY_STATE.PATROL;
-            if(name.Equals("EnemyPeasant (2)"))
-                Debug.Log(Agent);
         }
 
         private void Update()
