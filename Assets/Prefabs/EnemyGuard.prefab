@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 5857160028630656388}
   - component: {fileID: 8842931170519606563}
   - component: {fileID: 8842931170519606564}
-  - component: {fileID: 8842931170519606565}
+  - component: {fileID: 4458809999769197080}
   - component: {fileID: 8842931170519606566}
   - component: {fileID: 8842931170519606567}
   - component: {fileID: 8842931170519606562}
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroundCheckDistance: 0.1
   hitBox: {fileID: 0}
---- !u!114 &8842931170519606565
+--- !u!114 &4458809999769197080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,31 +352,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 691735862901734125}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60d3a641c9f3114e90cab03dc3e8ae2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f14f96e08a54ff09930658d00048b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   m_AiAnimatorScr: {fileID: 0}
   target: {fileID: 0}
-  patrolSpeed: 4
   chaseSpeed: 5
   doNotMove: 0
-  guard: 0
   debug: 0
-  lookAroundDelay: 3
-  FovDistance: 30
-  FovAngle: 45
-  hearingDistance: 5
+  FovDistance: 20
+  FovAngle: 60
+  hearingDistance: 10
   enemiesMask:
     serializedVersion: 2
     m_Bits: 512
   obstacleMask:
     serializedVersion: 2
     m_Bits: 4097
-  targetScanDelay: 0.25
-  guardPosition: {x: 0, y: 0, z: 0}
-  guardLeashRange: 10
-  resetPath: 0
-  currentstate: 0
 --- !u!54 &8842931170519606566
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -54,6 +54,13 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="AI" t="Include">
+            <e p="AIControl.cs" t="Include" />
+            <e p="EnemyAIControl.cs" t="Include" />
+            <e p="GuardAIControl.cs" t="Include" />
+            <e p="PatrolAIControl.cs" t="Include" />
+            <e p="SummonAIControl.cs" t="Include" />
+          </e>
           <e p="AiAnimator_scr.cs" t="Include" />
           <e p="Attributes_scr.cs" t="Include" />
           <e p="ButtonData.cs" t="Include" />
@@ -61,8 +68,6 @@
           <e p="Corpse_scr.cs" t="Include" />
           <e p="DifficultyHandler_scr.cs" t="Include" />
           <e p="DontDestroyOnLoad_scr.cs" t="Include" />
-          <e p="EnemyAIControl.cs" t="Include" />
-          <e p="EnemyAnimator_scr.cs" t="Include" />
           <e p="EnemySpawner_scr.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="GameManager_Scr.cs" t="Include" />
@@ -75,7 +80,6 @@
           <e p="PlayerController_scr.cs" t="Include" />
           <e p="RotateWithCamera_scr.cs" t="Include" />
           <e p="ShowClosestPoint.cs" t="Include" />
-          <e p="SummonAIControl.cs" t="Include" />
           <e p="Templates" t="Include">
             <e p="Artifact.cs" t="Include" />
             <e p="PermanentMinionModifier.cs" t="Include" />

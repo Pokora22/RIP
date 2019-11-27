@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 7007863952775523347}
   - component: {fileID: 6483661527495625800}
   - component: {fileID: 7819310527098577742}
-  - component: {fileID: -4871600976387969211}
   - component: {fileID: 8179706966285730082}
+  - component: {fileID: 7993332807702458499}
   m_Layer: 10
   m_Name: EnemyPeasant
   m_TagString: Enemy
@@ -264,40 +264,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a6454b7a4c77c5c4cb4f76dccfd3e635, type: 3}
   clipsAlert:
   - {fileID: 8300000, guid: 46ca8f7301c62f543850b2647cc1be20, type: 3}
---- !u!114 &-4871600976387969211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 113348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d60d3a641c9f3114e90cab03dc3e8ae2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AiAnimatorScr: {fileID: 0}
-  target: {fileID: 0}
-  patrolSpeed: 3
-  chaseSpeed: 4
-  doNotMove: 0
-  guard: 0
-  debug: 0
-  lookAroundDelay: 3
-  FovDistance: 15
-  FovAngle: 45
-  hearingDistance: 5
-  enemiesMask:
-    serializedVersion: 2
-    m_Bits: 512
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 4097
-  targetScanDelay: 0.25
-  guardPosition: {x: 0, y: 0, z: 0}
-  guardLeashRange: 20
-  resetPath: 0
-  currentstate: 0
 --- !u!114 &8179706966285730082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +278,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroundCheckDistance: 0.1
   hitBox: {fileID: 0}
+--- !u!114 &7993332807702458499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f25708fd6843b88718d5de904f17b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AiAnimatorScr: {fileID: 0}
+  target: {fileID: 0}
+  chaseSpeed: 4
+  doNotMove: 0
+  debug: 0
+  FovDistance: 15
+  FovAngle: 45
+  hearingDistance: 5
+  enemiesMask:
+    serializedVersion: 2
+    m_Bits: 512
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4097
+  targetScanDelay: 0.25
+  patrolSpeed: 0
+  currentstate: 0
 --- !u!1 &126732179466468637
 GameObject:
   m_ObjectHideFlags: 0

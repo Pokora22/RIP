@@ -164,7 +164,8 @@ public class Attributes_scr : MonoBehaviour
                 Collider[] nearbyAllies = Physics.OverlapSphere(transform.position, alertRange, gameObject.layer);
                 foreach (Collider ally in nearbyAllies)
                 {
-                    ally.GetComponent<EnemyAIControl>().setNewDestination(transform.position);
+                    if (TryGetComponent(out PatrolAIControl patrolAi))
+                        patrolAi.setNewDestination(transform.position);
                 }
             }
         }
