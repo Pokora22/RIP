@@ -290,13 +290,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f25708fd6843b88718d5de904f17b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AiAnimatorScr: {fileID: 0}
   target: {fileID: 0}
   chaseSpeed: 4
   doNotMove: 0
   debug: 0
-  FovDistance: 15
-  FovAngle: 45
+  fovDistance: 15
+  fovAngle: 45
   hearingDistance: 5
   enemiesMask:
     serializedVersion: 2
@@ -305,7 +304,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4097
   targetScanDelay: 0.25
-  patrolSpeed: 0
+  patrolSpeed: 3
   currentstate: 0
 --- !u!1 &126732179466468637
 GameObject:

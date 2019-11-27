@@ -30,7 +30,6 @@ public class PlayerController_scr : MonoBehaviour
     
     void Start()
     {
-        Debug.Log("Start of player ctrl");
         minions = new List<SummonAIControl>();
         minionsAway = new List<SummonAIControl>();
         playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
@@ -211,8 +210,6 @@ public class PlayerController_scr : MonoBehaviour
 
     private void OnDestroy()
     {
-//        PlayerPrefs.SetInt("MinionsKept", minions.Count);
-
         playerAttributes.minionsAtDisposal = minions.Count;
     }
 }
