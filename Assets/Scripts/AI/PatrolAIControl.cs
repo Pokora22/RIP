@@ -74,29 +74,32 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     AIPatrol();
                     break;
                 case ENEMY_STATE.CHASE:
-                    AiChase();
+                    //If still chasing
+                    if (AiChase()) {
+                        if(TargetInAttackRange())
+                            CurrentState = ENEMY_STATE.ATTACK;
+                    }
+                    else
+                        CurrentState = ENEMY_STATE.PATROL;
                     break;
                 case ENEMY_STATE.ATTACK:
-                    if (!Agent.isStopped)
+                    if (!TargetInAttackRange())
+                        CurrentState = ENEMY_STATE.CHASE;
+                    else if (!Agent.isStopped)
                         StartCoroutine(AiAttack());
                     break;
             }
         }
-
 
         public void AIPatrol()
         {   
             if(target != gameObject)
                 CurrentState = ENEMY_STATE.CHASE;
             else if (InStoppingDistance() && !doNotMove)
-            {
-                Agent.SetDestination(randomWaypoint());
+            {                
+                TargetDestination = randomWaypoint();                
             }
-
-            TargetDestination = Agent.destination;
         }
-
-	
 
         private Vector3 randomWaypoint()
         {
@@ -105,8 +108,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float z = Random.Range(levelBounds.min.z, levelBounds.max.z);
             
             NavMeshHit hit;
-            NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2.0f, NavMesh.AllAreas);
-            
+            //If navmesh fails to find a close position
+            if (!NavMesh.SamplePosition(new Vector3(x, 0, z), out hit, 2f, NavMesh.AllAreas))
+            {
+                Debug.Log("Navmesh not sampled");
+                return transform.position;
+            }
+
             NavMeshPath path = new NavMeshPath();
             //Dirty            
             try{

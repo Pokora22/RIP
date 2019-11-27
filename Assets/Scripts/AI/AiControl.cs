@@ -39,20 +39,18 @@ namespace AI
         }
         
         //------------------------------------------
-        protected void AiChase()
+        protected bool AiChase()
         {
             Agent.speed = chaseSpeed;
-            //TODO: Return when lost target
-
+                
             if (CanSeeTarget(target) || CanHearTarget(target)) //Update position only when seeing player
             {
-                TargetDestination = target.transform.position;
-
-                if (TargetInAttackRange()) ;
-                //TODO: Completed  chase with success
+                TargetDestination = target.transform.position;                
             }
-            else if (InStoppingDistance()) ;
-                //TODO: Completed chase with failure
+            else if (InStoppingDistance()) 
+                return false;
+                
+            return true;
         }
 
         //------------------------------------------
@@ -68,17 +66,11 @@ namespace AI
                 yield return new WaitUntil(() => !Agent.isStopped);
 
                 //Check if target still exists after the animation is done
-                if (!target || TargetAttr.health <= 0) ;
-                //TODO: Attack completed with success ?
-                else
+                if (target && TargetAttr.health <= 0)                
                 {
-                    TargetDestination = target.transform.position;
-                    if (!TargetInAttackRange()) ;
-                    //TODO: Attack completed
+                    TargetDestination = target.transform.position;                    
                 }
-            }
-            else ;
-            //TODO: Return to basic state;
+            }            
         }
 	
         public void SetTarget(GameObject target)
@@ -119,21 +111,23 @@ namespace AI
         
         protected bool TargetInAttackRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) <= Agent.stoppingDistance;
+            return (target && Vector3.Distance(transform.position, target.transform.position) <= Agent.stoppingDistance);
         }
 
         protected bool CanSeeTarget(GameObject target)
         {
-            Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
-            Vector3 direction = (new Vector3(target.transform.position.x, 1f, target.transform.position.z) -
-                                origin).normalized;
-            float angle = Vector3.Angle(transform.forward, direction);
+            if(target){
+                Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+                Vector3 direction = (new Vector3(target.transform.position.x, 1f, target.transform.position.z) -
+                                    origin).normalized;
+                float angle = Vector3.Angle(transform.forward, direction);
 
-            if (angle < fovAngle)
-            {
-                float distance = Vector3.Distance(transform.position, target.transform.position);
-                if(!Physics.Raycast(origin, direction, distance, obstacleMask))
-                    return true;
+                if (angle < fovAngle)
+                {
+                    float distance = Vector3.Distance(transform.position, target.transform.position);
+                    if(!Physics.Raycast(origin, direction, distance, obstacleMask))
+                        return true;
+                }
             }
 
             return false;
@@ -141,13 +135,17 @@ namespace AI
 
         protected bool CanHearTarget(GameObject target)
         {
-            //TODO: Ask object for it's velocity instead (from attributes)
-//            Rigidbody rb = target.GetComponent<Rigidbody>();
-            
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            return distance < hearingDistance;
-            
+            if(target){
+                //TODO: Ask object for it's velocity instead (from attributes)
+//                Rigidbody rb = target.GetComponent<Rigidbody>();
+                
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                return distance < hearingDistance;
+                
                 //&& rb.velocity.magnitude != 0; //Any movement (might change formula someday)
+            }
+            
+            return false;
         }
         
         private void OnDrawGizmos()

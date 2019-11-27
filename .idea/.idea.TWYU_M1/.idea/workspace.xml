@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/AIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -207,8 +200,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/AIControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" />
       </list>
     </option>
   </component>
@@ -286,14 +279,7 @@
       <workItem from="1574709656670" duration="7635000" />
       <workItem from="1574847188847" duration="9328000" />
       <workItem from="1574857052677" duration="529000" />
-      <workItem from="1574857604021" duration="2920000" />
-    </task>
-    <task id="LOCAL-00073" summary="Fixed calling update position on disabled navmesh agents">
-      <created>1573939290057</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1573939290057</updated>
+      <workItem from="1574857604021" duration="6245000" />
     </task>
     <task id="LOCAL-00074" summary="Fixed calling update position on disabled navmesh agents v2&#10;Added framework for low and high priority target searches">
       <created>1573940105201</created>
@@ -631,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574855332128</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="PatrolAI is in">
+      <created>1574860769861</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1574860769861</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -678,7 +671,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Changed player to use same iframe routine as everything else&#10;Delegated enemy agent lock to animation/editor for finer control" />
     <MESSAGE value="Added guard corpse&#10;Fixed wrong layers for new guard" />
     <MESSAGE value="Added optional guard routine and necessary leash checks to enemy AI" />
     <MESSAGE value="Added skeleton for inventory display" />
@@ -703,7 +695,8 @@
     <MESSAGE value="Fixed keeping minion between levels&#10;Added new skybox and light" />
     <MESSAGE value="Removes imports that were throwing errors in webgl build" />
     <MESSAGE value="Splitting into inheritance checkpoint 1:&#10;AI Control, EnemyAIControl" />
-    <option name="LAST_COMMIT_MESSAGE" value="Splitting into inheritance checkpoint 1:&#10;AI Control, EnemyAIControl" />
+    <MESSAGE value="PatrolAI is in" />
+    <option name="LAST_COMMIT_MESSAGE" value="PatrolAI is in" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -712,47 +705,6 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" log-message="true" log-stack="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs</url>
-          <line>92</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" initialLine="92">
-            <startOffsets>
-              <option value="2852" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2891" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint suspend="NONE" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs</url>
-          <line>88</line>
-          <log-expression expression="Debug.Log(&quot;target != gameObject&quot; + (target != gameObject))" language="C#" custom="RiderImportsList:" />
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" initialLine="88">
-            <startOffsets>
-              <option value="2690" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2714" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint suspend="NONE" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs</url>
-          <line>90</line>
-          <log-expression expression="Debug.Log(&quot;inStoppingDistance: &quot; + inStoppingDistance());" language="C#" custom="RiderImportsList:" />
-          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" initialLine="90">
-            <startOffsets>
-              <option value="2782" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2821" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
