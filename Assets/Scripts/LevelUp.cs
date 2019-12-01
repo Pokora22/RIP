@@ -25,9 +25,14 @@ public class LevelUp : MonoBehaviour
         levelUpPanel.SetActive(true);
         Time.timeScale = 0;
 
-        for(int i = 0; i < 3; i++){
-            buttons[i] = Instantiate(lvlUpButton, levelUpPanel.transform);
-            buttons[i].GetComponent<UpgradeButton>().RegisterPanel(this);
+        List<int> allFuns = new List<int>() {0, 1, 2, 3, 4, 5};        
+
+        for(int i = 0; i < 3; i++)
+        {
+            int fun = allFuns[Random.Range(0, allFuns.Count)];
+            buttons[i] = Instantiate(lvlUpButton, levelUpPanel.transform.GetChild(1));
+            buttons[i].GetComponent<UpgradeButton>().RegisterButton(this, fun);
+            allFuns.Remove(fun);
         }
 
         //TODO: Panel with some buttons - make buttons do things

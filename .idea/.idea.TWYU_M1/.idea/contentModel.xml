@@ -84,7 +84,7 @@
           <e p="ShowClosestPoint.cs" t="Include" />
           <e p="Templates" t="Include">
             <e p="Artifact.cs" t="Include" />
-            <e p="PermanentMinionModifier.cs" t="Include" />
+            <e p="PermanentMinionModifierItem.cs" t="Include" />
             <e p="Potion.cs" t="Include" />
           </e>
           <e p="ThirdPersonCharacter_Custom.cs" t="Include" />
@@ -92,6 +92,7 @@
           <e p="TimeOutToMenu_scr.cs" t="Include" />
           <e p="TreasureChest_scr.cs" t="Include" />
           <e p="UpgradeButton.cs" t="Include" />
+          <e p="ZombieAttributes.cs" t="Include" />
         </e>
         <e p="SimplyPack" t="Include">
           <e p="Readme.txt" t="Include" />

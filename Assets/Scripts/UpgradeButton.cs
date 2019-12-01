@@ -8,21 +8,17 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	TextMeshProUGUI buttonText;
 	private Button button;
 	private LevelUp levelUpPanel;
-
-	private string[] buttonNames;
+	private PlayerAttributes_scr playerAttributes;
+	private string[] buttonNames = new[]
+	{
+		"Recover Health", "++Maximum Minions", "++Minion Speed", "++Minion Damage",
+		"++Minion Health", "++Minion Attack Speed"
+	};	
 	private int buttonFunction;
 	
 	private void Start()
-	{
-		buttonNames = new[]
-		{
-			"Recover Health", "++Maximum Minions", "++Minion Speed", "++Minion Damage",
-			"++Minion Health"
-		};
-		button = gameObject.GetComponent<Button>();
-		buttonText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-		buttonFunction = Random.Range(0, 5);
-		buttonText.text = buttonNames[buttonFunction];
+	{		
+		playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
 	}
 
 	private void selectButton()
@@ -43,6 +39,9 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 			case 4:
 				IncreaseMinionHealth();
 				break;
+			case 5:
+				IncreaseMinionAttackSpeed();
+				break;
 		}           
 	}
 	
@@ -55,28 +54,42 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	
 	private void Heal(){
 		Debug.Log("Heal");
+		playerAttributes.heal();
 	}
 
 	private void IncreaseMaxMinions(){
 		Debug.Log("Max minion");
+		playerAttributes.summonsLimit++;
 	}
 
 	private void IncreaseMinionAttack(){
 		Debug.Log("Minionatt");
+		ZombieAttributes.attackMod++;
 	}
 
 	private void IncreaseMinionSpeed()
 	{
 		Debug.Log("Minion speed");
+		ZombieAttributes.moveSpeedMod++;
 	}
 	
 	private void IncreaseMinionHealth()
 	{
 		Debug.Log("Minion health");
+		ZombieAttributes.healthMod++;
+	}
+	
+	private void IncreaseMinionAttackSpeed()
+	{
+		Debug.Log("Minion Aspd");
+		ZombieAttributes.attackSpeedMod++;
 	}
 
-	public void RegisterPanel(LevelUp panel)
+	public void RegisterButton(LevelUp panel, int function)
 	{
+		Debug.Log(function);
 		levelUpPanel = panel;
+		buttonFunction = function;
+		gameObject.GetComponentInChildren<TextMeshProUGUI>().text = buttonNames[buttonFunction];
 	}
 }

@@ -104,6 +104,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             target = player;
             summoner = player.GetComponent<PlayerController_scr>();
             minionAttributes = gameObject.GetComponent<Attributes_scr>();
+            agent.speed *= minionAttributes.moveSpeedMultiplier;
 
             gameObject.name = "Minion " + (player.GetComponent<PlayerController_scr>().minions.Count  + player.GetComponent<PlayerController_scr>().minionsAway.Count);
             

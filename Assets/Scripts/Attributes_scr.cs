@@ -46,6 +46,13 @@ public class Attributes_scr : MonoBehaviour
             attackSpeed += attackSpeed * (diff * diffMod/ 5);
             moveSpeedMultiplier += moveSpeedMultiplier * (diff * diffMod/ 5);
         }
+        else if (CompareTag("Minion"))
+        {
+            maxHealth += ZombieAttributes.healthMod;
+            attackDamage += ZombieAttributes.attackMod;
+            attackSpeed += ZombieAttributes.attackSpeedMod;
+            moveSpeedMultiplier += ZombieAttributes.moveSpeedMod / moveSpeedMultiplier;
+        }
 
         if (CompareTag("Enemy") || CompareTag("Minion"))
         {

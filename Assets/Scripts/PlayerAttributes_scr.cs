@@ -90,7 +90,7 @@ public class PlayerAttributes_scr : MonoBehaviour
 
             currentExp = 0;
 
-            nextLvlExpReq += baseExpReq * 1.5f; //TODO: Better formula for next lvl
+            nextLvlExpReq += baseExpReq * 1.2f; //TODO: Better formula for next lvl
             Debug.Log("Next level: " + nextLvlExpReq);
             Debug.Log("Overflow: " + overflow);
 
