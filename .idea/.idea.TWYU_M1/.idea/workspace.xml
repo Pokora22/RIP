@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ZombieAttributes.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Buttons/UpgradeButton.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Buttons/UpgradeButton.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/World Objects/Brittle Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/World Objects/Brittle Wall.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Templates/PermanentMinionModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Templates/PermanentMinionModifierItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Templates/PermanentMinionModifier.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Templates/PermanentMinionModifierItem.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -190,9 +183,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Templates/PermanentMinionModifierItem.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
       </list>
     </option>
   </component>
@@ -273,14 +266,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="10330000" />
-    </task>
-    <task id="LOCAL-00078" summary="Random Maze Gen v2">
-      <created>1574185554630</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1574185554630</updated>
+      <workItem from="1575209747401" duration="10956000" />
     </task>
     <task id="LOCAL-00079" summary="Random Maze Gen v2.1">
       <created>1574186319152</created>
@@ -618,7 +604,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575219250392</updated>
     </task>
-    <option name="localTasksCounter" value="127" />
+    <task id="LOCAL-00127" summary="Made upgrade options always be unique on level up&#10;Changed exp required progression">
+      <created>1575221951069</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1575221951069</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +659,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Added activating items (need deactivating as well)" />
     <MESSAGE value="Added first 'artifact' - healing potion and required methods" />
     <MESSAGE value="Disabled treasure after acquiring it&#10;Added untracked files from previous commit" />
     <MESSAGE value="Item System Checkpoint 1" />
@@ -691,7 +683,8 @@
     <MESSAGE value="Guarding and patrol AIs finished" />
     <MESSAGE value="Trying to serialize a dictionary for instantiating mobs after nav mesh generation" />
     <MESSAGE value="Added level up buttons and panel (empty functions so far)&#10;Updated some UI elements" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added level up buttons and panel (empty functions so far)&#10;Updated some UI elements" />
+    <MESSAGE value="Made upgrade options always be unique on level up&#10;Changed exp required progression" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made upgrade options always be unique on level up&#10;Changed exp required progression" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -60,6 +60,7 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	private void IncreaseMaxMinions(){
 		Debug.Log("Max minion");
 		playerAttributes.summonsLimit++;
+		playerAttributes.updateHud();
 	}
 
 	private void IncreaseMinionAttack(){
