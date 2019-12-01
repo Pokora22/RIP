@@ -63,10 +63,7 @@ public class GenerateMaze : MonoBehaviour
 
     private void SpawnAis()
     {
-        foreach (var pair in aiSpawns)
-        {
-//            Instantiate(pair.Value, pair.Key.position, Quaternion.identity);
-        }
+        
     }
 
     private void PlaceExits(float tLength, float tWidth)

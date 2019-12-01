@@ -16,7 +16,7 @@ public class Inventory_scr : MonoBehaviour
     private TextMeshProUGUI itemDescription;
     [SerializeField] private float useArtifactPeriod, inventorySize = 9f;
     [SerializeField] private GameObject buttonPrefab;
-    [SerializeField] private List<ButtonData> displayButtons;
+    [SerializeField] private List<InventoryButtonData> displayButtons;
     private GameObject characterSheet, inventoryDisplay;
     private bool characterSheetOpen = false;
     
@@ -25,7 +25,7 @@ public class Inventory_scr : MonoBehaviour
     {
         characterSheet = GameObject.FindWithTag("CharacterUI");
         inventoryDisplay = GameObject.FindWithTag("InventoryUI");
-        displayButtons = new List<ButtonData>();
+        displayButtons = new List<InventoryButtonData>();
         itemDescription = GameObject.FindWithTag("InventoryUIText").GetComponent<TextMeshProUGUI>();
         itemDescription.text = "";
         Hide();
@@ -97,9 +97,9 @@ public class Inventory_scr : MonoBehaviour
         {
             Debug.Log("?");
             equippedItem.deactivate();
-            ButtonData button = findButtonWithItem(equippedItem);
-            button.active = false;
-            button.updateImage();
+            InventoryButtonData inventoryButton = findButtonWithItem(equippedItem);
+            inventoryButton.active = false;
+            inventoryButton.updateImage();
         }
 
         equippedItem = artifact;
@@ -118,14 +118,14 @@ public class Inventory_scr : MonoBehaviour
     {
         equippedItem = null;
         displayDescription("");
-        ButtonData toRemove = findButtonWithItem(item);
+        InventoryButtonData toRemove = findButtonWithItem(item);
         displayButtons.Remove(toRemove);
         Destroy(toRemove.gameObject);
     }
 
-    private ButtonData findButtonWithItem(Artifact item)
+    private InventoryButtonData findButtonWithItem(Artifact item)
     {
-        foreach (ButtonData button in displayButtons)
+        foreach (InventoryButtonData button in displayButtons)
         {
             if (button.artifact == item)
             {
@@ -141,7 +141,7 @@ public class Inventory_scr : MonoBehaviour
     private void AddItemToDisplay(Artifact item)
     {
         GameObject button = Instantiate(buttonPrefab, inventoryDisplay.transform);
-        ButtonData data = button.GetComponent<ButtonData>();
+        InventoryButtonData data = button.GetComponent<InventoryButtonData>();
         displayButtons.Add(data);
         data.setup(this, item);
     }

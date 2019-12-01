@@ -10,7 +10,7 @@ using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 
-namespace UnityStandardAssets.Characters.ThirdPerson
+namespace AI
 {    
     public class GuardAIControl : EnemyAIControl
     {

@@ -63,7 +63,6 @@
           </e>
           <e p="AiAnimator_scr.cs" t="Include" />
           <e p="Attributes_scr.cs" t="Include" />
-          <e p="ButtonData.cs" t="Include" />
           <e p="ButtonHandler_scr.cs" t="Include" />
           <e p="Corpse_scr.cs" t="Include" />
           <e p="DifficultyHandler_scr.cs" t="Include" />
@@ -71,8 +70,11 @@
           <e p="EnemySpawner_scr.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="GameManager_Scr.cs" t="Include" />
+          <e p="GameTimer.cs" t="Include" />
           <e p="GenerateMaze.cs" t="Include" />
           <e p="Inventory_scr.cs" t="Include" />
+          <e p="InventoryButtonData.cs" t="Include" />
+          <e p="LevelUp.cs" t="Include" />
           <e p="MazeDataGenerator.cs" t="Include" />
           <e p="NpcAudio_scr.cs" t="Include" />
           <e p="PauseMenu_scr.cs" t="Include" />
@@ -89,6 +91,7 @@
           <e p="ThirdPersonUserControl_Custom.cs" t="Include" />
           <e p="TimeOutToMenu_scr.cs" t="Include" />
           <e p="TreasureChest_scr.cs" t="Include" />
+          <e p="UpgradeButton.cs" t="Include" />
         </e>
         <e p="SimplyPack" t="Include">
           <e p="Readme.txt" t="Include" />

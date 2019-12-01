@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using AI;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {

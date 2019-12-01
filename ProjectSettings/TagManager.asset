@@ -30,6 +30,7 @@ TagManager:
   - InventoryUIText
   - ItemButton
   - SceneManager
+  - TimerUI
   layers:
   - Default
   - TransparentFX

@@ -17,15 +17,15 @@ public class PlayerAttributes_scr : MonoBehaviour
     private float currentExp;
     private float currentLvl;
     private int skillPoints = 0;
-    [SerializeField] private float baseExpReq = 50;
+    [SerializeField] private float baseExpReq = 20;
     private float nextLvlExpReq;
     private PlayerController_scr summoner;
     private TextMeshProUGUI hudZombieCount;
     [SerializeField] private Sprite[] phylacteri;
     private GameObject[] livesDisplay;
     private Image expBar;
-    private GameObject levelNotification;
-
+    private LevelUp levelUpScript;
+    
     private void Awake()
     {
         //Initialize values for other things to use
@@ -42,7 +42,8 @@ public class PlayerAttributes_scr : MonoBehaviour
         hudZombieCount = GameObject.FindWithTag("UIZombieCount").GetComponentInChildren<TextMeshProUGUI>();
         livesDisplay = GameObject.FindGameObjectsWithTag("UIPhylactery");
         expBar = GameObject.FindWithTag("UIExpBar").GetComponent<Image>();
-        levelNotification = GameObject.FindWithTag("UILevelNotification");
+        levelUpScript = gameObject.GetComponent<LevelUp>();
+        
         
         updateHud();
     }
@@ -50,7 +51,7 @@ public class PlayerAttributes_scr : MonoBehaviour
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.C))
-            addExp(100);
+            addExp(30);
     }
 
     public void damage()
@@ -83,21 +84,21 @@ public class PlayerAttributes_scr : MonoBehaviour
         if (currentExp > nextLvlExpReq)
         {
             
-            float overflow = exp - (nextLvlExpReq - currentExp); //Get exp that would go over the amnt required
+            float overflow = exp - nextLvlExpReq; //Get exp that would go over the amnt required            
+            
+            levelUpScript.levelUp();
 
-            currentLvl++;
-            skillPoints++;
             currentExp = 0;
 
             nextLvlExpReq += baseExpReq * 1.5f; //TODO: Better formula for next lvl
+            Debug.Log("Next level: " + nextLvlExpReq);
+            Debug.Log("Overflow: " + overflow);
 
             if (overflow > 0)
                 addExp(overflow); //Add the exp after new lvl if there's any over the amnt required before
-
-            
         }
         updateHud();
-    }
+    }    
 
     public void updateHud()
     {
@@ -107,8 +108,6 @@ public class PlayerAttributes_scr : MonoBehaviour
 
         expBar.fillAmount = currentExp / nextLvlExpReq;
         
-        hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count));
-        
-        levelNotification.SetActive(skillPoints > 0); //TODO: When skill points are in, check that against 0
+        hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count) + "/" + summonsLimit);
     }
 }
