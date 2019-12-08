@@ -19,6 +19,7 @@ public class PlayerController_scr : MonoBehaviour
     public UnityEvent newMinionEvent;
 
     [SerializeField] private GameObject reticlePrefab;
+    [SerializeField] private LayerMask reticleMask;
     private GameObject reticle;
     private bool consumeSummonInput = false;
     private PlayerAttributes_scr playerAttributes;
@@ -75,7 +76,7 @@ public class PlayerController_scr : MonoBehaviour
         Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
         Vector3 reticlePos;
         if (Physics.SphereCast(origin, minionCollisionCheckRadius, m_CamForward, out hit,
-            minionRunDistance))
+            minionRunDistance, reticleMask))
             reticlePos = hit.point;
         else
         {
