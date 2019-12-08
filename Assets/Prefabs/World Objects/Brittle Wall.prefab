@@ -2460,7 +2460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfee47c19814224dbaac687982c03b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 12
+  maxHealth: 6
   health: 0
   attackDamage: 1
   attackSpeed: 2
@@ -2504,7 +2504,7 @@ GameObject:
   - component: {fileID: 8645669460972608444}
   - component: {fileID: 239771882390510065}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: DestructibleWallLoSBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -37,10 +37,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool targettingDestructible = false;
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
-        private Vector3 m_AdvanceDestination, targetDestination;
-        private IEnumerator targetDestructibleRoutine;
-
-        
+        private Vector3 m_AdvanceDestination, targetDestination;        
         
         public MINION_STATE CurrentState
         {
@@ -54,7 +51,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 currentState = value;
                 agent.isStopped = false;
                 m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed, false);
-                StopCoroutine(targetDestructibleRoutine);
                 
                 switch (currentState)
                 {
@@ -67,13 +63,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     
                     case MINION_STATE.ADVANCE:
                         targetDestination = m_AdvanceDestination;
+                        SeekDestructible();
                         summoner.minionLeave(this);
                         break;
                     
                     case MINION_STATE.CHASE:
                         targettingDestructible = target && !target.CompareTag("Enemy");
-                        if (targettingDestructible)
-                            StartCoroutine(targetDestructibleRoutine);
+//                        if (targettingDestructible)
+//                            setDestructibleDestination();
                         agent.stoppingDistance = targettingDestructible ? 
                             destructibleStoppingDistance : enemyStoppingDistance; //Conditional distance depending on if target is enemy or destructible?
                         summoner.minionLeave(this);
@@ -90,9 +87,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
 
         private void Start()
-        {
-            targetDestructibleRoutine = setDestructibleDestination();
-            
+        {            
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<UnityEngine.AI.NavMeshAgent>();
             m_AiAnimatorScr = GetComponent<AiAnimator_scr>();
@@ -198,15 +193,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
-        private IEnumerator setDestructibleDestination()
+        private void setDestructibleDestination()
         {
             Collider target = this.target.GetComponent<Collider>();
-            while (true)
-            {
-                targetDestination = target.ClosestPointOnBounds(transform.position);
-                
-                yield return new WaitForSeconds(1f); //Update location once a second
-            }
+            
+            targetDestination = target.ClosestPointOnBounds(transform.position);            
         }
 
         private IEnumerator minionAttack()
@@ -234,9 +225,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 else
                 {
                     //Update destination and check if target is too far for an attack
-                    targetDestination = target.transform.position;
-                    if (!inStoppingDistance())
-                        CurrentState = MINION_STATE.CHASE;
+                    if (!targettingDestructible)
+                    {
+                        targetDestination = target.transform.position;
+                        if (!inStoppingDistance())
+                            CurrentState = MINION_STATE.CHASE;
+                    }
                 }
             }
             else
@@ -265,6 +259,39 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
         }
 
+        private void SeekDestructible()
+        {
+            Vector3 scanDir = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, enemyDetectionRange,
+                scanDir, playerLeashRange, destructiblesMask, QueryTriggerInteraction.Ignore);
+
+            Debug.Log("Got hits: " + hits.Length);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                Debug.Log("Hit name: " + hits[i].transform.name);
+                Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+                Vector3 destination = new Vector3(hits[i].point.x, 1f, hits[i].point.z);
+                float distance = Vector3.Distance(origin, destination);
+                GameObject newTarget = hits[i].transform.gameObject;
+                
+                Debug.DrawRay(origin, destination - origin, Color.red, 2f);
+                
+                RaycastHit hit;
+                if (!Physics.Raycast(origin, destination - origin, out hit, distance, obstaclesMask))
+                {
+                    Debug.DrawRay(origin, destination - origin, Color.blue, 2f);
+//                    Debug.Log("hit: " + hit.transform.name);
+                    this.target = newTarget;
+                    targetAttr = newTarget.GetComponent<Attributes_scr>();
+                    targetDestination = hits[i].point;
+                }
+                else
+                {
+//                    Debug.Log(hit.transform.name);
+                }
+            }            
+        }
+
         //TODO: Might need to split this into two routines - low and high priority and cycle them when changing states
         private IEnumerator findTarget(float targetScanDelay)
         {
@@ -289,13 +316,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         x => (this.transform.position - x.transform.position).sqrMagnitude
                     ).ToList();
 
-                    if (enemyList.Count == 0 && CurrentState == MINION_STATE.ADVANCE)
-                    {
-                        nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, destructiblesMask);
-                        enemyList = nearbyEnemies.OrderBy(
-                            x => (this.transform.position - x.transform.position).sqrMagnitude
-                        ).ToList();
-                    }
+                    
+                    //TODO: Change to a spherecast all + raycast for check
+//                    if (enemyList.Count == 0 && CurrentState == MINION_STATE.ADVANCE)
+//                    {
+//                        nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, destructiblesMask);
+//                        enemyList = nearbyEnemies.OrderBy(
+//                            x => (this.transform.position - x.transform.position).sqrMagnitude
+//                        ).ToList();
+//                    }
 
                     while (enemyList.Count > 0)
                     {
@@ -318,6 +347,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                             targetAttr = newTarget.GetComponent<Attributes_scr>();
                             if (newTarget.CompareTag("Enemy"))
                                 targetAI = newTarget.GetComponent<EnemyAIControl>();
+                        }
+                        else
+                        {
+                            Debug.Log(hit.transform.name);
                         }
                     }
                 }
