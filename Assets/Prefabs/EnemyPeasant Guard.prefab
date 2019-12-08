@@ -40,7 +40,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 113348, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_Name
-      value: EnemyPeasant (2)
+      value: EnemyPeasant Guard
       objectReference: {fileID: 0}
     - target: {fileID: 436670, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -86,15 +86,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+    - target: {fileID: 6483661527495625800, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
-      propertyPath: guard
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -767089427695670908, guid: 350a1db5356f5d64e81033d627412795,
+        type: 2}
     - target: {fileID: 7993332807702458499, guid: 20fd7288cd4fefc42bb408939463160e,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: guard
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7993332807702458499, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}

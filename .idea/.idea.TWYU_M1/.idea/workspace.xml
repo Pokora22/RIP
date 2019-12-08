@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/New Material.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/New Material.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/ParticleSmokeMobile 1.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/ParticleSmokeMobile 1.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Reticle.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Reticle.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/MainMixer.mixer" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/MainMixer.mixer.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/a0/a0e249ca69ca84ce5b8fa025342f32ff.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -282,14 +270,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="23151000" />
-    </task>
-    <task id="LOCAL-00082" summary="Added restricted zones to maze generator">
-      <created>1574279120355</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1574279120355</updated>
+      <workItem from="1575209747401" duration="24549000" />
     </task>
     <task id="LOCAL-00083" summary="Fixed length and width being the opposite of what they should">
       <created>1574279149807</created>
@@ -627,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575829049478</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="Adding settings menu &#10;Updating unity (hope nothing breaks)">
+      <created>1575834933100</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1575834933101</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +663,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Item display with activating/deactivating items on click is in&#10;Moved update image to button data and simplified couple lines in inventory" />
     <MESSAGE value="Fixed inventory object not destroying properly when used up" />
     <MESSAGE value="Fixed inventory items removing properly" />
     <MESSAGE value="Added trapped chests" />
@@ -700,7 +687,8 @@
     <MESSAGE value="Increasing max minions updates hud" />
     <MESSAGE value="Changed method of acquisition destructible targets" />
     <MESSAGE value="NavMesh agents on AI now is enabled after nav mesh is generated to avoid issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="NavMesh agents on AI now is enabled after nav mesh is generated to avoid issues" />
+    <MESSAGE value="Adding settings menu &#10;Updating unity (hope nothing breaks)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding settings menu &#10;Updating unity (hope nothing breaks)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
