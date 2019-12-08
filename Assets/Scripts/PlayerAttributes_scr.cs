@@ -17,7 +17,7 @@ public class PlayerAttributes_scr : MonoBehaviour
     private float currentExp;
     private float currentLvl;
     private int skillPoints = 0;
-    [SerializeField] private float baseExpReq = 20;
+    [SerializeField] private float baseExpReq = 10;
     private float nextLvlExpReq;
     private PlayerController_scr summoner;
     private TextMeshProUGUI hudZombieCount;

@@ -267,27 +267,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             Debug.Log("Got hits: " + hits.Length);
             for (int i = 0; i < hits.Length; i++)
-            {
-                Debug.Log("Hit name: " + hits[i].transform.name);
+            {                
                 Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
                 Vector3 destination = new Vector3(hits[i].point.x, 1f, hits[i].point.z);
                 float distance = Vector3.Distance(origin, destination);
-                GameObject newTarget = hits[i].transform.gameObject;
-                
-                Debug.DrawRay(origin, destination - origin, Color.red, 2f);
+                GameObject newTarget = hits[i].transform.gameObject;                
                 
                 RaycastHit hit;
                 if (!Physics.Raycast(origin, destination - origin, out hit, distance, obstaclesMask))
                 {
                     Debug.DrawRay(origin, destination - origin, Color.blue, 2f);
-//                    Debug.Log("hit: " + hit.transform.name);
                     this.target = newTarget;
                     targetAttr = newTarget.GetComponent<Attributes_scr>();
                     targetDestination = hits[i].point;
-                }
-                else
-                {
-//                    Debug.Log(hit.transform.name);
                 }
             }            
         }

@@ -190,6 +190,8 @@ MonoBehaviour:
   newMinionEvent:
     m_PersistentCalls:
       m_Calls: []
+  reticlePrefab: {fileID: 58021026008853575, guid: 33c0e67a7b7cc9f439914ac9d3497324,
+    type: 3}
 --- !u!114 &4450414843463200064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,8 +720,8 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2151623921230706617}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1

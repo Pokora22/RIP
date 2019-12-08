@@ -17,7 +17,9 @@ public class PlayerController_scr : MonoBehaviour
     public LayerMask obstaclesMask;
     public List<SummonAIControl> minions, minionsAway;
     public UnityEvent newMinionEvent;
-    
+
+    [SerializeField] private GameObject reticlePrefab;
+    private GameObject reticle;
     private bool consumeSummonInput = false;
     private PlayerAttributes_scr playerAttributes;
     private Attributes_scr characterAttributes;
@@ -36,6 +38,8 @@ public class PlayerController_scr : MonoBehaviour
         characterAttributes = GetComponent<Attributes_scr>();
         m_Cam = Camera.main.transform;
         m_Rigidbody = GetComponent<Rigidbody>();
+
+        reticle = Instantiate(reticlePrefab, transform.position, Quaternion.identity);
 
         inputTimeStamp = Time.time + inputTimeDelay;
 
@@ -62,6 +66,24 @@ public class PlayerController_scr : MonoBehaviour
         HandleControlInput();
         summonMinionCheck();
         sendMinionCheck();
+        drawReticle();
+    }
+
+    private void drawReticle()
+    {
+        RaycastHit hit;
+        Vector3 origin = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        Vector3 reticlePos;
+        if (Physics.SphereCast(origin, minionCollisionCheckRadius, m_CamForward, out hit,
+            minionRunDistance))
+            reticlePos = hit.point;
+        else
+        {
+            reticlePos = transform.position + m_CamForward * minionRunDistance;
+            reticlePos = new Vector3(reticlePos.x, .2f, reticlePos.z);
+        }
+
+        reticle.transform.position = reticlePos;
     }
 
     private void summonMinionCheck()
