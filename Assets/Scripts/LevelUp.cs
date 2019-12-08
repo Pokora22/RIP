@@ -34,8 +34,6 @@ public class LevelUp : MonoBehaviour
             buttons[i].GetComponent<UpgradeButton>().RegisterButton(this, fun);
             allFuns.Remove(fun);
         }
-
-        //TODO: Panel with some buttons - make buttons do things
     }
 
     public void ClosePanel()

@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/World Objects/Brittle Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/World Objects/Brittle Wall.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +59,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/599589BF-4CE2-4890-9B8A-14CBE4A2034E/b3/1a98efc9/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameTimer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Drawers/Field/Parent/Polymorphic/AbstractDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
@@ -178,15 +180,15 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/InventoryButtonData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ZombieAttributes.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Templates/PermanentMinionModifierItem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" />
       </list>
     </option>
   </component>
@@ -267,14 +269,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="17494000" />
-    </task>
-    <task id="LOCAL-00080" summary="Random Maze Gen v2.2">
-      <created>1574186532282</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1574186532282</updated>
+      <workItem from="1575209747401" duration="18165000" />
     </task>
     <task id="LOCAL-00081" summary="Fixed up maze generation weighting&#10;Added nav mesh generation on runtime">
       <created>1574275002097</created>
@@ -612,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575222633848</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="Changed method of acquisition destructible targets">
+      <created>1575828162290</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1575828162291</updated>
+    </task>
+    <option name="localTasksCounter" value="130" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +662,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Disabled treasure after acquiring it&#10;Added untracked files from previous commit" />
     <MESSAGE value="Item System Checkpoint 1" />
     <MESSAGE value="Item display with activating/deactivating items on click is in&#10;Moved update image to button data and simplified couple lines in inventory" />
     <MESSAGE value="Fixed inventory object not destroying properly when used up" />
@@ -685,7 +686,8 @@
     <MESSAGE value="Added level up buttons and panel (empty functions so far)&#10;Updated some UI elements" />
     <MESSAGE value="Made upgrade options always be unique on level up&#10;Changed exp required progression" />
     <MESSAGE value="Increasing max minions updates hud" />
-    <option name="LAST_COMMIT_MESSAGE" value="Increasing max minions updates hud" />
+    <MESSAGE value="Changed method of acquisition destructible targets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed method of acquisition destructible targets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

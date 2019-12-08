@@ -63,7 +63,11 @@ public class GenerateMaze : MonoBehaviour
 
     private void SpawnAis()
     {
-        
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject e in enemies)
+        {
+            e.GetComponent<NavMeshAgent>().enabled = true;
+        }
     }
 
     private void PlaceExits(float tLength, float tWidth)
@@ -193,12 +197,6 @@ public class GenerateMaze : MonoBehaviour
                     else
                         PlaceObstacle(i, j);
                 }
-                //Predetermined player position in restricted zones instead
-//                else if (!playerPlaced)
-//                    {
-//                        playerPlaced = true;
-//                        GameObject.FindWithTag("Player").transform.position = new Vector3(i * cellSize, 0, j * cellSize);
-//                    }
             }
         }
     }

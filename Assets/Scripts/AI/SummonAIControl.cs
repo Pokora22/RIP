@@ -316,16 +316,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         x => (this.transform.position - x.transform.position).sqrMagnitude
                     ).ToList();
 
-                    
-                    //TODO: Change to a spherecast all + raycast for check
-//                    if (enemyList.Count == 0 && CurrentState == MINION_STATE.ADVANCE)
-//                    {
-//                        nearbyEnemies = Physics.OverlapSphere(transform.position, enemyDetectionRange, destructiblesMask);
-//                        enemyList = nearbyEnemies.OrderBy(
-//                            x => (this.transform.position - x.transform.position).sqrMagnitude
-//                        ).ToList();
-//                    }
-
                     while (enemyList.Count > 0)
                     {
                         GameObject newTarget = enemyList[0].gameObject;
