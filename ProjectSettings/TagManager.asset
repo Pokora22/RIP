@@ -31,6 +31,10 @@ TagManager:
   - ItemButton
   - SceneManager
   - TimerUI
+  - QualityDropdown
+  - MasterVolumeSlider
+  - MusicVolumeSlider
+  - SFXVolumeSlider
   layers:
   - Default
   - TransparentFX

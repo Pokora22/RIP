@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu_scr : MonoBehaviour
 {
@@ -37,9 +38,20 @@ public class PauseMenu_scr : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void Exit()
+    {
+        SceneManager.LoadScene(0);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    } 
+
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        GetComponentInChildren<SettingsMenu>().SyncWithPlayerPrefs();
         Time.timeScale = 0f;
         gameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
