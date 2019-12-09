@@ -57,6 +57,8 @@ public class PlayerAttributes_scr : MonoBehaviour
 
     public void damage()
     {
+        
+        Debug.Log("Player damaged");
         if (--health < 1)
         {
             int currentScene = SceneManager.GetActiveScene().buildIndex;
@@ -84,7 +86,7 @@ public class PlayerAttributes_scr : MonoBehaviour
         hints.ShowHint(TutorialHints.HINT.TIME_LIMIT);
         currentExp += exp;
 
-        if (currentExp > nextLvlExpReq)
+        if (currentExp >= nextLvlExpReq)
         {
             
             float overflow = exp - nextLvlExpReq; //Get exp that would go over the amnt required            

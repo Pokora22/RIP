@@ -51,6 +51,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 currentState = value;
                 agent.isStopped = false;
                 m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed, false);
+                targettingDestructible = false;
                 
                 switch (currentState)
                 {
@@ -58,7 +59,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         target = player;
                         summoner.minionReturn(this);
                         agent.stoppingDistance = playerFollowowDistance;
-                        targettingDestructible = false;
                         break;
                     
                     case MINION_STATE.ADVANCE:
@@ -106,14 +106,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             CurrentState = MINION_STATE.FOLLOW;
 
             audioPlayer = GetComponent<NpcAudio_scr>();
-            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);
-
-            StartCoroutine(findTarget(.25f));
+            audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);            
         }
 
         private void Update()
         {
             UpdatePosition(targetDestination);
+            
+            findTarget();
             
             switch (CurrentState)
             {
@@ -258,7 +258,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, enemyDetectionRange,
                 scanDir, playerLeashRange, destructiblesMask, QueryTriggerInteraction.Ignore);
 
-            Debug.Log("Got hits: " + hits.Length);
+            Debug.Log("Destructibles in range: " +hits.Length);
             for (int i = 0; i < hits.Length; i++)
             {                
                 Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
@@ -273,63 +273,55 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     this.target = newTarget;
                     targetAttr = newTarget.GetComponent<Attributes_scr>();
                     targetDestination = hits[i].point;
+                    Debug.Log("Targetting new destructible: " + hits[i].transform.name);
+                    CurrentState = MINION_STATE.CHASE;
+                }
+                else
+                {
+                    Debug.Log(hit.transform.name + " in the way of destructible.");
                 }
             }            
         }
 
         //TODO: Might need to split this into two routines - low and high priority and cycle them when changing states
-        private IEnumerator findTarget(float targetScanDelay)
-        {
-            //Use scanDelay time on low priority search
-            float lowPriorityDelay = targetScanDelay;
-            //Use average frame time when advancing instead (high priority search)
-            float highPriorityDelay = Time.smoothDeltaTime;
-            
-            while (true)
+        private void findTarget()
+        {        
+            if (!recalled)
             {
-                if (!recalled)
+                //Wait if minion is already targeting something
+                if (!target || target.CompareTag("Enemy"))
+                    return;
+
+                Collider[] nearbyEnemies =
+                    Physics.OverlapSphere(transform.position, enemyDetectionRange, enemiesMask);
+                List<Collider> enemyList = nearbyEnemies.OrderBy(
+                    x => (this.transform.position - x.transform.position).sqrMagnitude
+                ).ToList();
+
+                while (enemyList.Count > 0)
                 {
-                    //Wait if minion is already targeting something
-                    while (target.CompareTag("Enemy"))
+                    GameObject newTarget = enemyList[0].gameObject;
+                    enemyList.RemoveAt(0);
+
+                    Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
+                    Vector3 destination =
+                        (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z));
+                    //Dirty edit to offset destructible walls inner lining
+                    float distance = Vector3.Distance(origin, destination) - .2f;
+
+                    Debug.DrawRay(origin, destination - origin, Color.red, 1f);
+
+                    RaycastHit hit;
+                    if (!Physics.Raycast(origin, destination - origin, out hit, distance, obstaclesMask))
                     {
-                        yield return null;
+                        Debug.DrawRay(origin, destination - origin, Color.blue, 2f);
+                        this.target = newTarget;
+                        targetAttr = newTarget.GetComponent<Attributes_scr>();                        
+                        targetAI = newTarget.GetComponent<EnemyAIControl>();
+                        CurrentState = MINION_STATE.CHASE;
+                        return;                        
                     }
-
-                    Collider[] nearbyEnemies =
-                        Physics.OverlapSphere(transform.position, enemyDetectionRange, enemiesMask);
-                    List<Collider> enemyList = nearbyEnemies.OrderBy(
-                        x => (this.transform.position - x.transform.position).sqrMagnitude
-                    ).ToList();
-
-                    while (enemyList.Count > 0)
-                    {
-                        GameObject newTarget = enemyList[0].gameObject;
-                        enemyList.RemoveAt(0);
-
-                        Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
-                        Vector3 destination =
-                            (new Vector3(newTarget.transform.position.x, 1f, newTarget.transform.position.z));
-                        //Dirty edit to offset destructible walls inner lining
-                        float distance = Vector3.Distance(origin, destination) - .2f;
-
-                        Debug.DrawRay(origin, destination - origin, Color.red, 1f);
-
-                        RaycastHit hit;
-                        if (!Physics.Raycast(origin, destination - origin, out hit, distance, obstaclesMask))
-                        {
-                            Debug.DrawRay(origin, destination - origin, Color.blue, 2f);
-                            this.target = newTarget;
-                            targetAttr = newTarget.GetComponent<Attributes_scr>();
-                            if (newTarget.CompareTag("Enemy"))
-                            {
-                                targetAI = newTarget.GetComponent<EnemyAIControl>();
-                                CurrentState = MINION_STATE.CHASE;
-                            }
-                        }
-                    }
-                }
-                //Search more often when minion is advancing forward
-                yield return CurrentState == MINION_STATE.ADVANCE ? new WaitForSeconds(highPriorityDelay) : new WaitForSeconds(lowPriorityDelay);
+                }                
             }
         }
 

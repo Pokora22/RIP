@@ -2,25 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Effects.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.shader" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.shader.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt_Profiles.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt_Profiles/Main Camera Profile.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt_Profiles/Main Camera Profile.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/New Material.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/New Material.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,6 +62,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Drawers/Field/Parent/Polymorphic/AbstractDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/NavMeshComponents/Editor/NavMeshAssetManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/PoisonCloud.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Trap.cs" root0="FORCE_HIGHLIGHTING" />
@@ -119,6 +110,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Inspector/Preferences/InspectorStyles.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/GuardAIControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/EnemyAIControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus.meta" root0="FORCE_HIGHLIGHTING" />
@@ -135,22 +127,28 @@
     <setting file="file://$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/599589BF-4CE2-4890-9B8A-14CBE4A2034E/b3/1a98efc9/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Standard Assets/Utility/ParticleSystemDestroyer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextInfoDebugTool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.test-framework@1.0.13/UnityEditor.TestRunner/CommandLineParser/CommandLineOption.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Drawers/UnityObject/CustomEditorBaseDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Drawers/Field/Parent/ParentFieldDrawer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Generic/Menu/ContextMenuUtility.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Menu.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Crypt.unity" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Sandbox/OcclusionCullingData.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Editor/EditorWindow/InspectorDrawerWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Editor/EditorWindow/PopupMenuWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Prefabs/GuardCorpse.prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonCharacter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonUserControl.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -196,17 +194,17 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/ZombieAttributes.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Templates/PermanentMinionModifierItem.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PauseMenu_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
       </list>
     </option>
@@ -248,10 +246,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="34824">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="19844">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="34824" />
+      <option name="pid" value="19844" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -288,14 +286,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="40211000" />
-    </task>
-    <task id="LOCAL-00088" summary="Found another coroutine bug">
-      <created>1574287011874</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1574287011874</updated>
+      <workItem from="1575209747401" duration="44095000" />
     </task>
     <task id="LOCAL-00089" summary="Fixed summon ai creating ~40 coroutines for attack (still dunno how)">
       <created>1574288804348</created>
@@ -633,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575903675500</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="Changing summons enemy search checkpoint">
+      <created>1575906851702</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1575906851703</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -681,7 +679,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Fixed weird rotation on minions when looking at targets higher than themself" />
     <MESSAGE value="Fixed(?) again(??) minion AI getting stuck when near their destination." />
     <MESSAGE value="Improved minion recall function (which broke slightly with previous update)" />
     <MESSAGE value="Added option for generated objects to always point towards free space" />
@@ -706,7 +703,8 @@
     <MESSAGE value="Added settings syncing with player prefs on menu open" />
     <MESSAGE value="Added tutorial hints that trigger on related events (first time only)" />
     <MESSAGE value="Moved the hints script to GO in canvas.&#10;Get rid of main game canvas when loading main menu (to have on start things work)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved the hints script to GO in canvas.&#10;Get rid of main game canvas when loading main menu (to have on start things work)" />
+    <MESSAGE value="Changing summons enemy search checkpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changing summons enemy search checkpoint" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -715,6 +713,19 @@
           <properties exception="System.Threading.ThreadAbortException" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" log-stack="true" suspend="NONE" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs</url>
+          <line>60</line>
+          <properties documentPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" initialLine="60">
+            <startOffsets>
+              <option value="1890" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1918" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

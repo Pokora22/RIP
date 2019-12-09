@@ -46,8 +46,7 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	}
 	
 	public virtual void OnPointerClick(PointerEventData eventData)
-	{		
-		Debug.Log(gameObject + " clicked");
+	{			
 		selectButton();
 		levelUpPanel.ClosePanel();
 	}
