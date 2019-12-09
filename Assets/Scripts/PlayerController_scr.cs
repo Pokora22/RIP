@@ -29,10 +29,11 @@ public class PlayerController_scr : MonoBehaviour
     private Rigidbody m_Rigidbody;
     private float inputTimeDelay = .2f;
     private float inputTimeStamp;
-
+    private TutorialHints hints;
     
     void Start()
     {
+        hints = GetComponent<TutorialHints>();
         minions = new List<SummonAIControl>();
         minionsAway = new List<SummonAIControl>();
         playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
@@ -49,6 +50,8 @@ public class PlayerController_scr : MonoBehaviour
             Debug.Log("?");
             InstantiateMinionNearby();
         }
+        
+        hints.ShowHint(TutorialHints.HINT.START);
     }
 
     private void InstantiateMinionNearby()
@@ -147,6 +150,7 @@ public class PlayerController_scr : MonoBehaviour
 
             //Summon minion
             GameObject newMinion = Instantiate(minionNPC, hit.position, transform.rotation);
+            hints.ShowHint(TutorialHints.HINT.SEND);
 
             //Destroy body
             Destroy(body.transform.gameObject);
@@ -182,6 +186,9 @@ public class PlayerController_scr : MonoBehaviour
     {
         if (other.CompareTag("Exit"))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+        if(other.CompareTag("SummonHintTrigger"))
+            hints.ShowHint(TutorialHints.HINT.SUMMON);
     }
     
     private void HandleControlInput()

@@ -81,6 +81,7 @@ public class Inventory_scr : MonoBehaviour
             return false;
         
         AddItemToDisplay(item);
+        GetComponent<TutorialHints>().ShowHint(TutorialHints.HINT.INVENTORY);
 
         return true;
     }

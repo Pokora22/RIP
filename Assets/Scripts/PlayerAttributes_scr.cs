@@ -61,7 +61,8 @@ public class PlayerAttributes_scr : MonoBehaviour
             int currentScene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene("GameOver"); //TODO: Maybe a game over screen
         }
-
+        
+        GetComponent<TutorialHints>().ShowHint(TutorialHints.HINT.HURT);
         updateHud();
     }
 
@@ -79,6 +80,7 @@ public class PlayerAttributes_scr : MonoBehaviour
 
     public void addExp(float exp)
     {
+        GetComponent<TutorialHints>().ShowHint(TutorialHints.HINT.TIME_LIMIT);
         currentExp += exp;
 
         if (currentExp > nextLvlExpReq)

@@ -92,6 +92,7 @@
           <e p="ThirdPersonUserControl_Custom.cs" t="Include" />
           <e p="TimeOutToMenu_scr.cs" t="Include" />
           <e p="TreasureChest_scr.cs" t="Include" />
+          <e p="TutorialHints.cs" t="Include" />
           <e p="UpgradeButton.cs" t="Include" />
           <e p="ZombieAttributes.cs" t="Include" />
         </e>
