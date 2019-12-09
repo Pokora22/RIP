@@ -17,6 +17,7 @@ public class LevelUp : MonoBehaviour
         buttons = new GameObject[3];
         levelUpPanel = GameObject.FindWithTag("UILevelNotification");
         levelUpPanel.SetActive(false);
+        playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
     }
 
     public void levelUp(){
