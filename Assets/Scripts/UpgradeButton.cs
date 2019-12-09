@@ -26,20 +26,17 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 		switch(buttonFunction){
 			case 0:
 				Heal();
-				break;
+				break;				
 			case 1:
-				IncreaseMaxMinions();
-				break;
-			case 2:
 				IncreaseMinionSpeed();
 				break;
-			case 3:
+			case 2:
 				IncreaseMinionAttack();
 				break;
-			case 4:
+			case 3:
 				IncreaseMinionHealth();
 				break;
-			case 5:
+			case 4:
 				IncreaseMinionAttackSpeed();
 				break;
 		}           
@@ -57,8 +54,9 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	}
 
 	private void IncreaseMaxMinions(){
+		//This is poor, upgrading every level now instead.
 		Debug.Log("Max minion");
-		playerAttributes.summonsLimit++;
+		playerAttributes.summonsLimit *= 2;
 		playerAttributes.updateHud();
 	}
 

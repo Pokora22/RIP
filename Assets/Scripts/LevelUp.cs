@@ -9,6 +9,7 @@ public class LevelUp : MonoBehaviour
     private GameObject levelUpPanel;
     [SerializeField] GameObject lvlUpButton;
     private GameObject[] buttons;
+    private PlayerAttributes_scr playerAttributes;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,9 @@ public class LevelUp : MonoBehaviour
         levelUpPanel.SetActive(true);
         Time.timeScale = 0;
 
-        List<int> allFuns = new List<int>() {0, 1, 2, 3, 4, 5};        
+        playerAttributes.summonsLimit += (int)(playerAttributes.summonsLimit * .5);
+        
+        List<int> allFuns = new List<int>() {0, 1, 2, 3, 4};        
 
         for(int i = 0; i < 3; i++)
         {
