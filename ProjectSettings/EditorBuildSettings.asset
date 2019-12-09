@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Cemetery.unity
     guid: eb0070d6d30a24f788b06faeadb5fb2d
   - enabled: 1
+    path: Assets/Scenes/Town.unity
+    guid: 94cc992f2985ade46a72e19ee6c4a90e
+  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: c7e85fb2f27e94149b91b372fe5dcc33
   m_configObjects: {}

@@ -80,14 +80,14 @@ public class Attributes_scr : MonoBehaviour
         if (CompareTag("Player"))
             playerAttr.damage(); //Forward to player damage functions instead
         else
-        {
+        {            
             health -= dmgAmnt;
 
             if (health <= 0)
-            {
+            {                
                 audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.DEATH); //TODO: Add sounds for destructibles
                 if (LayerMask.LayerToName(gameObject.layer) == "Destructibles")
-                {
+                {                    
                     StartCoroutine(removeBody());
                     return;
                 }
