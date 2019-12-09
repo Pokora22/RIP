@@ -2,9 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight Guard.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight Guard.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Audio/Cowboy Bebop OST 1 - Rush (Extended).mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Audio/Cowboy Bebop OST 1 - Rush (Extended).mp3.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/GameManager(Canvas).prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/GameManager(Canvas).prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant Guard.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant Guard.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cemetery.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cemetery.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -196,13 +207,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HouseSpawn.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" />
       </list>
     </option>
@@ -284,21 +295,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="55523000" />
-    </task>
-    <task id="LOCAL-00096" summary="Added option for random exits (hang game when used together with pre-placed)&#10;Changed enemy AI attack check to use same rule as summon&#10;Added enemy guard&#10;Added swords from asset store&#10;Added some prefabs (Decorational) from asset store">
-      <created>1574436162907</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1574436162907</updated>
-    </task>
-    <task id="LOCAL-00097" summary="Changed player to use same iframe routine as everything else&#10;Delegated enemy agent lock to animation/editor for finer control">
-      <created>1574439696381</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1574439696382</updated>
+      <workItem from="1575209747401" duration="57729000" />
     </task>
     <task id="LOCAL-00098" summary="Added guard corpse&#10;Fixed wrong layers for new guard">
       <created>1574440429154</created>
@@ -629,7 +626,21 @@
       <option name="project" value="LOCAL" />
       <updated>1575927542600</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="Increasing max minions per level instead of choice reward">
+      <created>1575928164958</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1575928164958</updated>
+    </task>
+    <task id="LOCAL-00146" summary="Fix for missing playerupgrades">
+      <created>1575928329082</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1575928329082</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -677,8 +688,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Removes imports that were throwing errors in webgl build" />
-    <MESSAGE value="Splitting into inheritance checkpoint 1:&#10;AI Control, EnemyAIControl" />
     <MESSAGE value="PatrolAI is in" />
     <MESSAGE value="Chase and attack functions in AI are done (for good hopefully)" />
     <MESSAGE value="Guarding and patrol AIs finished" />
@@ -702,7 +711,9 @@
     <MESSAGE value="Added minion destination indicator with 2 colors based on normal/combat status" />
     <MESSAGE value="Added third (last) level" />
     <MESSAGE value="Added win condition" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added win condition" />
+    <MESSAGE value="Increasing max minions per level instead of choice reward" />
+    <MESSAGE value="Fix for missing playerupgrades" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix for missing playerupgrades" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -716,10 +727,10 @@
           <line>60</line>
           <properties documentPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" initialLine="60">
             <startOffsets>
-              <option value="1890" />
+              <option value="1889" />
             </startOffsets>
             <endOffsets>
-              <option value="1918" />
+              <option value="1917" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />

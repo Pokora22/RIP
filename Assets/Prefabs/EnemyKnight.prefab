@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 12
   health: 0
-  attackDamage: 3
+  attackDamage: 2
   attackSpeed: 1
   moveSpeedMultiplier: 1
   reflectDamage: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
   alertRange: 20
   alertChance: 20
   removeDelay: 5
-  invulnerableTime: 0.5
+  invulnerableTime: 0.2
 --- !u!114 &8842931170519606560
 MonoBehaviour:
   m_ObjectHideFlags: 0

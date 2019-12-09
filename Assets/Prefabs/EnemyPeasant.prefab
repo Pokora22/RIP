@@ -138,7 +138,7 @@ MonoBehaviour:
   alertRange: 20
   alertChance: 20
   removeDelay: 5
-  invulnerableTime: 0.5
+  invulnerableTime: 0.1
 --- !u!82 &6483661527495625800
 AudioSource:
   m_ObjectHideFlags: 0

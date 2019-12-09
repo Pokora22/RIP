@@ -34,6 +34,11 @@ public class PlayerController_scr : MonoBehaviour
     
     void Start()
     {
+        //Lock cursor to game
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        
+        
         try
         {
             hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();

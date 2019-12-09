@@ -11,7 +11,7 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	private PlayerAttributes_scr playerAttributes;
 	private string[] buttonNames = new[]
 	{
-		"Recover Health", "++Maximum Minions", "++Minion Speed", "++Minion Damage",
+		"Recover Health", "++Minion Speed", "++Minion Damage",
 		"++Minion Health", "++Minion Attack Speed"
 	};	
 	private int buttonFunction;

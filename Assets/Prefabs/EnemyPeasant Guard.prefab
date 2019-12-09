@@ -38,6 +38,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
+        type: 3}
+      propertyPath: guard
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 113348, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}
       propertyPath: m_Name
       value: EnemyPeasant Guard
@@ -96,11 +101,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4871600976387969211, guid: 20fd7288cd4fefc42bb408939463160e,
-        type: 3}
-      propertyPath: guard
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7993332807702458499, guid: 20fd7288cd4fefc42bb408939463160e, type: 3}

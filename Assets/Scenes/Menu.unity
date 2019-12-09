@@ -1880,7 +1880,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 01dc83fb2c5a0084299f1458b99d60a3, type: 3}
   - {fileID: 8300000, guid: 3a030a56ecbd0b449824a8c2346e20fc, type: 3}
   - {fileID: 8300000, guid: 8a57e54bdd125ee49a09ac9d9c11a712, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 6d6ad18e154116f4d846790855c8db40, type: 3}
   baseNumberOfUnitsPerScene: 00000000080000000c00000012000000
 --- !u!82 &1204248755
 AudioSource:

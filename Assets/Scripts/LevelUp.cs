@@ -29,11 +29,12 @@ public class LevelUp : MonoBehaviour
 
         playerAttributes.summonsLimit += (int)(playerAttributes.summonsLimit * .5);
         
-        List<int> allFuns = new List<int>() {0, 1, 2, 3, 4};        
-
+        List<int> allFuns = new List<int>() {0, 1, 2, 3, 4};
+        int minFun = playerAttributes.health < playerAttributes.maxHealth ? 0 : 1;
+        
         for(int i = 0; i < 3; i++)
         {
-            int fun = allFuns[Random.Range(0, allFuns.Count)];
+            int fun = allFuns[Random.Range(minFun, allFuns.Count)];
             buttons[i] = Instantiate(lvlUpButton, levelUpPanel.transform.GetChild(1));
             buttons[i].GetComponent<UpgradeButton>().RegisterButton(this, fun);
             allFuns.Remove(fun);

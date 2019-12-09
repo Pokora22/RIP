@@ -12,7 +12,7 @@ public class PlayerAttributes_scr : MonoBehaviour
     public int summonsLimit = 5;
     public int minionsAtDisposal = 0;
     public float maxHealth = 3f;
-    private float health;
+    public float health;
 
     private float currentExp;
     private float currentLvl;
