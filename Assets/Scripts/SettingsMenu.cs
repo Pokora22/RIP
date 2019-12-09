@@ -21,9 +21,6 @@ public class SettingsMenu : MonoBehaviour
         sfxVolumeSlider = GameObject.FindWithTag("SFXVolumeSlider").GetComponent<Slider>();
         qualityDropdown = GameObject.FindWithTag("QualityDropdown").GetComponent<TMP_Dropdown>();
         
-        Debug.Log(qualityDropdown);
-        Debug.Log(sfxVolumeSlider);
-
         SyncWithPlayerPrefs();
     }
 

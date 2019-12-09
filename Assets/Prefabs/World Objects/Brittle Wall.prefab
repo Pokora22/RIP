@@ -2446,7 +2446,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipsRaise: []
   clipsAttack: []
-  clipsDeath: []
+  clipsDeath:
+  - {fileID: 8300000, guid: 06902de1cdfdfaf4797f71844ef27da9, type: 3}
   clipsAlert: []
 --- !u!114 &-580452498699995144
 MonoBehaviour:

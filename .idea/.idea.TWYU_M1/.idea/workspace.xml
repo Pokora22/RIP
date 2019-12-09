@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Audio/SFX/StoneSlide.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Audio/SFX/StoneSlide.mp3.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MinionNPC.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MinionNPC.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/World Objects/Brittle Wall.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/World Objects/Brittle Wall.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -192,16 +195,16 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PauseMenu_scr.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
       </list>
     </option>
   </component>
@@ -282,14 +285,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="44930000" />
-    </task>
-    <task id="LOCAL-00091" summary="Removed debug logs">
-      <created>1574331301856</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1574331301856</updated>
+      <workItem from="1575209747401" duration="47864000" />
     </task>
     <task id="LOCAL-00092" summary="Light placement system v0.1">
       <created>1574356964871</created>
@@ -627,7 +623,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575911138256</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="Fixed friendly fire layer checking">
+      <created>1575911601319</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1575911601319</updated>
+    </task>
+    <option name="localTasksCounter" value="141" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +678,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Added option for generated objects to always point towards free space" />
     <MESSAGE value="Added objects and generation and exits and everything for cemetary level" />
     <MESSAGE value="Added dynamic difficulty system&#10;Added missing colliders to prefabs" />
     <MESSAGE value="Added button borders" />
@@ -700,7 +702,8 @@
     <MESSAGE value="Changing summons enemy search checkpoint" />
     <MESSAGE value="Changed friendly fire check to compare layers&#10;Changed minion ai to seek enemy targets on each frame instead async" />
     <MESSAGE value="Fixed exp overflow being too low" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed exp overflow being too low" />
+    <MESSAGE value="Fixed friendly fire layer checking" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed friendly fire layer checking" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

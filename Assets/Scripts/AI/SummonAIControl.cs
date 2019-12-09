@@ -62,6 +62,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         break;
                     
                     case MINION_STATE.ADVANCE:
+                        Debug.Log("Changing target destination (state switch)");
                         targetDestination = m_AdvanceDestination;
                         SeekDestructible();
                         summoner.minionLeave(this);
@@ -77,7 +78,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         break;
                     
                     case MINION_STATE.ATTACK:
-                        
+                        targettingDestructible = target && !target.CompareTag("Enemy");
                         break;
                 }
                 
@@ -165,7 +166,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             //Bandaid for remaining distance being different on agent and manual calculation. NavMesh agent sucks ??
 //            remainingDistance = remainingDistance < agent.remainingDistance
 //                ? remainingDistance
-//                : agent.remainingDistance;
+//                : agent.remainingDistance;            
 
             return remainingDistance <= agent.stoppingDistance;
         }
@@ -179,7 +180,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 //Need to only update destination for non destructible targets
                 if (!targettingDestructible)
+                {                    
                     targetDestination = target.transform.position;
+                }
 
                 if (inStoppingDistance())
                     CurrentState = MINION_STATE.ATTACK;
@@ -219,7 +222,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 {
                     //Update destination and check if target is too far for an attack
                     if (!targettingDestructible)
-                    {
+                    {                        
                         targetDestination = target.transform.position;
                         if (!inStoppingDistance())
                             CurrentState = MINION_STATE.CHASE;
@@ -257,8 +260,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             Vector3 scanDir = new Vector3(Camera.main.transform.forward.x, 0, Camera.main.transform.forward.z);
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, enemyDetectionRange,
                 scanDir, playerLeashRange, destructiblesMask, QueryTriggerInteraction.Ignore);
-
-            Debug.Log("Destructibles in range: " +hits.Length);
+            
             for (int i = 0; i < hits.Length; i++)
             {                
                 Vector3 origin = new Vector3(transform.position.x, 1f, transform.position.z);
@@ -273,12 +275,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     this.target = newTarget;
                     targetAttr = newTarget.GetComponent<Attributes_scr>();
                     targetDestination = hits[i].point;
-                    Debug.Log("Targetting new destructible: " + hits[i].transform.name);
                     CurrentState = MINION_STATE.CHASE;
-                }
-                else
-                {
-                    Debug.Log(hit.transform.name + " in the way of destructible.");
                 }
             }            
         }
