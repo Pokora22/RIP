@@ -89,7 +89,7 @@ public class PlayerAttributes_scr : MonoBehaviour
         if (currentExp >= nextLvlExpReq)
         {
             
-            float overflow = exp - nextLvlExpReq; //Get exp that would go over the amnt required            
+            float overflow = currentExp - nextLvlExpReq; //Get exp that would go over the amnt required            
             
             levelUpScript.levelUp();
 
