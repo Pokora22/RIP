@@ -27,6 +27,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         [SerializeField] private float playerLeashRange = 15f;
         [SerializeField] private bool debug = true;
         [SerializeField] private GameObject target;
+        [SerializeField] private GameObject destinationIndicatorPrefab;
         
         private Attributes_scr targetAttr;
         private EnemyAIControl targetAI;
@@ -38,6 +39,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
         private Vector3 m_AdvanceDestination, targetDestination;
+        private GameObject destinationIndicator;
+        private Renderer destIndicatorRenderer;
         
         public MINION_STATE CurrentState
         {
@@ -62,13 +65,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                         break;
                     
                     case MINION_STATE.ADVANCE:
-                        Debug.Log("Changing target destination (state switch)");
+                        destIndicatorRenderer.material.SetColor("_Color", Color.yellow);
                         targetDestination = m_AdvanceDestination;
                         SeekDestructible();
                         summoner.minionLeave(this);
                         break;
                     
                     case MINION_STATE.CHASE:
+                        destIndicatorRenderer.material.SetColor("_Color", Color.red);
                         targettingDestructible = target && !target.CompareTag("Enemy");
 //                        if (targettingDestructible)
 //                            setDestructibleDestination();
@@ -105,6 +109,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             gameObject.name = "Minion " + (player.GetComponent<PlayerController_scr>().minions.Count  + player.GetComponent<PlayerController_scr>().minionsAway.Count);
             
             CurrentState = MINION_STATE.FOLLOW;
+
+            destinationIndicator = Instantiate(destinationIndicatorPrefab);
+            destIndicatorRenderer = destinationIndicator.GetComponent<Renderer>();
 
             audioPlayer = GetComponent<NpcAudio_scr>();
             audioPlayer.playClip(NpcAudio_scr.CLIP_TYPE.RAISE);            
@@ -238,6 +245,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             agent.SetDestination(destination);
 
+            float y = CurrentState == MINION_STATE.FOLLOW ? -1f : .1f;
+            destinationIndicator.transform.position = new Vector3(destination.x, y, destination.z);
+
             if (!agent.pathPending)
             {
                 //https://docs.unity3d.com/ScriptReference/Rigidbody.SweepTest.html
@@ -361,6 +371,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void LockInPlace(int locked)
         {
             agent.isStopped = locked != 0;
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(destinationIndicator);
         }
     }
 }

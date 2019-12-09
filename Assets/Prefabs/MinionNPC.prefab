@@ -170,6 +170,8 @@ MonoBehaviour:
   playerLeashRange: 15
   debug: 1
   target: {fileID: 0}
+  destinationIndicatorPrefab: {fileID: 3177345606353718776, guid: 3fd353f91427ab34c9842c26d03294e8,
+    type: 3}
 --- !u!82 &6483661527495625800
 AudioSource:
   m_ObjectHideFlags: 0
