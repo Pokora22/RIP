@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/SFX/CaveIn.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/SFX/CaveIn.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Ograda iz prutev.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Ograda iz prutev.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -184,7 +182,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/AiControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/EnemySpawner_scr.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/InventoryButtonData.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ZombieAttributes.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
@@ -192,13 +189,14 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/LevelUp.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PauseMenu_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
       </list>
     </option>
   </component>
@@ -279,14 +277,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="35360000" />
-    </task>
-    <task id="LOCAL-00086" summary="Bad fix for a small ai detection issue">
-      <created>1574284761018</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1574284761018</updated>
+      <workItem from="1575209747401" duration="37755000" />
     </task>
     <task id="LOCAL-00087" summary="Changed animators to use attack bools instead of triggers">
       <created>1574285496583</created>
@@ -624,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575841050765</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="Added tutorial hints that trigger on related events (first time only)">
+      <created>1575901183139</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1575901183139</updated>
+    </task>
+    <option name="localTasksCounter" value="136" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -672,7 +670,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Added function to bring currently following minions to next level&#10;Renamed some things&#10;Maze generates on awake to supply navmesh sooner" />
     <MESSAGE value="Fixed targetting destructibles to only target when appropriate" />
     <MESSAGE value="Fixed weird rotation on minions when looking at targets higher than themself" />
     <MESSAGE value="Fixed(?) again(??) minion AI getting stuck when near their destination." />
@@ -697,7 +694,8 @@
     <MESSAGE value="Updating unity (hope nothing breaks)" />
     <MESSAGE value="Added sliders for master, music, sfx volumes&#10;Added dropdown for quality level&#10;Added saving those options&#10;Added above to pause menu ingame" />
     <MESSAGE value="Added settings syncing with player prefs on menu open" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added settings syncing with player prefs on menu open" />
+    <MESSAGE value="Added tutorial hints that trigger on related events (first time only)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tutorial hints that trigger on related events (first time only)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

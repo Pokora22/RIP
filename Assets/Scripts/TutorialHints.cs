@@ -15,7 +15,7 @@ public class TutorialHints : MonoBehaviour
     
     public enum HINT {START, SUMMON, SEND, TIME_LIMIT, HURT, INVENTORY}
 
-    private void Start()
+    private void Awake()
     {
         hintPlayed = new bool[hintPanels.Length];
     }
@@ -25,7 +25,8 @@ public class TutorialHints : MonoBehaviour
         int hintIndex = (int) hint;
         if (hintPlayed[hintIndex])
             return;
-        
+
+        hintPlayed[hintIndex] = true;
         DisableOtherHints();        
         
         hintPanels[hintIndex].SetActive(true);

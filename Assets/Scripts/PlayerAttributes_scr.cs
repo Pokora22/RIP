@@ -25,6 +25,7 @@ public class PlayerAttributes_scr : MonoBehaviour
     private GameObject[] livesDisplay;
     private Image expBar;
     private LevelUp levelUpScript;
+    private TutorialHints hints;
     
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class PlayerAttributes_scr : MonoBehaviour
         livesDisplay = GameObject.FindGameObjectsWithTag("UIPhylactery");
         expBar = GameObject.FindWithTag("UIExpBar").GetComponent<Image>();
         levelUpScript = gameObject.GetComponent<LevelUp>();
-        
+        hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();
         
         updateHud();
     }
@@ -62,7 +63,7 @@ public class PlayerAttributes_scr : MonoBehaviour
             SceneManager.LoadScene("GameOver"); //TODO: Maybe a game over screen
         }
         
-        GetComponent<TutorialHints>().ShowHint(TutorialHints.HINT.HURT);
+        hints.ShowHint(TutorialHints.HINT.HURT);
         updateHud();
     }
 
@@ -80,7 +81,7 @@ public class PlayerAttributes_scr : MonoBehaviour
 
     public void addExp(float exp)
     {
-        GetComponent<TutorialHints>().ShowHint(TutorialHints.HINT.TIME_LIMIT);
+        hints.ShowHint(TutorialHints.HINT.TIME_LIMIT);
         currentExp += exp;
 
         if (currentExp > nextLvlExpReq)

@@ -33,7 +33,7 @@ public class PlayerController_scr : MonoBehaviour
     
     void Start()
     {
-        hints = GetComponent<TutorialHints>();
+        hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();
         minions = new List<SummonAIControl>();
         minionsAway = new List<SummonAIControl>();
         playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
@@ -97,17 +97,20 @@ public class PlayerController_scr : MonoBehaviour
 
         if (Input.GetButton("Fire2") && inputTimeStamp < Time.time)
         {
+            Debug.Log("Summoning");
             inputTimeStamp = Time.time + inputTimeDelay;
             Collider[] nearbyBodies = Physics.OverlapSphere(transform.position, summonRadius, bodiesMask);
             
             //secondary mouse button
             if (nearbyBodies.Length > 0 && minions.Count + minionsAway.Count < playerAttributes.summonsLimit)
             {
+                Debug.Log("There's a body");
                 summonMinion(nearbyBodies[0].gameObject);
                 consumeSummonInput = true;
             }
             else if (minionsAway.Count > 0)
             {
+                Debug.Log("There's no body. Recalling");
                 SummonAIControl minionToRecall = minionsAway[0];
                 StartCoroutine(minionToRecall.recall());
             }

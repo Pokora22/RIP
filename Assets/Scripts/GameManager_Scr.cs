@@ -44,6 +44,9 @@ public class GameManager_Scr : MonoBehaviour
         audioSource.clip = music[scene.buildIndex];
         audioSource.Play();
         BaseNumberOfUnits = baseNumberOfUnitsPerScene[scene.buildIndex];
+
+        if (scene.buildIndex == 0)
+            Destroy(GameObject.FindWithTag("GameManager"));
     }
     
     void OnDisable()

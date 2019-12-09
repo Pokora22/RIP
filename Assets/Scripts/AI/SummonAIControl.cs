@@ -37,7 +37,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool targettingDestructible = false;
         private PlayerController_scr summoner;
         private Attributes_scr minionAttributes;
-        private Vector3 m_AdvanceDestination, targetDestination;        
+        private Vector3 m_AdvanceDestination, targetDestination;
         
         public MINION_STATE CurrentState
         {

@@ -19,10 +19,12 @@ public class Inventory_scr : MonoBehaviour
     [SerializeField] private List<InventoryButtonData> displayButtons;
     private GameObject characterSheet, inventoryDisplay;
     private bool characterSheetOpen = false;
+    private TutorialHints hints;
     
     // Start is called before the first frame update
     void Awake()
     {
+        hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();
         characterSheet = GameObject.FindWithTag("CharacterUI");
         inventoryDisplay = GameObject.FindWithTag("InventoryUI");
         displayButtons = new List<InventoryButtonData>();
@@ -81,7 +83,7 @@ public class Inventory_scr : MonoBehaviour
             return false;
         
         AddItemToDisplay(item);
-        GetComponent<TutorialHints>().ShowHint(TutorialHints.HINT.INVENTORY);
+        hints.ShowHint(TutorialHints.HINT.INVENTORY);
 
         return true;
     }

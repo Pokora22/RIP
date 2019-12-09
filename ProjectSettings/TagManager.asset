@@ -35,6 +35,8 @@ TagManager:
   - MasterVolumeSlider
   - MusicVolumeSlider
   - SFXVolumeSlider
+  - SummonHintTrigger
+  - HintManager
   layers:
   - Default
   - TransparentFX
