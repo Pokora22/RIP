@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
 using AI;
+using Random = UnityEngine.Random;
 
 public class Attributes_scr : MonoBehaviour
 {
@@ -26,7 +28,7 @@ public class Attributes_scr : MonoBehaviour
     private NpcAudio_scr audioPlayer;
     private bool alertUsed = false;
     private PlayerAttributes_scr playerAttr;
-    private PlayerController_scr summoner;
+    private PlayerController_scr player;
     private GameObject attacker;
     private AiAnimator_scr m_AiAnimatorScr;
     [SerializeField] private float invulnerableTime = 0.5f;
@@ -63,8 +65,15 @@ public class Attributes_scr : MonoBehaviour
         m_Collider = GetComponent<Collider>();
         
         health = maxHealth;
-        summoner = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
-        playerAttr = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
+        try
+        {
+            playerAttr = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }        
         m_AiAnimatorScr = gameObject.GetComponent<AiAnimator_scr>();
         audioPlayer = GetComponent<NpcAudio_scr>();
     }
@@ -98,7 +107,7 @@ public class Attributes_scr : MonoBehaviour
                 if (gameObject.CompareTag("Enemy"))
                     playerAttr.addExp(expValue);
                 else if (gameObject.CompareTag("Minion"))
-                    summoner.minionRemove(GetComponent<SummonAIControl>());
+                    player.minionRemove(GetComponent<SummonAIControl>());
 
                 Instantiate(corpse, transform.position, transform.rotation);
                 Destroy(gameObject);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -33,10 +34,18 @@ public class PlayerController_scr : MonoBehaviour
     
     void Start()
     {
-        hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();
+        try
+        {
+            hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();
+            playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
         minions = new List<SummonAIControl>();
-        minionsAway = new List<SummonAIControl>();
-        playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
+        minionsAway = new List<SummonAIControl>();        
         characterAttributes = GetComponent<Attributes_scr>();
         m_Cam = Camera.main.transform;
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -44,10 +53,9 @@ public class PlayerController_scr : MonoBehaviour
         reticle = Instantiate(reticlePrefab, transform.position, Quaternion.identity);
 
         inputTimeStamp = Time.time + inputTimeDelay;
-
+        
         for (int i = 0; i < playerAttributes.minionsAtDisposal; i++)
-        {
-            Debug.Log("?");
+        {            
             InstantiateMinionNearby();
         }
         

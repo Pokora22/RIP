@@ -2,170 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/SFX/HouseCollapse.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Audio/SFX/HouseCollapse.mp3.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Materials.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Materials/Baker_house.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Materials/Baker_house.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Materials/Barrel.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Materials/Barrel.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models/Baker_house.FBX" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models/Baker_house.FBX.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models/Barrel.FBX" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models/Barrel.FBX.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models/Materials.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models/Materials/Baker_house_snow.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Models/Materials/Baker_house_snow.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Prefabs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Prefabs/Baker_house.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Prefabs/Baker_house.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Prefabs/Barrel.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Prefabs/Barrel.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Readme.txt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Scene.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Scene.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Textures.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Textures/Baker_house.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Textures/Baker_house.tif.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Textures/Barrel.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Baker House/Textures/Barrel.tif.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Materials.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Materials/Fantasy House.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Materials/Fantasy House.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Mesh.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Mesh/Fantasy_House_6.FBX" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Mesh/Fantasy_House_6.FBX.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Mesh/Fantasy_House_6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Mesh/Fantasy_House_6.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Prefab/Fantasy_House_6.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Prefab/Fantasy_House_6.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Scene.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Scene/Fantasy House.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Fantasy House/Scene/Fantasy House.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Models.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Models/Materials.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Models/Materials/Wells.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Models/Materials/Wells.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Models/Wells.FBX" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Models/Wells.FBX.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Prefabs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Prefabs/Wells.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Prefabs/Wells.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Preview.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Preview.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Textures.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Textures/Wells.tga" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Lowpoly Wells/Textures/Wells.tga.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/Decor.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/Decor.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/Fancy_Tavern.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Materials/Fancy_Tavern.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/brick.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/brick.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/glass.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/glass.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/plants.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/plants.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/roof.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/roof.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/wall.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/wall.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/wood.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Materials/wood.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Medieva_fantasy_house.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Medieva_fantasy_house.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Medieva_fantasy_house.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Medieva_fantasy_house.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/brick.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/brick.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/brick_height.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/brick_height.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/brick_norm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/brick_norm.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/glass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/glass.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/glass_norm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/glass_norm.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/glass_spec.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/glass_spec.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/plant.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/plant.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/plant_norm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/plant_norm.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/roof.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/roof.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/roof_height.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/roof_height.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/roof_norm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/roof_norm.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wall.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wall.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wall_norm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wall_norm.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wall_spec.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wall_spec.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wood_n.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wood_n.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wood_planks.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wood_planks.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wood_planks_norm.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Medieval fantasy house/Textures/wood_planks_norm.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Fancy_Tavern.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Fancy_Tavern.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/New Terrain 2.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/New Terrain 2.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer 1.terrainlayer" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer 1.terrainlayer.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer 2.terrainlayer" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer 2.terrainlayer.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer 3.terrainlayer" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer 3.terrainlayer.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer.terrainlayer" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/NewLayer.terrainlayer.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Baker_house.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Baker_house.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Fancy_Tavern.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Fancy_Tavern.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Fantasy_House_6.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Fantasy_House_6.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Medieva_fantasy_house.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Buildings/Medieva_fantasy_house.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Fancy_Tavern.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Fancy_Tavern.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Readme.txt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scene.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scene.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Town.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Town.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Town.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Town/NavMesh.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Town/NavMesh.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/HouseSpawn.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SimplyPack/Materials/OrangBrick.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/SimplyPack/Materials/OrangBrick.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Textures/Decor.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Textures/Decor.tif.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Textures/Fancy_Tavern.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Textures/Fancy_Tavern.tif.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cemetery.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cemetery.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Town.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Town.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Tree1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Tree1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Tree2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Tree2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Tree3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/stylezed low poly props/Prefabs/Tree3.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HouseSpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HouseSpawn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -356,13 +198,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HouseSpawn.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
       </list>
     </option>
   </component>
@@ -443,14 +285,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="53092000" />
-    </task>
-    <task id="LOCAL-00094" summary="Random exit placement WIP">
-      <created>1574360284349</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1574360284349</updated>
+      <workItem from="1575209747401" duration="54909000" />
     </task>
     <task id="LOCAL-00095" summary="Updated exit placement code - bounds for inactive objects return 0, so delegated offset to editor field">
       <created>1574367350201</created>
@@ -788,7 +623,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575916785689</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="Added third (last) level">
+      <created>1575925739679</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1575925739679</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -836,7 +678,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Added button borders" />
     <MESSAGE value="Fixed keeping minion between levels&#10;Added new skybox and light" />
     <MESSAGE value="Removes imports that were throwing errors in webgl build" />
     <MESSAGE value="Splitting into inheritance checkpoint 1:&#10;AI Control, EnemyAIControl" />
@@ -861,7 +702,8 @@
     <MESSAGE value="Fixed friendly fire layer checking" />
     <MESSAGE value="Fixed minions changing attack position when they shouldn't" />
     <MESSAGE value="Added minion destination indicator with 2 colors based on normal/combat status" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added minion destination indicator with 2 colors based on normal/combat status" />
+    <MESSAGE value="Added third (last) level" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added third (last) level" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

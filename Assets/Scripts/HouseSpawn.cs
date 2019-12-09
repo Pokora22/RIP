@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HouseSpawn : MonoBehaviour
 {
@@ -20,7 +21,9 @@ public class HouseSpawn : MonoBehaviour
     {
         if (_attributesScr.health <= 0)
         {
-            --spawnersLeft;
+            if (--spawnersLeft <= 0)
+                SceneManager.LoadScene("Win");
+            
             gameObject.GetComponent<EnemySpawner_scr>().enabled = false;
             this.enabled = false;
         }
