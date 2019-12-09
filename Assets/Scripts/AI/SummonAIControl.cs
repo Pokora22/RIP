@@ -139,12 +139,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void minionFollow()
         {
-            //Check if there's a new target
-            if (!recalled && target != player)
-                CurrentState = MINION_STATE.CHASE;
-            //Update destination to player position
-            else
-                targetDestination = player.transform.position;
+            targetDestination = player.transform.position;
         }
         
         public void SendToDestination(Vector3 destination, bool obstacleHit, RaycastHit rayHit)
@@ -159,9 +154,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void minionAdvance()
         {
-            if (target != player)
-                CurrentState = MINION_STATE.CHASE;
-            else if (inStoppingDistance())
+            if (inStoppingDistance())
                 CurrentState = MINION_STATE.FOLLOW;
         }
 
@@ -297,9 +290,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 if (!recalled)
                 {
                     //Wait if minion is already targeting something
-                    while (target != player)
+                    while (target.CompareTag("Enemy"))
                     {
-                        yield return new WaitForSeconds(lowPriorityDelay);
+                        yield return null;
                     }
 
                     Collider[] nearbyEnemies =
@@ -328,11 +321,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                             this.target = newTarget;
                             targetAttr = newTarget.GetComponent<Attributes_scr>();
                             if (newTarget.CompareTag("Enemy"))
+                            {
                                 targetAI = newTarget.GetComponent<EnemyAIControl>();
-                        }
-                        else
-                        {
-                            Debug.Log(hit.transform.name);
+                                CurrentState = MINION_STATE.CHASE;
+                            }
                         }
                     }
                 }

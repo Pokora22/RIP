@@ -2,14 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Effects.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.shader" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Effects/Blur.shader.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt_Profiles.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt_Profiles/Main Camera Profile.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt_Profiles/Main Camera Profile.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/New Material.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/New Material.mat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,6 +76,7 @@
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Trap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AI/PatrolAIControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/NavMeshComponents/Scripts/NavMeshSurface.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TimeOutToMenu_scr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" root0="FORCE_HIGHLIGHTING" />
@@ -146,7 +157,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonCharacter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ThirdPersonUserControl_Custom.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ThirdPersonCharacter_Custom.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ShowClosestPoint.cs" />
@@ -191,12 +201,13 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GenerateMaze.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PauseMenu_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SettingsMenu.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Inventory_scr.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager_Scr.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TutorialHints.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
       </list>
     </option>
   </component>
@@ -277,14 +288,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="37755000" />
-    </task>
-    <task id="LOCAL-00087" summary="Changed animators to use attack bools instead of triggers">
-      <created>1574285496583</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1574285496583</updated>
+      <workItem from="1575209747401" duration="40211000" />
     </task>
     <task id="LOCAL-00088" summary="Found another coroutine bug">
       <created>1574287011874</created>
@@ -622,7 +626,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575901183139</updated>
     </task>
-    <option name="localTasksCounter" value="136" />
+    <task id="LOCAL-00136" summary="Moved the hints script to GO in canvas.&#10;Get rid of main game canvas when loading main menu (to have on start things work)">
+      <created>1575903675500</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1575903675500</updated>
+    </task>
+    <option name="localTasksCounter" value="137" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -670,7 +681,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Fixed targetting destructibles to only target when appropriate" />
     <MESSAGE value="Fixed weird rotation on minions when looking at targets higher than themself" />
     <MESSAGE value="Fixed(?) again(??) minion AI getting stuck when near their destination." />
     <MESSAGE value="Improved minion recall function (which broke slightly with previous update)" />
@@ -695,7 +705,8 @@
     <MESSAGE value="Added sliders for master, music, sfx volumes&#10;Added dropdown for quality level&#10;Added saving those options&#10;Added above to pause menu ingame" />
     <MESSAGE value="Added settings syncing with player prefs on menu open" />
     <MESSAGE value="Added tutorial hints that trigger on related events (first time only)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added tutorial hints that trigger on related events (first time only)" />
+    <MESSAGE value="Moved the hints script to GO in canvas.&#10;Get rid of main game canvas when loading main menu (to have on start things work)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved the hints script to GO in canvas.&#10;Get rid of main game canvas when loading main menu (to have on start things work)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

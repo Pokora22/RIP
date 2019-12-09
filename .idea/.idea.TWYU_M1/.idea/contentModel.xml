@@ -15,6 +15,10 @@
             <e p="Readme for Assigning.txt" t="Include" />
           </e>
         </e>
+        <e p="Effects" t="Include">
+          <e p="Blur.cs" t="Include" />
+          <e p="Blur.shader" t="Include" />
+        </e>
         <e p="ExitVolume.cs" t="Include" />
         <e p="NavMeshComponents" t="Include">
           <e p="Editor" t="Include">
@@ -94,6 +98,7 @@
           <e p="TreasureChest_scr.cs" t="Include" />
           <e p="TutorialHints.cs" t="Include" />
           <e p="UpgradeButton.cs" t="Include" />
+          <e p="WakeUpEffect.cs" t="Include" />
           <e p="ZombieAttributes.cs" t="Include" />
         </e>
         <e p="SimplyPack" t="Include">

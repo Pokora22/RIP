@@ -51,7 +51,7 @@ TagManager:
   - Enemies
   - Destructibles
   - IgnoreNavMesh
-  - 
+  - PostProcess
   - 
   - 
   - 
