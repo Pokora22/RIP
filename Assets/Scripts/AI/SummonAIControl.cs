@@ -7,6 +7,7 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 using AI;
+using UnityEngine.Events;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -37,7 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private bool dmgRoutineRunning = false;
         private bool targettingDestructible = false;
         private PlayerController_scr summoner;
-        private Attributes_scr minionAttributes;
+        private Attributes_scr selfAttributes;
         private Vector3 m_AdvanceDestination, targetDestination;
         private GameObject destinationIndicator;
         private Renderer destIndicatorRenderer;
@@ -53,7 +54,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 
                 currentState = value;
                 agent.isStopped = false;
-                m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed, false);
+                m_AiAnimatorScr.SetAttackAnim(selfAttributes.attackSpeed, false);
                 targettingDestructible = false;
                 
                 switch (currentState)
@@ -103,8 +104,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             player = GameObject.FindWithTag("Player");
             target = player;
             summoner = player.GetComponent<PlayerController_scr>();
-            minionAttributes = gameObject.GetComponent<Attributes_scr>();
-            agent.speed *= minionAttributes.moveSpeedMultiplier;
+            selfAttributes = gameObject.GetComponent<Attributes_scr>();
+            agent.speed *= selfAttributes.moveSpeedMultiplier;
 
             gameObject.name = "Minion " + (player.GetComponent<PlayerController_scr>().minions.Count  + player.GetComponent<PlayerController_scr>().minionsAway.Count);
             
@@ -181,6 +182,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void minionChase()
         {
             //Return to player if enemies run out too far from player or die
+            Debug.Log(name + " target: " + target);
             if (!target || targetAttr.health <= 0 || Vector3.Distance(transform.position, player.transform.position) > playerLeashRange)
                 CurrentState = MINION_STATE.FOLLOW;
             else
@@ -214,7 +216,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                     targetAI.SetTarget(this.gameObject);
                 
                 //Start attack animation
-                float animLength = m_AiAnimatorScr.SetAttackAnim(minionAttributes.attackSpeed);
+                float animLength = m_AiAnimatorScr.SetAttackAnim(selfAttributes.attackSpeed);
 
 //                Debug.Log("Waiting for " + animLength);
                 //Wait for animation to finish
@@ -366,6 +368,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 yield return null;
             
             recalled = false;
+        }
+
+        public void ModifyAttributes(float attack = 0, float moveSpeed = 0, float attackSpeed = 0, float health = 0)
+        {
+            selfAttributes.health += health;
+            selfAttributes.maxHealth += health;
+            selfAttributes.moveSpeedMultiplier += moveSpeed;
+            selfAttributes.attackSpeed += moveSpeed;
+            selfAttributes.attackSpeed += attackSpeed;
+            selfAttributes.attackDamage += attack;
         }
         
         private void LockInPlace(int locked)

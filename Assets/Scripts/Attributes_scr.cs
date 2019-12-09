@@ -65,15 +65,10 @@ public class Attributes_scr : MonoBehaviour
         m_Collider = GetComponent<Collider>();
         
         health = maxHealth;
+        
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController_scr>();
-        try
-        {
-            playerAttr = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }        
+        playerAttr = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
+        
         m_AiAnimatorScr = gameObject.GetComponent<AiAnimator_scr>();
         audioPlayer = GetComponent<NpcAudio_scr>();
     }

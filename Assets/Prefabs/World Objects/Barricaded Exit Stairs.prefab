@@ -560,10 +560,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4407780995917578860, guid: eb62962f83ee62342bc11ea37c8eb7d3,
+    - target: {fileID: 3066730448261016033, guid: eb62962f83ee62342bc11ea37c8eb7d3,
         type: 3}
-      propertyPath: m_Name
-      value: Barricaded Exit Stairs
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407780995917578856, guid: eb62962f83ee62342bc11ea37c8eb7d3,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4407780995917578857, guid: eb62962f83ee62342bc11ea37c8eb7d3,
         type: 3}
@@ -620,20 +625,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4407780995917578856, guid: eb62962f83ee62342bc11ea37c8eb7d3,
+    - target: {fileID: 4407780995917578859, guid: eb62962f83ee62342bc11ea37c8eb7d3,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
+      propertyPath: spawnDelay
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407780995917578860, guid: eb62962f83ee62342bc11ea37c8eb7d3,
+        type: 3}
+      propertyPath: m_Name
+      value: Barricaded Exit Stairs
       objectReference: {fileID: 0}
     - target: {fileID: 4407780995917578861, guid: eb62962f83ee62342bc11ea37c8eb7d3,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066730448261016033, guid: eb62962f83ee62342bc11ea37c8eb7d3,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6863562966346664911, guid: eb62962f83ee62342bc11ea37c8eb7d3,
         type: 3}

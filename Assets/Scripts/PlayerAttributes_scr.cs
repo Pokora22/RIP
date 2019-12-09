@@ -115,4 +115,9 @@ public class PlayerAttributes_scr : MonoBehaviour
         
         hudZombieCount.SetText(" x " + (summoner.minions.Count + summoner.minionsAway.Count) + "/" + summonsLimit);
     }
+
+    public void RegisterPlayer(PlayerController_scr player)
+    {
+        summoner = player;
+    }
 }

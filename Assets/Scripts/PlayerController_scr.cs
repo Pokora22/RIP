@@ -31,23 +31,20 @@ public class PlayerController_scr : MonoBehaviour
     private float inputTimeDelay = .2f;
     private float inputTimeStamp;
     private TutorialHints hints;
-    
+
+    private void Awake()
+    {
+        playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
+        playerAttributes.RegisterPlayer(this);
+    }
+
     void Start()
     {
         //Lock cursor to game
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;        
         
-        
-        try
-        {
-            hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();
-            playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        hints = GameObject.FindWithTag("HintManager").GetComponent<TutorialHints>();        
         
         minions = new List<SummonAIControl>();
         minionsAway = new List<SummonAIControl>();        
@@ -188,7 +185,6 @@ public class PlayerController_scr : MonoBehaviour
 
     public void minionReturn(SummonAIControl minion)
     {
-//        Debug.Log(minion.name + " returning");
         minionsAway.Remove(minion);
         if(!minions.Contains(minion))
             minions.Add(minion);

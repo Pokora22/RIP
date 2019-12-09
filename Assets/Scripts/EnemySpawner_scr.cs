@@ -17,7 +17,7 @@ public class EnemySpawner_scr : MonoBehaviour
     {
         float diff = PlayerPrefs.GetInt("difficulty");
         spawnPoint = transform.GetChild(0).position;
-        spawnDelay -= spawnDelay * (diff/4);
+        spawnDelay -= spawnDelay * (diff/10);
         spawnUnitLimit = diff * 10 + 10;
         timer = spawnDelay;
     }

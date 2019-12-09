@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 {
@@ -17,7 +18,7 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	private int buttonFunction;
 	
 	private void Start()
-	{		
+	{			
 		playerAttributes = GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>();
 	}
 
@@ -61,26 +62,54 @@ public class UpgradeButton : MonoBehaviour, IPointerClickHandler
 	}
 
 	private void IncreaseMinionAttack(){
-		Debug.Log("Minionatt");
 		ZombieAttributes.attackMod++;
+		
+		PlayerController_scr player = GameObject.FindWithTag("Player").GetComponent<PlayerController_scr>();
+		foreach (SummonAIControl minion in player.minions)		
+			minion.ModifyAttributes(attack: 1);
+		foreach (SummonAIControl minion in player.minionsAway)		
+			minion.ModifyAttributes(attack: 1);
+		
+		Debug.Log("Minionatt: " + ZombieAttributes.attackMod);
 	}
 
 	private void IncreaseMinionSpeed()
 	{
-		Debug.Log("Minion speed");
 		ZombieAttributes.moveSpeedMod++;
+		
+		PlayerController_scr player = GameObject.FindWithTag("Player").GetComponent<PlayerController_scr>();
+		foreach (SummonAIControl minion in player.minions)		
+			minion.ModifyAttributes(moveSpeed: 1);
+		foreach (SummonAIControl minion in player.minionsAway)		
+			minion.ModifyAttributes(moveSpeed: 1);
+		
+		Debug.Log("Minion speed: " + ZombieAttributes.moveSpeedMod);
 	}
 	
 	private void IncreaseMinionHealth()
 	{
-		Debug.Log("Minion health");
 		ZombieAttributes.healthMod++;
+		
+		PlayerController_scr player = GameObject.FindWithTag("Player").GetComponent<PlayerController_scr>();
+		foreach (SummonAIControl minion in player.minions)		
+			minion.ModifyAttributes(health: 1);
+		foreach (SummonAIControl minion in player.minionsAway)		
+			minion.ModifyAttributes(health: 1);
+		
+		Debug.Log("Minion health: " + ZombieAttributes.healthMod);
 	}
 	
 	private void IncreaseMinionAttackSpeed()
 	{
-		Debug.Log("Minion Aspd");
 		ZombieAttributes.attackSpeedMod++;
+		
+		PlayerController_scr player = GameObject.FindWithTag("Player").GetComponent<PlayerController_scr>();
+		foreach (SummonAIControl minion in player.minions)		
+			minion.ModifyAttributes(attackSpeed: 1);
+		foreach (SummonAIControl minion in player.minionsAway)		
+			minion.ModifyAttributes(attackSpeed: 1);
+		
+		Debug.Log("Minion Aspd: " + ZombieAttributes.attackSpeedMod);
 	}
 
 	public void RegisterButton(LevelUp panel, int function)
