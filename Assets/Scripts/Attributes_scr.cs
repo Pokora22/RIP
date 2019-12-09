@@ -140,8 +140,8 @@ public class Attributes_scr : MonoBehaviour
     }
 
     private bool friendlyFire(GameObject other)
-    {        
-        return transform.root.gameObject.layer == other.layer;
+    {           
+        return gameObject.layer == other.layer;
     }
 
     private IEnumerator removeBody()

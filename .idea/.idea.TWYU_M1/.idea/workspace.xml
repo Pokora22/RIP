@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="" />
+    <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyKnight.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/EnemyPeasant.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MinionNPC.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MinionNPC.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,8 +199,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/WakeUpEffect.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UpgradeButton.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/AI/SummonAIControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Attributes_scr.cs" />
       </list>
     </option>
@@ -276,14 +282,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="44394000" />
-    </task>
-    <task id="LOCAL-00090" summary="Fix for summon attack firing off multiple times (animator state change reports too slow)">
-      <created>1574331161601</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1574331161601</updated>
+      <workItem from="1575209747401" duration="44930000" />
     </task>
     <task id="LOCAL-00091" summary="Removed debug logs">
       <created>1574331301856</created>
@@ -621,7 +620,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575910898626</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="Fixed exp overflow being too low">
+      <created>1575911138256</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1575911138256</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -669,7 +675,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Improved minion recall function (which broke slightly with previous update)" />
     <MESSAGE value="Added option for generated objects to always point towards free space" />
     <MESSAGE value="Added objects and generation and exits and everything for cemetary level" />
     <MESSAGE value="Added dynamic difficulty system&#10;Added missing colliders to prefabs" />
@@ -694,7 +699,8 @@
     <MESSAGE value="Moved the hints script to GO in canvas.&#10;Get rid of main game canvas when loading main menu (to have on start things work)" />
     <MESSAGE value="Changing summons enemy search checkpoint" />
     <MESSAGE value="Changed friendly fire check to compare layers&#10;Changed minion ai to seek enemy targets on each frame instead async" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed friendly fire check to compare layers&#10;Changed minion ai to seek enemy targets on each frame instead async" />
+    <MESSAGE value="Fixed exp overflow being too low" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed exp overflow being too low" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
