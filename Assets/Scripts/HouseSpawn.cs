@@ -22,7 +22,7 @@ public class HouseSpawn : MonoBehaviour
         if (_attributesScr.health <= 0)
         {
             if (--spawnersLeft <= 0)
-                SceneManager.LoadScene("Win");
+                GameObject.FindWithTag("GameManager").GetComponent<PlayerAttributes_scr>().EndGame();
             
             gameObject.GetComponent<EnemySpawner_scr>().enabled = false;
             this.enabled = false;

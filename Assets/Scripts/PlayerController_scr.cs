@@ -249,6 +249,8 @@ public class PlayerController_scr : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerAttributes.minionsAtDisposal = minions.Count;
+        playerAttributes.minionsAtDisposal = minions.Count;        
     }
+    
+    
 }

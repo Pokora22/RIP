@@ -90,6 +90,7 @@
           <e p="PlayerAttributes_scr.cs" t="Include" />
           <e p="PlayerController_scr.cs" t="Include" />
           <e p="RotateWithCamera_scr.cs" t="Include" />
+          <e p="Score.cs" t="Include" />
           <e p="SettingsMenu.cs" t="Include" />
           <e p="ShowClosestPoint.cs" t="Include" />
           <e p="Templates" t="Include">

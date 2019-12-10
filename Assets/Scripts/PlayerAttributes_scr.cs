@@ -60,13 +60,21 @@ public class PlayerAttributes_scr : MonoBehaviour
         
         Debug.Log("Player damaged");
         if (--health < 1)
-        {
-            int currentScene = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene("GameOver"); //TODO: Maybe a game over screen
-        }
+            EndGame();
         
         hints.ShowHint(TutorialHints.HINT.HURT);
         updateHud();
+    }
+
+    public void EndGame()
+    {
+        float timeLeft = gameObject.GetComponent<GameTimer>().getTimeLeft();
+        int minions = summoner.minions.Count + summoner.minionsAway.Count;
+        
+        gameObject.GetComponent<Score>().UpdateScore((int)currentExp,
+            minions, (int)timeLeft, (int)health);
+        
+        SceneManager.LoadScene("GameOver"); 
     }
 
     public bool heal()

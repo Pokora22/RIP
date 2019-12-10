@@ -53,5 +53,10 @@ public class GameTimer : MonoBehaviour
         else
             return player.position;
             // TODO:Spawn where if there's no space behind player?            
-    }    
+    }
+
+    public float getTimeLeft()
+    {
+        return timeLimit;
+    }
 }
