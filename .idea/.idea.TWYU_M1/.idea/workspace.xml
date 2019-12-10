@@ -2,28 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95d2cd61-3a01-4998-981e-75f80d1d0470" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/Tomb.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/Tomb.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/Tomb.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/Tomb.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/Tomb_Demo.unity" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/Tomb_Demo.unity.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/tomb.fbx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/tomb.fbx.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/tomb.tga" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Models/Tomb/tomb.tga.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Score.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TWYU_M1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/PlayerAnimatorController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/PlayerAnimatorController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/GameManager(Canvas).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/GameManager(Canvas).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Cemetery.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Cemetery.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Crypt.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameTimer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameTimer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/HouseSpawn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/HouseSpawn.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerAttributes_scr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController_scr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameOver.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameOver.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -161,6 +141,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Crypt.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scenes/GameOver.unity" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Sandbox/OcclusionCullingData.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Sisus/Power Inspector/Code/Editor/EditorWindow/InspectorDrawerWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
@@ -305,14 +286,7 @@
       <workItem from="1574857052677" duration="529000" />
       <workItem from="1574857604021" duration="8125000" />
       <workItem from="1574865761226" duration="9013000" />
-      <workItem from="1575209747401" duration="62775000" />
-    </task>
-    <task id="LOCAL-00100" summary="Added skeleton for inventory display">
-      <created>1574459347703</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1574459347703</updated>
+      <workItem from="1575209747401" duration="63025000" />
     </task>
     <task id="LOCAL-00101" summary="Added mouse click interaction to inventory">
       <created>1574511086667</created>
@@ -650,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575934547841</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="Added scoring code to game over screen">
+      <created>1575937478563</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1575937478563</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -698,7 +679,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
-    <MESSAGE value="Guarding and patrol AIs finished" />
     <MESSAGE value="Trying to serialize a dictionary for instantiating mobs after nav mesh generation" />
     <MESSAGE value="Added level up buttons and panel (empty functions so far)&#10;Updated some UI elements" />
     <MESSAGE value="Made upgrade options always be unique on level up&#10;Changed exp required progression" />
@@ -723,7 +703,8 @@
     <MESSAGE value="Fix for missing playerupgrades" />
     <MESSAGE value="Fixed upgrades wrong names&#10;Made health recovery only pop up when player health is below max" />
     <MESSAGE value="Upgrading minions now modifies all minions, not just new ones" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upgrading minions now modifies all minions, not just new ones" />
+    <MESSAGE value="Added scoring code to game over screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added scoring code to game over screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

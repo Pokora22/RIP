@@ -37,6 +37,7 @@ TagManager:
   - SFXVolumeSlider
   - SummonHintTrigger
   - HintManager
+  - ScorePane
   layers:
   - Default
   - TransparentFX
